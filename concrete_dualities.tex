@@ -1,0 +1,651 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[margin=3cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{bbold}
+\usepackage[utf8]{inputenc}
+\usepackage{parskip}
+\usepackage{mathtools}
+\usepackage[english]{babel}
+\usepackage{tikz-cd}
+\usepackage{bbm}
+% change subsections to alphabetic
+\renewcommand\thesubsection{\thesection.\alph{subsection}}
+
+\newtheorem{theorem}{Theorem}[section] % part
+\newtheorem{lemma}{Lemma}[section] % part
+\newtheorem{definition}{Definition}[section] % part
+
+\newcommand{\D}[2]{#1^\prime(#2)}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\scalar}[2]{\langle#1, #2\rangle}
+
+\DeclareMathOperator{\Ima}{Im}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\colim}{colim}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Set}{Set}
+\DeclareMathOperator{\Frm}{Frm}
+\DeclareMathOperator{\Top}{Top}
+\DeclareMathOperator{\Bool}{Bool}
+\DeclareMathOperator{\CAlg}{CAlg_R}
+\DeclareMathOperator{\CAlgZ}{CAlg_\mathbb{Z}}
+\DeclareMathOperator{\Ring}{Ring}
+\DeclareMathOperator{\Aff}{Aff}
+\DeclareMathOperator{\Fun}{Fun}
+\DeclareMathOperator{\Nat}{Nat}
+
+
+\def\HomA{\ensuremath\mathcal{A}}
+\def\HomB{\ensuremath\mathcal{B}}
+\def\HomFrm{\ensuremath\Hom_\Frm}
+\def\HomTop{\ensuremath\Hom_\Top}
+\def\t{\ensuremath\tilde}
+
+
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\renewcommand\qedsymbol{$\blacksquare$}
+% https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXG1hdGhjYWx7QX1ee29wfSJdLFsyLDAsIlxcbWF0aGNhbHtCfSJdLFsxLDAsIlxcYm90Il0sWzAsMSwiVCIsMCx7ImN1cnZlIjotMn1dLFsxLDAsIlMiLDAseyJjdXJ2ZSI6LTJ9XV0=
+
+
+\begin{document}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Kasra Sammak}
+\lhead{Concrete Dualities}
+\rfoot{\thepage}
+\section{Introduction}
+\section{Preliminaries/Index}
+
+Throughout this thesis we will be using the language of category theory, for which a mild introduction is in order. To that degree we plan to define the terms used as well as prove some well known theorems which we use quite freely, so not to distract us from the argument.
+
+\begin{definition}
+	Adjunction
+\end{definition}
+\textbf{Notes on free objects and the free functor}
+
+It is important to note that in some category $\mathcal{A}$ with a representing object $A_0$ that is a free generator on one free object, it holds that $\HomA(A_0,A) \cong A$ on the level of set, as the morphisms are uniquely determined by where they send the free generator to. 
+
+More concretely, given a forgetful functor $\t U: \mathcal{A} \to \Set$, we have $\HomA(A_0,A) = \t U(A)$. This due to how we construct $A_0$ and $B_0$ using the the left adjoint functor $\t F: \Set \to \mathcal{A}$ to the forgetful functor, which is called the free functor. 
+
+In general, such a functor does not have to exist, and we can still get the construction by defining $A_0$ as the left adjoint object of $\t U$ at $\{pt\} \in \Set$, however, we will assume that such a functor does exist for purposes of explication: $A_0 = \t F(\{\text{pt}\})$. Such an assumption is fair since the properties of the adjunction by definition of the left adjoint object will still hold (in particular the middle equality of the equation below), regardless of existence of the functor as a whole: \begin{align*}
+	\HomA(A_0, A) = \HomA(\t F(\{\text{pt}\}), A) = \HomB(\{pt\}, \t U(A)) = \t U(A).
+\end{align*}
+
+The left adjoint object to the forgetful functor has the following universal property (\textcolor{red}{TODO}).
+
+In the  examples which are to be discussed in this thesis, we only need to check that such a left adjoint object does exist in the category, and we show what they are and that they satisfy the universal property.
+\section{Notes: Concrete Dualities}	
+
+Let $\mathcal{A}$ and $\mathcal{B}$ be two categories with the following representable functors with representing objects $A_0 \in \mathcal{A}$, and $B_0 \in \mathcal{B}$. We assume these are free objects on one free generator, which we will later make precise. 
+\begin{align*}
+	&\HomA(A_0, -) \cong U: \mathcal{A} \to \Set\\
+	&\HomB(B_0, -) \cong V: \mathcal{B} \to \Set\\
+\end{align*}
+Let $T: \mathcal{A} \to \mathcal{B}$ and $S: \mathcal{B} \to \mathcal{A}$ be contravariant functors with natural transformations $\eta: 1_\mathcal{B} \to TS$ and $\epsilon :  1_\mathcal{A} \to ST$. We can view this as the following \emph{dual adjunction}
+\[\begin{tikzcd}
+	{\mathcal{A}} & \bot & {\mathcal{B}^{op}}
+	\arrow["T", bend left, from=1-1, to=1-3]
+	\arrow["S", bend left, from=1-3, to=1-1]
+\end{tikzcd}\]
+
+When these natural transformations are natural isomorphisms we are speaking of a \emph{dual equivalence}. 
+
+Like any adjunction we have the following triangle equalities \begin{align*}
+	&T{\epsilon_A} \circ \eta_{TA} = 1_{TA} \ &\text{and}& \ &  S{\eta_B} \circ \epsilon_{SB} = 1_{SB}&
+\end{align*}
+and $\Hom$ set isomorphisms \begin{align*}
+	\HomA(A, SB) \cong \HomB(B, TA) \cong \HomB^{op}(TA,B)
+\end{align*}
+
+Given some $\mathcal{A}$-morphism $f: A\to A'$, consider the map $Uf: UA \to UA'$. More explicitly, this is \begin{align*}
+ 	\HomA(A_0, -) (f) : \HomA(A_0, A) \stackrel{f \circ (-)}{\to} \HomA(A_0, A')
+ \end{align*}
+We shorten this notation by using $[f]: [A] \to [A']$.
+
+The following pair of objects will be of central importance to this these, which are defined as the following:
+\begin{align*}
+	\t A := SB_0&&
+	\t B := TA_0.
+\end{align*}
+
+
+From these characteristics we can deduce how $S$ and $T$ should be defined, to which a few lemmas will illuminate the bigger picture of our situation.
+\begin{lemma}
+\begin{align*}
+		VT \cong \HomA(-, \t  A)&&
+	US \cong \HomB(-, \t  B)\\
+\end{align*}
+\end{lemma}
+\begin{proof}
+As presheafs, $V$ and $VT$ (respectively $U$ and $US$) may be computed pointwise. 
+\begin{align*}
+	VT(A) = \HomB(B_0, TA) = \HomA(A,SB_0) = \HomA(A, \t A) \\
+	\implies VT \cong \HomA(-, \t A)
+\end{align*}
+\begin{align*}
+	US(B) = \HomA(A_0, SB) = \HomB(B,TA_0) = \HomB(B, \t B) \\
+	\implies US \cong \HomB(-, \t B)
+\end{align*}
+\end{proof}
+
+Given our assumption that $A_0$ and $B_0$ are free objects on one free generator, this result should already give us an idea of how our adjunction is to be induced, which the goal of the whole introduction to concrete dualities is to make precise. 
+
+However the broad strokes of it uses the free-forget  adjunction ($\bar F \dashv \bar U$)  to show via \begin{align*}
+	\HomA(A, \t A) = VT(A) = \HomB(B_0, T A) = \bar U(TA)
+\end{align*} 
+that the underlying sets of $T$ and $S$ respectively, are $\Hom_A(-, \t A)$ and $\HomB(-, \t B)$. \footnote{In the course of this thesis we will often prove results about $\mathcal{A}$, respectively $T: \mathcal{A}\to \mathcal{B}$ with unit $\epsilon:1_\mathcal{A} \to ST $, from which the results about $\mathcal{B}$, respectively $S: \mathcal{B} \to \mathcal{A}$ with counit $\eta: 1_\mathcal{B} \to TS$, follow completely analogously. Unless we state that results do not follow analogously, we assume this to be the case.}
+
+\begin{lemma}
+	$V \t B \cong U \t A$
+\end{lemma}
+\begin{proof}
+	\begin{align*}
+		V \t B \stackrel{Def. V}{=}& \HomB(B_0,\t B) \stackrel{Def. \t B}{=} \HomB(B_0, TA_0)\\ \stackrel{Adjunction}{\cong}& \HomA(A_0,SB_0) \stackrel{Def. \t A}{=}\HomA(A_0,\t A) \stackrel{Def. U}{=} U\t A
+	\end{align*} \end{proof}
+	
+	The aim of the following will be to show how the objects $\t A$ and $\t B$ actually induce the adjunction $T \dashv S$, while showing that the units and counits of the adjunction are given \emph{by evaluation}, that is \begin{align*}
+		\epsilon_A(x): \HomA(A, \t A) &\to \t B& \eta_B(y) : \HomB(B, \t 
+		B) &\to \t A\\
+		f & \mapsto f(x)& g &\mapsto g(y).
+	\end{align*}
+	
+	In the following we define the canonical "evaluation" maps, $\varphi_{A, x}$ and $\psi_{B, y}$ and the canonical bijections $\tau$ and $\sigma$:  
+\begin{align*}
+	\varphi_{A, x} : \HomA(A, \t A) &\to [\t A ]& \psi_{B, y} : \HomB(B, \t B) &\to [\t B ]\\
+	 s &\mapsto [s](x) &t &\mapsto [t](y) \\\\
+	 \tau: [\t A] &\to [\t B]&\sigma: [\t B] &\to [\t A]\\
+	 \t x &\mapsto  [[\epsilon_{\t A}](\t x)](1_{\t A})&\t y &\mapsto  [[\eta_{\t B}](\t y)](1_{\t B})
+\end{align*}
+which evaluate the maps $[s]$ and $[t]$ at $x$ and $y$ respectively:
+\begin{align*}
+	[s]: [A] &\to [\t A]&[t]: [B] &\to [\t B]\\
+	x &\mapsto [s](x)& y &\mapsto [t](y)
+\end{align*}
+as for any $s \in \HomA(A, \t A) $, we have the induced map $[s]: [A] \to [\t A]$.
+
+So for every $x \in \HomA(A_0,  A)$ we have the following diagram.
+\[\begin{tikzcd}
+	s && {[s](x)} && {\tau([s](x))} \\
+	\HomA(A, \t A) && \HomA(A_0, \t A) && \HomB(B_0, \t B) \\
+	&& \HomA(A_0, SB_0) && \HomB(B_0, TA_0)
+	\arrow[maps to, from=1-1, to=1-3]
+	\arrow[maps to, from=1-3, to=1-5]
+	\arrow["\varphi_{A,x}", from=2-1, to=2-3]
+	\arrow["\tau", from=2-3, to=2-5]
+	\arrow["\cong",from=2-3, to=3-3]
+	\arrow["\cong",from=2-5, to=3-5]
+	\arrow[from=3-3, to=3-5]
+\end{tikzcd}\]
+By the dual adjunction we have $\HomA(A, SB_0) \cong \HomB(B_0, TA)$.
+
+
+
+
+\begin{lemma}
+	$\tau$ and $\sigma$ are inverses, and the following identities hold:
+	\begin{align*}
+		&[[\epsilon_A](x)] = \tau \varphi_{A,x}& & [\eta_B](y)]= \sigma \psi_{B,y}
+	\end{align*}
+\end{lemma}
+\begin{proof}
+	First we check the identities, as understanding them will help us prove that $\tau$ and $\sigma$ are inverses. We only check the left identity, and as the right identity will follow analogously. 
+	
+	First we have $\tau \varphi_{A,x}(s) = \tau([s](x))$ by definition of $\varphi_{A,x}$. But then by definition of $\tau$ we have $\tau([s](x)) = [[\epsilon_{\t A}][s](x)](1_{\t A})$. 
+	
+	Since $\epsilon$ is a natural transformation, we have the following commutative diagram for all $A, A' \in \mathcal{A}$ such that there exists a map $A \to A'$. In particular, given $s: A \to \t A$ we have:
+\[\begin{tikzcd}
+	{1_\mathcal{A}(A)} && {ST(A)} \\
+	\\
+	{1_\mathcal{A}(\t A)} && {ST(\t A)}
+	\arrow["{\epsilon_A}", from=1-1, to=1-3]
+	\arrow["s"', from=1-1, to=3-1]
+	\arrow["STs", from=1-3, to=3-3]
+	\arrow["{\epsilon_{\t A}}"', from=3-1, to=3-3]
+\end{tikzcd}\]
+so that $[[\epsilon_{\t A}][s](x)](1_{\t A}) = [[STs][\epsilon_A](x)](1_{\t A})$. 
+
+By Lemma 3.1, we know that $[STs] = US(Ts)  = \HomB(Ts, \t B)$, which is just a map  $\HomB(TA, \t B) \to \HomB(T\t A, \t B)$, induced by $Ts: T\t A \to TA$. \emph{Notice that $US(-)$ and $T(-)$ are both contravariant, so that $UST(-)$ is covariant. }
+
+Now as  $[\epsilon_A](x) \in \HomB(TA, \t B)$, we have the induced post composition
+
+\[\begin{tikzcd}
+	&& {} \\
+	{T\t A} && {\t B} \\
+	{TA}\\
+	\arrow["{[\epsilon_A](x)\circ Ts}", dashed, from=2-1, to=2-3]
+	\arrow["Ts"', from=2-1, to=3-1]
+	\arrow["{[\epsilon_A](x)}"', from=3-1, to=2-3]
+\end{tikzcd}\]
+which can be otherwise phrased as a right action of $Ts$ on $[\epsilon_A](x)$ so that \begin{align}
+[[STs][\epsilon_A](x)](1_{\t A}) = [[\epsilon_A](x)\circ Ts](1_{\t A}).
+ \end{align}
+% 
+% Now we look more closely at what these maps do: Firstly, Ts is simply a precomposition map \begin{align*}
+% 	Ts = \HomA(-,\t A): \HomA(\t A, \t A) &\stackrel{- \circ s}{\to} \HomA( A, \t A)\\ f &\mapsto f \circ s
+% \end{align*}
+% while $US(Ts)$ is the map
+% \begin{align*}
+% 	US(Ts) = \HomB(-,\t B)(Ts): \HomB(\HomA(A, \t A), \t B) &\stackrel{- \circ Ts}{\to}\HomB(\HomA(\t A, \t A), \t B)\\
+% 	g^* &\mapsto g^* \circ Ts.
+% \end{align*}
+% The map $\epsilon_A(x)$ is given by evaluation, or in other words, it is that map that sends $p \in \Hom(A, \t A)$ to $p(x) \in [\t B]$, up to canonical isomorphism $[\t A] \cong [\t B]$ given by Lemma 1.1.
+% 
+% Now $Ts$ is sent by $1_{\t A}$ to $1_{\t A} \circ s$, and we see then that $[\epsilon_A](x) \circ Ts$ sends $1_{\t A} \mapsto 1_{\t A} \circ s(x) = s(x)$. 
+% 
+% Now we can see that the maps $[[\epsilon_A](x)\circ T(-)](1_{\t A})$ and $[[\epsilon_A](x)](-)$ both send $s \mapsto s(x)$, so that $[[\epsilon_A](x)\circ Ts](1_{\t A})=[[\epsilon_A](x)](s)$.
+% 
+
+From Lemma 3.1 we know that $VT = \HomA(-, \t A)$ so that we get the induced diagram
+\[\begin{tikzcd}
+	&& {} \\
+	{\HomA(\t A, \t A)} && {\t B} \\
+	{\HomA(A, \t A)}\\
+	\arrow["{[[\epsilon_A](x)\circ Ts]}", dashed, from=2-1, to=2-3]
+	\arrow["\text{[$Ts$]}"', from=2-1, to=3-1]
+	\arrow["{[[\epsilon_A](x)]}"', from=3-1, to=2-3]
+\end{tikzcd}\]
+Notice that then $[Ts]$ becomes an evaluation of the precomposition functor $\HomA(-, \t A)$ at $s$, i.e. $[Ts] = - \circ s$, which sends $1_{\t A} \mapsto s$. Therefore it holds that \begin{align*}
+ 	[[\epsilon_A](x)\circ Ts](1_{\t A})=[[\epsilon_A](x)](s).
+ \end{align*}
+ All together we have \begin{align*}
+ 	\tau \circ \varphi_{A,x}(s)= &\tau([s](x))\\
+ 	=&[[\epsilon_{\t A}][s](x)](1_{\t A})\\
+ 	 =& [[STs][\epsilon_A](x)](1_{\t A})
+ 	\\=&[[\epsilon_A](x)\circ Ts](1_{\t A})\\
+ 	=&[[\epsilon_A](x)](s)
+ \end{align*}
+ which gives us the desired identity.
+ 
+ Now we check that $\tau$ and $\sigma$ are inverses. 
+ 
+ The above identity gives us the particular instance \begin{align*}
+ 	\tau \varphi_{S\t B, 1_{\t B}}(s) = [[\epsilon_{S\t B,\t y}](1_{\t B})](s)
+ \end{align*}
+ for all $s \in \HomA(S\t B, \t A)$.
+ 
+ For $s = [\eta_{\t B}](\t y)$ with $\t y \in [\t B]$, noticing the maps \begin{align*}
+ 	[\eta_{\t B}](\t y): S\t B &\to \t A &\text{and} \ \ \ \varphi_{S\t B, 1_{\t B}}: \HomA(S\t B, \t A) \to & [\t A]\\
+ 	1_{\t B} &\mapsto 1_{\t B}(\t y)& s \mapsto& [s](1_{\t B})
+ \end{align*}
+ we see that $[[\eta_{\t B}](\t y)](1_{\t B}) = \varphi_{S \t B, 1_{\t B}}(s)$ and so we  have \begin{align*}
+ 	\tau \sigma (\t y) =& \tau ( [[\eta_{\t B}](\t y)](1_{\t B}))\\
+ 	 =&  \tau(\varphi_{S\t B, 1_{\t B}}(s))\\
+ 	 =& [[\epsilon_{S\t B}](1_{\t B})][\eta_{\t B}](\t y) = \t y.
+ \end{align*}
+ We only need to show the last equality. 
+ 
+ Consider the triangle equality $S\eta_{\t B} \circ \epsilon_{S\t B} = 1_{S \t B}$ which induces $[S\eta_{\t B}] [\epsilon_{S\t B}] = 1_{[S \t B]}$.
+ 
+ We can extrapolate from (1)  using the result $US = \HomB(-, \t B)$ from Lemma 3.1 that for some $A \in \mathcal{A}$, $x \in A$, $B \in \mathcal{B}$ and $f \in \HomB(B, TA)$ the left action of $[Sf]$ on $[\epsilon_A](x) \in \HomB(TA, \t B)$ becomes a right action of $f$ on $[\epsilon_A](x)$, i.e. \begin{align*}
+ 	[Sf][\epsilon_A](x) = [\epsilon_A](x) \circ f \in \HomB(B, \t B).
+ \end{align*}
+ Therefore \begin{align*}
+ 	1_{\t B} = 1_{\HomB(\t B, \t B)}(1_{\t B}) =1_{[S \t B]}(1_{\t B}) = [S\eta_{\t B}] [\epsilon_{S\t B}](1_{\t B}) = [\epsilon_{S\t B}](1_{\t B}) \circ \eta_{\t B}.
+ \end{align*}
+ 
+ In other words, the induced map is the identity on $[\t B]$:\begin{align*}
+ 	[\epsilon_{S\t B}](1_{\t B})][ \eta_{\t B}] = 1_{[\t B]}.
+ \end{align*}
+ 
+  Thus we have $\tau \sigma = 1_{[\t B]}$ as desired.
+% Recall that the following map is defined as evaluating at $1_{\t B}$:\begin{align*}
+% 	[[\epsilon_{S\t B}](1_{\t B})]: [\HomA(\HomB(\t B , \t B), \t A)] &\to [\t B]\\
+% 	p &\mapsto p(1_{\t B})
+% \end{align*}
+%% with \begin{align*}
+%% 	[\epsilon_{S\t B}]:\HomB(\t B, \t B) &\to \HomB(\HomA(\HomB(\t B, \t B), \t A), \t B)\\
+%%1_{\t B} & \mapsto (p \to p(1_{\t B}))\\
+%% \end{align*}
+%which means $[[\epsilon_{S\t B}](1_{\t B})][\eta_{\t B}](\t y) =[\eta_{\t B}](\t y)(1_{\t B})$ and so
+%\begin{align*}
+% 	[[\epsilon_{S\t B}](1_{\t B})][\eta_{\t B}]: [\t B] &\to [\t B]\\
+% 	\t y &\mapsto [\eta_{\t B}](\t y)(1_{\t B}) = 1_{\t B}(\t y) = \t y.
+% \end{align*}
+
+% Remembering that $[S\eta_{\t B}][\eta_{S \t B}] = 1_{[S \t B]}$ 
+% since \begin{align*}
+% 	\eta_{\t B}: \t B \to \HomA(\HomB(\t B, \t B),\t A)
+% \end{align*}
+% means \begin{align*}
+% 	S\eta_{\t B}: \HomB(\HomA(\HomB(\t B, \t B), \t A), \t B) \to \HomB(\t B, \t B)
+% \end{align*}
+% and \begin{align*}
+% 	\epsilon_{S \t B}: \HomB(\t B, \t B) \to \HomB(\HomA(\HomB(\t B, \t B), \t A), \t B)
+% 	 \end{align*}
+% 	 evaluated at $1_{\t B}$ gives $[\epsilon_{S \t B}](1_{\t B}) = 1_{\t B}$, from which we \emph{somehow} deduce that \begin{align*}
+% 	 	\tau \sigma = 1_{[\t B]}
+% 	 \end{align*} (\textcolor{red}{TODO}: why?)
+\end{proof}
+Lemma 3.3 makes precise the notion that our unit and counit are given "by evaluation", given
+\begin{align*}
+	[[\epsilon_A](x)]: \HomA(A, \t A) &\to [\t B] & [[\eta_B](y)]:\HomB(B, \t B) &\to [\t A]\\
+	f &\mapsto f(x) & g &\mapsto g(y) 
+\end{align*}
+via canonical bijections $\tau$ and $\sigma$. From here we can (\textcolor{red}{TODO}: deduce or allude to?) deduce the fact that $T = \HomA(-, \t A)$ and $S = \HomB(-, \t B)$, as $\tau$ and $\sigma$ send the precise evaluation maps to the other pairing, and as such we can view the unit and counit as such:
+\begin{align*}
+	\epsilon_A:  A&\to \HomB(\HomA(A, \t A),\t B) & \eta_B: B&\to \HomA(\HomB(B, \t B),\t A)\\
+	x &\mapsto (f \to f(x)) & y &\mapsto (g\to g(y) )
+\end{align*}
+\section{Schizophrenic Objects}
+What we want for our set up is that the composition of these maps induces a lift, i.e. for every $A \in \mathcal{A}$ and  $x \in A$ there exists an $f \in \HomB(TA, \t B)$, that induces  $[f]: [TA] \to [\t B]$, such that the following diagram commutes: 
+\[\begin{tikzcd}
+	&& \HomB(B_0, TA)  \\
+	\\
+	\HomA(A, \tilde A)  && \HomB (B_0, \tilde B) 
+	\arrow[dashed, from=1-3, to=3-3]
+	\arrow["\cong",from=3-1, to=1-3]
+	\arrow["\tau \circ (\varphi_{A,x}) ",from=3-1, to=3-3]
+\end{tikzcd}\]
+%Although we know the existence of an isomorphism given by the adjunction, the family of lifts criterium is stronger, requiring  a choice of isomorphism for every $A \in \mathcal{A}$ and $x \in A$.
+
+This lends itself to a precise definition of the \emph{schizophrenic object}, which is the central notion of this thesis:
+
+\begin{definition}
+	A triple $(\t A, \tau, \t B)$ with a pair of objects $(\t A, \t B) \in \mathcal{A} \times \mathcal{B}$ and a bijective map $\tau: [\t A] \to [\t B]$ is called a \emph{schizophrenic object} (for concrete categories $\mathcal{A}$ and $\mathcal{B}$) if the following conditions are satisfied:
+	\begin{enumerate}
+		\item[SO1.] For every $A \in \mathcal{A}$ the family $(\tau\varphi_{A,x}: \HomA(A, \t A) \to [\t B])_{x \in [A]}$ admits a $V$-initial lifting $(e_{A,x}:TA \to \t B)_{x \in [A]}$
+		\item[SO2.] For every $B \in \mathcal{B}$ the family $(\sigma\psi_{B,y}: \HomB(B, \t B) \to [\t A])_{y \in [B]}$ admits a $U$-initial lifting $(d_{B,y}:SB \to \t A)_{y \in [B]}$
+	\end{enumerate}
+\end{definition}
+
+What these conditions actually mean is two-fold: Firstly, the $V$-structured lifting property yields the existence of  a $\mathcal{B}$-morphism $e_{A,x} \in \HomB(TA, \t B)$ for every $A \in \mathcal{A}$ and $x \in A$, such that $[TA] = \HomA(A, \t A)$ and $[e_{A,x}] = \tau \varphi_{A,x}$.
+
+But secondly,  the $V$-initiality means that for any $Z \in \mathcal{B}$ and a map $h: [Z] \to [TA]$, if  all composite maps $\tau \varphi_{A,x} \circ h$ are the underlying-set maps for $\mathcal{B}$-morphisms in $\HomB(Z, \t B)$, then there exists a unique $\mathcal{B}$-morphism in $\HomB(Z, TA)$  whose underlying set map is $h$.
+
+In other words, the $V$-structured lift is initial among all such lifts: if $Z$ is any other $\mathcal{B}$-object whose underlying set maps into $\HomA(A, \t A)$ in a way that is compatible with all $\tau \varphi_{A,x}$ composites, then that map factors uniquely through $TA$ in $\mathcal{B}$. 
+
+
+
+\[\begin{tikzcd}
+	&&&& {[TA]} \\
+	\\
+	{[Z]} && {\HomA(A, \t A)} && {[\t B]}
+	\arrow["{[e_{A,x}]}", from=1-5, to=3-5]
+	\arrow["h"', from=3-1, to=3-3]
+	\arrow[from=3-3, to=1-5]
+	\arrow["{\tau \varphi_{A,x}}"', from=3-3, to=3-5]
+\end{tikzcd}\]
+
+
+We now show a central theorem to this thesis.
+
+\begin{theorem}
+	Every schizophrenic object $(\t A, \tau , \t B)$ induces a natural dual adjunction strictly represented by $(\t A, \t B)$ (\textcolor{red}{TODO}: define strictly represented), such that $\tau$ and $\sigma = \tau^{-1}$ are the canonical bijections defined in the previous section.
+\end{theorem}
+\begin{proof}
+	First we show that $T$ and $S$ are well defined functors. The conditions (SO1.) and (SO2.) show us how $T$ and $S$ act on objects up to underlying-set isomorphism. 
+	
+	Now we show how $T$ acts on morphisms. To that effect, given some $f: A \to A'$, we seek to show the existence of $Tf: TA' \to TA$ whose underlying set map is $[Tf] = \HomA(f, \t A): \HomA(A', \t A) \to \HomA(A, \t A)$. As we have just seen, by $(SO1)$ it suffices to show that $\tau \varphi_{A,x}\circ \HomA(f, \t A)$ are the underlying set maps of  $\mathcal{B}$-morphisms in $\HomB(TA', \t B).$
+	
+	Considering that $[Tf]$ is simply the precomposition map $- \circ f$, we see that given some $s \in \HomA(A', \t A)$, it holds that $\tau \varphi_{A,x}\circ \HomA(f, \t A)(s) =\tau \varphi_{A,x}(sf)$. But since $[sf](x) = [s][f](x)$, where $[f](x) \in [A']$, we have $\tau \varphi_{A,x}(sf) = \tau \varphi_{A',[f](x)}(s) = [e_{A',[f](x)}](s)$, which is the underlying set map of a $\mathcal{B}$-morphism in $\HomB(TA', \t B)$ by definition, and which exists by the lifting property given by $(SO1.)$. 
+	
+	Therefore $T$ and $S$ are well-defined functors, where preservation of the identity and composition are derived from the underlying set-map given by precomposition (\textcolor{red}{TODO}:  is identity and composition actually clear because of this? ties to main question of why we can derive functor properties from underlying set map properties)
+	
+	Now we show that $T$ and $S$ are adjoint, and to do that we shall construct  unit and counit maps $\epsilon$ and $\eta$. In order to establish the existence of $\eta_B$ by playing the same game we first define $[\eta_B]: [B] \to [TSB]$ and show that each $\tau \varphi_{SB, t} \circ [\eta_B]$ with $t \in [SB]$, can be lifted along $V$, i.e. that it is the underlying set map of a $\mathcal{B}$-morphism in $\HomB(B, \t B)$. So we define in light of Lemma 3.3 under (SO2.)
+	\begin{align*}
+		[\eta_B]:[B] &\to \HomA(SB, \t A)\\
+		y &\mapsto d_{B,y}.
+	\end{align*}
+Then by definitions and (SO2.) we have  \begin{align*}
+	\tau \varphi_{SB, t} \circ [\eta_B](y) &= \tau \varphi_{SB, t} (d_{B,y})\\ &= \tau [d_{B,y}](t)\\ &= \tau \sigma \psi_{B,y}(t)\\ &= [t](y)
+\end{align*}
+which shows that $\tau \varphi_{SB, t} \circ [\eta_B]: [B] \to [\t B]$ is the underlying set map of a $\mathcal{B}$-morphism in $\HomB(B, \t B)$, proving the existence of $\eta_B$. 
+
+Furthermore we see that \begin{align}
+	e_{SB, t} \circ \eta_B = t \ \ \text{ for all } t \in [SB]= \HomB(B, \t B)
+\end{align}
+To verify naturality, we verify that given a $\mathcal{B}$-morphism $f: B \to B'$, that we have $f \circ [\eta_B] = [TSf] \circ [\eta_B]$ (\textcolor{red}{TODO}: can we simply use the left action becomes right action becomes left action? Or is this what I only have by proving the way i did below?), or in other words: \begin{align}
+	d_{B', f \circ y} = [TSf] \circ d_{B,y}
+\end{align} 
+Remember that the left action of $[TSf]$ on $d_{B,y}$ is a right action of $Sf$ on $d_{B,y}$. But the underlying map of $d_{B,y} \circ Sf$ is $\sigma \psi_{B,y} \circ \HomB(f, \t B)$ which is, up to the bijection $\sigma$, just the evaluation map of a morphism in $\HomB(B, \t B)$ at some $y \in [B]$ precomposed with $f \in \HomB(B, B')$, which yields the evaluation map of a morphism in $\HomB(B',B)$ at $f \circ y \in [B']$. In other words $[d_{B,y}] [Sf] = [\sigma \psi_{B', f \circ y}] = [d_{B', f \circ y}]$, which is clearly the underlying set map of $d_{B', f \circ y}$, giving us (3). 
+
+
+
+The definition of $S$ gives us that $[S\eta_B][\epsilon_{SB}](t) = \HomB(\eta_B, \t B)(e_{SB, t})$ and by (2) we have $\HomB(\eta_B, \t B)(e_{SB, t}) = e_{SB,t} \circ \eta_B = t$. Since $U$ is faithful, any map $[Sf] \in \Set([SB'], [SB])$ is the underlying-set map to a unique map $Sf \in \HomA(SB', SB)$, and we deduce that $[S\eta_B][\epsilon_{SB}] = 1_{[SB]}$ is the underlying set map of the triangle identity $S\eta_B \circ \epsilon_{SB} = 1_{SB}$.
+
+Finally, to show that $\tau$ is induced by this adjunction it suffices to see that it maps $\t x \mapsto [[\epsilon_{\t A}](\t x)](1_{\t A})$ as desired. For every $\t x \in [\t A]$ we have
+\begin{align*}
+	[[\epsilon_{\t A}](\t x)](1_{\t A}) = \tau \varphi_{\t A, \t x}(1_{\t A}) = \tau([1_{\t A}](\t x)) = \tau(\t x).
+\end{align*}
+\end{proof}
+\section{Motivation}
+We are now in the position to understand what this schizophrenic object really affords us, however first we will explicate what that is by  saying a few words about motivation that will hopefully make the above seemingly abstract definition of the schizophrenic object more understandable. 
+
+First remember that there is a bijection between $[\t A]$ and $[\t B]$, since  \begin{align*}
+	[\t A] = \HomA(A_0, SB_0) = \Hom_B(B_0, TA_0) = [\t B].
+\end{align*}
+
+In particular, we have shown that $\tau$ and $\sigma$ are necessarily such bijections and inverses of one another. 
+
+What is interesting about the schizophrenic object is that the object itself defines the adjunction via $\Hom$ sets in our respective categories. In other words, our question, in general, is that given a schizophrenic object $(\t A, \tau, \t B)$ do the sets $\Hom_A(A, SB_0)$ have $\mathcal{B}$ structure for every $A \in \mathcal{A}$ and $\HomB(B, TA_0)$ have $\mathcal{A}$ structure for every $B \in \mathcal{B}$. 
+
+More explicitly, do we have lifts via the forgetful functor, such that the following diagrams commute for every $A \in \mathcal{A}$ and for every $B \in \mathcal{B}$?
+
+\[\begin{tikzcd}
+	&& {\mathcal{B}^{op}} &&&&& {\mathcal{A}^{op}} \\
+	&& {} && {\text{and}} \\
+	{\mathcal{A}} && \Set &&& {\mathcal{B}} && \Set \\
+	A && {\HomA(A, \t A)} &&& B && {\HomB(B, \t B)} \\
+	&&&&& {}
+	\arrow["{\t U(-)}", from=1-3, to=3-3]
+	\arrow["{\t U(-)}", from=1-8, to=3-8]
+	\arrow["\exists", dashed, from=3-1, to=1-3]
+	\arrow["{\HomA(-,\t A)}"', from=3-1, to=3-3]
+	\arrow["\exists", dashed, from=3-6, to=1-8]
+	\arrow["{\HomB(-,\t B)}"', from=3-6, to=3-8]
+	\arrow[maps to, from=4-1, to=4-3]
+	\arrow[maps to, from=4-6, to=4-8]
+\end{tikzcd}\]
+If such lifts exist, then by construction, we will have the following adjunction
+\[\begin{tikzcd}
+	{\mathcal{A}} & \bot & {\mathcal{B}^{op}}
+	\arrow["{T:=\HomA(-, \t A)}",  bend left, from=1-1, to=1-3, from=1-1, to=1-3]
+	\arrow["{S:=\HomB(-, \t B)}", bend left, from=1-3, to=1-1, from=1-3, to=1-1]
+\end{tikzcd}\]
+
+To understand this adjunction and see that it does indeed correspond to the morphisms explained in the first section, we will go through several examples.
+\section{Leading example}
+%\emph{A note about notation: When speaking about $\Hom$ sets of a general category $A$, we use the notation as before $\HomA(-,-)$. However to shorten notation and ease readability, when speaking of specific categories, such as $\Frm, \Top,$ or $\Set$, we use the notation $\Frm(-,-), \Top(-,-),$ $ \Set(-.-).$}
+
+We begin with the adjunction 
+
+\[\begin{tikzcd}
+	{\Frm} & \bot & {\Top^{op}}
+	\arrow["{\text{T = $\Frm$(--, $\mathbb{S}$)}}" , bend left, from=1-1, to=1-3]
+	\arrow["{\text{S = $\Top$(--, $\mathbb{2}$)}}", bend left, from=1-3, to=1-1]
+\end{tikzcd}\]
+
+with the following unit and counit
+\begin{align*}
+	\tau:& [\mathbb{2}] \to [\mathbb{S}] & \sigma: [\mathbb{S}]&\to [\mathbb{2}]\\
+	&\t x \to  [[\epsilon_{\mathbb{2}}](\t x)](1_{\mathbb{2}})&\t y &\mapsto [[\eta_{\mathbb{S}}](\t y)](1_{\mathbb{S}})
+\end{align*}
+In this setting  the respective representable objects are $A_0 = a$ and $B_0 = \{pt\}$, where $a$ is here  notation for the free frame generated by one object, i.e., the free 3-chain $\bot - a - \top$. 
+
+Now it is easy to see that $TA_0 = \Frm(a, \mathbb{2}) = \mathbb{2}$ and $SB_0 = \Top(\{pt\}, \mathbb{S}) = \mathbb{S}$, however it is not easy to see in general why $\Frm(A, \mathbb{2}) \in \Top$ and $\Top(B, \mathbb{S}) \in \Frm$.
+
+Given that $\mathbb{S}$ is a topology on the set $\{0,1\}$, we endow $\Top(B, \mathbb{S})$ with an order $u \leq v \iff u(x) \leq v(x)$ for all $x \in B$ given a pointwise order in $\mathbb{2}$. 
+
+
+For a topology on $\Frm(A, \mathbb{2})$, we consider the family \begin{align*}
+	\{ \  \{p \in \Frm(A, \mathbb{2}) \   \lvert \  p(x) = 1 \} \ \lvert \ x \in A \ \} 
+\end{align*} 
+
+Our adjunction has the unit
+\begin{align*}
+	\epsilon:& 1_{\Frm} \to ST\\
+	&A \mapsto STA\\
+	&A \mapsto \Top(\Frm(A, \mathbb{2}), \mathbb{S})
+\end{align*}
+so that 
+\begin{align*}
+	\epsilon_A:& A \to \Top(\Frm(A, \mathbb{2}), \mathbb{S})
+\end{align*}
+where 
+\begin{align*}
+	\epsilon_A(x):& \Frm(A, \mathbb{2}) \to \mathbb{S}\\
+	&p \mapsto p(x)
+\end{align*}
+Notice that the topology on $\Frm(A, \mathbf{2})$ is the initial topology making all $(\epsilon_A(x))_{x \in A}$ continuous.
+
+When passing to $U$ and $V$, we have
+\begin{align*}
+	[\epsilon_{\t A}]:& [\t A] \to [\Top(\Frm(\t A, \mathbb{2}), \mathbb{S})] = \Top(\Frm(\t A, \mathbb{2}), \mathbb{S})\\
+	&(\t x: a \to x) \mapsto (p \to p(x))
+\end{align*}
+which is equal to
+\begin{align}
+	[\epsilon_{\mathbb{2}}]:& [\mathbb{2}] \to [\Top(\Frm(\mathbb{2}, \mathbb{2}), \mathbb{S})] = \Top(\Frm(\mathbb{2}, \mathbb{2}), \mathbb{S})\\
+	&(\t x: a \to x) \mapsto (1_{\mathbb{2}} \to 1_{\mathbb{2}}(x))
+\end{align}
+So we have 
+\begin{align*}
+	[\epsilon_{\mathbb{2}}](\t x):& \Frm(\mathbb{2},\mathbb{2}) \to \mathbb{S}\\
+	&1_{\mathbb{2}} \mapsto 1_{\mathbb{2}}(x)
+\end{align*}
+and now
+\begin{align*}
+	[[\epsilon_{\mathbb{2}}](\t x)]:& [\Frm(\mathbb{2},\mathbb{2})] \to [\mathbb{S}]\\
+	&(a \to 1_{\mathbb{2}}) \mapsto (\{pt\} \to1_{\mathbb{2}}(x))
+\end{align*}
+so that 
+\begin{align*}
+	[[\epsilon_{\mathbb{2}}](\t x)](1_{\mathbb{2}}) = (\{pt\} \to 1_{\mathbb{2}}(x)).
+\end{align*}
+Now we can see that the map \begin{align*}
+	\tau: [\mathbb{2}] &\to [\mathbb{S}]\\
+	(\t x: a \to x) &\mapsto (\{pt\} \to 1_{\mathbb{2}}(x))
+\end{align*}
+is the identity in $\Set$, as the underlying set on both sides is $[\mathbb{2}] = [\mathbb{S}] = \{0,1\}$ so that we are looking at the set map \begin{align*}
+	\{0,1\} &\to \{0,1\}\\
+	x &\mapsto 1_{\{0,1\}}(x)= x
+\end{align*}
+
+This map is clearly the identity. This boils down to the fact that our choice of morphism from $\Frm(\mathbb{2},\mathbb{2})$ was easy to determine since the set $\Frm(\mathbb{2},A) = \{pt\}$, as $\mathbb{2}$ is an initial object in $\Frm$, and in particular it is clear in $(1)$ that $\Frm(\mathbb{2},\mathbb{2}) = \{1_{\mathbb{2}}\}$. From this we can deduce that $\tau$ is the identity on $\bar U(\mathbb{2})$.
+In general, our schizophrenic object will not necessarily be initial in arbitrary concrete duality, and as such, our choice $p \in \HomA(\t A, \t A)$ may not be unique nor easy to determine, so that $\tau$, though always a bijection, is not necessarily always the identity. 
+
+\section{A more general example}
+
+The leading example is modeled from a more general example from which many examples to be discussed in this thesis are structured. 
+
+This is the duality between the category of Boolean Algebras and the category of sets. This duality is actually given by the forgetful functor and it's left adjoint the free functor. In this case, this free functor is necessarily the power-set functor $\mathcal{P}(-): \Set \to \Bool$, given by $S \mapsto \mathcal{P}(S)$, which sends the set $S$ to its powerset.  
+
+(\textcolor{red}{TODO}: introduce boolean algebras, and show that the power set forms a boolean algebra) 
+
+(\textcolor{red}{TODO}: clarify about finite boolean algebras/finite sets, why this works/doesn't work (dont know yet) in the infinite case, and how to mend such a construction). 
+
+This duality is easy to see, as all we need to see is that the adjunction isomorphic to the expected ones on the $\Hom$ sets given by the schizophrenic object $(\mathbb{2}, 1_{\mathbb{2}}, \mathbb{2})$. 
+
+In other words, we check that for all $A \in \Bool$, it holds that $U(A) = \Bool(A, \mathbb{2})$, and that for all $S \in \Set$, it holds that $\mathcal{P}(S) = \Set(S, \mathbb{2})$. 
+
+The first equality comes from the fact that a boolean algebra is a special case of a frame, so that morphisms in $\Bool(A, \mathbb{2})$ are left exact and colimit preserving, which means that a morphism is uniquely determined by which $a \in A$ is sent to 1 (\textcolor{red}{TODO}: show this).
+
+The second equation is given by the fact that any set map  $S \to \mathbb{2}$ is given uniquely by a subset $\t S \subset S$, via characteristic functions \begin{equation*}
+  \mathcal{X}_{\t S}(x) = \begin{cases}
+   1 & x \in \t S \\
+    0 & \text{else}.
+  \end{cases}
+\end{equation*}
+
+The unit and counit maps then follow the exact same logic as the leading example, and in particular, $\mathbb{2}$ is also initial in $\Bool$ so that by the same logic, our $\tau$ is equal to the set identity $1_{\mathbb{2}}$. 
+
+(\textcolor{red}{TODO}: talk about free object and show why  $(\mathbb{2}, 1_{\mathbb{2}}, \mathbb{2})$ is the schizophrenic object).
+
+\section{Rings and Affine varieties}
+
+We now turn to an example that any graduate Algebra student has encountered, the duality between the category of rings and the category of affine schemes. We will use the more general category of commutative $R$-algebras, which we denote $\CAlg$. Notice that if $R = \mathbb{Z}$, then $\CAlgZ = \Ring$. 
+
+In this example we already know from commutative algebra the adjunction that gives a dual equivalence, and we can easily show that one of these adjoint functors is isomorphic to the $\Hom$ functor. For the other adjoint, it is not so easy to see that the two functors are isomorphic directly, though we can easily conclude from uniqueness of the adjoint.  We will nevertheless try to give some intuition about this isomorphism.
+
+Firstly, we discuss the adjunction that one might learn in Algebra:
+
+\[\begin{tikzcd}
+	{\CAlg^{op}} & \bot & {\Aff}
+	\arrow["X(-)" , bend left, from=1-1, to=1-3]
+	\arrow["\mathcal{O}(-)", bend left, from=1-3, to=1-1]
+\end{tikzcd}\]
+
+Recall that an affine scheme $X \in \Aff$ is defined as a representable functor in the functor category $\Fun(\CAlg, \Set)$ (\emph{to avoid confusion, we use the notation $\Nat_{\mathcal{A}}^{\mathcal{B}}(-,-)$, or more often when the context is clear simply $\Nat(-,-)$, to refer to the set of morphisms, or natural transformations, in an arbitrary functor category $\Fun(\mathcal{A},\mathcal{B})$.})
+
+Now we see that there is a natural choice for our adjunction given by sending a representable object to its functor, and sending that representable functor to its object. In other words we have $X: \CAlg^{op} \to \Aff$ that sends $A \to X_A = \CAlg(A, -)$ and $\mathcal{O}: \CAlg \to \Set$, which sends $X(-) = \CAlg(\mathcal{O}(X), -)$ to $\mathcal{O}(X)$, its representable object.
+
+The equivalence is clear, since by construction  our unit and counit are  isomorphisms, i.e. $X_{\mathcal{O}(X)} =X$ and $\mathcal{O}(X_A) = A$. 
+
+
+Now on the one hand,  the Yoneda lemma shows us that   $\Aff(X, \mathbb{A}^1) = \mathbb{A}^1(\mathcal{O}(X)) = \CAlg(R[X], \mathcal{O}(X)) \cong \mathcal{O}(X)$. The final set isomorphism is due to the fact that $R[X]$ is a free commutative $R$-algebra on one free generator. Now we see that for any $X_A \in \Aff$ it holds that $\mathcal{O}(X_A) = \Aff(X_A, \mathbb{A}^1)$, and as such we have a natural choice for a schizophrenic object $(R[X], \tau, \mathbb{A}^1 )$. 
+
+
+We may use the same argument to show why $\CAlg(A, R[X])$ lifts to the category of affine schemes, and that it is isomorphic to $X(A) = \CAlg(A, -)$, however it is not obvious how to think about $\mathbb{A}^1$ as a free functor on one free generator, as elements of affine schemes are not given in the same way as they are for $R[X]$, where the element $X$ is clearly our free generator. 
+
+We may however still use Yoneda to see that $\CAlg(A, R[X]) = X_A(R[X]) = \Aff(\mathbb{A}^1, X_A) \cong X_A$, and as such our intuition thus must come from the fact that $\mathbb{A}^1$ is our free affine scheme on one free generator and that the above equality is given, so that elements of our affine scheme can be thought of as global functions from $A$ to $R[X]$. 
+
+Now we shall try to understand the unit and counits.
+
+
+%
+%Our adjunction has the unit
+%\begin{align*}
+%	\epsilon:& 1_{\Frm} \to ST\\
+%	&A \mapsto STA\\
+%	&A \mapsto \Top(\Frm(A, \mathbb{2}), \mathbb{S})
+%\end{align*}
+%so that 
+%\begin{align*}
+%	\epsilon_A:& A \to \Top(\Frm(A, \mathbb{2}), \mathbb{S})
+%\end{align*}
+%where 
+%\begin{align*}
+%	\epsilon_A(x):& \Frm(A, \mathbb{2}) \to \mathbb{S}\\
+%	&p \mapsto p(x)
+%\end{align*}
+%Notice that the topology on $\Frm(A, \mathbf{2})$ is the initial topology making all $(\epsilon_A(x))_{x \in A}$ continuous.
+%
+%When passing to $U$ and $V$, we have
+%\begin{align*}
+%	[\epsilon_{\t A}]:& [\t A] \to [\Top(\Frm(\t A, \mathbb{2}), \mathbb{S})] = \Top(\Frm(\t A, \mathbb{2}), \mathbb{S})\\
+%	&(\t x: 1 \to x) \mapsto (p \to p(x))
+%\end{align*}
+%which is equal to
+%\begin{align}
+%	[\epsilon_{\mathbb{2}}]:& [\mathbb{2}] \to [\Top(\Frm(\mathbb{2}, \mathbb{2}), \mathbb{S})] = \Top(\Frm(\mathbb{2}, \mathbb{2}), \mathbb{S})\\
+%	&(\t x: 1 \to x) \mapsto (1_{\mathbb{2}} \to 1_{\mathbb{2}}(x))
+%\end{align}
+%So we have 
+%\begin{align*}
+%	[\epsilon_{\mathbb{2}}](\t x):& \Frm(\mathbb{2},\mathbb{2}) \to \mathbb{S}\\
+%	&1_{\mathbb{2}} \mapsto 1_{\mathbb{2}}(x)
+%\end{align*}
+%and now
+%\begin{align*}
+%	[[\epsilon_{\mathbb{2}}](\t x)]:& [\Frm(\mathbb{2},\mathbb{2})] \to [\mathbb{S}]\\
+%	&(1 \to 1_{\mathbb{2}}) \mapsto (\{pt\} \to1_{\mathbb{2}}(x))
+%\end{align*}
+%so that 
+%\begin{align*}
+%	[[\epsilon_{\mathbb{2}}](\t x)](1_{\mathbb{2}}) = (\{pt\} \to 1_{\mathbb{2}}(x)).
+%\end{align*}
+%Now we can see that the map \begin{align*}
+%	\tau: [\mathbb{2}] &\to [\mathbb{S}]\\
+%	(\t x: 1 \to x) &\mapsto (\{pt\} \to 1_{\mathbb{2}}(x))
+%\end{align*}
+%is the identity in $\Set$, as the underlying set on both sides is $[\mathbb{2}] = [\mathbb{S}] = \{0,1\}$ so that we are looking at the set map \begin{align*}
+%	\{0,1\} &\to \{0,1\}\\
+%	x &\mapsto 1_{\{0,1\}}(x)= x
+%\end{align*}
+
+%\section{Questions}
+%\begin{enumerate}
+%	\item Is the above actually the case, i.e., am I actually supposed to look at the underlying sets in $\Set$ to understanding that $\tau$ is the identity?
+%	\subitem am I to understand $p(x) \in \mathbb{S}$ as "translating" from $\Frm$ to $\Top$ via $\Set$-elements?
+%	\item Is it actually true the remark about a free generator on one free object fully determining the set $\HomA(A_0,A) = A$ by where it sends the free generator to?
+%	\item In the commutative triangle we have the upper part of the lift being an isomorphism by the adjunction, so that a set of $V$ initial lifts $(TA \to B)_{x \in A}$ should be fully determined by existence of the maps $\tau \circ (\varphi_{A, x})$, correct? What I mean is, to show that a schizophrenic object exists, or to check the axioms for an S.O., I need only to show that $\tau \circ (\varphi_{A, x})$ is well defined for all $A \in \mathcal{A}$ and $x \in A$, and behaves as expected?
+%	\item In general,  a schizophrenic object should be fully determined by the adjunction and the representing objects. I mean to say if I understand the adjunction and know what the representing objects are, I have everything I need to check my hypothesis about the schizophrenic object, i.e., a hypothesis about a schizophrenic object leads to simply checking the adjunction and representable objects.
+%	\item Why are the representable objects \emph{necessarily} free objects on one free generator, and what is meant by free here? Does the necessary part come from the fact that only such an object could lead to a schizophrenic object, or is it for some reason necessary a priori?
+%\end{enumerate}
+\end{document}
