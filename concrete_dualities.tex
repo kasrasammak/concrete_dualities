@@ -37,6 +37,9 @@
 \DeclareMathOperator{\Aff}{Aff}
 \DeclareMathOperator{\Fun}{Fun}
 \DeclareMathOperator{\Nat}{Nat}
+\DeclareMathOperator{\Ob}{Ob}
+\DeclareMathOperator{\Mor}{Mor}
+
 
 
 \def\HomA{\ensuremath\mathcal{A}}
@@ -544,7 +547,51 @@ This duality is easy to see, as all we need to see is that the adjunction isomor
 
 In other words, we check that for all $A \in \Bool$, it holds that $U(A) = \Bool(A, \mathbb{2})$, and that for all $S \in \Set$, it holds that $\mathcal{P}(S) = \Set(S, \mathbb{2})$. 
 
-The first equality comes from the fact that a boolean algebra is a special case of a frame, so that morphisms in $\Bool(A, \mathbb{2})$ are left exact and colimit preserving, which means that a morphism is uniquely determined by which $a \in A$ is sent to 1 (\textcolor{red}{TODO}: show this).
+ Morphisms in $\Bool(A, \mathbb{2})$ are left exact, colimit preserving, and complement preserving.
+ 
+\begin{lemma}
+	We claim that there is a bijection \begin{align*}
+  	\phi: U(A) \to& \Bool(A, \mathbb{2})\\
+  	a \mapsto& f^*_a &f^*_a(x) = \begin{cases}
+   1 & x \geq a \\
+    0 & \text{else}
+  \end{cases}
+  \end{align*}
+\end{lemma}
+
+  
+ 
+ \begin{proof}
+ 	First we show that $f^*_a$ is finite limit, colimit, and complement preserving.
+ 
+ It holds that \begin{align*}
+ 	f^*_a(x \wedge y) = 1 &\iff x \wedge y \geq a\\ &\iff x \geq a \text{ and } y \geq a\\ &\iff f^*_a(x) \wedge f^*_a(y) =1 \
+ \end{align*}
+ and similarly that \begin{align*}
+ 	f^*_a(x \wedge y) = 0 &\iff x \wedge y \ngeq a\\ &\iff x \ngeq a \text{ or } y \ngeq a\\ &\iff f^*_a(x)  \wedge f^*_a(y) =0 \
+ \end{align*}
+
+
+Now we check \begin{align*}
+	f^*_a( x \vee y) = 1 &\iff x \vee y \geq a\\ &\iff x \geq a \text{ or } y \geq a\\
+	&\iff f^*_a(x) \vee f^*_a(y) = 1
+\end{align*}
+and similarly \begin{align*}
+	f^*_a( x \vee y) = 0 &\iff x \vee y \ngeq a\\ &\iff x \ngeq a \text{ and } y \ngeq a\\
+	&\iff f^*_a(x) \vee f^*_a(y) = 0
+\end{align*}
+
+Moreover it is clear from the definition that $f^*_a(\neg x)  =  \neg f^*_a(x)$.
+
+This shows that $\phi$ is well defined, and injectivity follows from definition of $\phi$. 
+
+To show surjectivity we consider a boolean algebra homomorphism $f \in \Bool(A, \mathbb{2})$, and define \begin{align*}
+	a = \bigwedge \{ x \in A \lvert f(x) = 1\}
+\end{align*}
+Now we show that $ f = f^*_a$. 
+(\textcolor{red}{TODO:} Finish this proof)
+ \end{proof}
+ This implies that morphisms in $\Bool(A, \mathbb{2})$ are uniquely determined by which $a \in A$ is severed by the boolean algebra homomorphism.
 
 The second equation is given by the fact that any set map  $S \to \mathbb{2}$ is given uniquely by a subset $\t S \subset S$, via characteristic functions \begin{equation*}
   \mathcal{X}_{\t S}(x) = \begin{cases}
