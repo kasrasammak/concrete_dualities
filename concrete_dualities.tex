@@ -39,6 +39,9 @@
 \DeclareMathOperator{\Nat}{Nat}
 \DeclareMathOperator{\Ob}{Ob}
 \DeclareMathOperator{\Mor}{Mor}
+\DeclareMathOperator{\kSp}{kSp}
+\DeclareMathOperator{\kHaus}{kHaus}
+\DeclareMathOperator{\Haus}{Haus}
 
 
 
@@ -69,6 +72,17 @@ Throughout this thesis we will be using the language of category theory, for whi
 
 \begin{definition}
 	Adjunction
+\end{definition}
+\begin{definition}[Source and sink]
+	 A \textbf{source} is a pair $(Y, (f_i))$ consisting of an object $Y$  of a category $\mathcal{C}$, and a family of morphisms $(Y \stackrel{f_i}{\to} X_i)_{i \in I}$ over a class $I$. Equivalently it is a family of objects in the under category  $\mathcal{C}_{Y/}$. 
+	 
+	 If $I$ is a finite index set $\{1, \cdots, n\}$, we call our source an \textbf{$n$-source}. 
+	 
+	 The dual concept to a source is called a \textbf{sink}. 
+	 \\
+\end{definition}
+\begin{definition}[Concrete Category]
+	Let $\mathcal{X}$ be a category. A \textbf{concrete category} over $\mathcal{X}$ is a pair $(\mathcal{A}, U)$ where $\mathcal{A}$ is a category and $U: \mathcal{A} \to \mathcal{X}$ is a faithful functor. Sometimes $U$ is called the \textbf{underlying functor} over $\mathcal{X}$ and $\mathcal{X}$ is called the \textbf{base category} for $(\mathcal{A},U)$. A concrete category over $\Set$ is called a \textbf{construct}.
 \end{definition}
 \textbf{Notes on free objects and the free functor}
 
@@ -634,6 +648,75 @@ We may however still use Yoneda to see that $\CAlg(A, R[X]) = X_A(R[X]) = \Aff(\
 
 Now we shall try to understand the unit and counits.
 
+\section{Gelfand Duality}
+In order to describe the following duality, some context is in order. In setting up a more general dual adjunction, whose restriction to an equivalence later defines the \emph{Gelfand duality}, we must set the scene, and in doing so we first define the following category, \emph{Kelley spaces}.
+\subsection{Kelley Spaces}
+Of primary importance to a Kelley space is the notion of a compactly generated topological space.
+\\
+\begin{definition}[$k$-continuous]
+	A function $f: X \to Y$ of underlying sets of a topological space is said to be \textbf{$k$-continuous} if for all compact Hausdorff $K \subset X$ and continuous functions $t: K \to X$ the composition $f \circ t$ is continuous. 
+\end{definition}
+\
+\begin{definition}[k-space]
+A topological space $X$ is said to be a \textbf{$k$-space}, or a \textbf{compactly generated topological space}, if for all spaces $Y$ and underlying-set functions $f: X \to Y$, it holds that $f$ is continuous if and only if $f$ is $k$-continuous.	
+\end{definition}
+\
+
+
+
+That is to say a space is compactly generated if all its continuous functions are continuous on compact subspaces. Note that in the definition the requirement that $K \subset X$ could be lifted to arbitrary compact Hausdorff space $Y$, since images of compact spaces by continuous maps $f(Y) \subset X$ are homeomorphic to compact subspaces  $K \subset X$, so in particular, $f$ factors through the inclusion $\iota: K \hookrightarrow X$. 
+
+For the following we will assume that $k$-spaces are additionally Hausdorff, and refer to ${\kSp}$ as the category of compactly generated Hausdorff spaces, whose morphisms are the continuous functions between them, making it a full subcategory of $\Top$, and in particular, of $\Haus \subset \Top$. 
+
+If given a topological space which may or may not be a $k$-space, we may force the compactly generated condition on it through a process which we call the \emph{Kelleyfication} of a topological space.
+
+That is, given a set(\textcolor{red}{TODO}: proper class?) $(K \stackrel{t_i}{\to} X)_{i \in I}$ of functions on compact subspaces $K\subset X$, we give $X$ the finest topology making all $t_i$ continuous. 
+
+That is, given an underlying-set function $X \stackrel{f}{\to} Y$, we give $X$ the topology such that $f$ is continuous if and only if $f \circ t_i$ is continuous. 
+
+But this is just the universal property of the colimit applied to topological spaces (and their full subcategories): for any set of continuous functions  $K_i \stackrel{\varphi_i}{\to}Y$ into some topological space $Y$ that satisfy commutativity (i.e., if there is a continuous map $K_i \stackrel{h}{\to} K_j $ for some $i, j \in I$, then $\varphi_i = \varphi_j \circ h$), then there exists a unique continuous map $X \stackrel{f}{\to}Y$ such that $\varphi = f \circ t_i$. 
+
+This is reflected by commutativity of the following diagram:
+
+\[\begin{tikzcd}
+	& Y \\
+	& X \\
+	{K_i} && {K_j}
+	\arrow["f", dashed, from=2-2, to=1-2]
+	\arrow["{f \circ t_i}", bend left,  from=3-1, to=1-2]
+	\arrow["{t_i}", from=3-1, to=2-2]
+	\arrow["h"', from=3-1, to=3-3]
+	\arrow["{f \circ t_j}"', bend right, from=3-3,  to=1-2]
+	\arrow["{t_j}"', from=3-3, to=2-2]
+\end{tikzcd}\]
+That is if $f \circ t_i$ is continuous, preimages of open sets $V \subset Y$ must be open under composition, in other words $t_i^{-1}(f^{-1}(V)) \subset K_i$ is open. 
+
+So $f \circ t_i$ induces a continuous $f: X \to Y$ in the following way: given a topological space with underlying set  $X$, the colimit out of compact Hausdorff subspaces will be its \emph{Kelleyfication}, which is necessarily a refinement of the topology of $X$, since continuous maps $X \stackrel{f}{\to}Y$ necessarily satisfy commutativity of the above diagram, so we want to add opens to $X$ which satisfy commutativity for arbitrary function $X \stackrel{f}{\to}Y$. 
+
+%(\textcolor{red}{TODO}: make this better, why exactly is this universal property equivalent to the first statement ($f$ continuous iff $f \circ t_i$ continuous)?)
+
+
+That is, if $X$ is not already Kelleyfied, we add opens $U = f^{-1}(V)$, for functions $f$ such that  $t_i^{-1}(U) \subset K$ is open  but $U \subset X$ is not. This is the universality condition, since commutativity must be satisfied for arbitrary function $f$. But this is our original statement: we want a topology on $X$ such that $f$ is continuous if and only if $f \circ t_i$ is continuous. 
+
+Thus we can understand a $k$-space as a colimit of compact Hausdorff spaces, or specifically, $X \in \kSp$ if and only if $X = \colim_{K \subset X \text{ compact}}K$.
+
+\textcolor{red}{Question}: are compact subspaces in $X$ compact if and only if they are compact in Kelley($X$)?
+
+We may otherwise view the \emph{Kelleyfication} as the left adjoint $k(-)$ to the forgetful functor. As $\kSp$ is a full subcategory of $\Haus$, this puts us in the setting of a coreflective subcategory of $\Haus \subset \Top$. 
+
+Another way to think about $\kSp$ is as the coreflective hull of $\kHaus$ in $\Haus$. That is to say, the forgetful functor $\kHaus \hookrightarrow \Haus$ does not have a left adjoint (\textcolor{red}{TODO}: Why? Does it have something to do with that $\kHaus$ is not closed under colimits), however we may take the intersection of all coreflective subcategories of $\Haus$ which contain $\kHaus$, and this will precisely be the category generated under colimits of $\kHaus$  (\textcolor{red}{TODO}: make this precise.)
+
+
+
+As it is important that our category admits function spaces (which we will later discuss), in the following we will show why $\kSp$ admits such spaces. In doing so we will introduce monotopological categories. 
+
+Let $(A, U)$ be a concrete category. 
+\begin{definition}[Topological functor]
+A functor $A \stackrel{G}{\to}B$ is called \textbf{topological} if every $G$-structured source has a unique $G$-initial lift. 
+ \end{definition}
+% (\textcolor{red}{TODO}: finish this part, if necessary, but the basic structure is the following: show that $\kSp$ is a monotopological category, show that monotopological categories admit function spaces... if theres an easier way to do it we may not need to define lifts and topological categories, so do that later)
+ 
+ 
 
 %
 %Our adjunction has the unit
