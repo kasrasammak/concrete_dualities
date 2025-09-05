@@ -11,6 +11,7 @@
 \usepackage[english]{babel}
 \usepackage{tikz-cd}
 \usepackage{bbm}
+\usepackage{stackrel}
 % change subsections to alphabetic
 \renewcommand\thesubsection{\thesection.\alph{subsection}}
 
@@ -42,15 +43,20 @@
 \DeclareMathOperator{\kSp}{kSp}
 \DeclareMathOperator{\kHaus}{kHaus}
 \DeclareMathOperator{\Haus}{Haus}
-
-
+\DeclareMathOperator{\ev}{ev}
 
 \def\HomA{\ensuremath\mathcal{A}}
 \def\HomB{\ensuremath\mathcal{B}}
+\def\HomC{\ensuremath\mathcal{C}}
+\def\HomD{\ensuremath\mathcal{D}}
+
+\def\concA{\ensuremath(\mathcal{A},U)}
+\def\concB{\ensuremath(\mathcal{B},V)}
+
+
 \def\HomFrm{\ensuremath\Hom_\Frm}
 \def\HomTop{\ensuremath\Hom_\Top}
 \def\t{\ensuremath\tilde}
-
 
 \DeclarePairedDelimiter\ceil{\lceil}{\rceil}
 \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
@@ -70,20 +76,98 @@
 
 Throughout this thesis we will be using the language of category theory, for which a mild introduction is in order. To that degree we plan to define the terms used as well as prove some well known theorems which we use quite freely, so not to distract us from the argument.
 
+We assume basic knowledge of Category theory (such as the definitions of Categories, functors, natural transformations, limits, colimits, initial object, terminal object, etc), and will choose to define terms as necessary as they relate to our investigation.
+\\
+\subsection{Adjunctions, Concrete Categories}
 \begin{definition}
 	Adjunction
 \end{definition}
+\
+\begin{definition}[Concrete Category]
+	Let $\mathcal{X}$ be a category. A \textbf{concrete category} over $\mathcal{X}$ is a pair $(\mathcal{A}, U)$ where $\mathcal{A}$ is a category and $U: \mathcal{A} \to \mathcal{X}$ is a faithful functor. Sometimes $U$ is called the \textbf{underlying functor} over $\mathcal{X}$ and $\mathcal{X}$ is called the \textbf{base category} for $(\mathcal{A},U)$. A concrete category over $\Set$ is called a \textbf{construct}.
+\end{definition}
+\
+\begin{definition} [Concrete functor]
+Let $(\mathcal{A}, U)$ and $(\mathcal{B}, V)$ be concrete categories over $\mathcal{X}$. A \textbf{concrete functor} from $(\mathcal{A}, U)$ to $(\mathcal{B},V)$ is a functor $F: \mathcal{A} \to \mathcal{B}$ such that $U = V \circ F$. 
+\end{definition}
+Note that a concrete functor is necessarily faithful, since $V$ is faithful. In general, for any functors $F: \mathcal{A} \to \mathcal{B}$ and $G: \mathcal{B} \to \mathcal{C}$, if $G \circ F$ is faithful, then $F$ is. The proof is easy: consider elements  $f, g \in \HomA(A, A')$ such that $Ff = Fg$. Then $GFf = GFg$ and since $G\circ F$ is faithful, then $f = g$. 
+\subsection{Types of arrows}
 \begin{definition}[Source and sink]
 	 A \textbf{source} is a pair $(Y, (f_i))$ consisting of an object $Y$  of a category $\mathcal{C}$, and a family of morphisms $(Y \stackrel{f_i}{\to} X_i)_{i \in I}$ over a class $I$. Equivalently it is a family of objects in the under category  $\mathcal{C}_{Y/}$. 
+	 
+	 For short we will use the notation $(Y \to X_i)_I$
 	 
 	 If $I$ is a finite index set $\{1, \cdots, n\}$, we call our source an \textbf{$n$-source}. 
 	 
 	 The dual concept to a source is called a \textbf{sink}. 
 	 \\
 \end{definition}
-\begin{definition}[Concrete Category]
-	Let $\mathcal{X}$ be a category. A \textbf{concrete category} over $\mathcal{X}$ is a pair $(\mathcal{A}, U)$ where $\mathcal{A}$ is a category and $U: \mathcal{A} \to \mathcal{X}$ is a faithful functor. Sometimes $U$ is called the \textbf{underlying functor} over $\mathcal{X}$ and $\mathcal{X}$ is called the \textbf{base category} for $(\mathcal{A},U)$. A concrete category over $\Set$ is called a \textbf{construct}.
+\
+\begin{definition}
+	A source $\mathcal{S} = (A \stackrel{f_i}{\to}A_i)_I$ is called a \textbf{mono-source} if it cancels from the left, i.e., if for any two parallel morphisms $B \stackrel[h]{g}{\rightrightarrows A}$ the equation $ \mathcal{S} \circ g = \mathcal{S} \circ h$, that is, if $f_i \circ g = f_i \circ h$ for all $i \in I$, implies $g = h$.
 \end{definition}
+For the following definitions, let $G: \mathcal{A} \to \mathcal{B}$ be a functor, and $B \in \Ob(\mathcal{B})$.
+
+\
+
+\begin{definition}[$G$-structured map]
+		A \textbf{$G$-structured arrow with domain $B$} is a a pair $(f, A)$ consisting of an $\mathcal{A}$-object $A$ and a $\mathcal{B}$-morphism $f: B \to GA$. 
+\end{definition}
+\
+\begin{definition}[$G$-structured lift]
+	Let $(B \stackrel{\varphi_i}{\to} GA_i)_I$ be a $G$-structured source. If there exists an object $A$ and a map of morphisms  $(A \stackrel{f_i}{\to} A_i)_I$, for which there exists a map $GA \stackrel{h}{\to} B$ such that $Gf_i = \varphi_i \circ h$ for all $i \in I$, we call $A$ a \textbf{$G$-structured lift} of the source. 
+	
+	For notation we will interchangably refer to $A$ or the source $(A \to A_i)_I$ as the lift.
+\end{definition}
+\
+\begin{definition}[Morphism of $G$-structured lifts]
+	We call an  $\mathcal{A}$-morphism $A' \stackrel{\phi}{\to} A$ a \textbf{morphism of $G$-structured lifts} if there exists another lift $(A' \stackrel{f_i'}{\to} A_i)_I$ such that $GA' \to GA_i$ factors  through $GA \to GA_i$ for all $i \in I$. 
+	
+	That is, there exists a  morphism $GA' \stackrel{h'}{\to} B$ such that $h' = h \circ G\phi$ and $f_i' = f_i \circ \phi$. 
+	
+	
+	\end{definition}
+\begin{definition}
+	The lift $A \in \Ob(\mathcal{A})$ of $(B \stackrel{\varphi_i}{\to} GA_i)_I$ is called a \textbf{$G$-initial lift} if  every $G$-structured lift $(A' \stackrel{f_i'}{\to} A_i)_I$ factors uniquely through $(A \stackrel{f_i}{\to} A_i)_I$.
+\end{definition}
+	
+For the previous definitions we refer to the following commutative diagram for clarity:
+
+\[\begin{tikzcd}
+	{A'} && A && {} && {A_i} \\
+	\\
+	{GA'} && GA && B && {GA_i}
+	\arrow["\phi", from=1-1, to=1-3]
+	\arrow["{f_i'}", bend left, from=1-1, to=1-7]
+	\arrow[from=1-1, to=3-1]
+	\arrow["{f_i}", from=1-3, to=1-7]
+	\arrow[from=1-3, to=3-3]
+	\arrow[from=1-7, to=3-7]
+	\arrow["{G\phi}", from=3-1, to=3-3]
+	\arrow["{h'}", bend right, from=3-1, to=3-5]
+	\arrow["h", from=3-3, to=3-5]
+	\arrow["{Gf_i}", bend right, from=3-3, to=3-7]
+	\arrow["{\varphi_i}", from=3-5, to=3-7].
+\end{tikzcd}\]
+
+\emph{Remark}. Often $h$ is the identity map, in which case our lift is called \textbf{strict}. However in practice we assume that $h$ is the identity unless stated otherwise.
+
+\
+
+\begin{definition}[cogenerator]
+A \textbf{cogenerator} of a category $\mathcal{C}$ is an object $c \in \mathcal{C}$ such that the Hom-set functor $\HomC(-, c): \mathcal{C}^{op} \to \Set$ is injective.
+
+That is, given two maps $e \stackrel[f_2]{f_1}{\rightrightarrows} d$, if the induced maps $\HomC(d, c) \stackrel[- \circ f_2]{- \circ f_1}{\rightrightarrows}  \HomC(e,c)$ are equal, then $f_1 = f_2$, i.e., for any $\phi: d \to c$ it holds that $\phi \circ f_1 = \phi \circ f_2 \Rightarrow f_1 = f_2$. 
+
+The dual concept is of a \textbf{generator}, which applies to $\HomC(c, -)$.
+\end{definition}
+\subsection{Topological and algebraic categories}
+In the following we  introduce monotopological categories. 
+
+Let $(A, U)$ be a concrete category. 
+\begin{definition}[Topological functor]
+A functor $A \stackrel{G}{\to}B$ is called \textbf{topological} if every $G$-structured source has a unique $G$-initial lift. 
+ \end{definition}
 \textbf{Notes on free objects and the free functor}
 
 It is important to note that in some category $\mathcal{A}$ with a representing object $A_0$ that is a free generator on one free object, it holds that $\HomA(A_0,A) \cong A$ on the level of set, as the morphisms are uniquely determined by where they send the free generator to. 
@@ -350,22 +434,25 @@ via canonical bijections $\tau$ and $\sigma$. From here we can (\textcolor{red}{
 	x &\mapsto (f \to f(x)) & y &\mapsto (g\to g(y) )
 \end{align*}
 \section{Schizophrenic Objects}
-What we want for our set up is that the composition of these maps induces a lift, i.e. for every $A \in \mathcal{A}$ and  $x \in A$ there exists an $f \in \HomB(TA, \t B)$, that induces  $[f]: [TA] \to [\t B]$, such that the following diagram commutes: 
+\subsection{Natural dual adjunction}
+What we want for our set up is that the composition of these maps induces a $U$-structured lift, i.e. for every $A \in \mathcal{A}$ and  $x \in A$ there exists an $e_{A,x} \in \HomB(TA, \t B)$, that induces  $[e_{A,x}]: [TA] \to [\t B]$, such that $[e_{A,x}] = \tau \varphi_{A,x}$, i.e., the following diagram commutes: 
 \[\begin{tikzcd}
-	&& \HomB(B_0, TA)  \\
+	& TA && {\t B} \\
 	\\
-	\HomA(A, \tilde A)  && \HomB (B_0, \tilde B) 
-	\arrow[dashed, from=1-3, to=3-3]
-	\arrow["\cong",from=3-1, to=1-3]
-	\arrow["\tau \circ (\varphi_{A,x}) ",from=3-1, to=3-3]
+	{\HomB(B_0, TA)} & {\HomA(A, \t A)} && {\HomB(B_0, \t B)}
+	\arrow["e_{A,x}",dashed, from=1-2, to=1-4]
+	\arrow["U", from=1-2, to=3-2]
+	\arrow["U", from=1-4, to=3-4]
+	\arrow["{=}", shift right=1, draw=none, from=3-1, to=3-2]
+	\arrow["{\tau \varphi_{A,x}}", from=3-2, to=3-4]
 \end{tikzcd}\]
 %Although we know the existence of an isomorphism given by the adjunction, the family of lifts criterium is stronger, requiring  a choice of isomorphism for every $A \in \mathcal{A}$ and $x \in A$.
 
-This lends itself to a precise definition of the \emph{schizophrenic object}, which is the central notion of this thesis:
+We will shortly see that to obtain the desired dual adjunction, we may additionally require such a lift to be intial, which lends itself to a precise definition of the \emph{schizophrenic object}, which is the central notion of this thesis:
 
 \begin{definition}
 	A triple $(\t A, \tau, \t B)$ with a pair of objects $(\t A, \t B) \in \mathcal{A} \times \mathcal{B}$ and a bijective map $\tau: [\t A] \to [\t B]$ is called a \emph{schizophrenic object} (for concrete categories $\mathcal{A}$ and $\mathcal{B}$) if the following conditions are satisfied:
-	\begin{enumerate}
+\begin{enumerate}
 		\item[SO1.] For every $A \in \mathcal{A}$ the family $(\tau\varphi_{A,x}: \HomA(A, \t A) \to [\t B])_{x \in [A]}$ admits a $V$-initial lifting $(e_{A,x}:TA \to \t B)_{x \in [A]}$
 		\item[SO2.] For every $B \in \mathcal{B}$ the family $(\sigma\psi_{B,y}: \HomB(B, \t B) \to [\t A])_{y \in [B]}$ admits a $U$-initial lifting $(d_{B,y}:SB \to \t A)_{y \in [B]}$
 	\end{enumerate}
@@ -373,20 +460,24 @@ This lends itself to a precise definition of the \emph{schizophrenic object}, wh
 
 What these conditions actually mean is two-fold: Firstly, the $V$-structured lifting property yields the existence of  a $\mathcal{B}$-morphism $e_{A,x} \in \HomB(TA, \t B)$ for every $A \in \mathcal{A}$ and $x \in A$, such that $[TA] = \HomA(A, \t A)$ and $[e_{A,x}] = \tau \varphi_{A,x}$.
 
-But secondly,  the $V$-initiality means that for any $Z \in \mathcal{B}$ and a map $h: [Z] \to [TA]$, if  all composite maps $\tau \varphi_{A,x} \circ h$ are the underlying-set maps for $\mathcal{B}$-morphisms in $\HomB(Z, \t B)$, then there exists a unique $\mathcal{B}$-morphism in $\HomB(Z, TA)$  whose underlying set map is $h$.
+But secondly,  the $V$-initiality means that for any $Z \in \mathcal{B}$ and a map $h: [Z] \to [TA]$, if  all composite maps $\tau \varphi_{A,x} \circ h$ are the underlying-set maps for $\mathcal{B}$-morphisms in $\HomB(Z, \t B)$, then there exists a unique $\mathcal{B}$-morphism $h' \in \HomB(Z, TA)$  whose underlying set map is $h$.
 
 In other words, the $V$-structured lift is initial among all such lifts: if $Z$ is any other $\mathcal{B}$-object whose underlying set maps into $\HomA(A, \t A)$ in a way that is compatible with all $\tau \varphi_{A,x}$ composites, then that map factors uniquely through $TA$ in $\mathcal{B}$. 
 
 
 
 \[\begin{tikzcd}
-	&&&& {[TA]} \\
+	Z && TA && {\t B} \\
 	\\
 	{[Z]} && {\HomA(A, \t A)} && {[\t B]}
-	\arrow["{[e_{A,x}]}", from=1-5, to=3-5]
-	\arrow["h"', from=3-1, to=3-3]
-	\arrow[from=3-3, to=1-5]
-	\arrow["{\tau \varphi_{A,x}}"', from=3-3, to=3-5]
+	\arrow["h'", from=1-1, to=1-3]
+	\arrow["{ ({\tau\varphi_{A,x}\circ h})'}", bend left, from=1-1, to=1-5]
+	\arrow[from=1-1, to=3-1]
+	\arrow["{e_{A,x}}", from=1-3, to=1-5]
+	\arrow["U", from=1-3, to=3-3]
+	\arrow["U", from=1-5, to=3-5]
+	\arrow["h", from=3-1, to=3-3]
+	\arrow["{\tau  \varphi_{A,x}}", from=3-3, to=3-5]
 \end{tikzcd}\]
 
 
@@ -431,6 +522,80 @@ Finally, to show that $\tau$ is induced by this adjunction it suffices to see th
 	[[\epsilon_{\t A}](\t x)](1_{\t A}) = \tau \varphi_{\t A, \t x}(1_{\t A}) = \tau([1_{\t A}](\t x)) = \tau(\t x).
 \end{align*}
 \end{proof}
+A dual adjunction induced by a schizophrenic object in this way is called \emph{natural}. However there exist also dual adjunctions which are not natural in this sense, although some modifications are in order to make it natural. 
+\subsection{Non-natural dual adjunction}
+
+Dual adjunctions which are not induced by a schizophrenic object are called \emph{non-natural}. The key difference here is initiality of the lifts. That is, in the situation described in $\S 3$, an arbitrary dual adjunction $(S', T')$ already determines a triple $(\t A, \tau, \t B)$ such that the following weakened conditions of $SO1$ and $SO2$ are fulfilled:
+\begin{enumerate}
+		\item[WSO1.] For every $A \in \mathcal{A}$ the family $(\tau\varphi_{A,x}: \HomA(A, \t A) \to [\t B])_{x \in [A]}$ admits a $V$-structured lift $(e_{A,x}:T'A \to \t B)_{x \in [A]}$ which extends functorially, i.e., for every $A \stackrel{f}{\to} A'$ in $\mathcal{A}$ there exists a $\mathcal{B}$-morphism $T'A' \stackrel{T'f}{\to}T'A$ with $[T'f] = \HomA(f,\t A)$. 
+		\item[WSO2.] For every $B \in \mathcal{B}$ the family $(\sigma\psi_{B,y}: \HomB(B, \t B) \to [\t A])_{y \in [B]}$ admits a $U$-structured lift $(d_{B,y}:S'B \to \t A)_{y \in [B]}$ which extends functorially.
+	\end{enumerate}
+	
+Though $(S',T')$ determins a triple, such a triple does not necessarily induce $(S',T')$ like the schizophrenic object induces $(S,T)$. In particular, a non-natural dual adjunction is not a dual equivalence, i.e., $\epsilon$ and $\eta$ are not natural isomorphisms. (\textcolor{red}{TODO/Question:} Why are $\epsilon$ and $\eta$ not isomorphisms?).
+
+However, if we are in this situation, there are potential modifications which may give us a natural dual adjunction. There are in particular two methods which we will remark. 
+
+Firstly, one may use the triple $(\t A, \tau, \t B)$ to induce a natural dual adjunction $(S,T)$ on the concrete categories $(\mathcal{A}, U)$ and $(\mathcal{B},V)$. Such a method requires additional assumptions on $(\mathcal{A},U)$ and $(\mathcal{B},V)$ which we will not discuss. For more details, see [1 1-D]. 
+
+The second method is the one which we will later see in action in our examples, which is to restrict our dual adjunction to full subcategories of our categories under which the unit and counit are isomorphisms. 
+
+In the next part we will discuss a situation which induces a non-natural dual adjunction between concrete categories.
+\subsection{Internal Hom-Functors}
+
+Let $(\mathcal{A}, U)$ be a concrete category. An \textbf{internal hom-functor} is a functor $H: \mathcal{A}^{op} \times \mathcal{A} \to \mathcal{A}$ such that $UH = \HomA(-,-)$. Moreover \begin{align*}
+	\text{all evaluation maps } \phi_{A,A',x}: \HomA(A,A') &\to [A']\\
+	h &\mapsto [h](x)\\
+	\text{lift to $\mathcal{A}$-morphisms } p_{A,A',x}: H(A,A') &\to A' \text{ for all } A, A' \in \mathcal{A}, x \in [A]
+\end{align*}
+Any cartesian closed concrete category which admits function spaces is a good example of a category with internal hom-functors. Recall the following definitions (from [2]):
+
+\
+\begin{definition}[Cartesian closed category] A category $\mathcal{A}$ is \textbf{cartesian closed} if it has finite products and for each $\mathcal{A}$-object $A$ the functor $(A \times -)$ has a right adjoint  $(-)^A$, called the \textbf{Heyting implication}. For $B \in \mathcal{A}$ we call $B^A$ an \textbf{exponentiable object}. 
+\end{definition}
+\
+
+\begin{definition}
+	A construct $ \concA$ is said to admit \textbf{function spaces} if $\mathcal{A}$ is cartesian closed, $\concA$ admits finite concrete products, and the evaluation morphisms $A \times B^A \stackrel{\ev}{\to} B$ can be chosen in such a way that $U(B^A)= \HomA(A,B)$ where $\ev$ is the restriction of the canonical evaluation map in $\Set$.  \end{definition}
+
+
+Now we want to see that such a category induces a dual adjunction. Let $\concA$ admit an internal hom-functor $H$, and let there be a concrete category $\concB$ and a concrete functor $\lvert - \lvert : \mathcal{B} \to \mathcal{A}$ such that $\HomB(B, C) \hookrightarrow \HomA(\lvert B \lvert, \lvert C \lvert)$ lift to $\mathcal{A}$-morphisms\footnote{$\HomB_\mathcal{A}(-,-)$ is notation for the hom set in $\mathcal{B}$ as $\mathcal{A}$-object} $\gamma_{B,C}: \HomB_\mathcal{A}(B,C) \to H(\lvert B \lvert, \lvert C\lvert)$, which can be done in a monotopological category by lifting initially.
+
+Given $\t B \in \mathcal{B}$ with $\t A := \lvert \t B \lvert $ and $\tau = 1_{[\t A]}$, we can check that $WSO2$ is fulfilled. In other words we are seeking a lift of the map $\sigma \psi_{B,y}: \HomB(B, \t B) \to [\t A]$. But such a lift is given by the internal hom-functor, given that the bottom part of the following diagram commutes:
+\[\begin{tikzcd}
+	{\HomB_\mathcal{A}(B, \t B)} && {H(\lvert B\lvert, \t A)} && {\t A} \\
+	\\
+	{\HomB(B, \t B)} && {\HomA(\lvert B \lvert , \t A) } && {[\t A]}
+	\arrow["{\gamma_{B, \t B}}", from=1-1, to=1-3]
+	\arrow[from=1-1, to=3-1]
+	\arrow["{p_{\lvert B \lvert, \t A, y}}", from=1-3, to=1-5]
+	\arrow[from=1-3, to=3-3]
+	\arrow[from=1-5, to=3-5]
+	\arrow["\iota", hook, from=3-1, to=3-3]
+	\arrow["{\sigma \varphi_{B,y}}", bend right, from=3-1, to=3-5]
+	\arrow["{\phi_{\lvert B\lvert , \t A,x }}", from=3-3, to=3-5]
+\end{tikzcd}\]
+
+That is, if $\sigma \varphi_{B,y} = \phi_{\lvert B\lvert, \t A, x} \circ \iota$ then we have $d_{B, y} = p_{\lvert B \lvert, \t A, y} \circ \gamma_{B, \t B}$, which gives us $WSO2$. 
+
+The question is if the concrete functor commutes with the evaluation map, since $\t A = \lvert \t B \lvert $ and $\tau$ (and therefore also $\sigma$) is the identity.
+
+\[\begin{tikzcd}
+	{\HomB(B, \t B)} && {[\t B]} && {[\t A]} \\
+	\\
+	&& {\HomA(\lvert B \lvert , \t A) }
+	\arrow["{\varphi_{B,y}}", from=1-1, to=1-3]
+	\arrow["\iota", hook, from=1-1, to=3-3]
+	\arrow["{\sigma }", from=1-3, to=1-5]
+	\arrow["{\phi_{\lvert B\lvert , \t A,x }}", from=3-3, to=1-5]
+\end{tikzcd}\]
+
+In other words, we check $\sigma([f](y)) = [\lvert f \lvert ](\iota(y))$, but this follows from faithfulness of the concrete functor $\lvert - \lvert $. (\textcolor{red}{TODO/Question}: is this true/really so immediate?)
+
+Therefore we have a contravariant functor $S(B) = \HomB_\mathcal{A}(B, \t B)$. 
+
+Now if for every $A \in \mathcal{A}$ we can lift the $\mathcal{A}$-source $(p_{A, \t A, x}: H(A, \t A) \to \t A$ along $\lvert - \lvert$ functorially, then we also have WSO1, inducing the contravariant functor $T: \mathcal{A} \to \mathcal{B}$ such that $\lvert T(A) \lvert = H(A, \t A)$, and as such we have the desired dual adjunction $(S, T)$. We will however only show this example-wise. 
+
+
 \section{Motivation}
 We are now in the position to understand what this schizophrenic object really affords us, however first we will explicate what that is by  saying a few words about motivation that will hopefully make the above seemingly abstract definition of the schizophrenic object more understandable. 
 
@@ -700,7 +865,7 @@ That is, if $X$ is not already Kelleyfied, we add opens $U = f^{-1}(V)$, for fun
 
 Thus we can understand a $k$-space as a colimit of compact Hausdorff spaces, or specifically, $X \in \kSp$ if and only if $X = \colim_{K \subset X \text{ compact}}K$.
 
-\textcolor{red}{Question}: are compact subspaces in $X$ compact if and only if they are compact in Kelley($X$)?
+\textcolor{red}{Question}: are compact subspaces in $X$ compact if and only if they are compact in Kelley($X$)? No.
 
 We may otherwise view the \emph{Kelleyfication} as the left adjoint $k(-)$ to the forgetful functor. As $\kSp$ is a full subcategory of $\Haus$, this puts us in the setting of a coreflective subcategory of $\Haus \subset \Top$. 
 
@@ -708,12 +873,13 @@ Another way to think about $\kSp$ is as the coreflective hull of $\kHaus$ in $\H
 
 
 
-As it is important that our category admits function spaces (which we will later discuss), in the following we will show why $\kSp$ admits such spaces. In doing so we will introduce monotopological categories. 
+It is important that our category admits function spaces, or in other words, that we are in a closed category (i.e. all exponentiables exist). In the following we will show why $\kSp$ is a closed category. This will indeed give us intuition of why we have even defined $\kSp$ the way we have, as $\Haus $ is not a closed category.  
 
-Let $(A, U)$ be a concrete category. 
-\begin{definition}[Topological functor]
-A functor $A \stackrel{G}{\to}B$ is called \textbf{topological} if every $G$-structured source has a unique $G$-initial lift. 
- \end{definition}
+What we want is the following adjunction:
+\begin{align*}
+	\Haus(A \times_{\Haus}C, B) \cong \Haus(C, B^A)
+\end{align*}
+For all $A, B, C \in \Ob(\Haus)$. However this does not hold in general. 
 % (\textcolor{red}{TODO}: finish this part, if necessary, but the basic structure is the following: show that $\kSp$ is a monotopological category, show that monotopological categories admit function spaces... if theres an easier way to do it we may not need to define lifts and topological categories, so do that later)
  
  
