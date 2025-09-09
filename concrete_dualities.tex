@@ -44,6 +44,8 @@
 \DeclareMathOperator{\kHaus}{kHaus}
 \DeclareMathOperator{\Haus}{Haus}
 \DeclareMathOperator{\ev}{ev}
+\DeclareMathOperator{\Lift}{Lift}
+
 
 \def\HomA{\ensuremath\mathcal{A}}
 \def\HomB{\ensuremath\mathcal{B}}
@@ -154,6 +156,17 @@ For the previous definitions we refer to the following commutative diagram for c
 
 \
 
+Consider that here we mean initial in the sense of the initial or induced topology (in $(\Top, U)$ as  construct), however applied to arbitrary concrete category $(\mathcal{A}, U)$ over arbitrary category $\mathcal{X}$. 
+
+That is, this lift is initial in the poset $(\Lift(B), \subset)$  of $G$-structured lifts of $B$ where the order is given by $A\subset A'$ if and only if $A'$ factors through $A$ as a lift, i.e. the morphisms are $A' \stackrel{\phi}{\to} A$ such that $(GA' \stackrel{h'}{\to}B) = (GA' \stackrel{G\phi}{\to}GA\stackrel{h}{\to}B) $. 
+
+Our intuition here however should come from topology, where the initial topology is the limit topology, i.e., the coarsest topology on $GA$ making all $(A \stackrel{f_i}{\to}A_i)_I$ continuous. 
+
+So for arbitrary category, we are looking for the weakest or initial $\mathcal{A}$-structure on $GA$ such that $(A \stackrel{f_i}{\to}A_i)_I$ are $\mathcal{A}$-morphisms, which ensures that for any $\mathcal{A}$-structure on $GA'$ such that $(A' \stackrel{f_i'}{\to}A_i)_I$ are $\mathcal{A}$-morphisms, there is a unique factorization $(A' \stackrel{\phi}{\to}A)$ through the lift $(A\stackrel{f_i}{\to} A_i)_I$. 
+Formally this is a limit  in $\mathcal{A}$ over $\mathcal{A}$-structures on $GA$ with the property that all $(A \stackrel{f_i}{\to}A_i)_I$ are $\mathcal{A}$-morphisms.
+
+\
+
 \begin{definition}[cogenerator]
 A \textbf{cogenerator} of a category $\mathcal{C}$ is an object $c \in \mathcal{C}$ such that the Hom-set functor $\HomC(-, c): \mathcal{C}^{op} \to \Set$ is injective.
 
@@ -164,10 +177,20 @@ The dual concept is of a \textbf{generator}, which applies to $\HomC(c, -)$.
 \subsection{Topological and algebraic categories}
 In the following we  introduce monotopological categories. 
 
-Let $(A, U)$ be a concrete category. 
+Let $(A, U)$ be a concrete category over $\mathcal{X}$. 
 \begin{definition}[Topological functor]
-A functor $A \stackrel{G}{\to}B$ is called \textbf{topological} if every $G$-structured source has a unique $G$-initial lift. 
+A functor $\mathcal{A} \stackrel{G}{\to}\mathcal{B}$ is called \textbf{topological} if every $G$-structured source has a unique $G$-initial lift. 
  \end{definition}
+ 
+ \begin{definition}[Topological category]
+ A concrete category $(\mathcal{A}, U)$ over $\mathcal{X}$ is said to be a \textbf{topological category} if $U$ is a topological functor. 
+ \end{definition}
+ 
+ Notice here again that our intuition of such a category should come from topology, which is even reflected in its name, namely, from the construct $(\Top, U)$,  over which every source lifts initially, since the arbitrary intersection of topologies is a topology. That is, we are taking the intersection of all topologies on $A$ such that all $(GA \stackrel{f_i}{\to} GA_i)_I$ are continuous.
+ 
+  That means there is a systematic way to choose open sets of $GA$. In other words,  a subset $S \subset GA$ lifts to an open set in $A$ if and only if $S$ equals the preimage $Gf_i^{-1}(G(U))$ for some  $f_i \in (GA \stackrel{f_i}{\to} GA_i)_I$ and $U \in  \tau_{A_i}$.
+ 
+
 \textbf{Notes on free objects and the free functor}
 
 It is important to note that in some category $\mathcal{A}$ with a representing object $A_0$ that is a free generator on one free object, it holds that $\HomA(A_0,A) \cong A$ on the level of set, as the morphisms are uniquely determined by where they send the free generator to. 
@@ -557,8 +580,10 @@ Any cartesian closed concrete category which admits function spaces is a good ex
 \begin{definition}
 	A construct $ \concA$ is said to admit \textbf{function spaces} if $\mathcal{A}$ is cartesian closed, $\concA$ admits finite concrete products, and the evaluation morphisms $A \times B^A \stackrel{\ev}{\to} B$ can be chosen in such a way that $U(B^A)= \HomA(A,B)$ where $\ev$ is the restriction of the canonical evaluation map in $\Set$.  \end{definition}
 
+A cartesian closed concrete category which admits function spaces admits an internal hom-functor by definition, since we can choose $B^A$ to be our lift.
 
-Now we want to see that such a category induces a dual adjunction. Let $\concA$ admit an internal hom-functor $H$, and let there be a concrete category $\concB$ and a concrete functor $\lvert - \lvert : \mathcal{B} \to \mathcal{A}$ such that $\HomB(B, C) \hookrightarrow \HomA(\lvert B \lvert, \lvert C \lvert)$ lift to $\mathcal{A}$-morphisms\footnote{$\HomB_\mathcal{A}(-,-)$ is notation for the hom set in $\mathcal{B}$ as $\mathcal{A}$-object} $\gamma_{B,C}: \HomB_\mathcal{A}(B,C) \to H(\lvert B \lvert, \lvert C\lvert)$, which can be done in a monotopological category by lifting initially.
+ 
+Now we want to see that a category which admits an internal hom-functor induces a dual adjunction. Let $\concA$ admit an internal hom-functor $H$, and let there be a concrete category $\concB$ and a concrete functor $\lvert - \lvert : \mathcal{B} \to \mathcal{A}$ such that $\HomB(B, C) \hookrightarrow \HomA(\lvert B \lvert, \lvert C \lvert)$ lift to $\mathcal{A}$-morphisms\footnote{$\HomB_\mathcal{A}(-,-)$ is notation for the hom set in $\mathcal{B}$ as $\mathcal{A}$-object} $\gamma_{B,C}: \HomB_\mathcal{A}(B,C) \to H(\lvert B \lvert, \lvert C\lvert)$, which can be done in a monotopological category by lifting initially.
 
 Given $\t B \in \mathcal{B}$ with $\t A := \lvert \t B \lvert $ and $\tau = 1_{[\t A]}$, we can check that $WSO2$ is fulfilled. In other words we are seeking a lift of the map $\sigma \psi_{B,y}: \HomB(B, \t B) \to [\t A]$. But such a lift is given by the internal hom-functor, given that the bottom part of the following diagram commutes:
 \[\begin{tikzcd}
@@ -593,7 +618,7 @@ In other words, we check $\sigma([f](y)) = [\lvert f \lvert ](\iota(y))$, but th
 
 Therefore we have a contravariant functor $S(B) = \HomB_\mathcal{A}(B, \t B)$. 
 
-Now if for every $A \in \mathcal{A}$ we can lift the $\mathcal{A}$-source $(p_{A, \t A, x}: H(A, \t A) \to \t A$ along $\lvert - \lvert$ functorially, then we also have WSO1, inducing the contravariant functor $T: \mathcal{A} \to \mathcal{B}$ such that $\lvert T(A) \lvert = H(A, \t A)$, and as such we have the desired dual adjunction $(S, T)$. We will however only show this example-wise. 
+Now if for every $A \in \mathcal{A}$ we can lift the $\mathcal{A}$-source $(p_{A, \t A, x}: H(A, \t A) \to \t A)$ along $\lvert - \lvert$ functorially, then we also have WSO1, inducing the contravariant functor $T: \mathcal{A} \to \mathcal{B}$ such that $\lvert T(A) \lvert = H(A, \t A)$, and as such we have the desired dual adjunction $(S, T)$. We will however only show this example-wise. 
 
 
 \section{Motivation}
@@ -633,6 +658,7 @@ If such lifts exist, then by construction, we will have the following adjunction
 
 To understand this adjunction and see that it does indeed correspond to the morphisms explained in the first section, we will go through several examples.
 \section{Leading example}
+
 %\emph{A note about notation: When speaking about $\Hom$ sets of a general category $A$, we use the notation as before $\HomA(-,-)$. However to shorten notation and ease readability, when speaking of specific categories, such as $\Frm, \Top,$ or $\Set$, we use the notation $\Frm(-,-), \Top(-,-),$ $ \Set(-.-).$}
 
 We begin with the adjunction 
@@ -819,7 +845,7 @@ In order to describe the following duality, some context is in order. In setting
 Of primary importance to a Kelley space is the notion of a compactly generated topological space.
 \\
 \begin{definition}[$k$-continuous]
-	A function $f: X \to Y$ of underlying sets of a topological space is said to be \textbf{$k$-continuous} if for all compact Hausdorff $K \subset X$ and continuous functions $t: K \to X$ the composition $f \circ t$ is continuous. 
+	A function $f: X \to Y$ of underlying sets of a topological space is said to be \textbf{$k$-continuous} if for all compact $K$ and continuous functions $t: K \to X$ the composition $f \circ t$ is continuous. 
 \end{definition}
 \
 \begin{definition}[k-space]
@@ -829,7 +855,7 @@ A topological space $X$ is said to be a \textbf{$k$-space}, or a \textbf{compact
 
 
 
-That is to say a space is compactly generated if all its continuous functions are continuous on compact subspaces. Note that in the definition the requirement that $K \subset X$ could be lifted to arbitrary compact Hausdorff space $Y$, since images of compact spaces by continuous maps $f(Y) \subset X$ are homeomorphic to compact subspaces  $K \subset X$, so in particular, $f$ factors through the inclusion $\iota: K \hookrightarrow X$. 
+That is to say a space is compactly generated if all its continuous functions are continuous on compact subspaces. Note that the domain in the definition of arbitrary compact space $Y$ could be restricted to compact subsets $K \subset X$ since images of compact spaces by continuous maps $f(Y) \subset X$ are homeomorphic to compact subspaces  $K \subset X$, so in particular, $f$ factors through the inclusion $\iota: K \hookrightarrow X$. 
 
 For the following we will assume that $k$-spaces are additionally Hausdorff, and refer to ${\kSp}$ as the category of compactly generated Hausdorff spaces, whose morphisms are the continuous functions between them, making it a full subcategory of $\Top$, and in particular, of $\Haus \subset \Top$. 
 
