@@ -45,7 +45,7 @@
 \DeclareMathOperator{\Haus}{Haus}
 \DeclareMathOperator{\ev}{ev}
 \DeclareMathOperator{\Lift}{Lift}
-
+\DeclareMathOperator{\kAlg}{kAlg}
 
 \def\HomA{\ensuremath\mathcal{A}}
 \def\HomB{\ensuremath\mathcal{B}}
@@ -186,9 +186,9 @@ A functor $\mathcal{A} \stackrel{G}{\to}\mathcal{B}$ is called \textbf{topologic
  A concrete category $(\mathcal{A}, U)$ over $\mathcal{X}$ is said to be a \textbf{topological category} if $U$ is a topological functor. 
  \end{definition}
  
- Notice here again that our intuition of such a category should come from topology, which is even reflected in its name, namely, from the construct $(\Top, U)$,  over which every source lifts initially, since the arbitrary intersection of topologies is a topology. That is, we are taking the intersection of all topologies on $A$ such that all $(GA \stackrel{f_i}{\to} GA_i)_I$ are continuous.
+ Notice here again that our intuition of such a category should come from topology, which is even reflected in its name, namely, from the construct $(\Top, U)$,  over which every source lifts initially, since the arbitrary intersection of topologies is a topology. That is, we are taking the intersection of all topologies on $A$ such that all $(UA \stackrel{f_i}{\to} UA_i)_I$ are continuous.
  
-  That means there is a systematic way to choose open sets of $GA$. In other words,  a subset $S \subset GA$ lifts to an open set in $A$ if and only if $S$ equals the preimage $Gf_i^{-1}(G(U))$ for some  $f_i \in (GA \stackrel{f_i}{\to} GA_i)_I$ and $U \in  \tau_{A_i}$.
+  That means there is a systematic way to choose open sets of $UA$. In other words,  a subset $S \subset UA$ lifts to an open set in $A$ if and only if $S$ equals the preimage $Uf_i^{-1}(U(V))$ for some  $f_i \in (UA \stackrel{f_i}{\to} UA_i)_I$ and $V \in  \tau_{A_i}$ (\textcolor{red}{i.e., the topology of $A_i$: introduce this notation somewhere}).
  
 
 \textbf{Notes on free objects and the free functor}
@@ -516,7 +516,7 @@ We now show a central theorem to this thesis.
 	
 	Considering that $[Tf]$ is simply the precomposition map $- \circ f$, we see that given some $s \in \HomA(A', \t A)$, it holds that $\tau \varphi_{A,x}\circ \HomA(f, \t A)(s) =\tau \varphi_{A,x}(sf)$. But since $[sf](x) = [s][f](x)$, where $[f](x) \in [A']$, we have $\tau \varphi_{A,x}(sf) = \tau \varphi_{A',[f](x)}(s) = [e_{A',[f](x)}](s)$, which is the underlying set map of a $\mathcal{B}$-morphism in $\HomB(TA', \t B)$ by definition, and which exists by the lifting property given by $(SO1.)$. 
 	
-	Therefore $T$ and $S$ are well-defined functors, where preservation of the identity and composition are derived from the underlying set-map given by precomposition (\textcolor{red}{TODO}:  is identity and composition actually clear because of this? ties to main question of why we can derive functor properties from underlying set map properties)
+	Therefore $T$ and $S$ are well-defined functors, where preservation of the identity and composition are derived from the fact that the underlying set-map is given by precomposition (\textcolor{red}{TODO}:  is identity and composition actually clear because of this? ties to main question of why we can derive functor properties from underlying set map properties)
 	
 	Now we show that $T$ and $S$ are adjoint, and to do that we shall construct  unit and counit maps $\epsilon$ and $\eta$. In order to establish the existence of $\eta_B$ by playing the same game we first define $[\eta_B]: [B] \to [TSB]$ and show that each $\tau \varphi_{SB, t} \circ [\eta_B]$ with $t \in [SB]$, can be lifted along $V$, i.e. that it is the underlying set map of a $\mathcal{B}$-morphism in $\HomB(B, \t B)$. So we define in light of Lemma 3.3 under (SO2.)
 	\begin{align*}
@@ -583,7 +583,7 @@ Any cartesian closed concrete category which admits function spaces is a good ex
 A cartesian closed concrete category which admits function spaces admits an internal hom-functor by definition, since we can choose $B^A$ to be our lift.
 
  
-Now we want to see that a category which admits an internal hom-functor induces a dual adjunction. Let $\concA$ admit an internal hom-functor $H$, and let there be a concrete category $\concB$ and a concrete functor $\lvert - \lvert : \mathcal{B} \to \mathcal{A}$ such that $\HomB(B, C) \hookrightarrow \HomA(\lvert B \lvert, \lvert C \lvert)$ lift to $\mathcal{A}$-morphisms\footnote{$\HomB_\mathcal{A}(-,-)$ is notation for the hom set in $\mathcal{B}$ as $\mathcal{A}$-object} $\gamma_{B,C}: \HomB_\mathcal{A}(B,C) \to H(\lvert B \lvert, \lvert C\lvert)$, which can be done in a monotopological category by lifting initially.
+Now we want to see how and under what conditions can  a category which admits an internal hom-functor  induce a dual adjunction. Let $\concA$ admit an internal hom-functor $H$, and let there be a concrete category $\concB$ and a concrete functor $\lvert - \lvert : \mathcal{B} \to \mathcal{A}$ such that $\HomB(B, C) \hookrightarrow \HomA(\lvert B \lvert, \lvert C \lvert)$ lift to $\mathcal{A}$-morphisms\footnote{$\HomB_\mathcal{A}(-,-)$ is notation for the hom set in $\mathcal{B}$ as $\mathcal{A}$-object} $\gamma_{B,C}: \HomB_\mathcal{A}(B,C) \to H(\lvert B \lvert, \lvert C\lvert)$.  In a monotopological category, this can be done by lifting initially.
 
 Given $\t B \in \mathcal{B}$ with $\t A := \lvert \t B \lvert $ and $\tau = 1_{[\t A]}$, we can check that $WSO2$ is fulfilled. In other words we are seeking a lift of the map $\sigma \psi_{B,y}: \HomB(B, \t B) \to [\t A]$. But such a lift is given by the internal hom-functor, given that the bottom part of the following diagram commutes:
 \[\begin{tikzcd}
@@ -704,23 +704,23 @@ Notice that the topology on $\Frm(A, \mathbf{2})$ is the initial topology making
 
 When passing to $U$ and $V$, we have
 \begin{align*}
-	[\epsilon_{\t A}]:& [\t A] \to [\Top(\Frm(\t A, \mathbb{2}), \mathbb{S})] = \Top(\Frm(\t A, \mathbb{2}), \mathbb{S})\\
-	&(\t x: a \to x) \mapsto (p \to p(x))
+	[\epsilon_{\t A}]: [\t A] &\to [\Top(\Frm(\t A, \mathbb{2}), \mathbb{S})] = \Top(\Frm(\t A, \mathbb{2}), \mathbb{S})\\
+	(\t x: a \to x) &\mapsto (p \to p(x))
 \end{align*}
 which is equal to
 \begin{align}
-	[\epsilon_{\mathbb{2}}]:& [\mathbb{2}] \to [\Top(\Frm(\mathbb{2}, \mathbb{2}), \mathbb{S})] = \Top(\Frm(\mathbb{2}, \mathbb{2}), \mathbb{S})\\
-	&(\t x: a \to x) \mapsto (1_{\mathbb{2}} \to 1_{\mathbb{2}}(x))
+	[\epsilon_{\mathbb{2}}]: [\mathbb{2}] &\to [\Top(\Frm(\mathbb{2}, \mathbb{2}), \mathbb{S})] = \Top(\Frm(\mathbb{2}, \mathbb{2}), \mathbb{S})\\
+	(\t x: a \to x) &\mapsto (1_{\mathbb{2}} \to 1_{\mathbb{2}}(x))
 \end{align}
 So we have 
 \begin{align*}
-	[\epsilon_{\mathbb{2}}](\t x):& \Frm(\mathbb{2},\mathbb{2}) \to \mathbb{S}\\
-	&1_{\mathbb{2}} \mapsto 1_{\mathbb{2}}(x)
+	[\epsilon_{\mathbb{2}}](\t x): \Frm(\mathbb{2},\mathbb{2}) &\to \mathbb{S}\\
+	1_{\mathbb{2}} &\mapsto 1_{\mathbb{2}}(x)
 \end{align*}
 and now
 \begin{align*}
-	[[\epsilon_{\mathbb{2}}](\t x)]:& [\Frm(\mathbb{2},\mathbb{2})] \to [\mathbb{S}]\\
-	&(a \to 1_{\mathbb{2}}) \mapsto (\{pt\} \to1_{\mathbb{2}}(x))
+	[[\epsilon_{\mathbb{2}}](\t x)]: [\Frm(\mathbb{2},\mathbb{2})] &\to [\mathbb{S}]\\
+	(a \to 1_{\mathbb{2}}) &\mapsto (\{pt\} \to1_{\mathbb{2}}(x))
 \end{align*}
 so that 
 \begin{align*}
@@ -897,7 +897,7 @@ We may otherwise view the \emph{Kelleyfication} as the left adjoint $k(-)$ to th
 
 Another way to think about $\kSp$ is as the coreflective hull of $\kHaus$ in $\Haus$. That is to say, the forgetful functor $\kHaus \hookrightarrow \Haus$ does not have a left adjoint (\textcolor{red}{TODO}: Why? Does it have something to do with that $\kHaus$ is not closed under colimits), however we may take the intersection of all coreflective subcategories of $\Haus$ which contain $\kHaus$, and this will precisely be the category generated under colimits of $\kHaus$  (\textcolor{red}{TODO}: make this precise.)
 
-
+Note that products are given as the Kelleyfications of topological  products, and furthermore, that for all locally compact spaces $X$, we have $X \times_k Y = X \times Y$ for all $Y \in \kSp$. (\textcolor{red}{TODO} show this).
 
 It is important that our category admits function spaces, or in other words, that we are in a closed category (i.e. all exponentiables exist). In the following we will show why $\kSp$ is a closed category. This will indeed give us intuition of why we have even defined $\kSp$ the way we have, as $\Haus $ is not a closed category.  
 
@@ -906,6 +906,56 @@ What we want is the following adjunction:
 	\Haus(A \times_{\Haus}C, B) \cong \Haus(C, B^A)
 \end{align*}
 For all $A, B, C \in \Ob(\Haus)$. However this does not hold in general. 
+
+However in $\kSp$ function spaces are given as Kelleyfications of the set $\Top(X,Y)$ with the compact-open topology. 
+\textcolor{red}{ToDO} Show that this means that $\kSp$ is cartesian closed concrete category which admits function spaces.
+
+\textcolor{red}{ToDO} Show that $\kSp$ is a monotopological category
+
+Now let us define the category $\kAlg$ of complex $k$-algebras, whose objects are $\mathbb{C}$-algebras endowed with a Kelley topology, whose morphisms are the continuous algebra homomorphisms, and whose algebra operations are continuous with respect to $k$-products. 
+
+Now since $\kSp$ is a monotopological category which admits function spaces, we are in the setting of a category which admits an internal hom-functor. 
+
+To put ourselves completely in the situation of \textbf{4.c} we notice that $\kAlg \subset \kSp$ is a full subcategory, so that we have an underlying functor $U: \kAlg \to \kSp$, which satisfies the conditions of $4.c$ in the following. As $\mathbb{C}$ is a colimit of its compact Hausdorff subspaces which is moreover a $\mathbb{C}$-algebra, we see that $\mathbb{C} \in \kAlg$, and we call it $\mathbb{C}_a$,  so that $U(\mathbb{C}_a) = \mathbb{C}_s$, by analogous notation, and clearly $\tau = 1_{\mathbb{C}_a}. $
+
+Since  we are in a monotopological category, then we know that $\kAlg(A, \mathbb{C}_a) \to [\mathbb{C}_s]$
+lifts initially to a $\kSp$-morphism, which we will denote $\Hom_k(A, \mathbb{C}_a) \to \mathbb{C}_s$.
+
+Now all we need to see is that $\kSp(X,\mathbb{C}_s) \to [\mathbb{C}_a]$ lifts along $U$ functorially to a $\kAlg$-morphism $C_k(X, \mathbb{C}_s) \to \mathbb{C}_a$, which we must show directly. (\textcolor{red}{TODO}: show this)
+
+As such we have an adjunction 
+\begin{align*}
+	C: \kSp & \to \kAlg &  S: \kAlg & \to \kSp\\
+	X &\mapsto C_k(X, \mathbb{C}_s) & A &\mapsto \Hom_k(A, \mathbb{C}_a)
+\end{align*}
+
+which is not natural.
+
+This is called the \emph{generalized Gelfand-Naimark Duality}. 
+
+In the following we will want to restrict $\kSp$ and $\kAlg$ to their full subcategories under which the above adjunction is a dual equivalence. For that we will introduce the category of $C^*$-algebras.
+\subsection{$C^*$-algebras}
+Consider the functor $C^*: \Top \to \Set$, which sends  $X \mapsto C^*(X) = \Top_{bd.}(X, \mathbb{C})$ for all $X \in \Top$. 
+From pointwise operations $C^*(X)$ can be seen to be an associative, commutative, unital $\mathbb{C}$-algebra. Pointwise conjugation gives us the operation $f \mapsto f^*$, so that $C^*(X)$ is an involutive algebra, and the supremum norm $\lVert f \lVert = \sup_{x \in X}\lvert f(x)\lvert $ turns $C^*(X)$ into a normed algebra satisfying $\lVert f \lVert^2 = \lVert f \cdot f^* \lVert$. If we consider the involution preserving unital $\mathbb{C}$-algebra homomorphisms, we obtain a category $C^*$.
+
+Note that $C^* \subset \kAlg$ is a full subcategory.
+
+ We could view $C^*$ as a concrete category via the usual underlying-set functor, however we might find it more interesting in this case to consider a different faithful functor, namely the functor $\bigcirc: C^* \to \Set$ which sends any $C^*$-algebra $A$ to it's unit ball $\{ a \in A \  \lvert  \ \lVert a \lVert \leq 1\}$ and each morphism $f$  to its restriction $f_\bigcirc$ to the unit ball of its domain.
+ 
+ \subsubsection{Gelfand-Naimark Duality}
+ 
+ For any compact Hausdorff space $X$, we see that the $C^*$-algebra $C^*(X)$ and the function $k$-algebra $C(X) = C_k(X, \mathbb{C}_s)$ coincide algebraically, since continuous functions over compact spaces are bounded in $\mathbb{C}$ and since $X \times_k X = X \times X$ (\textcolor{red}{TODO}: I think, make this precise or delete it). Moreover the topology of $C^*(X)$ is the compact open topology, since $X$ is compact, and therefore they also coincide topologically. That means we have can restrict $C$ to a functor $C: \kHaus \to C^*$.
+ 
+ Can we restrict $S$ accordingly? For every $C^*$-algebra $A$, the space $S(A) = \Hom_k(A, \mathbb{C}_a)$ is compact, and its topology is that of pointwise convergence, due to basic results about the topology of function spaces. (\textcolor{red}{TODO} cite basic results). We call $S: C^* \to \kHaus$ the \emph{spectrum}- functor, and it follows that the generalized Gelfand-Naimark adjunction restricts to a dual adjunction
+ 
+ \begin{align*}
+	C: \kHaus & \to C^* &  S: C^* & \to \kHaus\\
+	X &\mapsto C_k(X, \mathbb{C}_s) & A &\mapsto \Hom_k(A, \mathbb{C}_a).
+\end{align*}
+ 
+ However this still doesn't give us the equivalence, as $\mathbb{C}_s \notin \kHaus$. Remember that we want to consider $C^*$ as a concrete category via the functor $\bigcirc$, so that for any compact Hausdorff space $X$, one has $\bigcirc C(X) = \kHaus(X, D)$ where $D = \{ c \in \mathbb{C}_s \ \lvert \ \lVert c \lVert \leq 1 \}. $
+ 
+ Thus we can conclude that there is a natural dual adjunction between concrete categories $(\kHaus, U)$ and $(C^*, \bigcirc)$ with schizophrenic object $(D, 1_D, \mathbb{C}_a)$. 
 % (\textcolor{red}{TODO}: finish this part, if necessary, but the basic structure is the following: show that $\kSp$ is a monotopological category, show that monotopological categories admit function spaces... if theres an easier way to do it we may not need to define lifts and topological categories, so do that later)
  
  
