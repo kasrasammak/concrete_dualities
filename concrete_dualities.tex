@@ -249,14 +249,21 @@ From these characteristics we can deduce how $S$ and $T$ should be defined, to w
 \begin{proof}
 As presheafs, $V$ and $VT$ (respectively $U$ and $US$) may be computed pointwise. 
 \begin{align*}
-	VT(A) = \HomB(B_0, TA) = \HomA(A,SB_0) = \HomA(A, \t A) \\
+	VT(A) \cong \HomB(B_0, TA) \cong \HomA(A,SB_0) = \HomA(A, \t A) \\
 	\implies VT \cong \HomA(-, \t A)
 \end{align*}
 \begin{align*}
-	US(B) = \HomA(A_0, SB) = \HomB(B,TA_0) = \HomB(B, \t B) \\
+	US(B) \cong  \HomA(A_0, SB) \cong  \HomB(B,TA_0) =  \HomB(B, \t B) \\
 	\implies US \cong \HomB(-, \t B)
 \end{align*}
 \end{proof}
+Should we have strict identities
+\begin{align*}
+		VT = \HomA(-, \t  A)&&
+	US = \HomB(-, \t  B)\\
+\end{align*} 
+
+we say that the adjunction is \emph{strictly represented} by $\t A$ and $\t B$. 
 
 Given our assumption that $A_0$ and $B_0$ are free objects on one free generator, this result should already give us an idea of how our adjunction is to be induced, which the goal of the whole introduction to concrete dualities is to make precise. 
 
@@ -314,7 +321,7 @@ By the dual adjunction we have $\HomA(A, SB_0) \cong \HomB(B_0, TA)$.
 \begin{lemma}
 	$\tau$ and $\sigma$ are inverses, and the following identities hold:
 	\begin{align*}
-		&[[\epsilon_A](x)] = \tau \varphi_{A,x}& & [\eta_B](y)]= \sigma \psi_{B,y}
+		&[[\epsilon_A](x)] = \tau \varphi_{A,x}& & [[\eta_B](y)]= \sigma \psi_{B,y}
 	\end{align*}
 \end{lemma}
 \begin{proof}
@@ -394,7 +401,7 @@ Notice that then $[Ts]$ becomes an evaluation of the precomposition functor $\Ho
  for all $s \in \HomA(S\t B, \t A)$.
  
  For $s = [\eta_{\t B}](\t y)$ with $\t y \in [\t B]$, noticing the maps \begin{align*}
- 	[\eta_{\t B}](\t y): S\t B &\to \t A &\text{and} \ \ \ \varphi_{S\t B, 1_{\t B}}: \HomA(S\t B, \t A) \to & [\t A]\\
+ 	[\eta_{\t B}](\t y): S\t B &\to \t A & \ \ \ \varphi_{S\t B, 1_{\t B}}: \HomA(S\t B, \t A) \to & [\t A]\\
  	1_{\t B} &\mapsto 1_{\t B}(\t y)& s \mapsto& [s](1_{\t B})
  \end{align*}
  we see that $[[\eta_{\t B}](\t y)](1_{\t B}) = \varphi_{S \t B, 1_{\t B}}(s)$ and so we  have \begin{align*}
@@ -414,7 +421,7 @@ Notice that then $[Ts]$ becomes an evaluation of the precomposition functor $\Ho
  \end{align*}
  
  In other words, the induced map is the identity on $[\t B]$:\begin{align*}
- 	[\epsilon_{S\t B}](1_{\t B})][ \eta_{\t B}] = 1_{[\t B]}.
+ 	[[\epsilon_{S\t B}](1_{\t B})][ \eta_{\t B}] = 1_{[\t B]}.
  \end{align*}
  
   Thus we have $\tau \sigma = 1_{[\t B]}$ as desired.
@@ -497,8 +504,8 @@ In other words, the $V$-structured lift is initial among all such lifts: if $Z$ 
 	\arrow["{ ({\tau\varphi_{A,x}\circ h})'}", bend left, from=1-1, to=1-5]
 	\arrow[from=1-1, to=3-1]
 	\arrow["{e_{A,x}}", from=1-3, to=1-5]
-	\arrow["U", from=1-3, to=3-3]
-	\arrow["U", from=1-5, to=3-5]
+	\arrow["V", from=1-3, to=3-3]
+	\arrow["V", from=1-5, to=3-5]
 	\arrow["h", from=3-1, to=3-3]
 	\arrow["{\tau  \varphi_{A,x}}", from=3-3, to=3-5]
 \end{tikzcd}\]
@@ -507,16 +514,16 @@ In other words, the $V$-structured lift is initial among all such lifts: if $Z$ 
 We now show a central theorem to this thesis.
 
 \begin{theorem}
-	Every schizophrenic object $(\t A, \tau , \t B)$ induces a natural dual adjunction strictly represented by $(\t A, \t B)$ (\textcolor{red}{TODO}: define strictly represented), such that $\tau$ and $\sigma = \tau^{-1}$ are the canonical bijections defined in the previous section.
+	Every schizophrenic object $(\t A, \tau , \t B)$ induces a natural dual adjunction strictly represented by $(\t A, \t B)$, such that $\tau$ and $\sigma = \tau^{-1}$ are the canonical bijections defined in the previous section.
 \end{theorem}
 \begin{proof}
 	First we show that $T$ and $S$ are well defined functors. The conditions (SO1.) and (SO2.) show us how $T$ and $S$ act on objects up to underlying-set isomorphism. 
 	
-	Now we show how $T$ acts on morphisms. To that effect, given some $f: A \to A'$, we seek to show the existence of $Tf: TA' \to TA$ whose underlying set map is $[Tf] = \HomA(f, \t A): \HomA(A', \t A) \to \HomA(A, \t A)$. As we have just seen, by $(SO1)$ it suffices to show that $\tau \varphi_{A,x}\circ \HomA(f, \t A)$ are the underlying set maps of  $\mathcal{B}$-morphisms in $\HomB(TA', \t B).$
+	Now we show how $T$ acts on morphisms. To that effect, given some $f: A \to A'$, we seek to show the existence of $Tf: TA' \to TA$ whose underlying set map is $[Tf] = \HomA(f, \t A): \HomA(A', \t A) \to \HomA(A, \t A)$, which sends $s \mapsto s \circ f$. As we have just seen, by $(SO1)$ it suffices to show that $\tau \varphi_{A,x}\circ \HomA(f, \t A)$ are the underlying set maps of  $\mathcal{B}$-morphisms in $\HomB(TA', \t B).$
 	
 	Considering that $[Tf]$ is simply the precomposition map $- \circ f$, we see that given some $s \in \HomA(A', \t A)$, it holds that $\tau \varphi_{A,x}\circ \HomA(f, \t A)(s) =\tau \varphi_{A,x}(sf)$. But since $[sf](x) = [s][f](x)$, where $[f](x) \in [A']$, we have $\tau \varphi_{A,x}(sf) = \tau \varphi_{A',[f](x)}(s) = [e_{A',[f](x)}](s)$, which is the underlying set map of a $\mathcal{B}$-morphism in $\HomB(TA', \t B)$ by definition, and which exists by the lifting property given by $(SO1.)$. 
 	
-	Therefore $T$ and $S$ are well-defined functors, where preservation of the identity and composition are derived from the fact that the underlying set-map is given by precomposition (\textcolor{red}{TODO}:  is identity and composition actually clear because of this? ties to main question of why we can derive functor properties from underlying set map properties)
+	Therefore $T$ and $S$ are well-defined functors, where preservation of the identity and the composition law follow the same logic as above, using $V$-initiality and the fact that the underlying-set map is defined by precomposition.
 	
 	Now we show that $T$ and $S$ are adjoint, and to do that we shall construct  unit and counit maps $\epsilon$ and $\eta$. In order to establish the existence of $\eta_B$ by playing the same game we first define $[\eta_B]: [B] \to [TSB]$ and show that each $\tau \varphi_{SB, t} \circ [\eta_B]$ with $t \in [SB]$, can be lifted along $V$, i.e. that it is the underlying set map of a $\mathcal{B}$-morphism in $\HomB(B, \t B)$. So we define in light of Lemma 3.3 under (SO2.)
 	\begin{align*}
@@ -531,10 +538,10 @@ which shows that $\tau \varphi_{SB, t} \circ [\eta_B]: [B] \to [\t B]$ is the un
 Furthermore we see that \begin{align}
 	e_{SB, t} \circ \eta_B = t \ \ \text{ for all } t \in [SB]= \HomB(B, \t B)
 \end{align}
-To verify naturality, we verify that given a $\mathcal{B}$-morphism $f: B \to B'$, that we have $f \circ [\eta_B] = [TSf] \circ [\eta_B]$ (\textcolor{red}{TODO}: can we simply use the left action becomes right action becomes left action? Or is this what I only have by proving the way i did below?), or in other words: \begin{align}
+Since $[\eta_B]$ lifts for all $B$, we may verify naturality on underlying-set maps; we verify that given a $\mathcal{B}$-morphism $f: B \to B'$, that we have $ [\eta_{B'}]\circ (f \circ -) = [TSf] \circ [\eta_B]$, or in other words: \begin{align}
 	d_{B', f \circ y} = [TSf] \circ d_{B,y}
 \end{align} 
-Remember that the left action of $[TSf]$ on $d_{B,y}$ is a right action of $Sf$ on $d_{B,y}$. But the underlying map of $d_{B,y} \circ Sf$ is $\sigma \psi_{B,y} \circ \HomB(f, \t B)$ which is, up to the bijection $\sigma$, just the evaluation map of a morphism in $\HomB(B, \t B)$ at some $y \in [B]$ precomposed with $f \in \HomB(B, B')$, which yields the evaluation map of a morphism in $\HomB(B',B)$ at $f \circ y \in [B']$. In other words $[d_{B,y}] [Sf] = [\sigma \psi_{B', f \circ y}] = [d_{B', f \circ y}]$, which is clearly the underlying set map of $d_{B', f \circ y}$, giving us (3). 
+Remember that the left action of $[TSf]$ on $d_{B,y}$ is a right action of $Sf$ on $d_{B,y}$. But the underlying map of $d_{B,y} \circ Sf$ is $\sigma \psi_{B,y} \circ \HomB(f, \t B)$ which is, up to the bijection $\sigma$, just the evaluation map of a morphism in $\HomB(B, \t B)$ at some $y \in [B]$ precomposed with $f \in \HomB(B, B')$, which yields the evaluation map of a morphism in $\HomB(B',\t B)$ at $f \circ y \in [B']$. In other words $[d_{B,y}] [Sf] = [\sigma \psi_{B', f \circ y}] = [d_{B', f \circ y}]$, which is clearly the underlying set map of $d_{B', f \circ y}$, giving us (3) by uniqueness of the lift. 
 
 
 
@@ -548,7 +555,7 @@ Finally, to show that $\tau$ is induced by this adjunction it suffices to see th
 A dual adjunction induced by a schizophrenic object in this way is called \emph{natural}. However there exist also dual adjunctions which are not natural in this sense, although some modifications are in order to make it natural. 
 \subsection{Non-natural dual adjunction}
 
-Dual adjunctions which are not induced by a schizophrenic object are called \emph{non-natural}. The key difference here is initiality of the lifts. That is, in the situation described in $\S 3$, an arbitrary dual adjunction $(S', T')$ already determines a triple $(\t A, \tau, \t B)$ such that the following weakened conditions of $SO1$ and $SO2$ are fulfilled:
+Dual adjunctions which are not induced by a schizophrenic object are called \emph{non-natural}. The key difference here is initiality of the lifts. That is, an arbitrary dual adjunction $(S', T')$ in the situation described in $\S 3$ already determines a triple $(\t A, \tau, \t B)$ such that the following weakened conditions of $SO1$ and $SO2$ are fulfilled:
 \begin{enumerate}
 		\item[WSO1.] For every $A \in \mathcal{A}$ the family $(\tau\varphi_{A,x}: \HomA(A, \t A) \to [\t B])_{x \in [A]}$ admits a $V$-structured lift $(e_{A,x}:T'A \to \t B)_{x \in [A]}$ which extends functorially, i.e., for every $A \stackrel{f}{\to} A'$ in $\mathcal{A}$ there exists a $\mathcal{B}$-morphism $T'A' \stackrel{T'f}{\to}T'A$ with $[T'f] = \HomA(f,\t A)$. 
 		\item[WSO2.] For every $B \in \mathcal{B}$ the family $(\sigma\psi_{B,y}: \HomB(B, \t B) \to [\t A])_{y \in [B]}$ admits a $U$-structured lift $(d_{B,y}:S'B \to \t A)_{y \in [B]}$ which extends functorially.
@@ -605,13 +612,13 @@ That is, if $\sigma \varphi_{B,y} = \phi_{\lvert B\lvert, \t A, x} \circ \iota$ 
 The question is if the concrete functor commutes with the evaluation map, since $\t A = \lvert \t B \lvert $ and $\tau$ (and therefore also $\sigma$) is the identity.
 
 \[\begin{tikzcd}
-	{\HomB(B, \t B)} && {[\t B]} && {[\t A]} \\
+	{\HomB(B, \t B)} && {[\t B]} \\
 	\\
-	&& {\HomA(\lvert B \lvert , \t A) }
-	\arrow["{\varphi_{B,y}}", from=1-1, to=1-3]
-	\arrow["\iota", hook, from=1-1, to=3-3]
-	\arrow["{\sigma }", from=1-3, to=1-5]
-	\arrow["{\phi_{\lvert B\lvert , \t A,x }}", from=3-3, to=1-5]
+	{\HomA(\lvert B \lvert, \t A) } && {[\t A]}
+	\arrow["{\varphi_{B, y}}", from=1-1, to=1-3]
+	\arrow["i"', hook', from=1-1, to=3-1]
+	\arrow["\sigma", from=1-3, to=3-3]
+	\arrow["{\phi_{\lvert B \lvert, \t A, x}}"', from=3-1, to=3-3]
 \end{tikzcd}\]
 
 In other words, we check $\sigma([f](y)) = [\lvert f \lvert ](\iota(y))$, but this follows from faithfulness of the concrete functor $\lvert - \lvert $. (\textcolor{red}{TODO/Question}: is this true/really so immediate?)
@@ -830,14 +837,14 @@ Now we see that there is a natural choice for our adjunction given by sending a 
 The equivalence is clear, since by construction  our unit and counit are  isomorphisms, i.e. $X_{\mathcal{O}(X)} =X$ and $\mathcal{O}(X_A) = A$. 
 
 
-Now on the one hand,  the Yoneda lemma shows us that   $\Aff(X, \mathbb{A}^1) = \mathbb{A}^1(\mathcal{O}(X)) = \CAlg(R[X], \mathcal{O}(X)) \cong \mathcal{O}(X)$. The final set isomorphism is due to the fact that $R[X]$ is a free commutative $R$-algebra on one free generator. Now we see that for any $X_A \in \Aff$ it holds that $\mathcal{O}(X_A) = \Aff(X_A, \mathbb{A}^1)$, and as such we have a natural choice for a schizophrenic object $(R[X], \tau, \mathbb{A}^1 )$. 
+Now on the one hand,  the Yoneda lemma shows us that   $\Aff(X, \mathbb{A}^1) = \mathbb{A}^1(\mathcal{O}(X)) = \CAlg(R[X], \mathcal{O}(X)) \cong \mathcal{O}(X)$. The final set isomorphism is due to the fact that $R[X]$ is a free commutative $R$-algebra on one free generator. Now we see that for any $X_A \in \Aff$ it holds that $\mathcal{O}(X_A) = \Aff(X_A, \mathbb{A}^1)$, and as such we have a natural choice for a schizophrenic object $(R[X], \tau, \mathbb{A}^1 )$ (\textcolor{red}{TODO} compute $\tau$ if necessary). 
 
 
 We may use the same argument to show why $\CAlg(A, R[X])$ lifts to the category of affine schemes, and that it is isomorphic to $X(A) = \CAlg(A, -)$, however it is not obvious how to think about $\mathbb{A}^1$ as a free functor on one free generator, as elements of affine schemes are not given in the same way as they are for $R[X]$, where the element $X$ is clearly our free generator. 
 
-We may however still use Yoneda to see that $\CAlg(A, R[X]) = X_A(R[X]) = \Aff(\mathbb{A}^1, X_A) \cong X_A$, and as such our intuition thus must come from the fact that $\mathbb{A}^1$ is our free affine scheme on one free generator and that the above equality is given, so that elements of our affine scheme can be thought of as global functions from $A$ to $R[X]$. 
-
-Now we shall try to understand the unit and counits.
+We may however still use Yoneda to see that $\CAlg(A, R[X]) = X_A(R[X]) = \Aff(\mathbb{A}^1, X_A) \cong X_A$, and as such our intuition thus must come from the fact that $\mathbb{A}^1$ is our free affine scheme on one free generator (\textcolor{red}{TODO} why?) and  thus by the above equality we can think of elements of our affine scheme  as global functions from $A$ to $R[X]$. 
+%
+%Now we shall try to understand the unit and counits.
 
 \section{Gelfand Duality}
 In order to describe the following duality, some context is in order. In setting up a more general dual adjunction, whose restriction to an equivalence later defines the \emph{Gelfand duality}, we must set the scene, and in doing so we first define the following category, \emph{Kelley spaces}.
@@ -1011,7 +1018,11 @@ Note that $C^* \subset \kAlg$ is a full subcategory.
 %	x &\mapsto 1_{\{0,1\}}(x)= x
 %\end{align*}
 
-%\section{Questions}
+\section{Questions}
+\begin{enumerate}
+	\item How do I approach the preliminaries part? Just a list of definitions? Or should I write some kind of narrating text? Should I move it to the appendix?
+	\item 
+\end{enumerate}
 %\begin{enumerate}
 %	\item Is the above actually the case, i.e., am I actually supposed to look at the underlying sets in $\Set$ to understanding that $\tau$ is the identity?
 %	\subitem am I to understand $p(x) \in \mathbb{S}$ as "translating" from $\Frm$ to $\Top$ via $\Set$-elements?
