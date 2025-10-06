@@ -755,55 +755,63 @@ This is the duality between the category of Boolean Algebras and the category of
 
 (\textcolor{red}{TODO}: clarify about finite boolean algebras/finite sets, why this works/doesn't work (dont know yet) in the infinite case, and how to mend such a construction). 
 
-This duality is easy to see, as all we need to see is that the adjunction isomorphic to the expected ones on the $\Hom$ sets given by the schizophrenic object $(\mathbb{2}, 1_{\mathbb{2}}, \mathbb{2})$. 
-
-In other words, we check that for all $A \in \Bool$, it holds that $U(A) = \Bool(A, \mathbb{2})$, and that for all $S \in \Set$, it holds that $\mathcal{P}(S) = \Set(S, \mathbb{2})$. 
-
- Morphisms in $\Bool(A, \mathbb{2})$ are left exact, colimit preserving, and complement preserving.
- 
-\begin{lemma}
-	We claim that there is a bijection \begin{align*}
-  	\phi: U(A) \to& \Bool(A, \mathbb{2})\\
-  	a \mapsto& f^*_a &f^*_a(x) = \begin{cases}
-   1 & x \geq a \\
-    0 & \text{else}
-  \end{cases}
-  \end{align*}
-\end{lemma}
-
-  
- 
- \begin{proof}
- 	First we show that $f^*_a$ is finite limit, colimit, and complement preserving.
- 
- It holds that \begin{align*}
- 	f^*_a(x \wedge y) = 1 &\iff x \wedge y \geq a\\ &\iff x \geq a \text{ and } y \geq a\\ &\iff f^*_a(x) \wedge f^*_a(y) =1 \
- \end{align*}
- and similarly that \begin{align*}
- 	f^*_a(x \wedge y) = 0 &\iff x \wedge y \ngeq a\\ &\iff x \ngeq a \text{ or } y \ngeq a\\ &\iff f^*_a(x)  \wedge f^*_a(y) =0 \
- \end{align*}
-
-
-Now we check \begin{align*}
-	f^*_a( x \vee y) = 1 &\iff x \vee y \geq a\\ &\iff x \geq a \text{ or } y \geq a\\
-	&\iff f^*_a(x) \vee f^*_a(y) = 1
-\end{align*}
-and similarly \begin{align*}
-	f^*_a( x \vee y) = 0 &\iff x \vee y \ngeq a\\ &\iff x \ngeq a \text{ and } y \ngeq a\\
-	&\iff f^*_a(x) \vee f^*_a(y) = 0
-\end{align*}
-
-Moreover it is clear from the definition that $f^*_a(\neg x)  =  \neg f^*_a(x)$.
-
-This shows that $\phi$ is well defined, and injectivity follows from definition of $\phi$. 
-
-To show surjectivity we consider a boolean algebra homomorphism $f \in \Bool(A, \mathbb{2})$, and define \begin{align*}
-	a = \bigwedge \{ x \in A \lvert f(x) = 1\}
-\end{align*}
-Now we show that $ f = f^*_a$. 
-(\textcolor{red}{TODO:} Finish this proof)
- \end{proof}
- This implies that morphisms in $\Bool(A, \mathbb{2})$ are uniquely determined by which $a \in A$ is severed by the boolean algebra homomorphism.
+%This duality is easy to see, as all we need to see is that the adjunction isomorphic to the expected ones on the $\Hom$ sets given by the schizophrenic object $(\mathbb{2}, 1_{\mathbb{2}}, \mathbb{2})$. 
+%
+%In other words, we check that for all $A \in \Bool$, it holds that $U(A) = \Bool(A, \mathbb{2})$, and that for all $S \in \Set$, it holds that $\mathcal{P}(S) = \Set(S, \mathbb{2})$. 
+%
+% Morphisms in $\Bool(A, \mathbb{2})$ are left exact, colimit preserving, and complement preserving.
+% 
+%\begin{lemma}
+%	We claim that there is a bijection \begin{align*}
+%  	\phi: U(A) \to& \Bool(A, \mathbb{2})\\
+%  	a \mapsto& f^*_a &f^*_a(x) = \begin{cases}
+%   1 & x \geq a \\
+%    0 & \text{else}
+%  \end{cases}
+%  \end{align*}
+%\end{lemma}
+%
+%  
+% 
+% \begin{proof}
+% 	First we show that $f^*_a$ is finite limit, colimit, and complement preserving.
+% 
+% It holds that \begin{align*}
+% 	f^*_a(x \wedge y) = 1 &\iff x \wedge y \geq a\\ &\iff x \geq a \text{ and } y \geq a\\ &\iff f^*_a(x) \wedge f^*_a(y) =1 \
+% \end{align*}
+% and similarly that \begin{align*}
+% 	f^*_a(x \wedge y) = 0 &\iff x \wedge y \ngeq a\\ &\iff x \ngeq a \text{ or } y \ngeq a\\ &\iff f^*_a(x)  \wedge f^*_a(y) =0 \
+% \end{align*}
+%
+%
+%Now we check \begin{align*}
+%	f^*_a( x \vee y) = 1 &\iff x \vee y \geq a\\ &\iff x \geq a \text{ or } y \geq a\\
+%	&\iff f^*_a(x) \vee f^*_a(y) = 1
+%\end{align*}
+%and similarly \begin{align*}
+%	f^*_a( x \vee y) = 0 &\iff x \vee y \ngeq a\\ &\iff x \ngeq a \text{ and } y \ngeq a\\
+%	&\iff f^*_a(x) \vee f^*_a(y) = 0
+%\end{align*}
+%
+%Assuming $\neg x \geq a$ and $x \geq a$, we would have $0 = x \land \neg x \geq a$, which is a contradiction unless $a =0$.
+%
+%Similarly assuming $\neg x \ngeq a$ and $x \ngeq a$, we would have $1 = \neg x \lor x \ngeq a$ for all $a \neq 1$.
+%
+%Otherwise we are in the case $\neg x \geq a$ and $x \ngeq a$ or the case $x \geq a$ and $\neg x \ngeq a$, which, when relabeling $y = \neg x$, is just the same case.
+%
+%Therefore, for all $a \neq 0, 1$ in $A$, it holds that  $x \ngeq a $ if and only if $ \neg x \geq a$, which means for all such $a$ our function is complement preserving: $f^*_a(\neg x)  =  \neg f^*_a(x)$.
+%
+%(\textcolor{red}{Question}: What to do about $f_0^*$?)
+%
+%This shows that $\phi$ is well defined, and injectivity follows from definition of $\phi$. 
+%
+%To show surjectivity we consider a boolean algebra homomorphism $f \in \Bool(A, \mathbb{2})$, and define \begin{align*}
+%	a = \bigwedge \{ x \in A \lvert f(x) = 1\}
+%\end{align*}
+%Now we show that $ f = f^*_a$. 
+%(\textcolor{red}{TODO:} Finish this proof)
+% \end{proof}
+% This implies that morphisms in $\Bool(A, \mathbb{2})$ are uniquely determined by which $a \in A$ is severed by the boolean algebra homomorphism.
 
 The second equation is given by the fact that any set map  $S \to \mathbb{2}$ is given uniquely by a subset $\t S \subset S$, via characteristic functions \begin{equation*}
   \mathcal{X}_{\t S}(x) = \begin{cases}
@@ -963,6 +971,8 @@ Note that $C^* \subset \kAlg$ is a full subcategory.
  However this still doesn't give us the equivalence, as $\mathbb{C}_s \notin \kHaus$. Remember that we want to consider $C^*$ as a concrete category via the functor $\bigcirc$, so that for any compact Hausdorff space $X$, one has $\bigcirc C(X) = \kHaus(X, D)$ where $D = \{ c \in \mathbb{C}_s \ \lvert \ \lVert c \lVert \leq 1 \}. $
  
  Thus we can conclude that there is a natural dual adjunction between concrete categories $(\kHaus, U)$ and $(C^*, \bigcirc)$ with schizophrenic object $(D, 1_D, \mathbb{C}_a)$. 
+ 
+
 % (\textcolor{red}{TODO}: finish this part, if necessary, but the basic structure is the following: show that $\kSp$ is a monotopological category, show that monotopological categories admit function spaces... if theres an easier way to do it we may not need to define lifts and topological categories, so do that later)
  
  
