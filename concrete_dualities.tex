@@ -34,6 +34,7 @@
 \DeclareMathOperator{\Bool}{Bool}
 \DeclareMathOperator{\CAlg}{CAlg_R}
 \DeclareMathOperator{\CAlgZ}{CAlg_\mathbb{Z}}
+\DeclareMathOperator{\CAlgk}{CAlg_k}
 \DeclareMathOperator{\Ring}{Ring}
 \DeclareMathOperator{\Aff}{Aff}
 \DeclareMathOperator{\Fun}{Fun}
@@ -46,6 +47,10 @@
 \DeclareMathOperator{\ev}{ev}
 \DeclareMathOperator{\Lift}{Lift}
 \DeclareMathOperator{\kAlg}{kAlg}
+\DeclareMathOperator{\GSet}{G-Set}
+\DeclareMathOperator{\GFSet}{G-FinSet}
+\DeclareMathOperator{\ket}{k_{\text{ét}}}
+\DeclareMathOperator{\op}{op}
 
 \def\HomA{\ensuremath\mathcal{A}}
 \def\HomB{\ensuremath\mathcal{B}}
@@ -168,7 +173,7 @@ Formally this is a limit  in $\mathcal{A}$ over $\mathcal{A}$-structures on $GA$
 \
 
 \begin{definition}[cogenerator]
-A \textbf{cogenerator} of a category $\mathcal{C}$ is an object $c \in \mathcal{C}$ such that the Hom-set functor $\HomC(-, c): \mathcal{C}^{op} \to \Set$ is injective.
+A \textbf{cogenerator} of a category $\mathcal{C}$ is an object $c \in \mathcal{C}$ such that the Hom-set functor $\HomC(-, c): \mathcal{C}^{\op} \to \Set$ is injective.
 
 That is, given two maps $e \stackrel[f_2]{f_1}{\rightrightarrows} d$, if the induced maps $\HomC(d, c) \stackrel[- \circ f_2]{- \circ f_1}{\rightrightarrows}  \HomC(e,c)$ are equal, then $f_1 = f_2$, i.e., for any $\phi: d \to c$ it holds that $\phi \circ f_1 = \phi \circ f_2 \Rightarrow f_1 = f_2$. 
 
@@ -213,7 +218,7 @@ Let $\mathcal{A}$ and $\mathcal{B}$ be two categories with the following represe
 \end{align*}
 Let $T: \mathcal{A} \to \mathcal{B}$ and $S: \mathcal{B} \to \mathcal{A}$ be contravariant functors with natural transformations $\eta: 1_\mathcal{B} \to TS$ and $\epsilon :  1_\mathcal{A} \to ST$. We can view this as the following \emph{dual adjunction}
 \[\begin{tikzcd}
-	{\mathcal{A}} & \bot & {\mathcal{B}^{op}}
+	{\mathcal{A}} & \bot & {\mathcal{B}^{\op}}
 	\arrow["T", bend left, from=1-1, to=1-3]
 	\arrow["S", bend left, from=1-3, to=1-1]
 \end{tikzcd}\]
@@ -224,7 +229,7 @@ Like any adjunction we have the following triangle equalities \begin{align*}
 	&T{\epsilon_A} \circ \eta_{TA} = 1_{TA} \ &\text{and}& \ &  S{\eta_B} \circ \epsilon_{SB} = 1_{SB}&
 \end{align*}
 and $\Hom$ set isomorphisms \begin{align*}
-	\HomA(A, SB) \cong \HomB(B, TA) \cong \HomB^{op}(TA,B)
+	\HomA(A, SB) \cong \HomB(B, TA) \cong \HomB^{\op}(TA,B)
 \end{align*}
 
 Given some $\mathcal{A}$-morphism $f: A\to A'$, consider the map $Uf: UA \to UA'$. More explicitly, this is \begin{align*}
@@ -572,7 +577,7 @@ The second method is the one which we will later see in action in our examples, 
 In the next part we will discuss a situation which induces a non-natural dual adjunction between concrete categories.
 \subsection{Internal Hom-Functors}
 
-Let $(\mathcal{A}, U)$ be a concrete category. An \textbf{internal hom-functor} is a functor $H: \mathcal{A}^{op} \times \mathcal{A} \to \mathcal{A}$ such that $UH = \HomA(-,-)$. Moreover \begin{align*}
+Let $(\mathcal{A}, U)$ be a concrete category. An \textbf{internal hom-functor} is a functor $H: \mathcal{A}^{\op} \times \mathcal{A} \to \mathcal{A}$ such that $UH = \HomA(-,-)$. Moreover \begin{align*}
 	\text{all evaluation maps } \phi_{A,A',x}: \HomA(A,A') &\to [A']\\
 	h &\mapsto [h](x)\\
 	\text{lift to $\mathcal{A}$-morphisms } p_{A,A',x}: H(A,A') &\to A' \text{ for all } A, A' \in \mathcal{A}, x \in [A]
@@ -642,7 +647,7 @@ What is interesting about the schizophrenic object is that the object itself def
 More explicitly, do we have lifts via the forgetful functor, such that the following diagrams commute for every $A \in \mathcal{A}$ and for every $B \in \mathcal{B}$?
 
 \[\begin{tikzcd}
-	&& {\mathcal{B}^{op}} &&&&& {\mathcal{A}^{op}} \\
+	&& {\mathcal{B}^{\op}} &&&&& {\mathcal{A}^{\op}} \\
 	&& {} && {\text{and}} \\
 	{\mathcal{A}} && \Set &&& {\mathcal{B}} && \Set \\
 	A && {\HomA(A, \t A)} &&& B && {\HomB(B, \t B)} \\
@@ -658,12 +663,14 @@ More explicitly, do we have lifts via the forgetful functor, such that the follo
 \end{tikzcd}\]
 If such lifts exist, then by construction, we will have the following adjunction
 \[\begin{tikzcd}
-	{\mathcal{A}} & \bot & {\mathcal{B}^{op}}
+	{\mathcal{A}} & \bot & {\mathcal{B}^{\op}}
 	\arrow["{T:=\HomA(-, \t A)}",  bend left, from=1-1, to=1-3, from=1-1, to=1-3]
 	\arrow["{S:=\HomB(-, \t B)}", bend left, from=1-3, to=1-1, from=1-3, to=1-1]
 \end{tikzcd}\]
 
 To understand this adjunction and see that it does indeed correspond to the morphisms explained in the first section, we will go through several examples.
+
+
 \section{Leading example}
 
 %\emph{A note about notation: When speaking about $\Hom$ sets of a general category $A$, we use the notation as before $\HomA(-,-)$. However to shorten notation and ease readability, when speaking of specific categories, such as $\Frm, \Top,$ or $\Set$, we use the notation $\Frm(-,-), \Top(-,-),$ $ \Set(-.-).$}
@@ -671,7 +678,7 @@ To understand this adjunction and see that it does indeed correspond to the morp
 We begin with the adjunction 
 
 \[\begin{tikzcd}
-	{\Frm} & \bot & {\Top^{op}}
+	{\Frm} & \bot & {\Top^{\op}}
 	\arrow["{\text{T = $\Frm$(--, $\mathbb{S}$)}}" , bend left, from=1-1, to=1-3]
 	\arrow["{\text{S = $\Top$(--, $\mathbb{2}$)}}", bend left, from=1-3, to=1-1]
 \end{tikzcd}\]
@@ -749,7 +756,16 @@ In general, our schizophrenic object will not necessarily be initial in arbitrar
 
 The leading example is modeled from a more general example from which many examples to be discussed in this thesis are structured. 
 
-This is the duality between the category of Boolean Algebras and the category of sets. This duality is actually given by the forgetful functor and it's left adjoint the free functor. In this case, this free functor is necessarily the power-set functor $\mathcal{P}(-): \Set \to \Bool$, given by $S \mapsto \mathcal{P}(S)$, which sends the set $S$ to its powerset.  
+This is the duality between the category of Boolean Algebras and the category of sets. This duality is  given by 
+\[\begin{tikzcd}
+	\Bool & \bot & \Set
+	\arrow["{\Bool(-, \mathbb{2})}", shift left=2, bend left, from=1-1, to=1-3]
+	\arrow["{\mathcal{P}(-)}", shift left=3, bend left, from=1-3, to=1-1]
+\end{tikzcd}\]
+
+ where necessarily the power-set functor $\mathcal{P}(-): \Set \to \Bool$, given by $S \mapsto \mathcal{P}(S)$, which sends the set $S$ to its powerset.  
+
+(\textcolor{red}{TODO}: find more concrete description of $\Bool(-, \mathbb{2})$, check Ultrafilter hypothesis) 
 
 (\textcolor{red}{TODO}: introduce boolean algebras, and show that the power set forms a boolean algebra) 
 
@@ -813,9 +829,9 @@ This is the duality between the category of Boolean Algebras and the category of
 % \end{proof}
 % This implies that morphisms in $\Bool(A, \mathbb{2})$ are uniquely determined by which $a \in A$ is severed by the boolean algebra homomorphism.
 
-The second equation is given by the fact that any set map  $S \to \mathbb{2}$ is given uniquely by a subset $\t S \subset S$, via characteristic functions \begin{equation*}
-  \mathcal{X}_{\t S}(x) = \begin{cases}
-   1 & x \in \t S \\
+It holds that $\mathcal{P}(X) = \Set(X, \mathbb{2}) $ since any set map  $X \to \mathbb{2}$ is given uniquely by a subset $ S \subset X$, via characteristic functions \begin{equation*}
+  \mathcal{X}_{ S}(x) = \begin{cases}
+   1 & x \in  S \\
     0 & \text{else}.
   \end{cases}
 \end{equation*}
@@ -833,14 +849,14 @@ In this example we already know from commutative algebra the adjunction that giv
 Firstly, we discuss the adjunction that one might learn in Algebra:
 
 \[\begin{tikzcd}
-	{\CAlg^{op}} & \bot & {\Aff}
+	{\CAlg^{\op}} & \bot & {\Aff}
 	\arrow["X(-)" , bend left, from=1-1, to=1-3]
 	\arrow["\mathcal{O}(-)", bend left, from=1-3, to=1-1]
 \end{tikzcd}\]
 
 Recall that an affine scheme $X \in \Aff$ is defined as a representable functor in the functor category $\Fun(\CAlg, \Set)$ (\emph{to avoid confusion, we use the notation $\Nat_{\mathcal{A}}^{\mathcal{B}}(-,-)$, or more often when the context is clear simply $\Nat(-,-)$, to refer to the set of morphisms, or natural transformations, in an arbitrary functor category $\Fun(\mathcal{A},\mathcal{B})$.})
 
-Now we see that there is a natural choice for our adjunction given by sending a representable object to its functor, and sending that representable functor to its object. In other words we have $X: \CAlg^{op} \to \Aff$ that sends $A \to X_A = \CAlg(A, -)$ and $\mathcal{O}: \CAlg \to \Set$, which sends $X(-) = \CAlg(\mathcal{O}(X), -)$ to $\mathcal{O}(X)$, its representable object.
+Now we see that there is a natural choice for our adjunction given by sending a representable object to its functor, and sending that representable functor to its object. In other words we have $X: \CAlg^{\op} \to \Aff$ that sends $A \to X_A = \CAlg(A, -)$ and $\mathcal{O}: \CAlg \to \Set$, which sends $X(-) = \CAlg(\mathcal{O}(X), -)$ to $\mathcal{O}(X)$, its representable object.
 
 The equivalence is clear, since by construction  our unit and counit are  isomorphisms, i.e. $X_{\mathcal{O}(X)} =X$ and $\mathcal{O}(X_A) = A$. 
 
@@ -972,6 +988,55 @@ Note that $C^* \subset \kAlg$ is a full subcategory.
  
  Thus we can conclude that there is a natural dual adjunction between concrete categories $(\kHaus, U)$ and $(C^*, \bigcirc)$ with schizophrenic object $(D, 1_D, \mathbb{C}_a)$. 
  
+ \section{Galois theory}
+ Let us dive into another familiar example called the \emph{Galois correspondence}. The example we want to discuss is actually a generalization of the usual Galois correspondence, given by the following adjunction between the directed poset (\textcolor{red}{TODO} defined this) of subfield extensions of the finite field extension $k \hookrightarrow M\hookrightarrow L$ and the codirected poset (\textcolor{red}{TODO} figure out which is directed and which codirected, details) of the corresponding subgroups $H$ of the Galois group $\Gal(L/k)$:
+ 
+ \[\begin{tikzcd}
+	{\{L|M|k\} } & \bot & {\{H \leq \Gal(L/k)\}}
+	\arrow["{\Gal(L/-)}", shift left=3, bend left, from=1-1, to=1-3]
+	\arrow["{L^{(-)}}", bend left, from=1-3, to=1-1]
+\end{tikzcd}\]
+
+We know ${\{L|M|k\} }$ is directed since $L|k$ is a terminal object of the poset, and similarly ${\{H \leq \Gal(L/k)\}}$ is codirected over ${\{L|M|k\} }^{\op}$ whose terminal object is $k$, corresponding to the full subgroup $\Gal(L/k)$. 
+
+However the schizophrenic object doesn't live in the above adjunction, for that we consider a more general adjunction, which we can derive from the above adjunction in the following way. 
+
+The first important consideration is that we want our left (and by consequence, our right) category to include the separable closure of $k$, which we denote $k^s$, (\textcolor{red}{TODO} clarify/figure out why separable and why/why not algebraic closure) and naturally, all its intermediate finite field extensions. To be sufficiently general we consider the category $\CAlgk$  of commutative unital $k$-algebras with $k$-algebra homomorphisms. 
+
+The second important consideration is that the above left adjoint functor induces an adjunction with respect to the quotient groups of Galois groups under normal subgroups, or more generally the set of cosets of each subgroup $H$ in $\Gal(k^s/k) =: G$.
+
+Explicitly this is a map $L|k \mapsto \CAlgk(L, k^s)$. That is, $\CAlgk(L, k^s) \cong \Gal(k^s/k)/\Gal(k^s/L)$ (\textcolor{red}{TODO}: Show this (make sure its even true), and also think about how $\Gal(k^s/L)$ is distinguished from $\CAlgk(L, k^s)$, intuitively speaking). Notice that $\CAlgk(L,k^s)$ is finite and there exists a natural $G$-action on it, since homomorphisms into the closure are given by maps which permute the roots of the minimal polynomials of the elements which generate $L|k$ (\textcolor{red}{TODO} refer to literature). Furthermore, this extends to a natural $G$-action on $k^s$, as the $G$-action on $k^s$ is fully determined by permutation of roots not lying in $k$, or elements of $\CAlgk(k,k^s)$. (\textcolor{red}{TODO} explain more in detail). 
+
+Therefore $L|k \mapsto \CAlgk(L, k^s)$ lifts to the category $\GSet$, consisting of sets with a $G$-actionand $G$-equivariant homomorphisms between them, where $k^s$ also lives.
+
+(\textcolor{blue}{TODO} show that $\GSet(H,k^s)$ lifts to $\CAlgk$, I still don't know, but idea is that  a $G$-equivariant map of some set should determine some Galois subfield extension since its "part of that action" being preserved by a map. Determine how this set of maps should look like, and what exactly is the datum of the $G$-set as well as datum of the $\CAlgk$; How big or small is this hom-set? Is there a function for every element of the field, or is it enough to realize the datum in some sense as that of the generating elements of the extension? ). 
+
+Remember that if our subfield extension $M|k$ is $Galois$, that is,  it is a \emph{normal} (separable, algebraic) field extension, i.e. $M$ contains the roots of every polynomial over itself, then the fundamental theorem of Galois theory states that $\Gal(k^s/M) \unlhd \Gal(k^s/k)$. This gives us a Galois group over a different functor, namely the functor $\Gal(-/k)$ which yields a profinite system $({k^s|M|k} , Gal(M/k))$.
+
+Consider that $k^s|k = \colim_{\{k^s|L|k\}}L|k$, then corespectively we have \begin{align*}
+	\Gal(k^s/k)=& \CAlgk(\colim_{\{k^s|L|k\}}L, k^s)\\ =& \lim_{\{k^s|L|k\}}\CAlgk(L,k^s)\\ =& \lim_{\{k^s|L|k\}}\Gal(k^s/k)/\Gal(k^s/L)
+\end{align*}
+
+so $\Gal(k^s/k)$ can be realized as a profinite set, which is necessarily uncountable. 
+All together we have schizophrenic object $(k^s,1_{k^s},k^s)$ which induces the following dual adjunction
+
+
+ \[\begin{tikzcd}
+	\CAlgk & \bot & \GSet
+	\arrow["{\CAlgk(-, k^s)}", shift left=3, bend left, from=1-1, to=1-3]
+	\arrow["{\GSet(-, k^s)}", bend left, from=1-3, to=1-1]
+\end{tikzcd}\]
+
+%$\{k^s|L|k\} $ ${\{H \leq \Gal(L/k)\}}$
+This adjunction restricts to the categories $\ket$ of finite dimensional $k$-algebras which are isomorphic to a finite product of separable field extensions with the usual $k$-algebra homomorphisms between them, and the category $\GFSet$ of finite $G$-sets and the usual $G$-equivariant maps between them. 
+
+ \[\begin{tikzcd}
+	\ket^{\op} & \stackrel{\cong}{\bot} & \GFSet
+	\arrow["{\CAlgk(-, k^s)}", shift left=3, bend left, from=1-1, to=1-3]
+	\arrow["{\GSet(-, k^s)}", bend left, from=1-3, to=1-1]
+\end{tikzcd}\]
+
+To see this we just check that $L|k = \GSet(\CAlgk(L,k^s),k^s)$ and we check that $H = \CAlgk(\GSet(H,k^s),k^s))$. (\textcolor{red}{TODO}: prove this or refer to usual essential surj + fully faithful proof from literature)
 
 % (\textcolor{red}{TODO}: finish this part, if necessary, but the basic structure is the following: show that $\kSp$ is a monotopological category, show that monotopological categories admit function spaces... if theres an easier way to do it we may not need to define lifts and topological categories, so do that later)
  
@@ -1031,7 +1096,7 @@ Note that $C^* \subset \kAlg$ is a full subcategory.
 \section{Questions}
 \begin{enumerate}
 	\item How do I approach the preliminaries part? Just a list of definitions? Or should I write some kind of narrating text? Should I move it to the appendix?
-	\item 
+	\item Ask Georg how to differentiate between $k$-Alg in terms of kelleyfied complex algebras and $k$-Alg in terms of algebras over a field $k$. We know that $\kAlg \subset \CAlgk$ as subcategory (not full), should this be reflected in the notation?
 \end{enumerate}
 %\begin{enumerate}
 %	\item Is the above actually the case, i.e., am I actually supposed to look at the underlying sets in $\Set$ to understanding that $\tau$ is the identity?
