@@ -51,6 +51,11 @@
 \DeclareMathOperator{\GFSet}{G-FinSet}
 \DeclareMathOperator{\ket}{k_{\text{ét}}}
 \DeclareMathOperator{\op}{op}
+\DeclareMathOperator{\Ult}{Ult}
+\DeclareMathOperator{\clop}{Clop}
+\DeclareMathOperator{\FinSet}{FinSet}
+\DeclareMathOperator{\prim}{prime}
+
 
 \def\HomA{\ensuremath\mathcal{A}}
 \def\HomB{\ensuremath\mathcal{B}}
@@ -163,11 +168,12 @@ For the previous definitions we refer to the following commutative diagram for c
 
 Consider that here we mean initial in the sense of the initial or induced topology (in $(\Top, U)$ as  construct), however applied to arbitrary concrete category $(\mathcal{A}, U)$ over arbitrary category $\mathcal{X}$. 
 
-That is, this lift is initial in the poset $(\Lift(B), \subset)$  of $G$-structured lifts of $B$ where the order is given by $A\subset A'$ if and only if $A'$ factors through $A$ as a lift, i.e. the morphisms are $A' \stackrel{\phi}{\to} A$ such that $(GA' \stackrel{h'}{\to}B) = (GA' \stackrel{G\phi}{\to}GA\stackrel{h}{\to}B) $. 
+That is, this lift is initial in the poset $(\Lift(B), \subset)$  of $G$-structured lifts of $B$ where the preorder is given by $A\subset A'$ if and only if $A'$ factors through $A$ as a lift, i.e. the morphisms are $A' \stackrel{\phi}{\to} A$ such that $(GA' \stackrel{h'}{\to}B) = (GA' \stackrel{G\phi}{\to}GA\stackrel{h}{\to}B) $. 
 
-Our intuition here however should come from topology, where the initial topology is the limit topology, i.e., the coarsest topology on $GA$ making all $(A \stackrel{f_i}{\to}A_i)_I$ continuous. 
+This is a very important concept throughout this paper, which deserves a remark about its intuition, which here should come from topology, where the initial topology is the limit topology, i.e., the coarsest topology on $GA$ making all $(A \stackrel{f_i}{\to}A_i)_I$ continuous. 
 
-So for arbitrary category, we are looking for the weakest or initial $\mathcal{A}$-structure on $GA$ such that $(A \stackrel{f_i}{\to}A_i)_I$ are $\mathcal{A}$-morphisms, which ensures that for any $\mathcal{A}$-structure on $GA'$ such that $(A' \stackrel{f_i'}{\to}A_i)_I$ are $\mathcal{A}$-morphisms, there is a unique factorization $(A' \stackrel{\phi}{\to}A)$ through the lift $(A\stackrel{f_i}{\to} A_i)_I$. 
+So for arbitrary category, we are looking for the weakest or initial $\mathcal{A}$-structure on $GA$ such that $(A \stackrel{f_i}{\to}A_i)_I$ are $\mathcal{A}$-morphisms, which ensures that for any $\mathcal{A}$-structure on $GA'$ such that $(A' \stackrel{f_i'}{\to}A_i)_I$ are $\mathcal{A}$-morphisms which factor through the lift $(A\stackrel{f_i}{\to} A_i)_I$, that this factorization $(A' \stackrel{\phi}{\to}A)$ is unique.
+ 
 Formally this is a limit  in $\mathcal{A}$ over $\mathcal{A}$-structures on $GA$ with the property that all $(A \stackrel{f_i}{\to}A_i)_I$ are $\mathcal{A}$-morphisms.
 
 \
@@ -200,10 +206,10 @@ A functor $\mathcal{A} \stackrel{G}{\to}\mathcal{B}$ is called \textbf{topologic
 
 It is important to note that in some category $\mathcal{A}$ with a representing object $A_0$ that is a free generator on one free object, it holds that $\HomA(A_0,A) \cong A$ on the level of set, as the morphisms are uniquely determined by where they send the free generator to. 
 
-More concretely, given a forgetful functor $\t U: \mathcal{A} \to \Set$, we have $\HomA(A_0,A) = \t U(A)$. This due to how we construct $A_0$ and $B_0$ using the the left adjoint functor $\t F: \Set \to \mathcal{A}$ to the forgetful functor, which is called the free functor. 
+More concretely, given a forgetful functor $U: \mathcal{A} \to \Set$, we have $\HomA(A_0,A) = U(A)$. This due to how we construct $A_0$ and $B_0$ using the the left adjoint functor $F: \Set \to \mathcal{A}$ to the forgetful functor, which is called the free functor. 
 
-In general, such a functor does not have to exist, and we can still get the construction by defining $A_0$ as the left adjoint object of $\t U$ at $\{pt\} \in \Set$, however, we will assume that such a functor does exist for purposes of explication: $A_0 = \t F(\{\text{pt}\})$. Such an assumption is fair since the properties of the adjunction by definition of the left adjoint object will still hold (in particular the middle equality of the equation below), regardless of existence of the functor as a whole: \begin{align*}
-	\HomA(A_0, A) = \HomA(\t F(\{\text{pt}\}), A) = \HomB(\{pt\}, \t U(A)) = \t U(A).
+In general, such a functor does not have to exist, and we can still get the construction by defining $A_0$ as the left adjoint object of $U$ at $\{pt\} \in \Set$, however, we will assume that such a functor does exist for purposes of explication: $A_0 = F(\{\text{pt}\})$. Such an assumption is fair since the properties of the adjunction by definition of the left adjoint object will still hold (in particular the middle equality of the equation below), regardless of existence of the functor as a whole: \begin{align*}
+	\HomA(A_0, A) = \HomA(F(\{\text{pt}\}), A) = \HomB(\{pt\}, U(A)) = U(A).
 \end{align*}
 
 The left adjoint object to the forgetful functor has the following universal property (\textcolor{red}{TODO}).
@@ -283,9 +289,10 @@ that the underlying sets of $T$ and $S$ respectively, are $\Hom_A(-, \t A)$ and 
 \begin{proof}
 	\begin{align*}
 		V \t B \stackrel{Def. V}{=}& \HomB(B_0,\t B) \stackrel{Def. \t B}{=} \HomB(B_0, TA_0)\\ \stackrel{Adjunction}{\cong}& \HomA(A_0,SB_0) \stackrel{Def. \t A}{=}\HomA(A_0,\t A) \stackrel{Def. U}{=} U\t A
-	\end{align*} \end{proof}
+	\end{align*} 
+	\end{proof}
 	
-	The aim of the following will be to show how the objects $\t A$ and $\t B$ actually induce the adjunction $T \dashv S$, while showing that the units and counits of the adjunction are given \emph{by evaluation}, that is \begin{align*}
+	The aim of the following will be to show how the objects $\t A$ and $\t B$ actually induce the adjunction $T \dashv S$. In doing so, we first show that the units and counits of the adjunction are given \emph{by evaluation}, that is \begin{align*}
 		\epsilon_A(x): \HomA(A, \t A) &\to \t B& \eta_B(y) : \HomB(B, \t 
 		B) &\to \t A\\
 		f & \mapsto f(x)& g &\mapsto g(y).
@@ -348,7 +355,7 @@ so that $[[\epsilon_{\t A}][s](x)](1_{\t A}) = [[STs][\epsilon_A](x)](1_{\t A})$
 
 By Lemma 3.1, we know that $[STs] = US(Ts)  = \HomB(Ts, \t B)$, which is just a map  $\HomB(TA, \t B) \to \HomB(T\t A, \t B)$, induced by $Ts: T\t A \to TA$. \emph{Notice that $US(-)$ and $T(-)$ are both contravariant, so that $UST(-)$ is covariant. }
 
-Now as  $[\epsilon_A](x) \in \HomB(TA, \t B)$, we have the induced post composition
+Now as  $[\epsilon_A](x) \in \HomB(TA, \t B)$, we have the induced precomposition
 
 \[\begin{tikzcd}
 	&& {} \\
@@ -380,7 +387,7 @@ which can be otherwise phrased as a right action of $Ts$ on $[\epsilon_A](x)$ so
 From Lemma 3.1 we know that $VT = \HomA(-, \t A)$ so that we get the induced diagram
 \[\begin{tikzcd}
 	&& {} \\
-	{\HomA(\t A, \t A)} && {\t B} \\
+	{\HomA(\t A, \t A)} && {[\t B]} \\
 	{\HomA(A, \t A)}\\
 	\arrow["{[[\epsilon_A](x)\circ Ts]}", dashed, from=2-1, to=2-3]
 	\arrow["\text{[$Ts$]}"', from=2-1, to=3-1]
@@ -430,6 +437,7 @@ Notice that then $[Ts]$ becomes an evaluation of the precomposition functor $\Ho
  \end{align*}
  
   Thus we have $\tau \sigma = 1_{[\t B]}$ as desired.
+\end{proof}
 % Recall that the following map is defined as evaluating at $1_{\t B}$:\begin{align*}
 % 	[[\epsilon_{S\t B}](1_{\t B})]: [\HomA(\HomB(\t B , \t B), \t A)] &\to [\t B]\\
 % 	p &\mapsto p(1_{\t B})
@@ -457,7 +465,6 @@ Notice that then $[Ts]$ becomes an evaluation of the precomposition functor $\Ho
 % 	 evaluated at $1_{\t B}$ gives $[\epsilon_{S \t B}](1_{\t B}) = 1_{\t B}$, from which we \emph{somehow} deduce that \begin{align*}
 % 	 	\tau \sigma = 1_{[\t B]}
 % 	 \end{align*} (\textcolor{red}{TODO}: why?)
-\end{proof}
 Lemma 3.3 makes precise the notion that our unit and counit are given "by evaluation", given
 \begin{align*}
 	[[\epsilon_A](x)]: \HomA(A, \t A) &\to [\t B] & [[\eta_B](y)]:\HomB(B, \t B) &\to [\t A]\\
@@ -642,9 +649,9 @@ First remember that there is a bijection between $[\t A]$ and $[\t B]$, since  \
 
 In particular, we have shown that $\tau$ and $\sigma$ are necessarily such bijections and inverses of one another. 
 
-What is interesting about the schizophrenic object is that the object itself defines the adjunction via $\Hom$ sets in our respective categories. In other words, our question, in general, is that given a schizophrenic object $(\t A, \tau, \t B)$ do the sets $\Hom_A(A, SB_0)$ have $\mathcal{B}$ structure for every $A \in \mathcal{A}$ and $\HomB(B, TA_0)$ have $\mathcal{A}$ structure for every $B \in \mathcal{B}$. 
+What is interesting about the schizophrenic object is that the object itself defines the adjunction via $\Hom$ sets in our respective categories. In other words, our question, in general, is that given a schizophrenic object $(\t A, \tau, \t B)$ do the sets $\Hom_A(A, SB_0)$ have $\mathcal{B}$ structure for every $A \in \mathcal{A}$ and $\HomB(B, TA_0)$ have $\mathcal{A}$ structure for every $B \in \mathcal{B}$, and moreover, are they the initial objects with $\mathcal{B}$-structure. 
 
-More explicitly, do we have lifts via the forgetful functor, such that the following diagrams commute for every $A \in \mathcal{A}$ and for every $B \in \mathcal{B}$?
+More explicitly, do we have initial lifts via the forgetful functor, such that the following diagrams commute for every $A \in \mathcal{A}$ and for every $B \in \mathcal{B}$?
 
 \[\begin{tikzcd}
 	&& {\mathcal{B}^{\op}} &&&&& {\mathcal{A}^{\op}} \\
@@ -692,7 +699,16 @@ In this setting  the respective representable objects are $A_0 = a$ and $B_0 = \
 
 Now it is easy to see that $TA_0 = \Frm(a, \mathbb{2}) = \mathbb{2}$ and $SB_0 = \Top(\{pt\}, \mathbb{S}) = \mathbb{S}$, however it is not easy to see in general why $\Frm(A, \mathbb{2}) \in \Top$ and $\Top(B, \mathbb{S}) \in \Frm$.
 
-Given that $\mathbb{S}$ is a topology on the set $\{0,1\}$, we endow $\Top(B, \mathbb{S})$ with an order $u \leq v \iff u(x) \leq v(x)$ for all $x \in B$ given a pointwise order in $\mathbb{2}$. 
+For a $\Frm$-structure on $\Top(B, \mathbb{S})$ we desire a lift which preserves the evaluation map $\tau\psi_{B,y}$, and which is initial among such lifts. This means we want the weakest $\Frm$-structure such that for all $y \in B$ and $B \in \Top$ evaluation maps $\tau \psi_{B,y}$ lift to frame homomorphisms $d_{B,y}$.
+
+We know that the evaluation is a frame homomorphism if and only if it preserves pointwise order in $\mathbb{2}$, since   $d_{B,y}(u \leq v) = d_{B,y}(u) \leq d_{B,y}(v) = u(y) \leq v(y)$, and conversely a pointwise order 
+
+
+So for $B \in \Top$ we construct the $\Frm$-structure on $\Top(B, \mathbb{S})$ by a preorder that preserves the pointwise order in $\mathbb{2}$ for all $y \in B$. As we want the weakest such structure, we define it such that for  arbitrary $ u, v \in \Top(B, \mathbb{S})$ we have $u \leq v$ if and only if $u(y) \leq v(y)$ for all $y \in B$. 
+
+This is the initial $\Frm$-structure making all evaluation maps frame homomorphisms.
+
+
 
 
 For a topology on $\Frm(A, \mathbb{2})$, we consider the family \begin{align*}
@@ -752,95 +768,114 @@ is the identity in $\Set$, as the underlying set on both sides is $[\mathbb{2}] 
 This map is clearly the identity. This boils down to the fact that our choice of morphism from $\Frm(\mathbb{2},\mathbb{2})$ was easy to determine since the set $\Frm(\mathbb{2},A) = \{pt\}$, as $\mathbb{2}$ is an initial object in $\Frm$, and in particular it is clear in $(1)$ that $\Frm(\mathbb{2},\mathbb{2}) = \{1_{\mathbb{2}}\}$. From this we can deduce that $\tau$ is the identity on $\bar U(\mathbb{2})$.
 In general, our schizophrenic object will not necessarily be initial in arbitrary concrete duality, and as such, our choice $p \in \HomA(\t A, \t A)$ may not be unique nor easy to determine, so that $\tau$, though always a bijection, is not necessarily always the identity. 
 
-\section{A more general example}
+\section{Stone duality}
 
-The leading example is modeled from a more general example from which many examples to be discussed in this thesis are structured. 
+(\textcolor{blue}{TODO}: introduce boolean algebras, as well as ideals, filters, ultrafilters, principle ultrafilters, maybe in the beginning? question for Georg) 
 
-This is the duality between the category of Boolean Algebras and the category of sets. This duality is  given by 
+
+The leading example is modeled from a more general duality, called the Stone duality. Before we speak about the Stone duality let us discuss a more general situation.
+
+Consider the category $\Bool$ of Boolean algebras and boolean algebra homomorphisms between them. We claim there is an adjunction between $\Bool_{fin}$ and $\FinSet$ given by $\Ult(A)$, which sends a boolean algebra $A$ to the set $\Ult(A)$ of ultrafilters on $A$, and by $\mathcal{P}(X)$, which sends a set $X$ to its power-set.
+
 \[\begin{tikzcd}
-	\Bool & \bot & \Set
-	\arrow["{\Bool(-, \mathbb{2})}", shift left=2, bend left, from=1-1, to=1-3]
+	\Bool_{\text{fin}} & \bot & \FinSet^{\op}
+	\arrow["{\Ult(-)}", shift left=2, bend left, from=1-1, to=1-3]
 	\arrow["{\mathcal{P}(-)}", shift left=3, bend left, from=1-3, to=1-1]
 \end{tikzcd}\]
 
- where necessarily the power-set functor $\mathcal{P}(-): \Set \to \Bool$, given by $S \mapsto \mathcal{P}(S)$, which sends the set $S$ to its powerset.  
+Notice that $\mathcal{P}(X)$ is a boolean algebra if $X$ is finite, since every subset $S$ has a well-defined complement $X - S$. 
 
-(\textcolor{red}{TODO}: find more concrete description of $\Bool(-, \mathbb{2})$, check Ultrafilter hypothesis) 
 
-(\textcolor{red}{TODO}: introduce boolean algebras, and show that the power set forms a boolean algebra) 
+It is also the case that $\Ult(A)$ is  fully faithful as long as $A$ is a finite boolean algebra, since ultrafilters on those are principle, meaning that they are generated by a single element, an element which we can then identify with the points of $X$ in a faithful way. And so the counit $\Ult(\mathcal{P}(X)) \to X$ of the adjunction is an isomorphism.
+ 
+Indeed, this implies that the unit $A \to \mathcal{P}(\Ult(A))$ is an isomorphism, since (\textcolor{blue}{TODO} prove this), and so the adjunction above is a dual equivalence.
 
-(\textcolor{red}{TODO}: clarify about finite boolean algebras/finite sets, why this works/doesn't work (dont know yet) in the infinite case, and how to mend such a construction). 
+However that is not to say it is a natural dual adjunction. 
 
-%This duality is easy to see, as all we need to see is that the adjunction isomorphic to the expected ones on the $\Hom$ sets given by the schizophrenic object $(\mathbb{2}, 1_{\mathbb{2}}, \mathbb{2})$. 
-%
-%In other words, we check that for all $A \in \Bool$, it holds that $U(A) = \Bool(A, \mathbb{2})$, and that for all $S \in \Set$, it holds that $\mathcal{P}(S) = \Set(S, \mathbb{2})$. 
-%
-% Morphisms in $\Bool(A, \mathbb{2})$ are left exact, colimit preserving, and complement preserving.
-% 
-%\begin{lemma}
-%	We claim that there is a bijection \begin{align*}
-%  	\phi: U(A) \to& \Bool(A, \mathbb{2})\\
-%  	a \mapsto& f^*_a &f^*_a(x) = \begin{cases}
-%   1 & x \geq a \\
-%    0 & \text{else}
-%  \end{cases}
-%  \end{align*}
-%\end{lemma}
-%
-%  
-% 
-% \begin{proof}
-% 	First we show that $f^*_a$ is finite limit, colimit, and complement preserving.
-% 
-% It holds that \begin{align*}
-% 	f^*_a(x \wedge y) = 1 &\iff x \wedge y \geq a\\ &\iff x \geq a \text{ and } y \geq a\\ &\iff f^*_a(x) \wedge f^*_a(y) =1 \
-% \end{align*}
-% and similarly that \begin{align*}
-% 	f^*_a(x \wedge y) = 0 &\iff x \wedge y \ngeq a\\ &\iff x \ngeq a \text{ or } y \ngeq a\\ &\iff f^*_a(x)  \wedge f^*_a(y) =0 \
-% \end{align*}
-%
-%
-%Now we check \begin{align*}
-%	f^*_a( x \vee y) = 1 &\iff x \vee y \geq a\\ &\iff x \geq a \text{ or } y \geq a\\
-%	&\iff f^*_a(x) \vee f^*_a(y) = 1
-%\end{align*}
-%and similarly \begin{align*}
-%	f^*_a( x \vee y) = 0 &\iff x \vee y \ngeq a\\ &\iff x \ngeq a \text{ and } y \ngeq a\\
-%	&\iff f^*_a(x) \vee f^*_a(y) = 0
-%\end{align*}
-%
-%Assuming $\neg x \geq a$ and $x \geq a$, we would have $0 = x \land \neg x \geq a$, which is a contradiction unless $a =0$.
-%
-%Similarly assuming $\neg x \ngeq a$ and $x \ngeq a$, we would have $1 = \neg x \lor x \ngeq a$ for all $a \neq 1$.
-%
-%Otherwise we are in the case $\neg x \geq a$ and $x \ngeq a$ or the case $x \geq a$ and $\neg x \ngeq a$, which, when relabeling $y = \neg x$, is just the same case.
-%
-%Therefore, for all $a \neq 0, 1$ in $A$, it holds that  $x \ngeq a $ if and only if $ \neg x \geq a$, which means for all such $a$ our function is complement preserving: $f^*_a(\neg x)  =  \neg f^*_a(x)$.
-%
-%(\textcolor{red}{Question}: What to do about $f_0^*$?)
-%
-%This shows that $\phi$ is well defined, and injectivity follows from definition of $\phi$. 
-%
-%To show surjectivity we consider a boolean algebra homomorphism $f \in \Bool(A, \mathbb{2})$, and define \begin{align*}
-%	a = \bigwedge \{ x \in A \lvert f(x) = 1\}
-%\end{align*}
-%Now we show that $ f = f^*_a$. 
-%(\textcolor{red}{TODO:} Finish this proof)
-% \end{proof}
-% This implies that morphisms in $\Bool(A, \mathbb{2})$ are uniquely determined by which $a \in A$ is severed by the boolean algebra homomorphism.
+In the non-natural case, remember that an adjunction determines a triple which could be a candidate for a schizophrenic object. We will however see later, that our candidate is not a schizophrenic object of this adjunction, but of a slightly mended construction.
 
-It holds that $\mathcal{P}(X) = \Set(X, \mathbb{2}) $ since any set map  $X \to \mathbb{2}$ is given uniquely by a subset $ S \subset X$, via characteristic functions \begin{equation*}
+To determine the triple first consider the free boolean algebra on one generator $a$ is the set $\diamondsuit : =\{\bot, a, \neg a, \top \}$, since our generator needs to induce complements (\textcolor{red}{TODO} and has finite limits and arbitrary colimits), and the free set on one generator is $\{pt\}$. 
+
+Now  an ultrafilter on $\diamondsuit$ is determined by which element the bottom (and analogously top) associates to, which is an element of the set $\{a, \neg a\}= \mathbb{2}$, which we will prove in the following. It  therefore holds that  $\Ult(\diamondsuit) = \mathbb{2}$.
+
+Meanwhile $\mathcal{P}(\{pt\}) = \{\emptyset, \{pt\}\} = \mathbb{2}$ as boolean algebra, since the point and the empty set are complements, and thus form the truth-value boolean algebra which is an initial object of $\Bool$. 
+
+ Now in the following we want to show that such lifts exist, and we check that by showing that the adjunction we gave serves as a lift of the respective hom sets. 
+ 
+For the power-set functor, it is easy to see that $\mathcal{P}(X) = \Set(X, \mathbb{2}) $ since any set map  $X \to \mathbb{2}$ is given uniquely by a subset $ S \subset X$, via characteristic functions \begin{equation*}
   \mathcal{X}_{ S}(x) = \begin{cases}
    1 & x \in  S \\
     0 & \text{else}.
   \end{cases}
 \end{equation*}
 
+
+
+
+\begin{lemma}
+	There is a bijection \begin{align*}
+  	\phi: \Ult(A) \to& \Bool(A, \mathbb{2})\\
+  	F \mapsto& f_F &f_F(x) = \begin{cases}
+   1 & x \in F \\
+    0 & \text{else}
+  \end{cases}
+  \end{align*}
+  This restricts to a bijection $\phi': \prim(A) \to \Frm(A, \mathbb{2})$, where $\prim(A)$ is the set of all completely prime filters of $A$.
+\end{lemma}
+
+
+ 
+\begin{proof}
+ 	First we show that $f_F$ is finite limit, colimit, and order preserving. \emph{This alone is the statement that the point of a frame $F \rightleftarrows \mathbb{2}$ identifies with the completely prime filters on $A$. }
+  
+ That $F$ is upwards closed is the condition that $x \in F$, $y \in A \implies y \in F$. This implies that
+  \begin{align*}
+ 	f_F(x \wedge y) = 1 &\iff x \wedge y \in F\\ &\iff x \in F\text{ and } y \in F\\ &\iff f_F(x) \wedge f_F(y) =1 \
+ \end{align*}
+ 
+ 
+  That $F$ is a sub meet-semilattice is the condition $x, y \in F \implies x \land y \in F$. This implies that. \begin{align*}
+ 	f_F(x \wedge y) = 0 &\iff x \wedge y \notin F\\ &\iff x \notin F\text{ or } y \notin F\\ &\iff f_F(x)  \wedge f_F(y) =0 \
+ \end{align*}
+
+
+That $F$ is a completely prime filter is the condition that $\bigvee x_i \in F$ implies that there exists an $i \in I$ such that $x_i \in F$, which implies that \begin{align*}
+	f_F( \bigvee x_i) = 1 &\iff \bigvee x_i \in F\\ &\iff \exists i \in I : x_i \in F\\
+	&\iff \bigvee f_F(x_i) = 1
+\end{align*}
+and similarly \begin{align*}
+	f_F( \bigvee x_i) = 0 &\iff \bigvee x_i \notin F\\ &\iff \forall i \in I:x_i \notin F \\
+	&\iff \bigvee f_F(x_i)  = 0
+\end{align*}
+Consider that all these statements are actually equivalences, since you can obtain each condition by swapping the two way implications from what was our condition---the second two way implication of each of these chains of equivalences---to what we have proven---each chains end statement.
+
+To check that $f_F$ is order preserving, the only type of map that can't exist is $ 1 =f_F(a) \leq f_F(b) = 0$. In other words, we only need to check that for any $a \in F$ and $b \in P$ with $a \leq b$ it holds that $b \in F$. But this is exactly the condition of being upwards closed. 
+
+This shows that $\phi'$ is well defined and has an inverse. 
+
+Now to conclude the proof we check that the ultrafilter condition is equivalent to a complement preserving point of a boolean algebra $F \rightleftarrows \mathbb{2}$.
+
+The condition of being an ultrafilter of a set $S$ means that for $A, B \subset S$ it holds that $A \in F \iff \forall B \in F: A \cap B \neq \emptyset $.
+
+
+ Now consider that $F \subset \mathcal{P}(A)$ as a poset, where the empty set is an initial object, but $S \in F$ implies $A - S \notin F$ due to the ultrafilter condition. But this just means that $f_F(\neg A) = \neg f_F(A)$. 
+ 
+ For the converse case, consider that another way to phrase this is that the kernel of a boolean algebra morphism $f_F^{-1}(0)$ is an ideal, which is necessarily the complement of the filter $f_F^{-1}(1)$, since $F$ is a prime ideal. Now since $F$ cannot contain the complement of any of its elements, and being order preserving is equivalent to being upwards closed, we know that $A \in f_F^{-1}(1)$ so that $\emptyset \in f_f^{-1}(0)$ and $\emptyset \notin f_f^{-1}(1)$.
+ 
+This is equivalent to the ultrafilter condition, since \begin{align*}
+ 	B \cap A \notin F \implies B \cap A \in I \implies (B \cap A) \cup B = B \in I
+ \end{align*}
+ which is a contradiction, since $B \in F$ by assumption, meaning that for $B \in F$ it holds that  $B \cap A \neq \emptyset \iff B \cap A \in F$ (the backwards implication is obvious). 
+ 
+ This equivalence moreover gives us the backwards implication of the ultrafilter condition, where the forwards implication is given by the property of being a sub meet-semilattice.
+\end{proof}
+
+
 The unit and counit maps then follow the exact same logic as the leading example, and in particular, $\mathbb{2}$ is also initial in $\Bool$ so that by the same logic, our $\tau$ is equal to the set identity $1_{\mathbb{2}}$. 
 
-(\textcolor{red}{TODO}: talk about free object and show why  $(\mathbb{2}, 1_{\mathbb{2}}, \mathbb{2})$ is the schizophrenic object).
 
-\section{Rings and Affine varieties}
+
+\section{Rings and Affine schemes}
 
 We now turn to an example that any graduate Algebra student has encountered, the duality between the category of rings and the category of affine schemes. We will use the more general category of commutative $R$-algebras, which we denote $\CAlg$. Notice that if $R = \mathbb{Z}$, then $\CAlgZ = \Ring$. 
 
@@ -861,12 +896,38 @@ Now we see that there is a natural choice for our adjunction given by sending a 
 The equivalence is clear, since by construction  our unit and counit are  isomorphisms, i.e. $X_{\mathcal{O}(X)} =X$ and $\mathcal{O}(X_A) = A$. 
 
 
-Now on the one hand,  the Yoneda lemma shows us that   $\Aff(X, \mathbb{A}^1) = \mathbb{A}^1(\mathcal{O}(X)) = \CAlg(R[X], \mathcal{O}(X)) \cong \mathcal{O}(X)$. The final set isomorphism is due to the fact that $R[X]$ is a free commutative $R$-algebra on one free generator. Now we see that for any $X_A \in \Aff$ it holds that $\mathcal{O}(X_A) = \Aff(X_A, \mathbb{A}^1)$, and as such we have a natural choice for a schizophrenic object $(R[X], \tau, \mathbb{A}^1 )$ (\textcolor{red}{TODO} compute $\tau$ if necessary). 
+Now on the one hand,  the Yoneda lemma shows us that   $\Aff(X, \mathbb{A}^1) \cong \mathbb{A}^1(\mathcal{O}(X)) = \CAlg(R[X], \mathcal{O}(X)) \cong [\mathcal{O}(X)]$. The final set isomorphism is due to the fact that $R[X]$ is a free commutative $R$-algebra on one free generator. Now we see that for any $X_A \in \Aff$ it holds that $[\mathcal{O}(X_A)] = \Aff(X_A, \mathbb{A}^1)$, and as such we have a natural choice for a schizophrenic object $(R[X], \tau, \mathbb{A}^1 )$ (\textcolor{red}{TODO} compute $\tau$ if necessary). 
 
 
 We may use the same argument to show why $\CAlg(A, R[X])$ lifts to the category of affine schemes, and that it is isomorphic to $X(A) = \CAlg(A, -)$, however it is not obvious how to think about $\mathbb{A}^1$ as a free functor on one free generator, as elements of affine schemes are not given in the same way as they are for $R[X]$, where the element $X$ is clearly our free generator. 
 
-We may however still use Yoneda to see that $\CAlg(A, R[X]) = X_A(R[X]) = \Aff(\mathbb{A}^1, X_A) \cong X_A$, and as such our intuition thus must come from the fact that $\mathbb{A}^1$ is our free affine scheme on one free generator (\textcolor{red}{TODO} why?) and  thus by the above equality we can think of elements of our affine scheme  as global functions from $A$ to $R[X]$. 
+We may however still use Yoneda to see that $\CAlg(A, R[X]) \cong X_A(R[X]) = \Aff(\mathbb{A}^1, X_A) \cong [X_A]$, and as such our intuition thus must come from the fact that $\mathbb{A}^1$ is our free affine scheme on one free generator (\textcolor{blue}{TODO} why?) and  thus by the above equality we can think of elements of our affine scheme  as global functions from $A$ to $R[X]$.
+
+\[\begin{tikzcd}
+	{X_A} && TA && {\mathbb{A}^1} \\
+	\\
+	{[X_A]} && {\CAlg(A, R[X])} && {[\mathbb{A}^1]} \\
+	\\
+	A && {SX_A} && {R[X]} \\
+	\\
+	{[A]} && {\Aff(X_A, \mathbb{A}^1)} && {[R[X]]}
+	\arrow["{1_{X_A}}", from=1-1, to=1-3]
+	\arrow["V"', from=1-1, to=3-1]
+	\arrow["{e_{A,x}}", from=1-3, to=1-5]
+	\arrow["V"', from=1-3, to=3-3]
+	\arrow["V", from=1-5, to=3-5]
+	\arrow["\cong"', from=3-1, to=3-3]
+	\arrow["{\tau \varphi_{A, x}}"', from=3-3, to=3-5]
+	\arrow["{1_A}", from=5-1, to=5-3]
+	\arrow["U"', from=5-1, to=7-1]
+	\arrow["{d_{X_A,y}}", from=5-3, to=5-5]
+	\arrow["U"', from=5-3, to=7-3]
+	\arrow["U", from=5-5, to=7-5]
+	\arrow["\cong"', from=7-1, to=7-3]
+	\arrow["{\sigma\psi_{X_A,y}}"', from=7-3, to=7-5]
+\end{tikzcd}\]
+
+Since we have a canonical choice $[X_A] \cong \CAlg(A, R[X])$ and $[A] \cong \Aff(X_A,\mathbb{A}^1)$ of set isomorphisms, fully faithfulness of the Yoneda embeddings $V$ and $U$ ensures that any morphism of lifts into $X_A$ and $A$ respectively are unique, and as such the lifts $(X_A \stackrel{e_{A,x}}{\to}\mathbb{A}^1)_{x \in [A]}$ and $(A \stackrel{d_{X_A,y}}{\to} R[X])_{y \in [X_A]}$ are initial.
 %
 %Now we shall try to understand the unit and counits.
 
