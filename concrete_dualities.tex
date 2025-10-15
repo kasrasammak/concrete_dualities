@@ -810,8 +810,28 @@ For the power-set functor, it is easy to see that $\mathcal{P}(X) = \Set(X, \mat
 \end{equation*}
 
 
-
-
+\begin{lemma}
+	Let $I \subset P$ be an ideal of a lattice $P$. Then the following are equivalent 
+	\begin{enumerate}
+		\item The complement of $I$ is a filter $F \subset P$,
+		\item $1 \notin I$ and $I$ is prime.
+		\item $I$ can be given as the kernel of a lattice homomorphism $F \stackrel{f}{\rightleftarrows} \mathbb{2}$
+	\end{enumerate}
+\end{lemma}
+\begin{proof}
+	$(1) \implies (2)$: Since the complement of $I$ is a filter $F$, which contains the top element by upwards closure, we know the top element can't lie in $I$. Furthermore, $a \land b \in I$ implies that $a \in I$ or $b \in I$ by the fact that a filter is a sub meet-semilattice (if both $a, b \in F$ then so is $a \land b \in F$).
+	
+	$(2) \iff (3)$: One can check that  $f(a) =  \begin{cases}
+   1 & a \notin I \\
+    0 & a \in I
+  \end{cases}$ is a lattice homomorphism, and that the kernel of a lattice homomorphism defines a prime ideal. In fact, we will show this equivalence in the following lemma, but for frame homomorphisms. 
+  
+  \emph{Note that a lattice homomorphism is an order preserving, finite limit and finite colimit preserving morphism between lattices, while a frame homomorphism asks extra that it preserves arbitrary colimits, which we will see, upgrades the condition on the ideal (and dually to the filter) from being prime to being completely prime.}
+  
+  $(2) \& (3) \implies (1)$:  For ease we call $I = f^{-1}(0)$ and $F:= f^{-1}(1)$, and we implicitly use the fact that these are by definition set complements. Notice that the condition of being a prime ideal $a \land b \in I \implies a \in I$ or $b \in I$ is equivalent by contraposition to $a, b \in F \implies a \land b \in F$, so that $f^{-1}(1)$ is a sub meet-semilattice.
+  
+  Furthermore upwards closure of $F$ is derived directly from downwards closure of $I$. In other words, assuming $a, b \in P$ such that $a \leq b$, we have $a \in F \implies b \in F$ if and only if $ b \in I\implies a \in I$, which holds since $I$ is downwards closed.
+\end{proof}
 \begin{lemma}
 	There is a bijection \begin{align*}
   	\phi: \Ult(A) \to& \Bool(A, \mathbb{2})\\
@@ -849,7 +869,7 @@ and similarly \begin{align*}
 \end{align*}
 Consider that all these statements are actually equivalences, since you can obtain each condition by swapping the two way implications from what was our condition---the second two way implication of each of these chains of equivalences---to what we have proven---each chains end statement.
 
-To check that $f_F$ is order preserving, the only type of map that can't exist is $ 1 =f_F(a) \leq f_F(b) = 0$. In other words, we only need to check that for any $a \in F$ and $b \in P$ with $a \leq b$ it holds that $b \in F$. But this is exactly the condition of being upwards closed. 
+To check that $f_F$ is order preserving, the only type of map that contradicts the condition is $ 1 =f_F(a) \leq f_F(b) = 0$. In other words, we only need to check that for any $a \in F$ and $b \in P$ with $a \leq b$ it holds that $b \in F$. But this is exactly the condition of being upwards closed. 
 
 This shows that $\phi'$ is well defined and has an inverse. 
 
@@ -858,16 +878,17 @@ Now to conclude the proof we check that the ultrafilter condition is equivalent 
 The condition of being an ultrafilter of a set $S$ means that for $A, B \subset S$ it holds that $A \in F \iff \forall B \in F: A \cap B \neq \emptyset $.
 
 
- Now consider that $F \subset \mathcal{P}(A)$ as a poset, where the empty set is an initial object, but $S \in F$ implies $A - S \notin F$ due to the ultrafilter condition. But this just means that $f_F(\neg A) = \neg f_F(A)$. 
+ Now consider that $F \subset \mathcal{P}(A)$ as a poset, where the empty set is an initial object, but $S \in F$ implies $A - S \notin F$ due to the ultrafilter condition. But this just means that $f_F(\neg S) = \neg f_F(S)$. 
  
- For the converse case, consider that another way to phrase this is that the kernel of a boolean algebra morphism $f_F^{-1}(0)$ is an ideal, which is necessarily the complement of the filter $f_F^{-1}(1)$, since $F$ is a prime ideal. Now since $F$ cannot contain the complement of any of its elements, and being order preserving is equivalent to being upwards closed, we know that $A \in f_F^{-1}(1)$ so that $\emptyset \in f_f^{-1}(0)$ and $\emptyset \notin f_f^{-1}(1)$.
+ For the converse case, we only want to prove the backwards implication of the ultrafilter condition, since the forwards condition is given by the fact that $F$ is a sub meet-semilattice. 
  
-This is equivalent to the ultrafilter condition, since \begin{align*}
- 	B \cap A \notin F \implies B \cap A \in I \implies (B \cap A) \cup B = B \in I
- \end{align*}
- which is a contradiction, since $B \in F$ by assumption, meaning that for $B \in F$ it holds that  $B \cap A \neq \emptyset \iff B \cap A \in F$ (the backwards implication is obvious). 
  
- This equivalence moreover gives us the backwards implication of the ultrafilter condition, where the forwards implication is given by the property of being a sub meet-semilattice.
+ Moreover, it suffices to prove the following claim: for all $B \in F$ it holds that  $B \cap A \neq \emptyset \iff B \cap A \in F$, as this claim  implies the backwards condition of the ultrafilter lemma.
+ 
+ 
+ Consider that the previous lemma implies that $\emptyset \notin F$, from which "$\impliedby$" follows immediately.
+ 
+\textcolor{red}{TODO} show $B \cap A \neq \emptyset \implies B \cap A \in F$. 
 \end{proof}
 
 
