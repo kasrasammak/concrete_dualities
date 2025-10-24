@@ -1,0 +1,196 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[margin=3cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{bbold}
+\usepackage[utf8]{inputenc}
+\usepackage{parskip}
+\usepackage{mathtools}
+\usepackage[english]{babel}
+\usepackage{tikz-cd}
+\usepackage{bbm}
+\usepackage{stackrel}
+% change subsections to alphabetic
+\renewcommand\thesubsection{\thesection.\alph{subsection}}
+
+\newtheorem{theorem}{Theorem}[section] % part
+\newtheorem{lemma}{Lemma}[section] % part
+\newtheorem{definition}{Definition}[section] % part
+
+\newcommand{\D}[2]{#1^\prime(#2)}
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\scalar}[2]{\langle#1, #2\rangle}
+
+\DeclareMathOperator{\Ima}{Im}
+\DeclareMathOperator{\Gal}{Gal}
+\DeclareMathOperator{\colim}{colim}
+\DeclareMathOperator{\Hom}{Hom}
+\DeclareMathOperator{\Set}{Set}
+\DeclareMathOperator{\Frm}{Frm}
+\DeclareMathOperator{\Top}{Top}
+\DeclareMathOperator{\Bool}{Bool}
+\DeclareMathOperator{\CAlg}{CAlg_R}
+\DeclareMathOperator{\CAlgZ}{CAlg_\mathbb{Z}}
+\DeclareMathOperator{\CAlgk}{CAlg_k}
+\DeclareMathOperator{\Ring}{Ring}
+\DeclareMathOperator{\Aff}{Aff}
+\DeclareMathOperator{\Fun}{Fun}
+\DeclareMathOperator{\Nat}{Nat}
+\DeclareMathOperator{\Ob}{Ob}
+\DeclareMathOperator{\Mor}{Mor}
+\DeclareMathOperator{\kSp}{kSp}
+\DeclareMathOperator{\kHaus}{kHaus}
+\DeclareMathOperator{\Haus}{Haus}
+\DeclareMathOperator{\ev}{ev}
+\DeclareMathOperator{\Lift}{Lift}
+\DeclareMathOperator{\kAlg}{kAlg}
+\DeclareMathOperator{\GSet}{G-Set}
+\DeclareMathOperator{\GFSet}{G-FinSet}
+\DeclareMathOperator{\ket}{k_{\text{ét}}}
+\DeclareMathOperator{\op}{op}
+\DeclareMathOperator{\Ult}{Ult}
+\DeclareMathOperator{\clop}{Clop}
+\DeclareMathOperator{\FinSet}{FinSet}
+\DeclareMathOperator{\prim}{prime}
+\DeclareMathOperator{\Spat}{SpatLoc}
+\DeclareMathOperator{\Sob}{SobTop}
+\DeclareMathOperator{\DLat}{DLat}
+\DeclareMathOperator{\Loc}{Loc}
+\DeclareMathOperator{\CohLoc	}{CohLoc}
+\DeclareMathOperator{\CohTop}{CohTop}
+\DeclareMathOperator{\Stone}{Stone}
+
+
+
+
+
+
+
+
+
+\def\HomA{\ensuremath\mathcal{A}}
+\def\HomB{\ensuremath\mathcal{B}}
+\def\HomC{\ensuremath\mathcal{C}}
+\def\HomD{\ensuremath\mathcal{D}}
+
+\def\concA{\ensuremath(\mathcal{A},U)}
+\def\concB{\ensuremath(\mathcal{B},V)}
+
+
+\def\HomFrm{\ensuremath\Hom_\Frm}
+\def\HomTop{\ensuremath\Hom_\Top}
+\def\t{\ensuremath\tilde}
+
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+\renewcommand\qedsymbol{$\blacksquare$}
+% https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXG1hdGhjYWx7QX1ee29wfSJdLFsyLDAsIlxcbWF0aGNhbHtCfSJdLFsxLDAsIlxcYm90Il0sWzAsMSwiVCIsMCx7ImN1cnZlIjotMn1dLFsxLDAsIlMiLDAseyJjdXJ2ZSI6LTJ9XV0=
+
+
+\begin{document}
+
+\pagestyle{fancy}
+\fancyhf{}
+\rhead{Kasra Sammak}
+\lhead{Concrete Dualities}
+\rfoot{\thepage}
+\section{Stone Duality}
+We use this to discuss some proofs that I will not use in my paper
+
+\begin{lemma}
+	Let $I \subset P$ be an ideal of a lattice $P$. Then the following are equivalent 
+	\begin{enumerate}
+		\item The complement of $I$ is a filter $F \subset P$,
+		\item $1 \notin I$ and $I$ is prime.
+		\item $I$ can be given as the kernel of a lattice homomorphism $F \stackrel{f}{\rightleftarrows} \mathbb{2}$
+	\end{enumerate}
+\end{lemma}
+\begin{proof}
+	$(1) \implies (2)$: Since the complement of $I$ is a filter $F$, which contains the top element by upwards closure, we know the top element can't lie in $I$. Furthermore, $a \land b \in I$ implies that $a \in I$ or $b \in I$ by the fact that a filter is a sub meet-semilattice (if both $a, b \in F$ then so is $a \land b \in F$).
+	
+	$(2) \iff (3)$: One can check that  $f(a) =  \begin{cases}
+   1 & a \notin I \\
+    0 & a \in I
+  \end{cases}$ is a lattice homomorphism, and that the kernel of a lattice homomorphism defines a prime ideal. In fact, we will show this equivalence in the following lemma, but for frame homomorphisms. 
+  
+  \emph{Note that a lattice homomorphism is an order preserving, finite limit and finite colimit preserving morphism between lattices, while a frame homomorphism asks extra that it preserves arbitrary colimits, which we will see, upgrades the condition on the ideal (and dually to the filter) from being prime to being completely prime.}
+  
+  $(2) \& (3) \implies (1)$:  For ease we call $I = f^{-1}(0)$ and $F:= f^{-1}(1)$, and we implicitly use the fact that these are by definition set complements. Notice that the condition of being a prime ideal $a \land b \in I \implies a \in I$ or $b \in I$ is equivalent by contraposition to $a, b \in F \implies a \land b \in F$, so that $f^{-1}(1)$ is a sub meet-semilattice.
+  
+  Furthermore upwards closure of $F$ is derived directly from downwards closure of $I$. In other words, assuming $a, b \in P$ such that $a \leq b$, we have $a \in F \implies b \in F$ if and only if $ b \in I\implies a \in I$, which holds since $I$ is downwards closed.
+\end{proof}
+\begin{lemma}
+	Let $A$ be a Boolean algebra. Then there is a bijection \begin{align*}
+  	\phi: \Ult(A) \to& \Bool(A, \mathbb{2})\\
+  	F \mapsto& f_F &f_F(x) = \begin{cases}
+   1 & x \in F \\
+    0 & \text{else}
+  \end{cases}
+  \end{align*}
+  When over the category $\Frm$ this restricts to  a bijection $\phi': \prim(A) \to \Frm(A, \mathbb{2})$, where $\prim(A)$ is the set of all completely prime filters of $A$.
+\end{lemma}
+
+
+ 
+\begin{proof}
+ 	Our strategy will be to first identify  points of a frame $F \rightleftarrows \mathbb{2}$  with  completely prime filters on $A$ and then to show the ultrafilter condition in the boolean setting. 
+ 	
+ 	First we show that $f_F$ is finite limit, colimit, and order preserving. 
+  
+ That $F$ is upwards closed is the condition that $x \in F$, $y \in A \implies y \in F$. This implies that
+  \begin{align*}
+ 	f_F(x \wedge y) = 1 &\iff x \wedge y \in F\\ &\iff x \in F\text{ and } y \in F\\ &\iff f_F(x) \wedge f_F(y) =1 \
+ \end{align*}
+ 
+ 
+  That $F$ is a sub meet-semilattice is the condition $x, y \in F \implies x \land y \in F$. This implies that. \begin{align*}
+ 	f_F(x \wedge y) = 0 &\iff x \wedge y \notin F\\ &\iff x \notin F\text{ or } y \notin F\\ &\iff f_F(x)  \wedge f_F(y) =0 \
+ \end{align*}
+
+
+That $F$ is a completely prime filter is the condition that $\bigvee x_i \in F$ implies that there exists an $i \in I$ such that $x_i \in F$, which implies that \begin{align*}
+	f_F( \bigvee x_i) = 1 &\iff \bigvee x_i \in F\\ &\iff \exists i \in I : x_i \in F\\
+	&\iff \bigvee f_F(x_i) = 1
+\end{align*}
+and similarly \begin{align*}
+	f_F( \bigvee x_i) = 0 &\iff \bigvee x_i \notin F\\ &\iff \forall i \in I:x_i \notin F \\
+	&\iff \bigvee f_F(x_i)  = 0
+\end{align*}
+Consider that all these statements are actually equivalences, since you can obtain each condition by swapping the two way implications from what was our condition---the second two way implication of each of these chains of equivalences---to what we have proven---each chains end statement.
+
+However note that when we swap we must think about $f_F$ as arbitrary boolean algebra (or frame) homomorphism $f$, and consider $I$ and $F$ as nothing but preimages under $F$, for example,
+
+\begin{align*}
+	\bigvee x_i \in f^{-1}(1)&\iff f( \bigvee x_i) = 1 \\ 
+	&\iff \bigvee f(x_i) = 1 \\
+	&\iff \exists i \in f^{-1}(0) : x_i \in f^{-1}(1)
+\end{align*}
+
+To check that $f_F$ is order preserving, consider that the only type of map that contradicts the condition is $ 1 =f_F(a) \leq f_F(b) = 0$, so we only need to check that for any $a \in F$ and $b \in P$ with $a \leq b$ it holds that $b \in F$. But this is exactly the condition of being upwards closed. 
+
+This shows that $\phi'$ is well defined and has an inverse. 
+
+Now to conclude the proof we check that the ultrafilter condition is equivalent to a complement preserving point of a boolean algebra $F \rightleftarrows \mathbb{2}$.
+
+Having proven the equivalences for filter conditions, we note that for filters, the condition of being an ultrafilter of a set $S$ means that for $A, B \subset S$ it holds that $A \in F \iff \forall B \in F: A \cap B \neq \emptyset $. 
+
+
+ Now consider that $F \subset \mathcal{P}(A)$ as a poset, where the empty set is an initial object, but $S \in F$ implies $A - S \notin F$ due to the ultrafilter condition. But this just means that $f_F(\neg S) = \neg f_F(S)$. 
+ 
+ For the converse case, the forwards implication of the ultrafilter condition is given by the fact that $F$ is a sub meet-semilattice and $\emptyset \notin F$. 
+ 
+ 
+ 
+ 
+% Moreover, it suffices to prove the following claim: for all $B \in F$ it holds that  $B \cap A \neq \emptyset \iff B \cap A \in F$ for all $B \in F$, as this claim  implies the backwards condition of the ultrafilter lemma.
+% 
+% 
+% Consider that the previous lemma implies that $\emptyset \notin F$, from which "$\impliedby$" follows immediately.
+% 
+%\textcolor{blue}{TODO} show $B \cap A \neq \emptyset \implies B \cap A \in F$. 
+
+For the backwards implication, if we assume $a \in I$ then we have $a \land \neg a = \emptyset $, which is a contradiction to the fact that for all $ B \in F$ it holds that $ A \cap B \neq \emptyset$. Therefore $A \in F$. \end{proof}
+\end{document}
