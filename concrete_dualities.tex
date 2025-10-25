@@ -62,7 +62,9 @@
 \DeclareMathOperator{\CohLoc	}{CohLoc}
 \DeclareMathOperator{\CohTop}{CohTop}
 \DeclareMathOperator{\Stone}{Stone}
-
+\DeclareMathOperator{\pt}{pt}
+\DeclareMathOperator{\Idl}{Idl}
+\DeclareMathOperator{\Spec}{Spec}
 
 
 
@@ -696,6 +698,12 @@ If such lifts exist, then by construction, we will have the following adjunction
 To understand this adjunction and see that it does indeed correspond to the morphisms explained in the first section, we will go through several examples.
 
 \section{Examples}
+Our goal in the following will be to build intuition for the schizophrenic object through a careful analysis of examples. In particular, we are going to start with a subexample, if you will, of a more profound duality called the Stone duality, simply by elucidating its schizophrenic nature as it ties directly to the generality we have learned, so that we can get a sense for in what direct way we can lift hom sets.
+
+Consequently, in discussing the Stone duality we plan to give concrete descriptions of these Hom set functors, for which we had just given a more general description using universal properties and hom sets. Though we do lead with the general into the concrete, we may otherwise view our elucidation of the concrete as the generalization, since we must show the actual mechanics behind why we can think of these concrete objects as the hom sets.
+
+This will then lend itself to the intuition of the following examples, which we can in some sense think of extensions or special cases of the given dualities. 
+
 For the examples note that we may sometimes by abuse of notation and for lack of a better functorial description use $\HomA(-,\t A)$ to denote $T$, unless we denote otherwise.
 \section{Leading example}
 
@@ -796,9 +804,9 @@ In general, our schizophrenic object will not necessarily be initial in arbitrar
 (\textcolor{blue}{TODO}: introduce boolean algebras, as well as ideals, filters, ultrafilters, principle ultrafilters, maybe in the beginning? question for Georg) 
 
 
-The following section will take some development to get to the actual Stone duality, so we describe our strategy as follows: first we describe a non-natural dual adjunction between $\FinSet$ and $\Bool_{fin}$ which determines the triple of our sought after Stone duality, however for the wrong categories.
+The following section will take some development to get to the actual Stone duality, so we describe our strategy as follows: first we describe a non-natural dual adjunction between $\FinSet$ and $\Bool_{fin}$. This then determines a triple, and we ask ourselves if this triple is a schizophrenic object for some subdualities of $\Set$? of our sought after Stone duality, however for the wrong categories.
 
-Then we describe how to obtain the Stone duality via restriction and composition of other dualities, namely the dualities  $\Loc \rightleftarrows \Top$ and   $\DLat \rightleftarrows \CohTop$.
+Then we describe how to obtain the Stone duality via restriction and composition of some other dualities, namely the dualities  $\Loc \rightleftarrows \Top$ and   $\DLat \rightleftarrows \CohTop$.
 
 And finally we will show why the original triple is a schizophrenic object for the Stone duality.
 \subsection{Duality between finite boolean algebras and finite sets}
@@ -849,12 +857,29 @@ The proof is straightforward and boils down to an equivalence between properties
 
 Lattice homomorphisms are  order preserving, finite limit preserving, and finite colimit preserving. 
 
-Through the above map, we see that this corresponds to axioms of being a prime filter $F$, which are sub meet-semilattices (closed under finite meets), upwards closed, and the prime property: $\bot \notin F$ and $a \lor b \in F \implies a \in F $ or $b \in F$.
+Through the above map, we see that this corresponds to axioms of being a prime filter $F$, which are being a sub meet-semilattice (closed under finite meets), upwards closed, and having the property of being prime: $\bot \notin F$ and $a \lor b \in F \implies a \in F $ or $b \in F$.
 
 
-Frame homomorphisms additionally require preservation of arbitrary colimits, which simply upgrades the prime condition to completely prime, i.e. $\bigvee a_i \in F \implies \exists i \in I: a_i \in F$. However in our above setting of $A$ in $\Bool_{fin}$, this is no condition at all.
 
-Now if our setting is Boolean, then we have that prime filters correspond to ultrafilters, which additionally require $A \in F \iff \ \forall B \in F: B \cap A \neq \emptyset$. 
+Now if our setting is Boolean, then we have that prime filters correspond to ultrafilters, which, given the axioms of being a filter, willl additionally  require that $A \in F \iff \ \forall B \in F: B \cap A \neq \emptyset$. 
+
+The property that $F$ is prime is equivalent to $F$ being given above by $f^{-1}(1)$ for $f \in \DLat(A, \mathbb{2})$ which is further equivalent to the fact that its complement $I:= f^{-1}(0)$ is an ideal [Joh]. 
+
+So if $F$ is prime, then $\emptyset \notin F$ gives the forwards direction of the ultrafilter condition and for the other direction supposing $A \in I$, then $\neg A \in F $, but  $A \cap \neg A = \emptyset$ contradicting our assumption implying $A \in F$.
+
+Conversely if $F$ is an ultrafilter, then it cannot contain the complement of any of its elements, which is just $\neg f(A) = f(\neg A)$.
+
+%The ultrafilter condition implies that a filter cannot contain the complement of any of its elements, which is just $\neg f(A) = f(\neg A)$. And conversely to separate complements out of the filter via a lattice homomorphism gives the ultrafilter condition, since finite limit preservation and complementation implies $\emptyset \notin F := f^{-1}(1)$ for one direction, and for the other direction supposing $A \in I: = f^{-1}(0)$ then $\neg A \in F $, but  $A \cap \neg A = \emptyset$ contradicting our assumption implying $A \in F$. 
+
+
+\emph{Note that frame homomorphisms additionally require preservation of arbitrary colimits, which simply upgrades the prime condition to completely prime, i.e. $\bigvee a_i \in F \implies \exists i \in I: a_i \in F$. However in our above setting of $A$ in $\Bool_{fin}$, this is no condition at all.
+}
+
+Ultimately, what a point map  $F \stackrel{f}{\rightleftarrows} \mathbb{2}$ in $\DLat$ represents is the question of which subsets of our lattice are compatible with our desired structure restrictions. 
+
+As we have just seen, that means if our lattice is a frame, the points correspond to completely prime filters on $F$, and if it is a boolean algebra, they correspond to ultrafilters. 
+
+Note that the unit and counit maps then follow the exact same logic as the leading example, and in particular, $\mathbb{2}$ is also initial in $\Bool$ so that by the same logic, our $\tau$ is equal to the set identity $1_{\mathbb{2}}$. 
 
  %\begin{lemma}
 %	Let $I \subset P$ be an ideal of a lattice $P$. Then the following are equivalent 
@@ -951,11 +976,115 @@ Now if our setting is Boolean, then we have that prime filters correspond to ult
 %For the backwards implication, if we assume $a \in I$ then we have $a \land \neg a = \emptyset $, which is a contradiction to the fact that for all $ B \in F$ it holds that $ A \cap B \neq \emptyset$. Therefore $A \in F$. \end{proof}
 
 
-The unit and counit maps then follow the exact same logic as the leading example, and in particular, $\mathbb{2}$ is also initial in $\Bool$ so that by the same logic, our $\tau$ is equal to the set identity $1_{\mathbb{2}}$. 
 
-\textbf{Put this in the right place}:
+\subsection{The subdualities $\Frm \rightleftarrows \Top$ and $\DLat \rightleftarrows \CohLoc$ }
+In the following we will want to give a general overview of how we obtain the Stone duality in the first place.
 
-The notion of a point map of a lattice homomorphism $F \stackrel{f}{\rightleftarrows} \mathbb{2}$ is asking ourselves which subsets of our lattice is compatible with our desired structure restrictions. Since taking preimages of $f$ must split our lattice $F$ into two parts, thus effectively, 
+Before we define it we first focus on the following adjunction
+
+\[\begin{tikzcd}
+	\Loc & \bot & \Top
+	\arrow["{\pt(-)}", bend left, from=1-1, to=1-3]
+	\arrow["{\Omega(-)}", bend left, from=1-3, to=1-1]
+\end{tikzcd}\]
+ 
+ which is  the adjunction in our leading example. This is indeed given by $\pt(A) = \Frm(A, \mathbb{2})$, and $\Top(X, \mathbb{S}) = \Omega(X)$ which is the frame of opens on $X$, since a continuous map into the Sierpinski space is  uniquely determined by the preimage of $\{1\} \subset \mathbb{S}$, which corresponds to a unique open set of $X$. 
+ 
+ Indeed, we may define the category of \emph{\textbf{spatial locales}} and of \emph{\textbf{sober spaces}} respectively to be the largest subcategories of $\Loc = \Frm^{\op}$ and $\Top$, such that the adjunction is an equivalence. So now we have 
+ 
+ \[\begin{tikzcd}
+	\Spat & \stackrel{\cong}{\bot} & \Sob
+	\arrow["{\pt(-)}", bend left, from=1-1, to=1-3]
+	\arrow["{\Omega(-)}", bend left, from=1-3, to=1-1]
+\end{tikzcd}\]
+
+Note that this further restricts to the duality $\CohLoc	\rightleftarrows \CohTop$, which we will define using the following two definitions:
+
+Let $A$ be a locale. Then 
+
+\begin{definition}
+	We call an element $a \in A$ \textbf{finite}, if for all $S \subset A$ such that $\bigvee S \geq a$ there exists a finite $F \subset S$ such that $\bigvee F \geq a$. 
+\end{definition}
+
+This definition equivalent to the following two statements [Joh]:
+\begin{enumerate}
+	\item For all directed $S \subset A$ such that $\bigvee S \geq a$ there exists $s \in S$ such that $s \geq a$.
+	\item For all ideals $I \subset A$ such that $\bigvee I \geq a$ it holds that $a \in I$. 
+\end{enumerate}
+
+\begin{definition}
+	We call $A$ \textbf{coherent} if the following conditions hold: \begin{enumerate}
+		\item Every element $a \in A$ can be given as a join of finite elements
+		\item The finite elements $K(A)$ make up a sublattice of A. 
+	\end{enumerate}
+
+\end{definition}
+
+Since $K(A)$ is a sub join-semilattice of $A$ [Joh], the second condition is equivalent to $1 \in K(A)$ and $K(A)$ is closed under finite intersections.
+
+Now it is a property of the above equivalence that any sober topological space $X$ can be given as $X = \pt(\Omega(X))$ which motivates the definition of a coherent locale as a generalization of the idea that the compact open subsets, or $K(\Omega(A))$ are closed under finite intersection and generate the topology of $X$. 
+
+So a \emph{\textbf{coherent space}} is a sober space which satisfies the above condition, and we see easily 
+
+ \[\begin{tikzcd}
+	\CohLoc & \stackrel{\cong}{\bot} & \CohTop
+	\arrow["{\pt(-)}", bend left, from=1-1, to=1-3]
+	\arrow["{\Omega(-)}", bend left, from=1-3, to=1-1]
+\end{tikzcd}\]
+
+
+
+Now we aren't done yet. Consider the fact that a locale is coherent if and only if it is isomorphic to the locale of ideals of a distributive lattice. This gives us a functor $\Idl(-): \DLat \to \CohLoc$ (\textcolor{red}{TODO}: check that this is a functor).
+
+Now we can view $K(-)$ as a functor in the following way: given $A, B \in \CohLoc$ not every frame homomorphism $A \to B$ arises as a unique extension of the lattice homomorphism $K(A) \to K(B)$. So we may define a locale map $B \stackrel{f}{\to} A$ between coherent locales to be  \emph{\textbf{coherent}} if $f^*$ maps $K(A)$ to $K(B)$.
+
+This shows us that we have a duality 
+
+\[\begin{tikzcd}
+	\DLat & \bot & \CohLoc
+	\arrow["{\Idl(-)}", bend left, from=1-1, to=1-3]
+	\arrow["{K(-)}", bend left, from=1-3, to=1-1]
+\end{tikzcd}\](\textcolor{blue}{BIGTODO} make this make sense)
+
+Now we can compose these dualities to get $\DLat \rightleftarrows \CohLoc \rightleftarrows \CohTop$. But since the above duality is not necessarily a natural dual adjucntion, we may want to restrict even further.
+
+Now we notice that this duality sends a distributive lattice $A$ to what we call its \emph{\textbf{spectrum}}, in other words, $\Spec(A) := \pt(\Idl(A))$. On the other side we shall send a coherent space $X$ to its lattice of compact open subsets $K(\Omega(X))$. 
+
+Seeing that $\Spec(A)$ is Hausdorff if and only if $A$ is a boolean algebra [Joh], we shall see that we can restrict this equivalence to a duality between $\Bool$ and the category of coherent, Hausdorff spaces which are called \emph{\textbf{Stone spaces}}. Note that Stone spaces are compact and totally disconnected [Joh] making them a subcategory of $\kHaus$. 
+
+Note that if $X$ is Hausdorff, then $K(\Omega(X)) = \clop(X)$, since compact sets are exactly the closed sets of a  Hausdorff space.
+
+\subsection{Schizophrenic object of the Stone duality}
+As we have seen, we have the following adjunction
+
+\[\begin{tikzcd}
+	\Bool & \bot & \Stone
+	\arrow["{\Spec(-)}", bend left, from=1-1, to=1-3]
+	\arrow["{\clop(-)}", bend left, from=1-3, to=1-1]
+\end{tikzcd}\]
+
+Now remember our triple $(\mathbb{2}, 1_{\mathbb{2}}, \mathbb{2})$. The question is then twofold: \begin{enumerate}
+ 	\item Does this adjunction make sense?
+ 	\begin{enumerate}
+ 	\item Can we give the spectrum as a lift of the set of points of a boolean algebra, i.e. $[\Spec(A)] = \Bool(A, \mathbb{2})$?
+ 	\item  Can we give the boolean algebra of clopens of a stone space as a lift of the set of continuous maps over compact Hausdorff spaces, i.e., does $[\clop(X)] = \Stone(A, \mathbb{2})$?
+ 	\end{enumerate}
+ 	\item Are these lifts initial?
+
+
+ \end{enumerate}
+
+The answer to the first question we already gave in the leading example, as the set of points of a Boolean algebra. Remember at the outset we actually defined the adjunction by the identification of ultrafilters of a finite set $X$ with points of a finite boolean algebra, and points of any lattice are its prime ideals.
+
+But we can see in the background we actually send a boolean algebra to its frame of ideals, and consider the points of that frame, which correspond to completely prime filters. However, since were in  the opposite category, we consider that the completely prime ideals $I$ of $\Idl(A)$ correspond to prime ideals $P$ of $A$ by the bijective assignments $P \mapsto \{I \in \Idl(A) \lvert I \cap P \neq \emptyset\}$ and $F \mapsto \{a \in A \lvert \downarrow (b) \in F \}$ [Joh] so that the prime ideals of $A$ correspond to the spectrum.
+
+In a word, the points of the locale of ideals of $A$, or the \emph{spectrum} of $A$, are precisely its set of prime ideals.  
+
+But the second map we also have, given by the composed duality $\CohLoc \rightleftarrows \CohTop$, since we have already identified the initial lift of function space into the Sierpinski space to the category frames, so we need only compose it. 
+
+Consider that morphisms in $\Stone$ are not merely continuous maps between $\Stone$ spaces, but the maps must also be coherent, i.e., they must preserve compact opens. In a stone space, compact opens are precisely clopens, so $\Stone$ morphisms are precisely the continuous morphisms between stone spaces, whose preimage preserves clopen subsets. But Stone space morphisms are given by precisely where they send the subspace $\{1\} \subset \mathbb{S}$ to which are precisely the clopen sets of $X$. 
+
+
 
 \section{Rings and Affine schemes}
 
