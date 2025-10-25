@@ -1076,13 +1076,25 @@ Now remember our triple $(\mathbb{2}, 1_{\mathbb{2}}, \mathbb{2})$. The question
 
 The answer to the first question we already gave in the leading example, as the set of points of a Boolean algebra. Remember at the outset we actually defined the adjunction by the identification of ultrafilters of a finite set $X$ with points of a finite boolean algebra, and points of any lattice are its prime ideals.
 
-But we can see in the background we actually send a boolean algebra to its frame of ideals, and consider the points of that frame, which correspond to completely prime filters. However, since were in  the opposite category, we consider that the completely prime ideals $I$ of $\Idl(A)$ correspond to prime ideals $P$ of $A$ by the bijective assignments $P \mapsto \{I \in \Idl(A) \lvert I \cap P \neq \emptyset\}$ and $F \mapsto \{a \in A \lvert \downarrow (b) \in F \}$ [Joh] so that the prime ideals of $A$ correspond to the spectrum.
+But we can see in the background we actually send a boolean algebra $A$ to its frame of ideals $\Idl(A)$, and consider the points of that frame, which correspond to completely prime filters of $\Idl(A)$. However the complement of a prime filter is an ideal $I$ of $\Idl(A)$, and in particular it is completely prime. These correspond to prime ideals $P$ of $A$ by the bijective assignments $P \mapsto \{I \in \Idl(A) \lvert I \cap P \neq \emptyset\}$ and $F \mapsto \{a \in A \lvert \downarrow (b) \in F \}$ [Joh] so that the prime ideals of $A$ correspond to the spectrum.
 
 In a word, the points of the locale of ideals of $A$, or the \emph{spectrum} of $A$, are precisely its set of prime ideals.  
 
-But the second map we also have, given by the composed duality $\CohLoc \rightleftarrows \CohTop$, since we have already identified the initial lift of function space into the Sierpinski space to the category frames, so we need only compose it. 
+For the second map, consider that we also have the initial lift of the adjunction $\Top \stackrel{\Top(-,\mathbb{S})}{\rightleftarrows} \Frm$.
 
-Consider that morphisms in $\Stone$ are not merely continuous maps between $\Stone$ spaces, but the maps must also be coherent, i.e., they must preserve compact opens. In a stone space, compact opens are precisely clopens, so $\Stone$ morphisms are precisely the continuous morphisms between stone spaces, whose preimage preserves clopen subsets. But Stone space morphisms are given by precisely where they send the subspace $\{1\} \subset \mathbb{S}$ to which are precisely the clopen sets of $X$. 
+Remember that each restriction is simply the free generator or left adjoint of the forgetful functor, whose underlying functors into subcategories of $\Top$ compose with the underlying functor into $\Top$.
+
+ Since coherentifying a topology on $X$ doesn't do anything to the Sierpinski space (all elements in $\mathbb{S}$ are compact open, and taking unions of finite intersections of $\mathbb{S}$ gives us back $\mathbb{S}$), we first notice that after composing, we have a functor $\CohTop \rightleftarrows \DLat$ that lifts $\CohTop(X, \mathbb{S})$ to $\DLat$, since coherent maps are precisely those which preserve compact opens, then $K(\CohTop(X, \mathbb{S})$ is exactly the conpact open subsets of $X$, or the distributive lattice of compact opens of $X$. 
+ 
+ We will want to focus on the restriction $\CohTop \stackrel{\Stone(-)}{\rightleftarrows} \Stone$, which is called the stone space reflection, or stoneification, which on $\DLat$ side restricts to $\Bool$ by the corresponding boolean algebra reflection functor.
+ 
+ To understand the Stoneification, we may first want to booleanify the lattice of compact open subsets of a space $X$, which we will call $A$. Let $A^*$ be the set of complements in $\mathcal{P}(X)$ of memebers of $A$. Then the patch topology, which has as a base $C = \{U \cap V \lvert U \in A, V \in A^*\}$ , will be a Stone space (notice that we are taking the boolean completion $B$ of $A$ and then taking its spectrum) [Joh].
+ 
+ We must be careful here, because now the boolean completion of $\mathbb{S}$ in $\mathbb{P}(\{0,1\})$ is simply $\mathbb{2}_s$ or the two point discrete space, since by booleanifying we must generate the complement of $\{1\}$.
+ 
+ This shows us that the right adjoint of the stone duality is given as an initial lift of $\Stone(-, \mathbb{2}_s)$. 
+
+Consider that morphisms in $\Stone$ into $\mathbb{2}_s$ are uniquely determined by the clopen subsets of a stone space $X$, since  (\textcolor{red}{TODO}: finish this part)
 
 
 
