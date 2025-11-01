@@ -57,14 +57,19 @@
 \DeclareMathOperator{\prim}{prime}
 \DeclareMathOperator{\Spat}{SpatLoc}
 \DeclareMathOperator{\Sob}{SobTop}
+\DeclareMathOperator{\Spatt}{Spat}
+\DeclareMathOperator{\Sobb}{Sob}
 \DeclareMathOperator{\DLat}{DLat}
 \DeclareMathOperator{\Loc}{Loc}
+\DeclareMathOperator{\Coh}{Coh}
 \DeclareMathOperator{\CohLoc	}{CohLoc}
 \DeclareMathOperator{\CohTop}{CohTop}
 \DeclareMathOperator{\Stone}{Stone}
 \DeclareMathOperator{\pt}{pt}
 \DeclareMathOperator{\Idl}{Idl}
 \DeclareMathOperator{\Spec}{Spec}
+\DeclareMathOperator{\Ind}{Ind}
+\DeclareMathOperator{\Pro}{Pro}
 
 
 
@@ -1096,8 +1101,75 @@ Remember that each restriction is simply the free generator or left adjoint of t
 
 Consider that morphisms in $\Stone$ into $\mathbb{2}_s$ are uniquely determined by the clopen subsets of a stone space $X$, since  (\textcolor{red}{TODO}: finish this part)
 
+%\[\begin{tikzcd}
+%	&& \Loc & \bot & \Top \\
+%	&& \vdash && \vdash \\
+%	&& \Spat & {\stackrel{\cong}{\bot}} & \Sob \\
+%	&& \vdash && \vdash \\
+%	\DLat & \bot & \CohLoc & \bot & \CohTop \\
+%	\vdash &&&& \vdash \\
+%	\Bool && \bot && \Stone
+%	\arrow["{\pt(-)}", bend left, from=1-3, to=1-5]
+%	\arrow["{\Spatt(-)}", bend left, from=1-3, to=3-3]
+%	\arrow["{\Omega(-)}", bend left, from=1-5, to=1-3]
+%	\arrow["{\Sobb(-)}", bend left, from=1-5, to=3-5]
+%	\arrow[hook', bend left, from=3-3, to=1-3]
+%	\arrow["{\pt(-)}", bend left, from=3-3, to=3-5]
+%	\arrow["{\Coh(-)}", bend left, from=3-3, to=5-3]
+%	\arrow[hook', bend left, from=3-5, to=1-5]
+%	\arrow["\Omega(-)", bend left, from=3-5, to=3-3]
+%	\arrow["{\Coh(-)}", bend left, from=3-5, to=5-5]
+%	\arrow["{\Idl(-)}", bend left, from=5-1, to=5-3]
+%	\arrow["{\Bool(-)}", bend left, from=5-1, to=7-1]
+%	\arrow[hook', bend left, from=5-3, to=3-3]
+%	\arrow["{K(-)}", bend left, from=5-3, to=5-1]
+%	\arrow["{\pt(-)}", bend left, from=5-3, to=5-5]
+%	\arrow[hook', bend left, from=5-5, to=3-5]
+%	\arrow["{\Omega(-)}", bend left, from=5-5, to=5-3]
+%	\arrow["{\Stone(-)}", bend left, from=5-5, to=7-5]
+%	\arrow[hook', bend left, from=7-1, to=5-1]
+%	\arrow["{\Spec(-)}", bend left, from=7-1, to=7-5]
+%	\arrow[hook', bend left, from=7-5, to=5-5]
+%	\arrow["{\clop(-)}", bend left, from=7-5, to=7-1]
+%\end{tikzcd}\]
 
+\[\begin{tikzcd}
+	\Top & \bot & \Loc \\
+	\vdash && \vdash \\
+	\Sob & {\stackrel{\cong}{\bot}} & \Spat \\
+	\vdash && \vdash \\
+	\CohTop & \bot & \CohLoc & \bot & \DLat \\
+	\vdash &&&& \vdash \\
+	\Stone && {\stackrel{\cong}{\bot}} && \Bool
+	\arrow["{\Omega(-)}", bend left, from=1-1, to=1-3]
+	\arrow["{\Sobb(-)}", bend left, from=1-1, to=3-1]
+	\arrow["{\pt(-)}", bend left, from=1-3, to=1-1]
+	\arrow["{\Spatt(-)}", bend left, from=1-3, to=3-3]
+	\arrow[hook', bend left, from=3-1, to=1-1]
+	\arrow["\Omega(-)", bend left, from=3-1, to=3-3]
+	\arrow["{\Coh(-)}", bend left, from=3-1, to=5-1]
+	\arrow[hook', bend left, from=3-3, to=1-3]
+	\arrow["{\pt(-)}", bend left, from=3-3, to=3-1]
+	\arrow["{\Coh(-)}", bend left, from=3-3, to=5-3]
+	\arrow[hook', bend left, from=5-1, to=3-1]
+	\arrow["{\Omega(-)}", bend left, from=5-1, to=5-3]
+	\arrow["{\Stone(-)}", bend left, from=5-1, to=7-1]
+	\arrow[hook', bend left, from=5-3, to=3-3]
+	\arrow["{\pt(-)}", bend left, from=5-3, to=5-1]
+	\arrow["{K(-)}", bend left, from=5-3, to=5-5]
+	\arrow["{\Idl(-)}", bend left, from=5-5, to=5-3]
+	\arrow["{\Bool(-)}", bend left, from=5-5, to=7-5]
+	\arrow[hook', bend left, from=7-1, to=5-1]
+	\arrow["{\clop(-)}", bend left, from=7-1, to=7-5]
+	\arrow[hook', bend left, from=7-5, to=5-5]
+	\arrow["{\Spec(-)}", bend left, from=7-5, to=7-1]
+\end{tikzcd}\]
 
+As a side remark, another reason our original equivalence of categories $\FinSet^{\op} \cong \Bool_{fin}$ might be interesting to us now is that by considering the $\Ind$ and $\Pro$ categories, we get the following equivalence:
+\begin{align*}
+	\Bool \cong \Ind(\Bool_{fin}) \cong \Ind(\FinSet^{\op}) \cong  \Pro(\FinSet)^{\op}
+\end{align*}
+which means we can identify $\Stone$ spaces with profinite sets.
 \section{Rings and Affine schemes}
 
 We now turn to an example that any graduate Algebra student has encountered, the duality between the category of rings and the category of affine schemes. We will use the more general category of commutative $R$-algebras, which we denote $\CAlg$. Notice that if $R = \mathbb{Z}$, then $\CAlgZ = \Ring$. 
