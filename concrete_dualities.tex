@@ -820,18 +820,31 @@ In general, our schizophrenic object will not necessarily be initial in arbitrar
 
 (\textcolor{blue}{TODO}: introduce boolean algebras, as well as ideals, filters, ultrafilters, principle ultrafilters, maybe in the beginning? question for Georg) 
 
-Before we begin we would like to call attention to the fact that the Stone duality is wrought with interesting subdualities, which are themselves examples. It is not explicit yet what we mean by subduality, since here we are using it in a more broad sense, however in this section we will make that explicit. Though describing these subdualities may feel like a diversion, we find they actually elucidate the structure of the Stone duality as well as provide us with intuition for the following examples, so we plan to describe them.
+Before we begin we would like to call attention to the fact that the Stone duality is wrought with interesting subdualities, some of which are themselves examples. It is not explicit yet what we mean by subduality, since here we are using it in a more broad sense, however in this section we will make that explicit. Though describing these subdualities may feel like a diversion, we find they actually elucidate the structure of the Stone duality as well as provide us with intuition for the following examples, so we plan to describe them.
 
-Our strategy is as follows: first we describe a the natural dual adjunction between $\FinSet$ and $\Bool_{fin}$, which we will later see, can be obtained by restricting the Stone duality to full subcategories. However that is not how we will be constructing Stone. 
+Our strategy is as follows: first we describe a the natural dual adjunction between $\FinSet$ and $\Bool_{fin}$, which we will later see, can be obtained by restricting the Stone duality to full subcategories. However that is not how we will be constructing the Stone duality. 
 
 We start with this example because it is easier to understand and provides some groundwork for the following dualities.
 
-On the other hand, we will actually obtain the Stone duality via restriction and composition of some different dualities, namely the dualities  $\Top \rightleftarrows \Loc$, which we just saw, and  $\CohLoc \rightleftarrows \DLat$, between the category of coherent locales and coherent maps between them, which we will later define, and the category of distributive lattices with lattice morphisms.\footnote{Some authors choose to differentiate between $\DLat$ and $\DLat_{\text{bdd}}$, but we will go by the convention of [Joh] who chooses to define semi-lattices to include the bottom and top elements, respectively.}
+On the other hand, we will actually obtain the Stone duality via restriction and composition of some different dualities, namely the dualities  $\Top \rightleftarrows \Loc$, which we just saw, and  $\CohLoc^{\op}\rightleftarrows \DLat$, between the category of coherent locales and coherent maps between them, which we will later define, and the category of distributive lattices with lattice morphisms.\footnote{Some authors choose to differentiate between $\DLat$ and $\DLat_{\text{bdd}}$, but we will go by the convention of [Joh] who chooses to define semi-lattices to include the bottom and top elements, respectively.}
 
 And finally we will show why the finite duality is a restriction of the Stone duality.
 
 \subsection{Duality between finite boolean algebras and finite sets}
-The leading example is modeled from a more general duality, called the Stone duality. Before we speak about the Stone duality let us discuss a more general situation.
+
+Before we speak about the Stone duality we plan to discuss one of its subdualities. However we should be clear what we mean by subduality.
+
+\
+
+\begin{definition}[subduality]
+	Let $\mathcal{A}$ and $\mathcal{B}$ be two categories for which there exists an duality, i.e., an adjunction $\mathcal{A}^{\op} \rightleftarrows \mathcal{B}$, given by left and right adjoint functors $T: \mathcal{A}^{\op} \to \mathcal{B}$ and $S: \mathcal{B} \to \mathcal{A}^{\op}$, respectively.
+	
+	If $\mathcal{A}' \subset \mathcal{A}$ and $\mathcal{B}' \subset \mathcal{B}$ are subcategories on which $S$ and $T$ restrict to a duality, we call $\mathcal{A}'^{\op} \rightleftarrows \mathcal{B}'$ given by  $T \lvert_{\mathcal{A}'}: \mathcal{A}^{\op} \to \mathcal{B}$ and $S\lvert_{\mathcal{B}'}: \mathcal{B}' \to \mathcal{A}'^{\op}$ a \emph{\textbf{subduality}} of $\mathcal{A}^{\op} \rightleftarrows \mathcal{B}$. 
+\end{definition} 
+Note that however in the following section we will use the term subduality more loosely to also refer to dualities for which the duality in question is a subduality (one might define it analogously as superduality), or dualities which arise by restriction/extension and composition/decomposition.
+
+ That is to say, we will refer to every horizontal duality of the big diagram at the end of this section loosely as a subduality of the Stone duality, even though the Stone duality is at the bottom.
+
 
 Consider the category $\Bool$ of Boolean algebras and boolean algebra homomorphisms between them. We claim there is an adjunction between $\Bool_{fin}$ and $\FinSet$ given by $\Ult(B)$, which sends a boolean algebra $B$ to the set $\Ult(B)$ of ultrafilters on $B$, and by $\mathcal{P}(X)$, which sends a set $X$ to its power-set.
 
@@ -841,7 +854,7 @@ Consider the category $\Bool$ of Boolean algebras and boolean algebra homomorphi
 	\arrow["{\Ult(-)}", shift left=3, bend left, from=1-3, to=1-1]
 \end{tikzcd}\]
 
-Notice that $\mathcal{P}(X)$ is a boolean algebra, since every subset $S$ has a well-defined complement $X - S$. 
+Notice that $\mathcal{P}(X)$ is a boolean algebra, since it has distributive lattice structure and  every subset $S$ has a well-defined complement $X - S$. 
 
 
 It is also the case that $\Ult(-)$ is  fully faithful as long as $A$ is a finite boolean algebra, since ultrafilters on those are principle, meaning that they are generated by a single element, an element which we can then identify with the points of $X$ in a faithful way. And so the unit $\Ult(\mathcal{P}(X)) \to X$ of the adjunction is an isomorphism.
@@ -1029,7 +1042,7 @@ This definition is equivalent to the following two statements [Joh]:
 	\item For all directed $S \subset B$ such that $\bigvee S \geq b$ there exists $s \in S$ such that $s \geq b$.
 	\item For all ideals $I \subset B$ such that $\bigvee I \geq b$ it holds that $b \in I$. 
 \end{enumerate}
-Notice that if $B$ is spatial, which implies the existence of a topological space $X = \pt(B)$ such that $B = \Omega(X)$, then the finite elements are precisely the compact subsets of $X$. 
+Notice that if $B$ is spatial, which implies the existence of a topological space $X = \pt(B)$ such that $B = \Omega(X)$, then the finite elements are precisely the compact open subsets of $X$. 
 \begin{definition}
 	We call $B$ \textbf{coherent} if the following conditions hold: \begin{enumerate}
 		\item Every element $b \in B$ can be given as a join of finite elements
@@ -1038,7 +1051,7 @@ Notice that if $B$ is spatial, which implies the existence of a topological spac
 
 \end{definition}
 
-Since $K(B)$ is a sub join-semilattice of $B$ [Joh], the second condition is equivalent to $1 \in K(B)$ and $K(B)$ is closed under finite intersections.
+Since $K(B)$ is a sub join-semilattice of $B$ (closed under finite joins) [Joh], the second condition is equivalent to $1 \in K(B)$ and $K(B)$ is closed under finite meets.
 
 If $B$ is spatial, this means that $K(B)$ forms a basis for the topology on $X$. In fact this is an equivalence: coherent locales are spatial [Joh].
 
@@ -1050,12 +1063,22 @@ Given $A, B \in \CohLoc$, we know that any lattice homomorphism $K(A) \to K(B)$ 
 
 In other words, the preimage of compact subsets under continuous maps is not necessarily  compact.
 
-So we may define a locale map $B \stackrel{f}{\to} A$ between coherent locales to be  \emph{\textbf{coherent}} if $f^*$ maps $K(A)$ to $K(B)$.
+So we may define a locale map $B \stackrel{f}{\to} A$ between coherent locales to be  \emph{\textbf{coherent}} if $f^*$ maps $K(A)$ to $K(B)$. Similarly a  continuous map $B \stackrel{f}{\to} A$ is coherent if $f^{-1}(K\Omega(A)) \subset  K\Omega (B)$.
 
 Unlike the other examples, that means the restriction of $\Spat$ to $\CohLoc$ is not full.
 
+In particular, we should be careful regarding how this affects how we interpret the schizophrenic object of this adjunction. 
 
-However, we have shown that we do get a dual equivalence
+The preimage of coherent topological maps must preserve compact opens, and $\{1\}$ is a compact open set in $\mathbb{S}$, so that $\CohTop(X, \mathbb{S}) = K \Omega(X)$. 
+
+Strictly speaking, this adjunction does not have a schizophrenic object, since we cannot obtain the opens by lifting hom-sets anymore, and we choose not to restrict the image of the adjunction. However we may loosely  interpret the adjunction as having a schizophrenic object in that it is a subdual equivalence of a duality with a schizophrenic object, namely, of  $\Top \rightleftarrows \Loc$.
+
+%This means we have to at the very least redefine $\pt(-)$ to be a lift of $ \CohLoc(-,\mathbb{2})$ (\textcolor{red}{TODO}: unless $\Frm(B,\mathbb{2})=\CohLoc^{\op}(B, \mathbb{2})$?)
+%Thus we want to check that our functor $\pt(-)$ is unperturbed, or in other words, that $\Frm(B, \mathbb{2})=\CohLoc(B, \mathbb{2})$ if $B$ is a coherent locale.
+%
+%Or that $\Frm(B, \mathbb{2})$ restricted to the subset $\CohLoc(B, \mathbb{2})$ commutes with taking the
+
+That is to say, we have a dual equivalence
 
  \[\begin{tikzcd}
 	\CohTop & \stackrel{\cong}{\bot} & \CohLoc
@@ -1076,23 +1099,23 @@ This shows us that we have a duality (\textcolor{red}{TODO}: show that this is a
 	\arrow["{K(-)}", bend left, from=1-1, to=1-3]
 	\arrow["{\Idl(-)}", bend left, from=1-3, to=1-1]
 \end{tikzcd}\]
-
-In particular, this is also a natural dual adjunction. Notice
-Now since we want to compose these dualities $\CohTop^{\op} \rightleftarrows \CohLoc^{\op} \rightleftarrows \DLat$, a natural candidate for schizophrenic object might be $\Omega(\mathbb{S}) = \bot - b - \top$, which we shall call $ \mathbb{S}_{\Lat}$, whose elements are all finite, so that  $K(\Omega(\mathbb{S}))$ leaves $ \Omega(\mathbb{S})$ unchanged.
-
-We see now that $K(X) = \CohLoc(X, \mathbb{S}_{\Lat})$, as coherent frame homomorphisms are precisely the ones which preserve compact opens, which are uniquely given by the preimage of $\{1\}$. 
-
-Moreover,  $\Idl(B) = \DLat(B, \mathbb{S}_{\Lat}), $ 
-
-
-But we aren't done yet, we will now want to restrict the composition.
-
+%
+%In particular, this is also a natural dual adjunction. 
+Now  we want to compose these dualities $\CohTop^{\op} \rightleftarrows \CohLoc^{\op} \rightleftarrows \DLat$. 
+%, a natural candidate for schizophrenic object might be $\Omega(\mathbb{S}) = \bot - b - \top$, which we shall call $ \mathbb{S}_{\Lat}$, whose elements are all finite, so that  $K(\Omega(\mathbb{S}))$ leaves $ \Omega(\mathbb{S})$ unchanged.
+%
+%We see now that $K(X) = \CohLoc(X, \mathbb{S}_{\Lat})$, as coherent frame homomorphisms are precisely the ones which preserve compact opens, which are uniquely given by the preimage of $\{1\}$. 
+%
+%Moreover,  $\Idl(B) = \DLat(B, \mathbb{S}_{\Lat}), $ 
+%
 
 This duality sends a distributive lattice $A$ to what we call its \emph{\textbf{spectrum}}, in other words, $\Spec(A) := \pt(\Idl(A))$. On the other side we shall send a coherent space $X$ to its lattice of compact open subsets $K(\Omega(X))$. 
 
-Seeing that $\Spec(A)$ is Hausdorff if and only if $A$ is a boolean algebra [Joh], we shall see that we can restrict this equivalence to a duality between $\Bool$ and the category of coherent, Hausdorff spaces which are called \emph{\textbf{Stone spaces}}. Note that Stone spaces are compact and totally disconnected [Joh] making them a subcategory of $\kHaus$. 
+But we aren't done yet, as we will then want to restrict the composition.
 
-Note that if $X$ is Hausdorff, then $K(\Omega(X)) = \clop(X)$, since compact sets are exactly the closed sets of a  Hausdorff space.
+Seeing that $\Spec(A)$ is Hausdorff if and only if $A$ is a boolean algebra [Joh], we shall see that we can restrict this equivalence to a duality between $\Bool$ and the category of coherent, Hausdorff spaces which are called \emph{\textbf{Stone spaces}}. 
+
+Note that Stone spaces are compact and totally disconnected [Joh] making them a subcategory of $\kHaus$. Moreover, if $X$ is Hausdorff, then $K(\Omega(X)) = \clop(X)$, since compact sets are exactly the closed sets of a  compact Hausdorff space.
 
 \subsection{Schizophrenic object of the Stone duality}
 As we have seen, we have the following adjunction
@@ -1104,7 +1127,7 @@ As we have seen, we have the following adjunction
 \end{tikzcd}\]
 
 Now remember our schizophrenic object $(\mathbb{2}, 1_{\mathbb{2}}, \mathbb{2})$. The question is then twofold: \begin{enumerate}
- 	\item Does this adjunction make sense?
+ 	\item Do the hom-sets lift?
  	\begin{enumerate}
  	\item Can we give the spectrum as a lift of the set of points of a boolean algebra, i.e. $[\Spec(B)] = \Bool(B, \mathbb{2})$?
  	\item  Can we give the boolean algebra of clopens of a stone space as a lift of the set of continuous maps over compact Hausdorff spaces, i.e., does $[\clop(X)] = \Stone(X, \mathbb{2})$?
@@ -1114,29 +1137,49 @@ Now remember our schizophrenic object $(\mathbb{2}, 1_{\mathbb{2}}, \mathbb{2})$
 
  \end{enumerate}
 
-The answer to the first question we already gave in the leading example, as the set of points of a Boolean algebra. Remember at the outset we actually defined the adjunction by the identification of ultrafilters of a finite set $X$ with points of a finite boolean algebra, and points of any lattice can be identified with its prime ideals.
+In order to answer these questions, we will first show that the composite subduality $\CohTop \rightleftarrows \DLat$ has a schizophrenic object, and then see what happens when we restrict to the Stone duality.
 
-But we can see in the background we actually send a boolean algebra $B$ to its frame of ideals $\Idl(B)$, and consider the points of that frame, which correspond to completely prime filters of $\Idl(B)$. These correspond to prime filters $P$ of $B$ by the bijective assignments $P \mapsto \{I \in \Idl(B) \lvert I \cap P \neq \emptyset\}$ and $F \mapsto \{b \in B \lvert \downarrow (b) \in F \}$ [Joh] so that the prime ideals of $B$ correspond to the spectrum.
+First we look to the leading example and remember our points functor. Remember at the outset when we identified ultrafilters of a finite set $X$ with points of a finite boolean algebra, we showed that points of any lattice can be identified with its prime filters.
 
-In a word, the points of the locale of ideals of $A$, or the \emph{spectrum} of $A$, are precisely its set of prime ideals.  
+But in the background of that example we actually sent a boolean algebra $B$ to its frame of ideals $\Idl(B)$, and then considered the points of that frame, which correspond to completely prime filters of $\Idl(B)$. These correspond to prime filters $P$ of $B$ by the bijective assignments $P \mapsto \{I \in \Idl(B) \lvert I \cap P \neq \emptyset\}$ and $F \mapsto \{b \in B \lvert \downarrow (b) \in F \}$ [Joh] so that the prime filters of $B$ correspond to the spectrum. There was nothing about this argumentation that required $B$ to be boolean, as it works for any distributive lattice.
 
-Now such a lift is initial by the same argumentation as in the leading example: we simply take the initial topology such that all evaluation maps $\Bool(B, \mathbb{2}) \to \mathbb{2}$ are continuous, which have as a subbasis  $\{\ \{p \in \Bool(B,\mathbb{2}) \lvert p(b) = 1\}\  \lvert \ b \in B \ \}$.
+In a word, the points of the locale of ideals of $A$, or the \emph{spectrum} of $A$, are precisely its set of prime ideals, given by the lift of the functor $\DLat(-, \mathbb{2})$. 
+
+Such a lift is initial by the same argumentation as in the leading example: we simply take the initial topology such that all evaluation maps $\DLat(B, \mathbb{2}) \to \mathbb{2}$ are continuous, which have as a subbasis  $\{\ \{p \in \DLat(B,\mathbb{2}) \lvert p(b) = 1\}\  \lvert \ b \in B \ \}$.
+
+(\textcolor{red}{TODO} Compute/confirm  that this lifts initially to $\CohTop$)
+
 
 For the second map, consider that we also have the initial lift of the adjunction $\Top \stackrel{\Top(-,\mathbb{S})}{\rightleftarrows} \Frm^{\op}$.
 
 Remember that each restriction is simply the free generator or left adjoint of the forgetful functor, whose underlying functors into subcategories of $\Top$ compose with the underlying functor into $\Top$.
 
- Since coherentifying a topology on $X$ doesn't do anything to the Sierpinski space (all elements in $\mathbb{S}$ are compact open, and taking unions of finite intersections of $\mathbb{S}$ gives us back $\mathbb{S}$), we first notice that after composing, we have a functor $\CohTop \rightleftarrows \DLat$ that lifts $\CohTop(X, \mathbb{S})$ to $\DLat$, since coherent maps are precisely those which preserve compact opens, then $K(\CohTop(X, \mathbb{S})$ is exactly the compact open subsets of $X$, or the distributive lattice of compact opens of $X$. 
+ Since coherentifying a topology on $X$ doesn't do anything to the Sierpinski space (all elements in $\mathbb{S}$ are compact open, and taking unions of finite intersections of $\mathbb{S}$ gives us back $\mathbb{S}$), we first notice that after composing, we have a functor $\CohTop \rightleftarrows \DLat$ that lifts $\CohTop(X, \mathbb{S})$ to $\DLat$, since coherent maps are precisely those which preserve compact opens, i.e.,  as we have already seen $\CohTop(X, \mathbb{S}) = K\Omega(X)$, so that $\CohTop(X,\mathbb{S})$ lifts to $\DLat$: it is exactly the distributive lattice of compact open subsets of $X$.
  
- We will want to focus on the restriction $\CohTop \stackrel{\Stone(-)}{\rightleftarrows} \Stone$, which is called the stone space reflection, or stoneification, which on $\DLat$ side restricts to $\Bool$ by the corresponding boolean algebra reflection functor.
+ 
+ Now we see what happens when applying the restrictions.
+ 
+ 
+On the topological side, there is the restriction $\CohTop \stackrel{\Stone(-)}{\rightleftarrows} \Stone$, which is called the stone space reflection, or stoneification. On the other side, $\DLat$  restricts to $\Bool$ by the corresponding boolean algebra reflection functor, or Booleanification.
  
  To understand the Stoneification, we may first want to booleanify the lattice of compact open subsets of a space $X$, which we will call $A$. Let $A^*$ be the set of complements in $\mathcal{P}(X)$ of memebers of $A$. Then the patch topology, which has as a base $C = \{U \cap V \lvert U \in A, V \in A^*\}$ , will be a Stone space (notice that we are taking the boolean completion $B$ of $A$ and then taking its spectrum) [Joh].
  
- We must be careful here, because now the boolean completion of $\mathbb{S}$ in $\mathcal{P}(\{0,1\})$ is simply $\mathbb{2}_s$ or the two point discrete space, since by booleanifying we must generate the complement of $\{1\}$.
+ We must be careful here, because $\mathbb{S} \notin \Stone$, since $\mathbb{S}$ is clearly not Hausdorff. So we will need to take the boolean completion of $\mathbb{S}$ in $\mathcal{P}(\{0,1\})$ which is simply $\mathbb{2}_s$, the two point discrete space, since by booleanifying we must generate the complement of $\{1\}$.
  
- This shows us that the left adjoint of the Stone duality is given as an initial lift of $\Stone(-, \mathbb{2}_s)$. 
+ 
+The argumentation however works the same way as it would if $\mathbb{S}$ was in $\Stone$: the lift of $\CohTop(X, \mathbb{S})$ equals $[\clop(X)]$ if $X$ is a Stone space, since coherent maps into $\mathbb{S}$ are uniquely determined by the preimage of $\{1\}$, which are simply the compact open subsets of a compact Hausdorff space, which are its  clopens. 
 
-Consider that morphisms in $\Stone$ into $\mathbb{2}_s$ are uniquely determined by the clopen subsets of a stone space $X$, since  (\textcolor{red}{TODO}: finish this part)
+By the same argument we have $\Stone(X, \mathbb{2}_s) = [\clop(X)]$, and in fact, since we have Stonefied all objects, we are back to being in a full subcategory of $\Top$, since continuous maps between compact Hausdorff spaces must be coherent (continuity means the preimage of every clopen set is clopen, and in this setting the clopens are the compact opens).
+
+This is in particular true for any compact Hausdorff space, so that one has $\kHaus(X, \mathbb{2}_s) = \Stone(X, \mathbb{2}_s)$ for all $X \in \Stone$. 
+
+Moreover, considering all $n$-ary operations $\mathbb{2}_s^n \stackrel{\gamma}{\to} \mathbb{2}_s$, where $\mathbb{2}_s^n$ is given the product topology on $\mathbb{2}_s$, we get an induced map \begin{align*}
+	\Stone(X, \mathbb{2}_s)^n \cong \Stone(X, \mathbb{2}_s^n) \stackrel{\gamma \circ -}{\to} \Stone(X, \mathbb{2}_s)
+\end{align*}
+where the first isomorphism is easily shown by defining a map which combines components and its inverse which separates them. Th
+
+
+This shows us that the left adjoint of the Stone duality is given as a lift of $\Stone(-, \mathbb{2}_s)$, and in particular, this lift is initial, by a similar argument as in the leading example.
 
 %\[\begin{tikzcd}
 %	&& \Loc & \bot & \Top \\
