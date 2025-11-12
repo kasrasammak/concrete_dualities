@@ -71,6 +71,7 @@
 \DeclareMathOperator{\Ind}{Ind}
 \DeclareMathOperator{\Pro}{Pro}
 \DeclareMathOperator{\Lat}{Lat}
+\DeclareMathOperator{\charr}{char}
 
 
 
@@ -706,7 +707,7 @@ To understand this adjunction and see that it does indeed correspond to the morp
 \section{Examples}
 Our goal in the following will be to build intuition for the schizophrenic object through a careful analysis of examples. In particular, we are going to start with a subexample, if you will, of a more profound duality called the Stone duality, simply by elucidating its schizophrenic nature as it ties directly to the generality we have learned, so that we can get a sense for in what direct way we can lift hom sets.
 
-Consequently, in discussing the Stone duality we plan to give concrete descriptions of these Hom set functors, for which we had just given a more general description using universal properties and hom sets. Though we do lead with the general into the concrete, we may otherwise view our elucidation of the concrete as the generalization, since we must show the actual mechanics behind why we can think of these concrete objects as the hom sets.
+Consequently, in discussing the Stone duality we plan to give concrete descriptions of these Hom set functors, for which we had just given a more general description using universal properties and hom sets. Though we do lead with the general into the concrete, we may otherwise view our elucidation of the concrete as the generalization, since we must show the actual mechanics behind why we can think of these concrete objects as lifts of the hom sets.
 
 This will then lend itself to the intuition of the following examples, which we can in some sense think of extensions or special cases of the given dualities. 
 
@@ -715,7 +716,9 @@ For the examples note that we may sometimes by abuse of notation and for lack of
 
 %\emph{A note about notation: When speaking about $\Hom$ sets of a general category $A$, we use the notation as before $\HomA(-,-)$. However to shorten notation and ease readability, when speaking of specific categories, such as $\Frm, \Top,$ or $\Set$, we use the notation $\Frm(-,-), \Top(-,-),$ $ \Set(-.-).$}
 
-The aim of the leading example is two-fold: first we want to concretize the maps using our general description in the first part of this paper. Secondly, we want to provide argumentative insight for the following examples. 
+The aim of the leading example is two-fold: first we want to concretize the maps using our general description in the first part of this paper. To this end we aim to be very explicit in this example, so that we just once get to see what these maps look like explicitly, then later we will drop the explicicity for readability. 
+
+Secondly, we want to provide argumentative insight for the following examples. 
 
 
 We begin with the adjunction 
@@ -765,11 +768,20 @@ so that
 \begin{align*}
 	\eta_B:& B \to \Top(\Frm(B, \mathbb{2}), \mathbb{S})
 \end{align*}
+is such that its underlying map 
+\begin{align*}
+	[\eta_B]:& [B] \to [\Top(\Frm(B, \mathbb{2}), \mathbb{S})] = \Top(\Frm(B, \mathbb{2}), \mathbb{S})
+\end{align*}
+
 where 
 \begin{align*}
-	\eta_B(y):& \Frm(B, \mathbb{2}) \to \mathbb{S}\\
-	&p \mapsto p(y)
+	[\eta_B](y): \Frm(B, \mathbb{2}) &\to \mathbb{S}\\
+	p &\mapsto p(y)
 \end{align*}
+is given by evaluation.
+
+(\textcolor{red}{TODO} work out how to call these maps underlying set maps or not)
+
 Notice that the topology on $\Frm(B, \mathbf{2})$ is the initial topology making all $(\eta_B(y))_{y \in B}$ continuous, since continuous maps $\eta_B(y)$ are uniquely determined by the preimage of $\{1\}$.
 
 For each side of this adjunction respectively, we will see this kind of reasoning more often to argue initiality of lifts.
@@ -843,8 +855,11 @@ Before we speak about the Stone duality we plan to discuss one of its subdualiti
 \end{definition} 
 Note that however in the following section we will use the term subduality more loosely to also refer to dualities for which the duality in question is a subduality (one might define it analogously as superduality), or dualities which arise by restriction/extension and composition/decomposition.
 
- That is to say, we will refer to every horizontal duality of the big diagram at the end of this section loosely as a subduality of the Stone duality, even though the Stone duality is at the bottom.
+ That is to say, we will refer to every horizontal duality of the big diagram at the end of this section loosely as a subduality of the Stone duality, even though the Stone duality is at the bottom and given by an extra composition.
+ 
+ That is because the only relevant aspect of them for our discussion is that these dualities are connected, then it just becomes a matter of perspective, and moreover a stricter definition would serve to become very confusing and unnecessary.
 
+That being said, the first subduality we will discuss is a subduality, in the strict sense, of the duality we plan to develop in this section, the Stone duality.
 
 Consider the category $\Bool$ of Boolean algebras and boolean algebra homomorphisms between them. We claim there is an adjunction between $\Bool_{fin}$ and $\FinSet$ given by $\Ult(B)$, which sends a boolean algebra $B$ to the set $\Ult(B)$ of ultrafilters on $B$, and by $\mathcal{P}(X)$, which sends a set $X$ to its power-set.
 
@@ -864,7 +879,7 @@ Similarly, $\mathcal{P}(-)$ is fully faithful , as sets have unique power sets u
 
 To determine the schizophrenic object first consider the free boolean algebra on one generator $b$ is the set $\diamondsuit : =\{\bot, b, \neg b, \top \}$, since our generator needs to induce complements (\textcolor{red}{TODO} and has finite limits and arbitrary colimits), and the free set on one generator is $\{pt\}$. 
 
-Now  an ultrafilter on $\diamondsuit$ is determined by which element the bottom (and analogously top) associates to, which is an element of the set $\{b, \neg b\}= \mathbb{2}$, which we will prove in the following. It  therefore holds that  $\Ult(\diamondsuit) = \mathbb{2}$.
+Now  an ultrafilter on $\diamondsuit$ is determined by which element the bottom (and analogously top) associates to, which is an element of the set $\{b, \neg b\}= \mathbb{2}$, which we will prove in the following. But from that  it holds that  $\Ult(\diamondsuit) = \mathbb{2}$.
 
 Meanwhile $\mathcal{P}(\{pt\}) = \{\emptyset, \{pt\}\} = \mathbb{2}$ as boolean algebra, since the point and the empty set are complements, and thus form the truth-value boolean algebra which is an initial object of $\Bool$. 
 
@@ -1358,7 +1373,7 @@ That is, if $X$ is not already Kelleyfied, we add opens $U = f^{-1}(V)$, for fun
 
 Thus we can understand a $k$-space as a colimit of compact Hausdorff spaces, or specifically, $X \in \kSp$ if and only if $X = \colim_{K \subset X \text{ compact}}K$.
 
-\textcolor{red}{Question}: are compact subspaces in $X$ compact if and only if they are compact in Kelley($X$)? No.
+%\textcolor{red}{Question}: are compact subspaces in $X$ compact if and only if they are compact in Kelley($X$)? No.
 
 We may otherwise view the \emph{Kelleyfication} as the left adjoint $k(-)$ to the forgetful functor. As $\kSp$ is a full subcategory of $\Haus$, this puts us in the setting of a coreflective subcategory of $\Haus \subset \Top$. 
 
@@ -1376,8 +1391,13 @@ For all $A, B, C \in \Ob(\Haus)$. However this does not hold in general.
 
 However in $\kSp$ function spaces are given as Kelleyfications of the set $\Top(X,Y)$ with the compact-open topology. (\textcolor{blue}{TODO} why?).
 \textcolor{red}{ToDO} Show that this means that $\kSp$ is cartesian closed concrete category which admits function spaces.
+And as per [Dub], we see that $\kSp$ admits function spaces.
 
-\textcolor{red}{ToDO} Show that $\kSp$ is a monotopological category
+First we note that $\kSp$ is a coreflective subcategory of $\Top$. Since $\kSp$ is a coreflective subcategory of a topological category, it is itself a topological category (Herrlichs theorem \textcolor{red}{TODO} Find and cite this), and in particular it is monotopological. 
+
+Note that $\Top$ is a topological category since  for any source in $\Set$ we can always take the initial topology making every map in the source continuous.
+
+(\textcolor{red}{ToDO} Show that $\kSp$ admits function spaces )
 
 Now let us define the category $\kAlg$ of complex $k$-algebras, whose objects are $\mathbb{C}$-algebras endowed with a Kelley topology, whose morphisms are the continuous algebra homomorphisms, and whose algebra operations are continuous with respect to $k$-products. 
 
@@ -1388,8 +1408,18 @@ To put ourselves completely in the situation of \textbf{4.c} we notice that $\kA
 Since  we are in a monotopological category, then we know that $\kAlg(A, \mathbb{C}_a) \to [\mathbb{C}_s]$
 lifts initially to a $\kSp$-morphism, which we will denote $\Hom_k(A, \mathbb{C}_a) \to \mathbb{C}_s$.
 
-Now all we need to see is that $\kSp(X,\mathbb{C}_s) \to [\mathbb{C}_a]$ lifts along $U$ functorially to a $\kAlg$-morphism $C_k(X, \mathbb{C}_s) \to \mathbb{C}_a$, which we must show directly. (\textcolor{red}{TODO}: show this)
+Now all we need to see is that $\kSp(X,\mathbb{C}_s) \to [\mathbb{C}_a]$ lifts along $U$ functorially to a $\kAlg$-morphism $C_k(X, \mathbb{C}_s) \to \mathbb{C}_a$, which we must show directly. 
 
+To show this we first want to see that $C_k(X, \mathbb{C}_s)$ has the necessary internal operations. For that we first notice that the functor $C_k(X, -)$ is product preserving (as a coreflection we can compute limits in $\Top$ and then Kelleyfy). 
+
+So for instance we obtain addition by applying $C_k(X, -)$ to the corresponding addition operation  $+:\mathbb{C}_a \times \mathbb{C}_a \to \mathbb{C}_a$ in $\mathbb{C}_a$ but viewed as $\mathbb{C}_s$, so that $C_k(X,+):C_k(X,  \mathbb{C}_s \times \mathbb{C}_s) \to C_k(X, \mathbb{C}_s)$  is isomorphic to \begin{align*}C_k(X,+):C_k(X,  \mathbb{C}_s) \times C_k(X, \mathbb{C}_s) \to C_k(X, \mathbb{C}_s).
+ \end{align*}
+For scalar multiplication we notice that the composition \begin{align*}
+	\mathbb{C}_s \times C_k(X, \mathbb{C}_s)\times  X \stackrel{1_{\mathbb{C}_s} \times \text{ev}}{\longrightarrow} \mathbb{C}_s \times \mathbb{C}_s \stackrel{m}{\to}\mathbb{C}_s
+\end{align*}
+induces a continuous scalar multiplication on $C_k(X, \mathbb{C}_s)$, by applying the Heyting implication to $\Big(\mathbb{C}_s \times C_k(X, \mathbb{C}_s)\Big) \times X \to \mathbb{C}_s$, to get \begin{align*}
+	s: \mathbb{C}_s \times C_k(X, \mathbb{C}_s) \to C_k(X, \mathbb{C}_s).
+\end{align*}
 As such we have an adjunction 
 \begin{align*}
 	C: \kSp & \to \kAlg &  S: \kAlg & \to \kSp\\
@@ -1425,25 +1455,59 @@ Note that $C^* \subset \kAlg$ is a full subcategory.
  Thus we can conclude that there is a natural dual adjunction between concrete categories $(\kHaus, U)$ and $(C^*, \bigcirc)$ with schizophrenic object $(D, 1_D, \mathbb{C}_a)$. 
  
  \section{Galois theory}
- Let us dive into another familiar example called the \emph{Galois correspondence}. The example we want to discuss is actually a generalization of the usual Galois correspondence, given by the following adjunction between the directed poset (\textcolor{red}{TODO} defined this) of subfield extensions of the finite field extension $k \hookrightarrow M\hookrightarrow L$ and the codirected poset (\textcolor{red}{TODO} figure out which is directed and which codirected, details) of the corresponding subgroups $H$ of the Galois group $\Gal(L/k)$:
+ Let us dive into another familiar example called the \emph{Galois correspondence}. The example we want to discuss is actually a generalization of the usual Galois correspondence, given by the following contravariant adjunction between the directed posets (\textcolor{red}{TODO} define this) of subfield extensions of the finite field extension $k \hookrightarrow M\hookrightarrow L$ and of the corresponding subgroups $H$ of the Galois group $\Gal(L/k)$:
  
  \[\begin{tikzcd}
-	{\{L|M|k\} } & \bot & {\{H \leq \Gal(L/k)\}}
+	{\{L|M|k\} }^{\op} & \bot & {\{H \leq \Gal(L/k)\}}
 	\arrow["{\Gal(L/-)}", shift left=3, bend left, from=1-1, to=1-3]
 	\arrow["{L^{(-)}}", bend left, from=1-3, to=1-1]
 \end{tikzcd}\]
 
-We know ${\{L|M|k\} }$ is directed since $L|k$ is a terminal object of the poset, and similarly ${\{H \leq \Gal(L/k)\}}$ is codirected over ${\{L|M|k\} }^{\op}$ whose terminal object is $k$, corresponding to the full subgroup $\Gal(L/k)$. 
+That is to say ${\{L|M|k\} }^{\op}$ is codirected since $L|k$ is an initial object of the poset, and similarly ${\{H \leq \Gal(L/k)\}}$ is directed  ${\{L|M|k\} }^{\op}$ since $\Gal(L/k)$ is terminal, corresponding to the full subgroup $\Gal(L/k)$. 
 
 However the schizophrenic object doesn't live in the above adjunction, for that we consider a more general adjunction, which we can derive from the above adjunction in the following way. 
 
-The first important consideration is that we want our left (and by consequence, our right) category to include the separable closure of $k$, which we denote $k^s$, (\textcolor{red}{TODO} clarify/figure out why separable and why/why not algebraic closure) and naturally, all its intermediate finite field extensions. To be sufficiently general we consider the category $\CAlgk$  of commutative unital $k$-algebras with $k$-algebra homomorphisms. 
+The first important consideration is that we want our left (and by consequence, our right) category to include the separable closure of $k$, which we denote $k^s$, and naturally, all its intermediate finite field extensions. Intuitively, we want a field extension which contains all Galois extensions of $k$ as intermediate field extensions (that is, we want that $k^s/L$ is Galois, not $L/k$), i.e. our field extensions should be normal \emph{and} separable. 
+
+That's why we take $k^s$ and not $ \bar k$,  the algebraic closure of $k$. For perfect fields, where every algebraic extension is separable,  we have $k^s = \bar k$, by definition. However in general, we only have $k^s \subset \bar k$ so we cannot guarantee that an arbitrary algebraic extension of $k$ is separable.
+
+
+To be sufficiently general we consider the category $\CAlgk$  of commutative unital $k$-algebras with $k$-algebra homomorphisms. 
 
 The second important consideration is that the above left adjoint functor induces an adjunction with respect to the quotient groups of Galois groups under normal subgroups, or more generally the set of cosets of each subgroup $H$ in $\Gal(k^s/k) =: G$.
 
-Explicitly this is a map $L|k \mapsto \CAlgk(L, k^s)$. That is, $\CAlgk(L, k^s) \cong \Gal(k^s/k)/\Gal(k^s/L)$ (\textcolor{red}{TODO}: Show this (make sure its even true), and also think about how $\Gal(k^s/L)$ is distinguished from $\CAlgk(L, k^s)$, intuitively speaking). Notice that $\CAlgk(L,k^s)$ is finite and there exists a natural $G$-action on it, since homomorphisms into the closure are given by maps which permute the roots of the minimal polynomials of the elements which generate $L|k$ (\textcolor{red}{TODO} refer to literature). Furthermore, this extends to a natural $G$-action on $k^s$, as the $G$-action on $k^s$ is fully determined by permutation of roots not lying in $k$, or elements of $\CAlgk(k,k^s)$. (\textcolor{red}{TODO} explain more in detail). 
+Explicitly this is a map $L|k \mapsto \CAlgk(L, k^s)$. That is, \begin{align*}\CAlgk(L, k^s) \cong \Gal(k^s/k)/\Gal(k^s/L)	
+ \end{align*}
+ (\textcolor{red}{TODO}: Show this (make sure its even true), and also think about how $\Gal(k^s/L)$ is distinguished from $\CAlgk(L, k^s)$, intuitively speaking). 
+ 
+ For any finite field extension $L|k$, homomorphisms into the closure $k^s$ are given by maps which permute the roots of the minimal polynomials over $k$ of the finite generators of $L|k$. (\textcolor{red}{TODO} refer to literature) That also means in this case that the set $\CAlgk(L,k^s)$ is finite. Indeed, there is a natural $G$-action on it,  induced by the canonical $G$-action on $k^s$ which defines $G$ in the first place. Since every element of $k^s$ is a separable root over  $k$, this canonical $G$-action is completely determined by how its elements permute the roots of separable polynomials with coefficients in $k$.
 
-Therefore $L|k \mapsto \CAlgk(L, k^s)$ lifts to the category $\GSet$, consisting of sets with a $G$-actionand $G$-equivariant homomorphisms between them, where $k^s$ also lives.
+Now  we should seek lifts of the evaluation maps $\CAlgk(L,k^s) \to [k^s]$ in a way that preserves the $G$-action, which are called $G$-equivariant maps, which just means we can define the $G$-action of our lift of $\CAlgk(L,k^s)$ pointwise on $k^s$, since \begin{align*}
+	(g \varphi)(x) := \ev_{x,L}(g \cdot \varphi) =  g \cdot  \ev_{x, L}(\varphi) = g \cdot \varphi(x).
+\end{align*}
+
+Since $k^s$ comes with a canonical action, we know $L|k \mapsto \CAlgk(L, k^s)$ lifts to the category $\GSet$, consisting of sets with a $G$-action and $G$-equivariant homomorphisms between them.
+
+But there is nothing specific about the canonical action for the above equalities to hold, so that for any $G$-action $\star$ on $k^s$ there  automatically exists a lift of $\CAlgk(L,k^s) \to [k^s]$ whose $G$-action is defined pointwise by $\star$. 
+
+However, we want a lift of the evaluation  $\ev_{x,L}:\CAlgk(L,k^s) \to [k^s]$ to exist for all $L \in \CAlgk$ and all $x \in L$. 
+
+
+Since $G$ is a group of autormorphisms on $k^s$, a $G$-action on maps
+	$\CAlgk(f,k^s): \CAlgk(L',k^s) \stackrel{- \circ f}{\to} \CAlgk(L,k^s)
+$ means \begin{align*} g \cdot  \CAlgk(f,k^s) (\varphi) = g \cdot (\varphi \circ f) = (g \cdot \varphi) \circ f = \CAlgk(f,k^s)(g \cdot \varphi)
+ \end{align*}
+holds. Setting the action as postcomposition $g \cdot \varphi = g \circ \varphi$ satisfies the equality for all $g \in G$. 
+
+Notice that a $G$-equivariant map is given by a natural transformation $\CAlgk(-,k^s) \stackrel{\eta}{\implies}  \CAlgk(-,k^s)$, who by Yoneda is given by unique $k^s$-automorphisms $u_g: k^s \to k^s$, so that such an action is given by a group homomorphism $\theta: G \to G$, which sends $g \to u_g$. As such a $G$-equivariant map $f$ satisfies the equality \begin{align*}
+	g \cdot (\varphi \circ f) = (\theta(g) \circ \varphi)(f).
+\end{align*}
+Notice that means that the canonical $G$-action is given by $\theta = 1_G$. And in our set up we want a  $G$-action on $k^s$ such that for all $g \in G$ and $\varphi \in \CAlgk(L,k^s)$ we have \begin{align*}
+	g \cdot \varphi(x) = g \cdot \ev_{x,L}(\varphi) = \ev_{x,L}(\theta(g) \circ \varphi) = (\theta(g) \circ\varphi)(x).
+\end{align*}
+Since this must hold for all $L \in \CAlgk$ and all $x \in L$ and all $\varphi \in \CAlgk(L, k^s)$, it must hold in particular for $L=k^s$ and $\varphi = 1_{k^s}$, then the above equality becomes $g(x) = \theta(g)(x)$ for all $x \in k^s$ and $g \in G$. Indeed this lift only  exists if it is the canonical one, i.e. if $\theta = 1_G$, and so such a lift is  initial.
+
+%
 
 (\textcolor{blue}{TODO} show that $\GSet(H,k^s)$ lifts to $\CAlgk$, I still don't know, but idea is that  a $G$-equivariant map of some set should determine some Galois subfield extension since its "part of that action" being preserved by a map. Determine how this set of maps should look like, and what exactly is the datum of the $G$-set as well as datum of the $\CAlgk$; How big or small is this hom-set? Is there a function for every element of the field, or is it enough to realize the datum in some sense as that of the generating elements of the extension? ). 
 
