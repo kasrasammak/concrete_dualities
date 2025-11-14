@@ -72,6 +72,7 @@
 \DeclareMathOperator{\Pro}{Pro}
 \DeclareMathOperator{\Lat}{Lat}
 \DeclareMathOperator{\charr}{char}
+\DeclareMathOperator{\const}{const}
 
 
 
@@ -1191,7 +1192,7 @@ This is in particular true for any compact Hausdorff space, so that one has $\kH
 Moreover, considering all $n$-ary operations $\mathbb{2}_s^n \stackrel{\gamma}{\to} \mathbb{2}_s$, where $\mathbb{2}_s^n$ is given the product topology on $\mathbb{2}_s$, we get an induced map \begin{align*}
 	\Stone(X, \mathbb{2}_s)^n \cong \Stone(X, \mathbb{2}_s^n) \stackrel{\gamma \circ -}{\to} \Stone(X, \mathbb{2}_s)
 \end{align*}
-where the first isomorphism is easily shown by defining a map which combines components and its inverse which separates them. Th
+where the first isomorphism is the fact that Hom-sets preserve limits in the second argument, which is given by a natural map that combines components and its inverse which separates them.
 
 
 This shows us that the left adjoint of the Stone duality is given as a lift of $\Stone(-, \mathbb{2}_s)$, and in particular, this lift is initial, by a similar argument as in the leading example.
@@ -1463,7 +1464,7 @@ Note that $C^* \subset \kAlg$ is a full subcategory.
 	\arrow["{L^{(-)}}", bend left, from=1-3, to=1-1]
 \end{tikzcd}\]
 
-That is to say ${\{L|M|k\} }^{\op}$ is codirected since $L|k$ is an initial object of the poset, and similarly ${\{H \leq \Gal(L/k)\}}$ is directed  ${\{L|M|k\} }^{\op}$ since $\Gal(L/k)$ is terminal, corresponding to the full subgroup $\Gal(L/k)$. 
+That is to say ${\{L|M|k\} }^{\op}$ is codirected since $L|k$ is an initial object of the poset, and similarly ${\{H \leq \Gal(L/k)\}}$ is directed  since $\Gal(L/k)$ is terminal, corresponding to the full subgroup $\Gal(L/k)$. 
 
 However the schizophrenic object doesn't live in the above adjunction, for that we consider a more general adjunction, which we can derive from the above adjunction in the following way. 
 
@@ -1493,13 +1494,13 @@ But there is nothing specific about the canonical action for the above equalitie
 However, we want a lift of the evaluation  $\ev_{x,L}:\CAlgk(L,k^s) \to [k^s]$ to exist for all $L \in \CAlgk$ and all $x \in L$. 
 
 
-Since $G$ is a group of autormorphisms on $k^s$, a $G$-action on maps
+Since $G$ is a group of autormorphisms on $k^s$, a $G$-equivariant map 
 	$\CAlgk(f,k^s): \CAlgk(L',k^s) \stackrel{- \circ f}{\to} \CAlgk(L,k^s)
 $ means \begin{align*} g \cdot  \CAlgk(f,k^s) (\varphi) = g \cdot (\varphi \circ f) = (g \cdot \varphi) \circ f = \CAlgk(f,k^s)(g \cdot \varphi)
  \end{align*}
-holds. Setting the action as postcomposition $g \cdot \varphi = g \circ \varphi$ satisfies the equality for all $g \in G$. 
+holds. If ones sets the action to be postcomposition, i.e., $g \cdot_{\CAlgk(L,k^s)} \varphi = g \circ \varphi$ for each $L \in \CAlgk$ then the equality is satisfied for all $g \in G$. 
 
-Notice that a $G$-equivariant map is given by a natural transformation $\CAlgk(-,k^s) \stackrel{\eta}{\implies}  \CAlgk(-,k^s)$, who by Yoneda is given by unique $k^s$-automorphisms $u_g: k^s \to k^s$, so that such an action is given by a group homomorphism $\theta: G \to G$, which sends $g \to u_g$. As such a $G$-equivariant map $f$ satisfies the equality \begin{align*}
+Notice that such a $G$-equivariant map which is compatible with lifts of the evaluation maps is given by a natural transformation $\CAlgk(-,k^s) \stackrel{\eta}{\implies}  \CAlgk(-,k^s)$, who by Yoneda is given by unique $k^s$-automorphisms $u_g: k^s \to k^s$, so that such an action is given by a group homomorphism $\theta: G \to G$, which sends $g \to u_g$. As such a $G$-equivariant map $f$ satisfies the equality \begin{align*}
 	g \cdot (\varphi \circ f) = (\theta(g) \circ \varphi)(f).
 \end{align*}
 Notice that means that the canonical $G$-action is given by $\theta = 1_G$. And in our set up we want a  $G$-action on $k^s$ such that for all $g \in G$ and $\varphi \in \CAlgk(L,k^s)$ we have \begin{align*}
@@ -1507,17 +1508,20 @@ Notice that means that the canonical $G$-action is given by $\theta = 1_G$. And 
 \end{align*}
 Since this must hold for all $L \in \CAlgk$ and all $x \in L$ and all $\varphi \in \CAlgk(L, k^s)$, it must hold in particular for $L=k^s$ and $\varphi = 1_{k^s}$, then the above equality becomes $g(x) = \theta(g)(x)$ for all $x \in k^s$ and $g \in G$. Indeed this lift only  exists if it is the canonical one, i.e. if $\theta = 1_G$, and so such a lift is  initial.
 
+On the other side, we want to show that $\GSet(H,k^s)$ lifts initially to $\CAlgk$, where we take $k^s$ to be equipped with the canonical $G$-action.
+
+It is easily checked that the field axioms can be defined pointwise in $k^s$. 
+
+Moreover, since $G$ fixes $k$, then we have $\const_a \in \GSet(H,k^s)$ for each $a \in k $, since $	\const_a(\theta(g)\cdot y) = g \circ \const_a(y)$ holds true for all $g \in G$ and independent of $\theta$. That means for any $G$-equivariant map $H \to H'$ the induced map $\GSet(H',k^s) \to \GSet(H,k^s)$ is stable on these constant functions. Therefore $\GSet(H,k^s) \in \CAlgk$. Moreover this lift is clearly functorial in $H$, since composition preserves all pointwise operations. 
+
+Any other $\CAlgk$-morphism whose underlying set map is compatible with  all  evaluation maps $\GSet(H,k^s) \stackrel{\ev_{y,H}}{\rightarrow} [k^s]$ must factor uniquely through our lift of $\GSet(H,k^s) $, since $\CAlgk$-morphisms into $k^s$ are uniquely determined by permutation of roots in $k^s$, permutations which are defined on the set level.
+
+This is analogous to many familiar examples where we derived our structure pointwise from the structure of our schizophrenic object, and as a result such a structure is the weakest such compatible structure, i.e. an initial lift.
 %
+%
+%(\textcolor{blue}{TODO} show that $\GSet(H,k^s)$ lifts initially to $\CAlgk$, I still don't know, but idea is that  a $G$-equivariant map of some set should determine some Galois subfield extension since its "part of that action" being preserved by a map. Determine how this set of maps should look like, and what exactly is the datum of the $G$-set as well as datum of the $\CAlgk$; How big or small is this hom-set? Is there a function for every element of the field, or is it enough to realize the datum in some sense as that of the generating elements of the extension? ). 
 
-(\textcolor{blue}{TODO} show that $\GSet(H,k^s)$ lifts to $\CAlgk$, I still don't know, but idea is that  a $G$-equivariant map of some set should determine some Galois subfield extension since its "part of that action" being preserved by a map. Determine how this set of maps should look like, and what exactly is the datum of the $G$-set as well as datum of the $\CAlgk$; How big or small is this hom-set? Is there a function for every element of the field, or is it enough to realize the datum in some sense as that of the generating elements of the extension? ). 
 
-Remember that if our subfield extension $M|k$ is $Galois$, that is,  it is a \emph{normal} (separable, algebraic) field extension, i.e. $M$ contains the roots of every polynomial over itself, then the fundamental theorem of Galois theory states that $\Gal(k^s/M) \unlhd \Gal(k^s/k)$. This gives us a Galois group over a different functor, namely the functor $\Gal(-/k)$ which yields a profinite system $({k^s|M|k} , Gal(M/k))$.
-
-Consider that $k^s|k = \colim_{\{k^s|L|k\}}L|k$, then corespectively we have \begin{align*}
-	\Gal(k^s/k)=& \CAlgk(\colim_{\{k^s|L|k\}}L, k^s)\\ =& \lim_{\{k^s|L|k\}}\CAlgk(L,k^s)\\ =& \lim_{\{k^s|L|k\}}\Gal(k^s/k)/\Gal(k^s/L)
-\end{align*}
-
-so $\Gal(k^s/k)$ can be realized as a profinite set, which is necessarily uncountable. 
 All together we have schizophrenic object $(k^s,1_{k^s},k^s)$ which induces the following dual adjunction
 
 
@@ -1537,6 +1541,15 @@ This adjunction restricts to the categories $\ket$ of finite dimensional $k$-alg
 \end{tikzcd}\]
 
 To see this we just check that $L|k = \GSet(\CAlgk(L,k^s),k^s)$ and we check that $H = \CAlgk(\GSet(H,k^s),k^s))$. (\textcolor{red}{TODO}: prove this or refer to usual essential surj + fully faithful proof from literature)
+
+Just as a side remark,  if our subfield extension $M|k$ is $Galois$, that is,  it is a \emph{normal} (separable, algebraic) field extension, i.e. $M$ contains the roots of every polynomial over itself, then the fundamental theorem of Galois theory states that $\Gal(k^s/M) \unlhd \Gal(k^s/k)$. This gives us a Galois group over a different functor, namely the functor $\Gal(-/k)$ which yields a profinite system $({k^s|M|k} , Gal(M/k))$.
+
+Consider that $k^s|k = \colim_{\{k^s|L|k\}}L|k$, then corespectively we have \begin{align*}
+	\Gal(k^s/k)=& \CAlgk(\colim_{\{k^s|L|k\}}L, k^s)\\ =& \lim_{\{k^s|L|k\}}\CAlgk(L,k^s)\\ =& \lim_{\{k^s|L|k\}}\Gal(k^s/k)/\Gal(k^s/L)
+\end{align*}
+
+so $\Gal(k^s/k)$ can be realized as a profinite set, which is necessarily uncountable. 
+
 
 % (\textcolor{red}{TODO}: finish this part, if necessary, but the basic structure is the following: show that $\kSp$ is a monotopological category, show that monotopological categories admit function spaces... if theres an easier way to do it we may not need to define lifts and topological categories, so do that later)
  
