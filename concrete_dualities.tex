@@ -112,21 +112,30 @@
 
 Throughout this thesis we will be using the language of category theory, for which a mild introduction is in order. To that degree we plan to define the terms used as well as prove some well known theorems which we use quite freely, so not to distract us from the argument.
 
-We assume basic knowledge of Category theory (such as the definitions of Categories, functors, natural transformations, limits, colimits, initial object, terminal object, etc), and will choose to define terms as necessary as they relate to our investigation.
+We assume basic knowledge of Category theory (such as the definitions of Categories, functors, natural transformations, (filtered/directed) limits, (filtered/directed) colimits, initial object, terminal object, adjunctions, etc), and will choose to define terms as necessary as they relate to our investigation.
+
+This thesis will be divided into two parts. In the first part we describe the general framework for arbitrary categories. We will be answering the questions of what a mathematical duality is, what makes it concrete, and also what is the minimal datum that ascertains its existence. 
+
+In the second part we should like to describe some examples. As these examples span mathematics itself, we shall assume basic knowledge in each subfield to which our respective example pertains. Before each example we will make more explicit what is assumed, as well references for background and/or further reading. One may expect general knowledge of topology, commutative algebra, group theory, lattice theory, and Galois theory to be used quite freely.
+
+
+\subsection{Concrete Categories}
+
+In the course of this thesis we will be considering a certain type of category, called a concrete category. As we do not assume knowledge about this on behalf of the reader, we would like to introduce some definitions of the basic kinds of objects and constructions we will be working with. 
+
+First we should define a concrete category:
 \\
-\subsection{Adjunctions, Concrete Categories}
-\begin{definition}
-	Adjunction
-\end{definition}
 \
 \begin{definition}[Concrete Category]
 	Let $\mathcal{X}$ be a category. A \textbf{concrete category} over $\mathcal{X}$ is a pair $(\mathcal{A}, U)$ where $\mathcal{A}$ is a category and $U: \mathcal{A} \to \mathcal{X}$ is a faithful functor. Sometimes $U$ is called the \textbf{underlying functor} over $\mathcal{X}$ and $\mathcal{X}$ is called the \textbf{base category} for $(\mathcal{A},U)$. A concrete category over $\Set$ is called a \textbf{construct}.
 \end{definition}
-\
+
+Note that from here on out, we use concrete category to mean construct, since we do not consider any other type of concrete category in this thesis.
+\\
 \begin{definition} [Concrete functor]
 Let $(\mathcal{A}, U)$ and $(\mathcal{B}, V)$ be concrete categories over $\mathcal{X}$. A \textbf{concrete functor} from $(\mathcal{A}, U)$ to $(\mathcal{B},V)$ is a functor $F: \mathcal{A} \to \mathcal{B}$ such that $U = V \circ F$. 
 \end{definition}
-Note that a concrete functor is necessarily faithful, since $V$ is faithful. In general, for any functors $F: \mathcal{A} \to \mathcal{B}$ and $G: \mathcal{B} \to \mathcal{C}$, if $G \circ F$ is faithful, then $F$ is. The proof is easy: consider elements  $f, g \in \HomA(A, A')$ such that $Ff = Fg$. Then $GFf = GFg$ and since $G\circ F$ is faithful, then $f = g$. 
+A concrete functor is necessarily faithful, since $V$ is faithful. In general, for any functors $F: \mathcal{A} \to \mathcal{B}$ and $G: \mathcal{B} \to \mathcal{C}$, if $G \circ F$ is faithful, then $F$ is. The proof is easy: consider elements  $f, g \in \HomA(A, A')$ such that $Ff = Fg$. Then $GFf = GFg$ and since $G\circ F$ is faithful, then $f = g$. 
 \subsection{Types of arrows}
 \begin{definition}[Source and sink]
 	 A \textbf{source} is a pair $(Y, (f_i))$ consisting of an object $Y$  of a category $\mathcal{C}$, and a family of morphisms $(Y \stackrel{f_i}{\to} X_i)_{i \in I}$ over a class $I$. Equivalently it is a family of objects in the under category  $\mathcal{C}_{Y/}$. 
@@ -209,8 +218,8 @@ That is, given two maps $e \stackrel[f_2]{f_1}{\rightrightarrows} d$, if the ind
 
 The dual concept is of a \textbf{generator}, which applies to $\HomC(c, -)$.
 \end{definition}
-\subsection{Topological and algebraic categories}
-In the following we  introduce monotopological categories. 
+\subsection{Topological categories}
+In the following we  introduce topological categories. 
 
 Let $(A, U)$ be a concrete category over $\mathcal{X}$. 
 \begin{definition}[Topological functor]
@@ -221,12 +230,16 @@ A functor $\mathcal{A} \stackrel{G}{\to}\mathcal{B}$ is called \textbf{topologic
  A concrete category $(\mathcal{A}, U)$ over $\mathcal{X}$ is said to be a \textbf{topological category} if $U$ is a topological functor. 
  \end{definition}
  
- Notice here again that our intuition of such a category should come from topology, which is even reflected in its name, namely, from the construct $(\Top, U)$,  over which every source lifts initially, since the arbitrary intersection of topologies is a topology. That is, we are taking the intersection of all topologies on $A$ such that all $(UA \stackrel{f_i}{\to} UA_i)_I$ are continuous.
  
-  That means there is a systematic way to choose open sets of $UA$. In other words,  a subset $S \subset UA$ lifts to an open set in $A$ if and only if $S$ equals the preimage $Uf_i^{-1}(U(V))$ for some  $f_i \in (UA \stackrel{f_i}{\to} UA_i)_I$ and $V \in  \tau_{A_i}$ (\textcolor{red}{i.e., the topology of $A_i$: introduce this notation somewhere}).
+ Replacing "source" with "mono-source" gives us the definition of a \emph{\textbf{monotopological}} category.
+ 
+ 
+ Notice here again that our intuition of such a category should come from topology, which is even reflected in its name, namely, from the concrete category $(\Top, U)$,  over which every source lifts initially, since the arbitrary intersection of topologies is a topology. That is, we are taking the intersection of all topologies on $A$ such that all $(UA \stackrel{f_i}{\to} UA_i)_I$ are continuous.
+ 
+  That means there is a systematic way to choose open sets of $UA$. In other words,  a subset $S \subset UA$ lifts to an open set in $A$ if and only if $S$ equals the preimage $Uf_i^{-1}(U(V))$ for some  $f_i \in (UA \stackrel{f_i}{\to} UA_i)_I$ and $V \in  \Omega(A_i)$, where $\Omega(X)$ for topological space $X$ denotes the set of open sets of $X$.. 
  
 
-\textbf{Notes on free objects and the free functor}
+\subsection*{Notes on free objects and the free functor}
 
 It is important to note that in some category $\mathcal{A}$ with a representing object $A_0$ that is a free generator on one free object, it holds that $\HomA(A_0,A) \cong A$ on the level of set, as the morphisms are uniquely determined by where they send the free generator to. 
 
@@ -713,14 +726,15 @@ Consequently, in discussing the Stone duality we plan to give concrete descripti
 This will then lend itself to the intuition of the following examples, which we can in some sense think of extensions or special cases of the given dualities. 
 
 For the examples note that we may sometimes by abuse of notation and for lack of a better functorial description use $\HomA(-,\t A)$ to denote $T$, unless we denote otherwise.
-\section{Leading example}
+\section{The $\Top \rightleftarrows \Frm^{\op}$ duality}
 
 %\emph{A note about notation: When speaking about $\Hom$ sets of a general category $A$, we use the notation as before $\HomA(-,-)$. However to shorten notation and ease readability, when speaking of specific categories, such as $\Frm, \Top,$ or $\Set$, we use the notation $\Frm(-,-), \Top(-,-),$ $ \Set(-.-).$}
 
-The aim of the leading example is two-fold: first we want to concretize the maps using our general description in the first part of this paper. To this end we aim to be very explicit in this example, so that we just once get to see what these maps look like explicitly, then later we will drop the explicicity for readability. 
+The aim of discussing this example is two-fold: first we want to concretize the maps using our general description in the first part of this paper. To this end we aim to be very explicit in this example, so that we just once get to see what these maps look like explicitly, then later we will drop the explicicity for readability. 
 
 Secondly, we want to provide argumentative insight for the following examples. 
 
+For this reason we will come to refer to this example as the leading example, as it will serve as a leading example for the following.
 
 We begin with the adjunction 
 
@@ -1234,9 +1248,9 @@ This shows us that the left adjoint of the Stone duality is given as a lift of $
 	\vdash && \vdash \\
 	\Sob & {\stackrel{\cong}{\bot}} & \Spat \\
 	\vdash && \vdash \\
-	\CohTop & \bot & \CohLoc & \bot & \DLat \\
+	\CohTop & \bot & \CohLoc & \bot & \DLat^{\op} \\
 	\vdash &&&& \vdash \\
-	\Stone && {\stackrel{\cong}{\bot}} && \Bool
+	\Stone && {\stackrel{\cong}{\bot}} && \Bool^{\op}
 	\arrow["{\Omega(-)}", bend left, from=1-1, to=1-3]
 	\arrow["{\Sobb(-)}", bend left, from=1-1, to=3-1]
 	\arrow["{\pt(-)}", bend left, from=1-3, to=1-1]
@@ -1270,7 +1284,11 @@ which means we can identify $\Stone$ spaces with profinite sets.
 
 We now turn to an example that any graduate Algebra student has encountered, the duality between the category of rings and the category of affine schemes. We will use the more general category of commutative $R$-algebras, which we denote $\CAlg$. Notice that if $R = \mathbb{Z}$, then $\CAlgZ = \Ring$. 
 
-In this example we already know from commutative algebra the adjunction that gives a dual equivalence, and we can easily show that one of these adjoint functors is isomorphic to the $\Hom$ functor. For the other adjoint, it is not so easy to see that the two functors are isomorphic directly, though we can easily conclude from uniqueness of the adjoint.  We will nevertheless try to give some intuition about this isomorphism.
+This example is actually a non-example which we find nevertheless pedagogic, as it has a schizophrenic object on one side of the duality, but not the other. Moreover, given the nature of the functors at play it shall take the form of being a schizophrenic object without explicitly being one, and we shall elucidate why that is, and why we have nevertheless included it.
+
+We already know from commutative algebra the adjunction that gives a dual equivalence, and we can easily show that one of these adjoint functors is isomorphic to the $\Hom$ functor. 
+
+We will nevertheless try to give some intuition about this isomorphism.
 
 Firstly, we discuss the adjunction that one might learn in Algebra:
 
@@ -1280,45 +1298,60 @@ Firstly, we discuss the adjunction that one might learn in Algebra:
 	\arrow["\mathcal{O}(-)", bend left, from=1-3, to=1-1]
 \end{tikzcd}\]
 
-Recall that an affine scheme $X \in \Aff$ is defined as a representable functor in the functor category $\Fun(\CAlg, \Set)$ (\emph{to avoid confusion, we use the notation $\Nat_{\mathcal{A}}^{\mathcal{B}}(-,-)$, or more often when the context is clear simply $\Nat(-,-)$, to refer to the set of morphisms, or natural transformations, in an arbitrary functor category $\Fun(\mathcal{A},\mathcal{B})$.})
+Recall that an affine scheme $X \in \Aff$ is defined as a representable functor in the functor category $\Fun(\CAlg, \Set)$.
 
-Now we see that there is a natural choice for our adjunction given by sending a representable object to its functor, and sending that representable functor to its object. In other words we have $X: \CAlg^{\op} \to \Aff$ that sends $A \to X_A = \CAlg(A, -)$ and $\mathcal{O}: \CAlg \to \Set$, which sends $X(-) = \CAlg(\mathcal{O}(X), -)$ to $\mathcal{O}(X)$, its representable object.
+
+Now we see that there is a natural choice for our adjunction given by sending a representable object to its functor, and sending that representable functor to its object. In other words we have $X: \CAlg^{\op} \to \Aff$ that sends $A \mapsto X_A = \CAlg(A, -)$ and $\mathcal{O}: \CAlg \to \Set$, which sends $X(-) = \CAlg(\mathcal{O}(X), -)$ to $\mathcal{O}(X)$, its representable object.
 
 The equivalence is clear, since by construction  our unit and counit are  isomorphisms, i.e. $X_{\mathcal{O}(X)} =X$ and $\mathcal{O}(X_A) = A$. 
 
 
-Now on the one hand,  the Yoneda lemma shows us that   $\Aff(X, \mathbb{A}^1) \cong \mathbb{A}^1(\mathcal{O}(X)) = \CAlg(R[x], \mathcal{O}(X)) \cong [\mathcal{O}(X)]$. The final set isomorphism is due to the fact that $R[x]$ is a free commutative $R$-algebra on one free generator. Now we see that for any $X_A \in \Aff$ it holds that $[\mathcal{O}(X_A)] = \Aff(X_A, \mathbb{A}^1)$, and as such we have a natural choice for a schizophrenic object $(R[x], \tau, \mathbb{A}^1 )$ (\textcolor{red}{TODO} compute $\tau$ if necessary). 
+Now on the one hand,  the Yoneda lemma shows us that   $\Aff(X, \mathbb{A}^1) \cong \mathbb{A}^1(\mathcal{O}(X)) = \CAlg(R[x], \mathcal{O}(X)) \cong [\mathcal{O}(X)]$. The final set isomorphism is due to the fact that $R[x]$ is a free commutative $R$-algebra on one free generator. Now we see that for any $X_A \in \Aff$ it holds that $[\mathcal{O}(X_A)] = \Aff(X_A, \mathbb{A}^1)$, and as such our natural candidate for a schizophrenic object is $(R[x], \tau, \mathbb{A}^1 )$.
 
 
-We may use the same argument to show why $\CAlg(A, R[x])$ lifts to the category of affine schemes, and that it is isomorphic to $X(A) = \CAlg(A, -)$, however it is not obvious how to think about $\mathbb{A}^1$ as a free functor on one free generator, as elements of affine schemes are not given in the same way as they are for $R[x]$, where the element $X$ is clearly our free generator. 
 
-We may however still use Yoneda to see that $\CAlg(A, R[x]) \cong X_A(R[x]) = \Aff(\mathbb{A}^1, X_A) \cong [X_A]$, and as such our intuition thus must come from the fact that $\mathbb{A}^1$ is our free affine scheme on one free generator (\textcolor{blue}{TODO} why?) and  thus by the above equality we can think of elements of our affine scheme  as global functions from $A$ to $R[x]$.
+
 
 \[\begin{tikzcd}
-	{X_A} && TA && {\mathbb{A}^1} \\
+	A && {SX_A} && {R[t]} \\
 	\\
-	{[X_A]} && {\CAlg(A, R[x])} && {[\mathbb{A}^1]} \\
-	\\
-	A && {SX_A} && {R[x]} \\
-	\\
-	{[A]} && {\Aff(X_A, \mathbb{A}^1)} && {[R[x]]}
-	\arrow["{1_{X_A}}", from=1-1, to=1-3]
-	\arrow["V"', from=1-1, to=3-1]
-	\arrow["{e_{A,x}}", from=1-3, to=1-5]
-	\arrow["V"', from=1-3, to=3-3]
-	\arrow["V", from=1-5, to=3-5]
+	{[A]} && {\Aff(X_A, \mathbb{A}^1)} && {[R[t]]}
+	\arrow["{1_A}", dashed, from=1-1, to=1-3]
+	\arrow["U"', from=1-1, to=3-1]
+	\arrow["{d_{X_A,y}}", from=1-3, to=1-5]
+	\arrow["U"', from=1-3, to=3-3]
+	\arrow["U", from=1-5, to=3-5]
 	\arrow["\cong"', from=3-1, to=3-3]
-	\arrow["{\tau \varphi_{A, x}}"', from=3-3, to=3-5]
-	\arrow["{1_A}", from=5-1, to=5-3]
-	\arrow["U"', from=5-1, to=7-1]
-	\arrow["{d_{X_A,y}}", from=5-3, to=5-5]
-	\arrow["U"', from=5-3, to=7-3]
-	\arrow["U", from=5-5, to=7-5]
-	\arrow["\cong"', from=7-1, to=7-3]
-	\arrow["{\sigma\psi_{X_A,y}}"', from=7-3, to=7-5]
+	\arrow["{\sigma \psi_{X_A,y}}"', from=3-3, to=3-5]
 \end{tikzcd}\]
 
-Since we have a canonical choice $[X_A] \cong \CAlg(A, R[x])$ and $[A] \cong \Aff(X_A,\mathbb{A}^1)$ of set isomorphisms, fully faithfulness of the Yoneda embeddings $V$ and $U$ ensures that any morphism of lifts into $X_A$ and $A$ respectively are unique, and as such the lifts $(X_A \stackrel{e_{A,x}}{\to}\mathbb{A}^1)_{x \in [A]}$ and $(A \stackrel{d_{X_A,y}}{\to} R[x])_{y \in [X_A]}$ are initial.
+Since we have a canonical choice  $[A] \cong \Aff(X_A,\mathbb{A}^1)$ of set isomorphisms, fully faithfulness of the Yoneda embedding $U$ ensures that any morphism of lifts into $X_A$ and $A$ respectively are unique, and as such the lifts  and $(A \stackrel{d_{X_A,y}}{\to} R[t])_{y \in [X_A]}$ is initial.
+
+%$(X_A \stackrel{e_{A,x}}{\to}\mathbb{A}^1)_{x \in [A]}$
+
+The problem on the other side however is that we cannot find an appropriate concrete functor $V$ over which $\CAlg(A, R[t]) \stackrel{\tau\varphi_{A,x}}{\rightarrow} [R[t]]$ lifts to the category of affine schemes initially. 
+
+By Yoneda we see that  \begin{align*}
+	\CAlg(A, R[x]) \cong X_A(R[x]) = \Aff(\mathbb{A}^1, X_A) 
+\end{align*}
+so if we could find such a functor we would have $\Aff(\mathbb{A}^1,X_A) \cong [X_A]$ suggesting that $\mathbb{A}^1$ is a free object on one free generator, however there does not exist a functor $V$ so that this isomorphism holds. Although $\Aff$ is concrete (just take the functor $[\mathcal{O}(-)]$), such a functor does not lift $\tau\varphi_{A,x}$ in a way that can identify the set $\CAlg(A,R[t])$ with the functor $X_A$.
+
+% and that it is isomorphic to $X(A) = \CAlg(A, -)$, however it is not obvious how to think about $\mathbb{A}^1$ as a free functor on one free generator, as elements of affine schemes are not given in the same way as they are for $R[x]$, where the element $X$ is clearly our free generator. 
+%
+%We may however still use Yoneda to see that $\CAlg(A, R[x]) \cong X_A(R[x]) = \Aff(\mathbb{A}^1, X_A) \cong [X_A]$, and as such our intuition thus must come from the fact that $\mathbb{A}^1$ is our free affine scheme on one free generator (\textcolor{blue}{TODO} why?) and  thus by the above equality we can think of elements of our affine scheme  as global functions from $A$ to $R[x]$.
+%\[\begin{tikzcd}
+%	{X_A} && TA && {\mathbb{A}^1} \\
+%	\\
+%	{[A]} && {\CAlg(A, R[t])} && {[\mathbb{A}^1]}
+%	\arrow["{1_{X_A}}", dashed, from=1-1, to=1-3]
+%	\arrow["V"', from=1-1, to=3-1]
+%	\arrow["{e_{A,x}}", from=1-3, to=1-5]
+%	\arrow["V"', from=1-3, to=3-3]
+%	\arrow["V", from=1-5, to=3-5]
+%	\arrow["\cong"', from=3-1, to=3-3]
+%	\arrow["{\tau \varphi_{A,x}}"', from=3-3, to=3-5]
+%\end{tikzcd}\]
+
 %
 %Now we shall try to understand the unit and counits.
 
@@ -1456,7 +1489,7 @@ Note that $C^* \subset \kAlg$ is a full subcategory.
  Thus we can conclude that there is a natural dual adjunction between concrete categories $(\kHaus, U)$ and $(C^*, \bigcirc)$ with schizophrenic object $(D, 1_D, \mathbb{C}_a)$. 
  
  \section{Galois theory}
- Let us dive into another familiar example called the \emph{Galois correspondence}. The example we want to discuss is actually a generalization of the usual Galois correspondence, given by the following contravariant adjunction between the directed posets (\textcolor{red}{TODO} define this) of subfield extensions of the finite field extension $k \hookrightarrow M\hookrightarrow L$ and of the corresponding subgroups $H$ of the Galois group $\Gal(L/k)$:
+ Let us dive into another familiar example called the \emph{Galois correspondence}. The example we want to discuss is actually a generalization of the usual Galois correspondence from the fundamental theorem of Galois theory, given by the following contravariant adjunction between the directed posets (\textcolor{red}{TODO} define this) of subfield extensions of the finite field extension $k \hookrightarrow M\hookrightarrow L$ and of the corresponding subgroups $H$ of the Galois group $\Gal(L/k)$:
  
  \[\begin{tikzcd}
 	{\{L|M|k\} }^{\op} & \bot & {\{H \leq \Gal(L/k)\}}
@@ -1466,90 +1499,175 @@ Note that $C^* \subset \kAlg$ is a full subcategory.
 
 That is to say ${\{L|M|k\} }^{\op}$ is codirected since $L|k$ is an initial object of the poset, and similarly ${\{H \leq \Gal(L/k)\}}$ is directed  since $\Gal(L/k)$ is terminal, corresponding to the full subgroup $\Gal(L/k)$. 
 
-However the schizophrenic object doesn't live in the above adjunction, for that we consider a more general adjunction, which we can derive from the above adjunction in the following way. 
+It is easily checked that this defines an adjunction, however the schizophrenic object doesn't live here, so we would like to focus on a more general adjunction, which we can derive from the above adjunction in the following way. 
 
-The first important consideration is that we want our left (and by consequence, our right) category to include the separable closure of $k$, which we denote $k^s$, and naturally, all its intermediate finite field extensions. Intuitively, we want a field extension which contains all Galois extensions of $k$ as intermediate field extensions (that is, we want that $k^s/L$ is Galois, not $L/k$), i.e. our field extensions should be normal \emph{and} separable. 
+The first important consideration is that we want our left (and by consequence, our right) category to include the separable closure of $k$, which we denote $k_s$, and naturally, all its intermediate finite field extensions. Intuitively, we want a field extension $k_s$ whose intermediate field extensions $k^s|L$ are all normal \emph{and} separable. 
 
-That's why we take $k^s$ and not $ \bar k$,  the algebraic closure of $k$. For perfect fields, where every algebraic extension is separable,  we have $k^s = \bar k$, by definition. However in general, we only have $k^s \subset \bar k$ so we cannot guarantee that an arbitrary algebraic extension of $k$ is separable.
+That's why we take $k_s$ and not $ \bar k$,  the algebraic closure of $k$. For perfect fields, where every algebraic extension is separable,  we have $k_s = \bar k$, by definition. However in general, we only have $k_s \subset \bar k$ so we cannot guarantee that an arbitrary algebraic extension of $k$ is separable.
 
 
-To be sufficiently general we consider the category $\CAlgk$  of commutative unital $k$-algebras with $k$-algebra homomorphisms. 
+Now from the above left adjoint functor one may obtain an adjunction with respect to the set of cosets of each subgroup $H$ in $\Gal(k_s/k) =: G$, which has a canonical $G$-action on it.
 
-The second important consideration is that the above left adjoint functor induces an adjunction with respect to the quotient groups of Galois groups under normal subgroups, or more generally the set of cosets of each subgroup $H$ in $\Gal(k^s/k) =: G$.
-
-Explicitly this is a map $L|k \mapsto \CAlgk(L, k^s)$. That is, \begin{align*}\CAlgk(L, k^s) \cong \Gal(k^s/k)/\Gal(k^s/L)	
- \end{align*}
- (\textcolor{red}{TODO}: Show this (make sure its even true), and also think about how $\Gal(k^s/L)$ is distinguished from $\CAlgk(L, k^s)$, intuitively speaking). 
+Explicitly this is a map $L|k \mapsto \CAlgk(L, k_s)$, where $\CAlgk(L, k_s)$  can be given by $ \Gal(k_s/L) \setminus \Gal(k_s/k)$ (this shall be clear by the end of this section).
  
- For any finite field extension $L|k$, homomorphisms into the closure $k^s$ are given by maps which permute the roots of the minimal polynomials over $k$ of the finite generators of $L|k$. (\textcolor{red}{TODO} refer to literature) That also means in this case that the set $\CAlgk(L,k^s)$ is finite. Indeed, there is a natural $G$-action on it,  induced by the canonical $G$-action on $k^s$ which defines $G$ in the first place. Since every element of $k^s$ is a separable root over  $k$, this canonical $G$-action is completely determined by how its elements permute the roots of separable polynomials with coefficients in $k$.
+ For any finite field extension $L|k$, homomorphisms into the closure $k_s$ are given by maps which permute the roots of the minimal polynomials over $k$ of the finite generators of $L|k$. For background reading one may consider any introductory textbook on Galois theory, such as \emph{Bosch - Algebra}, where this claim follows directly from Lemma 3.4/8. 
+ 
+ Since every element of $k_s$ is a separable root over  $k$, the canonical $G$-action on $k_s$ which defines $G$ in the first place is completely determined by how its elements permute the roots of separable minimal polynomials with coefficients in $k$.
+ \subsection*{Schizophrenic object of $\CAlgk \rightleftarrows \GSet$ duality}
+ 
+ In the following we shall want to show explicitly that the generalized Galois adjunction fits the schizophrenic framework to be considered a concrete duality.
+  
+ To be sufficiently general we consider the category $\CAlgk$  of commutative unital $k$-algebras with $k$-algebra homomorphisms, and the category $\GSet$ of sets with a $\Gal(k_s/k)$-action and $G$-equivariant maps between them, and we plan to show that $(k_s, 1_{k_s}, k_s)$ is a schizophrenic object which induces the following adjunction 
+  \[\begin{tikzcd}
+	\CAlgk & \bot & \GSet
+	\arrow["{\CAlgk(-, k_s)}", shift left=3, bend left, from=1-1, to=1-3]
+	\arrow["{\GSet(-, k_s)}", bend left, from=1-3, to=1-1].
+\end{tikzcd}\]
 
-Now  we should seek lifts of the evaluation maps $\CAlgk(L,k^s) \to [k^s]$ in a way that preserves the $G$-action, which are called $G$-equivariant maps, which just means we can define the $G$-action of our lift of $\CAlgk(L,k^s)$ pointwise on $k^s$, since \begin{align*}
+%That also means in this case that the set $\CAlgk(L,k_s)$ is finite. 
+First  we should seek $G$-equivariant lifts of the evaluation maps $\CAlgk(L,k_s) \to [k_s]$, i.e. lifts that preserves the $G$-action, which just means we can define the $G$-action of our lift of $\CAlgk(L,k_s)$ pointwise on $k_s$, since \begin{align*}
 	(g \varphi)(x) := \ev_{x,L}(g \cdot \varphi) =  g \cdot  \ev_{x, L}(\varphi) = g \cdot \varphi(x).
 \end{align*}
 
-Since $k^s$ comes with a canonical action, we know $L|k \mapsto \CAlgk(L, k^s)$ lifts to the category $\GSet$, consisting of sets with a $G$-action and $G$-equivariant homomorphisms between them.
+Since $k_s$ comes with a canonical action, we know $L|k \mapsto \CAlgk(L, k_s)$ lifts to the category $\GSet$.
 
-But there is nothing specific about the canonical action for the above equalities to hold, so that for any $G$-action $\star$ on $k^s$ there  automatically exists a lift of $\CAlgk(L,k^s) \to [k^s]$ whose $G$-action is defined pointwise by $\star$. 
+Note that there is nothing specific about the canonical action for the above equalities to hold, so that for any $G$-action $\star$ on $k_s$ there  automatically exists a lift of $\CAlgk(L,k_s) \to [k_s]$ whose $G$-action is defined pointwise by $\star$. 
 
-However, we want a lift of the evaluation  $\ev_{x,L}:\CAlgk(L,k^s) \to [k^s]$ to exist for all $L \in \CAlgk$ and all $x \in L$. 
+%We want a lift of the evaluation  $\ev_{x,L}:\CAlgk(L,k_s) \to [k_s]$ to exist for all $L \in \CAlgk$ and all $x \in L$, so 
 
+But we have good reason to consider the canonical $G$-action on $k_s$. Remember as a schizophrenic object this $G$-action must be fixed.
 
-Since $G$ is a group of autormorphisms on $k^s$, a $G$-equivariant map 
-	$\CAlgk(f,k^s): \CAlgk(L',k^s) \stackrel{- \circ f}{\to} \CAlgk(L,k^s)
-$ means \begin{align*} g \cdot  \CAlgk(f,k^s) (\varphi) = g \cdot (\varphi \circ f) = (g \cdot \varphi) \circ f = \CAlgk(f,k^s)(g \cdot \varphi)
- \end{align*}
-holds. If ones sets the action to be postcomposition, i.e., $g \cdot_{\CAlgk(L,k^s)} \varphi = g \circ \varphi$ for each $L \in \CAlgk$ then the equality is satisfied for all $g \in G$. 
+The question then becomes, given this $G$-action on $k_s$, can we derive a obtain a different $G$-action on $\CAlgk(L,k_s)$ than the one we defined above?
 
-Notice that such a $G$-equivariant map which is compatible with lifts of the evaluation maps is given by a natural transformation $\CAlgk(-,k^s) \stackrel{\eta}{\implies}  \CAlgk(-,k^s)$, who by Yoneda is given by unique $k^s$-automorphisms $u_g: k^s \to k^s$, so that such an action is given by a group homomorphism $\theta: G \to G$, which sends $g \to u_g$. As such a $G$-equivariant map $f$ satisfies the equality \begin{align*}
+Explicitly the inhereted $G$-action on $\CAlgk(L,k_s)$ is given by  postcomposition, i.e., $g \cdot_{\CAlgk(L,k_s)} \varphi = g \circ \varphi$ for each $L \in \CAlgk$. As $G$ is a group of autormorphisms on $k_s$, a $G$-equivariant map 
+	$\CAlgk(f,k_s): \CAlgk(L',k_s) \stackrel{- \circ f}{\to} \CAlgk(L,k_s)
+$ means \begin{align*} g \cdot (\varphi \circ f) = (g \cdot \varphi) \circ f  \end{align*}
+holds. For postcomposition the equality is satisfied for all $g \in G$. 
+
+Notice that such a $G$-equivariant map which is compatible with lifts of the evaluation maps is given by a natural transformation $\CAlgk(-,k_s) \stackrel{\eta}{\implies}  \CAlgk(-,k_s)$, who by Yoneda is given by unique $k_s$-automorphisms $u_g: k_s \to k_s$, so that such an action is given by a group homomorphism $\theta: G \to G$, which sends $g \mapsto u_g$. As such, a $G$-equivariant map $f$ satisfies the equality \begin{align*}
 	g \cdot (\varphi \circ f) = (\theta(g) \circ \varphi)(f).
 \end{align*}
-Notice that means that the canonical $G$-action is given by $\theta = 1_G$. And in our set up we want a  $G$-action on $k^s$ such that for all $g \in G$ and $\varphi \in \CAlgk(L,k^s)$ we have \begin{align*}
+We want to show that $\theta = 1_G$. 
+
+In our set up we want a $G$-action on $\CAlgk(L,k_s)$ such that for all $g \in G$ and $\varphi \in \CAlgk(L,k_s)$ we have \begin{align*}
 	g \cdot \varphi(x) = g \cdot \ev_{x,L}(\varphi) = \ev_{x,L}(\theta(g) \circ \varphi) = (\theta(g) \circ\varphi)(x).
 \end{align*}
-Since this must hold for all $L \in \CAlgk$ and all $x \in L$ and all $\varphi \in \CAlgk(L, k^s)$, it must hold in particular for $L=k^s$ and $\varphi = 1_{k^s}$, then the above equality becomes $g(x) = \theta(g)(x)$ for all $x \in k^s$ and $g \in G$. Indeed this lift only  exists if it is the canonical one, i.e. if $\theta = 1_G$, and so such a lift is  initial.
+Since this must hold for all $L \in \CAlgk$, $x \in L$ and all $\varphi \in \CAlgk(L, k_s)$, it must hold in particular for $L=k_s$ and $\varphi = 1_{k_s}$, then the above equality becomes $g(x) = \theta(g)(x)$ for all $x \in k_s$ and $g \in G$. Indeed this lift only  exists if it is the canonical one, i.e. if $\theta = 1_G$.
 
-On the other side, we want to show that $\GSet(H,k^s)$ lifts initially to $\CAlgk$, where we take $k^s$ to be equipped with the canonical $G$-action.
+That means there is only one way to lift $\CAlgk(L,k_s) \to [k_s]$ to $\GSet$ if $k_s$ is considered with the canonical $G$-action, and therefore such a lift is  initial.
 
-It is easily checked that the field axioms can be defined pointwise in $k^s$. 
+On the other side, we want to show that $\GSet(H,k_s)$ lifts initially to $\CAlgk$, where we take $k_s$ to be equipped with the canonical $G$-action.
 
-Moreover, since $G$ fixes $k$, then we have $\const_a \in \GSet(H,k^s)$ for each $a \in k $, since $	\const_a(\theta(g)\cdot y) = g \circ \const_a(y)$ holds true for all $g \in G$ and independent of $\theta$. That means for any $G$-equivariant map $H \to H'$ the induced map $\GSet(H',k^s) \to \GSet(H,k^s)$ is stable on these constant functions. Therefore $\GSet(H,k^s) \in \CAlgk$. Moreover this lift is clearly functorial in $H$, since composition preserves all pointwise operations. 
+It is easily checked that the ring axioms can be defined pointwise in $k_s$. 
 
-Any other $\CAlgk$-morphism whose underlying set map is compatible with  all  evaluation maps $\GSet(H,k^s) \stackrel{\ev_{y,H}}{\rightarrow} [k^s]$ must factor uniquely through our lift of $\GSet(H,k^s) $, since $\CAlgk$-morphisms into $k^s$ are uniquely determined by permutation of roots in $k^s$, permutations which are defined on the set level.
+Since $G$ fixes $k$, then we have $\const_a \in \GSet(H,k_s)$ for each $a \in k $, since $	\const_a(\theta(g)\cdot y) = g \circ \const_a(y)$ holds true for all $g \in G$ and independent of $\theta$. That means for any $G$-equivariant map $H \to H'$ the induced map $\GSet(H',k_s) \to \GSet(H,k_s)$ is stable on these constant functions. In other words it commutes with the map $k \stackrel{\gamma}{\rightarrow}\GSet(H,k_s)$, which sends $a \mapsto \const_a$, which defines a ring homomorphism, so that $\GSet(H,k_s) \in \CAlgk$. Moreover this lift is clearly functorial in $H$, since composition preserves all pointwise operations. 
+
+Therefore we can determine our $\CAlgk$ object by the datum $(\GSet(H,k_s), +, \cdot, \gamma)$. And let $e_{y,H}$ be the lift of $\ev_{y,H}$ to $\CAlgk$.  
+
+Now let $(\oplus, \otimes, \gamma')$ be any other $\CAlgk$ structure on $\GSet(H,k_s)$ such that every $\ev_{y,H}$ lifts to a $\CAlgk$-morphism $e_{y,H}'$. Then \begin{align*}
+ 	(f \oplus g)(y) = e_{y,H}'(f \oplus g) =& e_{y,H}'(f) + e_{y,H}'(g)\\ =& f(y)+g(y) = e_{y,H}(f) +e_{y,H}(g)\\ =& e_{y,H}(f+g)  = (f+g) (y)
+ \end{align*}
+for all $y \in H$ and $H \in \GSet$, so that $f \oplus g = f +g$. Similarly we get $f \otimes g = f \cdot g$ and $\gamma = \gamma'$. Therefore our pointwise algebra structure is the unique $\CAlgk$ structure making all evaluation maps $\CAlgk$-morphisms, and in particular, it is the \emph{initial} such lift.  
+
+%Any other $\CAlgk$-morphism whose underlying set map is compatible with  all  evaluation maps $\GSet(H,k_s) \stackrel{\ev_{y,H}}{\rightarrow} [k_s]$ must factor uniquely through our lift of $\GSet(H,k_s) $, since $\CAlgk$-morphisms into $k_s$ are uniquely determined by permutation of roots in $k_s$, permutations which are defined on the set level.
 
 This is analogous to many familiar examples where we derived our structure pointwise from the structure of our schizophrenic object, and as a result such a structure is the weakest such compatible structure, i.e. an initial lift.
+
+%\[\begin{tikzcd}
+%	{K'} && TH && {k_s} \\
+%	\\
+%	{[K']} && {\GSet(H,L^k)} && {[k_s]}
+%	\arrow[dashed, from=1-1, to=1-3]
+%	\arrow[from=1-1, to=3-1]
+%	\arrow["{e_{y,H}}", from=1-3, to=1-5]
+%	\arrow[from=1-3, to=3-3]
+%	\arrow[from=1-5, to=3-5]
+%	\arrow["h", from=3-1, to=3-3]
+%	\arrow["{\ev_{y,H}}", from=3-3, to=3-5]
+%\end{tikzcd}\]
 %
 %
-%(\textcolor{blue}{TODO} show that $\GSet(H,k^s)$ lifts initially to $\CAlgk$, I still don't know, but idea is that  a $G$-equivariant map of some set should determine some Galois subfield extension since its "part of that action" being preserved by a map. Determine how this set of maps should look like, and what exactly is the datum of the $G$-set as well as datum of the $\CAlgk$; How big or small is this hom-set? Is there a function for every element of the field, or is it enough to realize the datum in some sense as that of the generating elements of the extension? ). 
+%(\textcolor{blue}{TODO} show that $\GSet(H,k_s)$ lifts initially to $\CAlgk$, I still don't know, but idea is that  a $G$-equivariant map of some set should determine some Galois subfield extension since its "part of that action" being preserved by a map. Determine how this set of maps should look like, and what exactly is the datum of the $G$-set as well as datum of the $\CAlgk$; How big or small is this hom-set? Is there a function for every element of the field, or is it enough to realize the datum in some sense as that of the generating elements of the extension? ). 
 
 
-All together we have schizophrenic object $(k^s,1_{k^s},k^s)$ which induces the following dual adjunction
+Therefore our triple $(k_s,1_{k_s},k_s)$ is indeed a schizophrenic object, which means the diagram we gave at the beginning of this section is in fact a well defined adjunction, as it is the induced adjunction of our schizophrenic object.
+
+\subsection*{Restricting to an equivalence of categories}
+
+Even though at this point the goal of this example, showing that we have a concrete duality, is complete, we would like to continue our discussion to bring us back to concrete Galois theory.
+
+That is we would like to work only with the objects that we see in Galois theory, in particular, with finite extensions of $k$, as opposed to general algebras over $k$. 
+
+Given a finite separable field extension $L|k$, the set $\CAlgk(L,k_s)$ is finite and the $G$-action it inherits is transitive [Szam]. In particular, our above adjunction restricts to the following dual equivalence:
 
 
  \[\begin{tikzcd}
-	\CAlgk & \bot & \GSet
-	\arrow["{\CAlgk(-, k^s)}", shift left=3, bend left, from=1-1, to=1-3]
-	\arrow["{\GSet(-, k^s)}", bend left, from=1-3, to=1-1]
+	\{\text{finite separable extensions of } k \}^{\op} & \stackrel{\cong}{\bot} & \GFSet_{\text{transitive}}
+	\arrow["{\CAlgk(-, k_s)}", shift left=3, bend left, from=1-1, to=1-3]
+	\arrow["{\GSet(-, k_s)}", bend left, from=1-3, to=1-1]
 \end{tikzcd}\]
 
-%$\{k^s|L|k\} $ ${\{H \leq \Gal(L/k)\}}$
-This adjunction restricts to the categories $\ket$ of finite dimensional $k$-algebras which are isomorphic to a finite product of separable field extensions with the usual $k$-algebra homomorphisms between them, and the category $\GFSet$ of finite $G$-sets and the usual $G$-equivariant maps between them. 
+One may refer to Theorem 1.5.2 in \emph{Szamuely} to see that the left adjoint functor induces a dual equivalence. We will indeed inadvertantly end up reproving this, however, our goal in this part is rather to underline what some constituents of this adjunction look like as we're now in a position to see our lifts a little more concretely.
+
+Firstly, for a finite field extension $L|k$ we have an explicit description of $\CAlgk(L,k_s)$ as a set of homomorphisms which permute the roots of minimal polynomials of the generators of $L$. This is clearly a transitive finite $G$-set, since $G$ permutes these finite roots transitively.
+
+From the proof of Theorem 1.5.2 we also know that any transitive $G$-set $H$ is given as $\CAlgk(L,k_s)$ for some finite field extension $L$ by the assignment $g \circ \iota = g \cdot x$ for some $x \in H$, where $\iota: L \to k_s$ is the inclusion homomorphism. It is a group theoretic fact that then this is isomorphic to the left coset space $U_x \setminus G$, where $U_x$ is the stabilizer of $x$. 
+
+That means a transitive $G$-set is encoded by the information of the stabilizer $U_x$ of $x \in H$. This will be important to understand what finite field extension $\GSet(H,k_s)$ is. 
+
+Consider that $\GSet(H,k_s) = \GSet(\CAlgk(L,k_s),k_s)$ for some finite separable field extension $L|k$. We want both an explicit description of  $L$ that only depends on the $G$-action of $H$, and to see why  $\GSet(\CAlgk(L,k_s),k_s) = L$.
+
+Notice that a $G$-equivariant map $ H \stackrel{f}{\to} k_s$ is completely determined by the image of a single element $x \in H$, since transitivity of $H$ and the $G$ action on $k_s$ give us a full description of $f$ via \begin{align*}
+	f(g\cdot x) = g \cdot f(x).
+\end{align*}
+
+Remember that $U_x$ is a subgroup of $G$, so that by the fundamental theorem it fixes a Galois extension $L' = (k_s)^{U_x}$. We want to see that indeed $L' = L$. 
+
+We show first that the map  $\GSet(H,k_s) \stackrel{\psi}{\rightarrow} (k_s)^{U_x}$ given by $ f \mapsto f(x)$ is a bijection. 
+
+For any $h \in U_x$ we have $f(x) = f(h \cdot x) = h \cdot f(x)$ by $G$-equivariance, so that $U_x$ fixes $f(x)$. 
+
+For an inverse consider $a \mapsto f_a$ where $f_a(x) = a$, given by $f_a(g \cdot x) = g \cdot a$. We just want to see that $f_a$ is well defined and $G$-equivariant. 
+
+If $g_1 \cdot x = g_2 \cdot x$ then $ g_2^{-1}\cdot g_1 \in U_x$, which means $g_1 \cdot a = g_2 (g_2^{-1} g_1) \cdot a = g_2 \cdot a$. 
+
+Given $g' \in G$ and that $y = g \cdot x$, we have \begin{align*}
+	f(g' \cdot y) = f(g' \cdot (g \cdot x)) = f((g'g)\cdot x) = (g'g) \cdot a = g' \cdot (g \cdot a) = g'\cdot (f(g\cdot x)) = g'\cdot f(y).
+\end{align*}
+It is easily checked that these maps are inverse to one another.
+
+Now replacing $H$ with $\CAlgk(L,k_s)$, we can use an analog to the above well-definedness argument to show why the stabilizer of $\iota$ is exactly $U_x$. And as $\iota$ is just the inclusion we have then $h(a) = a$ for any $a \in L$ and all $h \in U_{x}$, so that $L \subset (k_s)^{U_x}$.
+
+For the other inclusion we simply see use the fact that any finite field extension is given as a fixed field of some subgroup of $G$, so that our stabilizer $U_{\iota} = \{ g \in G \lvert g \circ \iota = \iota \}$ is exactly  $\Gal(k_s/L)$. That means if $g(a) = a$ for all $a \in (k_s)^{U_x}$, then $a \in L$. 
+
+Therefore $L|k = \GSet(\CAlgk(L,k_s),k_s)$. Using this we can also derive directly that  $H = \CAlgk(\GSet(H,k_s),k_s))$, since restating gives us \begin{align*}
+	\CAlgk(\GSet(H,k_s),k_s))= \CAlgk(k_s^{U_x},k_s) = \Gal(k_s/k_s^{U_x}) \setminus \Gal(k_s/k) = U_x \setminus G = H
+\end{align*}
+
+
+%$\{k_s|L|k\} $ ${\{H \leq \Gal(L/k)\}}$
+This adjunction will then extend to another subdual equivalence of the Galois correspondence, namely between the full subcategory $\ket \subset \CAlgk$ of finite dimensional algebras over $k$, defined to be isomorphic to a finite product of finite separable field extensions, and the full subcategory $\GFSet \subset \GSet$ of finite $G$-sets:
 
  \[\begin{tikzcd}
 	\ket^{\op} & \stackrel{\cong}{\bot} & \GFSet
-	\arrow["{\CAlgk(-, k^s)}", shift left=3, bend left, from=1-1, to=1-3]
-	\arrow["{\GSet(-, k^s)}", bend left, from=1-3, to=1-1]
+	\arrow["{\CAlgk(-, k_s)}", shift left=3, bend left, from=1-1, to=1-3]
+	\arrow["{\GSet(-, k_s)}", bend left, from=1-3, to=1-1]
 \end{tikzcd}\]
 
-To see this we just check that $L|k = \GSet(\CAlgk(L,k^s),k^s)$ and we check that $H = \CAlgk(\GSet(H,k^s),k^s))$. (\textcolor{red}{TODO}: prove this or refer to usual essential surj + fully faithful proof from literature)
+For this we only remark that any $G$-set can be seen as a disjoint union of transitive $G$-sets over each $G$-orbit, and that \begin{align*}
+	\CAlgk(\prod_I L_i, k) = \coprod_I\CAlgk(L_i,k)
+\end{align*}
+where $I$ is the finite index set of the set of orbits $G \setminus \CAlgk(\prod_I L_i, k)$. For details see \emph{Szamuely}.
 
-Just as a side remark,  if our subfield extension $M|k$ is $Galois$, that is,  it is a \emph{normal} (separable, algebraic) field extension, i.e. $M$ contains the roots of every polynomial over itself, then the fundamental theorem of Galois theory states that $\Gal(k^s/M) \unlhd \Gal(k^s/k)$. This gives us a Galois group over a different functor, namely the functor $\Gal(-/k)$ which yields a profinite system $({k^s|M|k} , Gal(M/k))$.
 
-Consider that $k^s|k = \colim_{\{k^s|L|k\}}L|k$, then corespectively we have \begin{align*}
-	\Gal(k^s/k)=& \CAlgk(\colim_{\{k^s|L|k\}}L, k^s)\\ =& \lim_{\{k^s|L|k\}}\CAlgk(L,k^s)\\ =& \lim_{\{k^s|L|k\}}\Gal(k^s/k)/\Gal(k^s/L)
+As a side remark,  if our subfield extension $L|k$ is $Galois$, that is,  it is a \emph{normal} (separable, algebraic) field extension, i.e. $L$ contains the roots of every polynomial over itself, then the fundamental theorem of Galois theory states that $\Gal(k_s/L) \unlhd \Gal(k_s/k)$. This gives us a Galois group over a different functor, namely the functor $\Gal(-/k)$ which yields a profinite system $({k_s|L|k} , \Gal(L/k))$.
+
+Consider that $k_s|k = \colim_{\{k_s|L|k\}}L|k$, then we have \begin{align*}
+	\Gal(k_s/k)=& \CAlgk(\colim_{\{k_s|L|k\}}L, k_s)\\ =& \lim_{\{k_s|L|k\}}\CAlgk(L,k_s)\\ =& \lim_{\{k_s|L|k\}}\Gal(k_s/k)/\Gal(k_s/L)\\
+	=& \lim_{\{k_s|L|k\}} \Gal(L/k)
 \end{align*}
 
-so $\Gal(k^s/k)$ can be realized as a profinite set, which is necessarily uncountable. 
-
+so that $\Gal(k_s/k)$ can be realized as a profinite group.
 
 % (\textcolor{red}{TODO}: finish this part, if necessary, but the basic structure is the following: show that $\kSp$ is a monotopological category, show that monotopological categories admit function spaces... if theres an easier way to do it we may not need to define lifts and topological categories, so do that later)
  
@@ -1613,7 +1731,7 @@ so $\Gal(k^s/k)$ can be realized as a profinite set, which is necessarily uncoun
 	\item How do I introduce subjects and where do i draw the line for assumed knowledge and not.
 	\item $\mathbb{A}^1$ is a free object on one free generator in $\Aff$
 	\item Why do we know that Kelleyfied products and kelleyfied function spaces with the compact open topology are the categorical products and exponentials in $\kSp$
-	\item $\GSet(H, k^s)$ lifts to $\CAlgk$ (possible for later)
+	\item $\GSet(H, k_s)$ lifts to $\CAlgk$ (possible for later)
 	\item $X \times_k Y = X \times Y$ for $X$ locally compact, $Y \in \kSp$
 	\item ask Georg if pointwise order preserving evaluation morphism into $\mathbb{2}$ preserves finite limits and colimits by some pointwise argument in the presheaf category
 	\item why  is $C^*(X) \subset C(X)$
