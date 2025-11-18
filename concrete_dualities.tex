@@ -73,7 +73,8 @@
 \DeclareMathOperator{\Lat}{Lat}
 \DeclareMathOperator{\charr}{char}
 \DeclareMathOperator{\const}{const}
-
+\DeclareMathOperator{\Boolf}{FinBool}
+\DeclareMathOperator{\id}{id}
 
 
 
@@ -614,13 +615,13 @@ Dual adjunctions which are not induced by a schizophrenic object are called \emp
 		\item[WSO2.] For every $B \in \mathcal{B}$ the family $(\sigma\psi_{B,y}: \HomB(B, \t B) \to [\t A])_{y \in [B]}$ admits a $U$-structured lift $(d_{B,y}:S'B \to \t A)_{y \in [B]}$ which extends functorially.
 	\end{enumerate}
 	
-Though $(S',T')$ determins a triple, such a triple does not necessarily induce $(S',T')$ like the schizophrenic object induces $(S,T)$. In particular, a non-natural dual adjunction is not a dual equivalence, i.e., $\epsilon$ and $\eta$ are not natural isomorphisms. (\textcolor{red}{TODO/Question:} Why are $\epsilon$ and $\eta$ not isomorphisms?).
+Though $(S',T')$ determins a triple, such a triple does not necessarily induce $(S',T')$ like the schizophrenic object induces $(S,T)$. 
 
 However, if we are in this situation, there are potential modifications which may give us a natural dual adjunction. There are in particular two methods which we will remark. 
 
 Firstly, one may use the triple $(\t A, \tau, \t B)$ to induce a natural dual adjunction $(S,T)$ on the concrete categories $(\mathcal{A}, U)$ and $(\mathcal{B},V)$. Such a method requires additional assumptions on $(\mathcal{A},U)$ and $(\mathcal{B},V)$ which we will not discuss. For more details, see [1 1-D]. 
 
-The second method is the one which we will later see in action in our examples, which is to restrict our dual adjunction to full subcategories of our categories under which the unit and counit are isomorphisms. 
+The second method is the one which we will later see in action in our examples, which is to restrict our  adjunction to full subcategories of our categories under which we have an equivalence. 
 
 In the next part we will discuss a situation which induces a non-natural dual adjunction between concrete categories.
 \subsection{Internal Hom-Functors}
@@ -849,7 +850,7 @@ In general, our schizophrenic object will not necessarily be initial in arbitrar
 
 Before we begin we would like to call attention to the fact that the Stone duality is wrought with interesting subdualities, some of which are themselves examples. It is not explicit yet what we mean by subduality, since here we are using it in a more broad sense, however in this section we will make that explicit. Though describing these subdualities may feel like a diversion, we find they actually elucidate the structure of the Stone duality as well as provide us with intuition for the following examples, so we plan to describe them.
 
-Our strategy is as follows: first we describe a the natural dual adjunction between $\FinSet$ and $\Bool_{fin}$, which we will later see, can be obtained by restricting the Stone duality to full subcategories. However that is not how we will be constructing the Stone duality. 
+Our strategy is as follows: first we describe a the natural dual adjunction between $\FinSet$ and $\Boolf$, which we will later see, can be obtained by restricting the Stone duality to full subcategories. However that is not how we will be constructing the Stone duality. 
 
 We start with this example because it is easier to understand and provides some groundwork for the following dualities.
 
@@ -868,18 +869,14 @@ Before we speak about the Stone duality we plan to discuss one of its subdualiti
 	
 	If $\mathcal{A}' \subset \mathcal{A}$ and $\mathcal{B}' \subset \mathcal{B}$ are subcategories on which $S$ and $T$ restrict to a duality, we call $\mathcal{A}'^{\op} \rightleftarrows \mathcal{B}'$ given by  $T \lvert_{\mathcal{A}'}: \mathcal{A}^{\op} \to \mathcal{B}$ and $S\lvert_{\mathcal{B}'}: \mathcal{B}' \to \mathcal{A}'^{\op}$ a \emph{\textbf{subduality}} of $\mathcal{A}^{\op} \rightleftarrows \mathcal{B}$. 
 \end{definition} 
-Note that however in the following section we will use the term subduality more loosely to also refer to dualities for which the duality in question is a subduality (one might define it analogously as superduality), or dualities which arise by restriction/extension and composition/decomposition.
+Note that we may change perspective from talking about subdualities of the leading example, or of the Stone duality. 
 
- That is to say, we will refer to every horizontal duality of the big diagram at the end of this section loosely as a subduality of the Stone duality, even though the Stone duality is at the bottom and given by an extra composition.
- 
- That is because the only relevant aspect of them for our discussion is that these dualities are connected, then it just becomes a matter of perspective, and moreover a stricter definition would serve to become very confusing and unnecessary.
+The first subduality we will discuss is a subduality of the Stone duality.
 
-That being said, the first subduality we will discuss is a subduality, in the strict sense, of the duality we plan to develop in this section, the Stone duality.
-
-Consider the category $\Bool$ of Boolean algebras and boolean algebra homomorphisms between them. We claim there is an adjunction between $\Bool_{fin}$ and $\FinSet$ given by $\Ult(B)$, which sends a boolean algebra $B$ to the set $\Ult(B)$ of ultrafilters on $B$, and by $\mathcal{P}(X)$, which sends a set $X$ to its power-set.
+Consider the category $\Bool$ of Boolean algebras and boolean algebra homomorphisms between them. We claim there is an adjunction between $\Boolf$ and $\FinSet$ given by $\Ult(B)$, which sends a boolean algebra $B$ to the set $\Ult(B)$ of ultrafilters on $B$, and by $\mathcal{P}(X)$, which sends a set $X$ to its power-set.
 
 \[\begin{tikzcd}
-	 \FinSet^{\op}& \bot & \Bool_{\text{fin}} 
+	 \FinSet& \bot & \Boolf^{\op}
 	\arrow["{\mathcal{P}(-)}", shift left=2, bend left, from=1-1, to=1-3]
 	\arrow["{\Ult(-)}", shift left=3, bend left, from=1-3, to=1-1]
 \end{tikzcd}\]
@@ -933,7 +930,7 @@ Conversely if $F$ is an ultrafilter, then it cannot contain the complement of an
 %The ultrafilter condition implies that a filter cannot contain the complement of any of its elements, which is just $\neg f(A) = f(\neg A)$. And conversely to separate complements out of the filter via a lattice homomorphism gives the ultrafilter condition, since finite limit preservation and complementation implies $\emptyset \notin F := f^{-1}(1)$ for one direction, and for the other direction supposing $A \in I: = f^{-1}(0)$ then $\neg A \in F $, but  $A \cap \neg A = \emptyset$ contradicting our assumption implying $A \in F$. 
 
 
-\emph{Note that frame homomorphisms additionally require preservation of arbitrary colimits, which simply upgrades the prime condition to completely prime, i.e. $\bigvee a_i \in F \implies \exists i \in I: a_i \in F$. However in our above setting of $A$ in $\Bool_{fin}$, this is no condition at all.
+\emph{Note that frame homomorphisms additionally require preservation of arbitrary colimits, which simply upgrades the prime condition to completely prime, i.e. $\bigvee a_i \in F \implies \exists i \in I: a_i \in F$. However in our above setting of $A$ in $\Boolf$, this is no condition at all.
 }
 
 Ultimately, what a point map  $F \stackrel{f}{\rightleftarrows} \mathbb{2}$ in $\DLat$ represents is the question of which subsets of our lattice are compatible with our desired structure restrictions. 
@@ -1275,9 +1272,53 @@ This shows us that the left adjoint of the Stone duality is given as a lift of $
 	\arrow["{\Spec(-)}", bend left, from=7-5, to=7-1]
 \end{tikzcd}\]
 
-As a side remark, another reason our original equivalence of categories $\FinSet^{\op} \cong \Bool_{fin}$ might be interesting to us now is that by considering the $\Ind$ and $\Pro$ categories, we get the following equivalence:
+%\[\begin{tikzcd}
+%	\Top & \bot & \Loc & \bot & {\DLat^{\op}} \\
+%	\vdash && \vdash \\
+%	\Sob & \bot & \Spat && \cong \\
+%	\dashv && \vdash \\
+%	\CohTop & \bot & \CohLoc & \bot & {\DLat^{\op}} \\
+%	\vdash &&&& \vdash \\
+%	\Stone && \bot && \Bool \\
+%	\\
+%	\\
+%	\\
+%	\FinSet && \bot && {\Boolf^{\op}}
+%	\arrow["{\Omega(-)}", bend left, from=1-1, to=1-3]
+%	\arrow["\Sobb(-)", bend left, from=1-1, to=3-1]
+%	\arrow["{\Coh(-)}"', bend right, from=1-1, to=5-1]
+%	\arrow["{\pt(-)}", bend left, from=1-3, to=1-1]
+%	\arrow["{U(-)}", bend left, hook, from=1-3, to=1-5]
+%	\arrow["{\Spatt(-)}", bend left, from=1-3, to=3-3]
+%	\arrow["{\Coh(-)}", bend left, from=1-3, to=5-3]
+%	\arrow["{F(-)}", bend left, from=1-5, to=1-3]
+%	\arrow["{\id}", bend left, tail reversed, from=1-5, to=5-5]
+%	\arrow["{U(-)}", bend left, hook', from=3-1, to=1-1]
+%	\arrow["{\Omega(-)}", bend left, from=3-1, to=3-3]
+%	\arrow["{U(-)}", bend left, hook', from=3-3, to=1-3]
+%	\arrow["{\pt(-)}", bend left, from=3-3, to=3-1]
+%	\arrow["{U(-)}"', bend right, hook', from=5-1, to=3-1]
+%	\arrow["{\Omega(-)}", bend left, from=5-1, to=5-3]
+%	\arrow["{\Stone(-)}", bend left, from=5-1, to=7-1]
+%	\arrow["{U(-)}", bend left, hook', from=5-3, to=3-3]
+%	\arrow["{\pt(-)}", bend left, from=5-3, to=5-1]
+%	\arrow["{K(-)}", bend left, from=5-3, to=5-5]
+%	\arrow["{\id}", bend left, tail reversed, from=5-5, to=1-5]
+%	\arrow["{\Idl(-)}", bend left, from=5-5, to=5-3]
+%	\arrow["{\Bool(-)}", bend left, from=5-5, to=7-5]
+%	\arrow["{U(-)}", bend left, hook', from=7-1, to=5-1]
+%	\arrow["{\clop(-)}"', bend left, from=7-1, to=7-5]
+%	\arrow[from=7-1, to=11-1]
+%	\arrow["{U(-)}", bend left, hook', from=7-5, to=5-5]
+%	\arrow["{\Spec(-)}"', bend left, from=7-5, to=7-1]
+%	\arrow[from=7-5, to=11-5]
+%	\arrow["{\Ult(-)}"', bend left, from=11-1, to=11-5]
+%	\arrow["{\mathcal{P}(-)}", bend right, from=11-1, to=11-5]
+%\end{tikzcd}\]
+
+As a side remark, another reason our original equivalence of categories $\FinSet^{\op} \cong \Boolf$ might be interesting to us now is that by considering the $\Ind$ and $\Pro$ categories, we get the following equivalence:
 \begin{align*}
-	\Bool \cong \Ind(\Bool_{fin}) \cong \Ind(\FinSet^{\op}) \cong  \Pro(\FinSet)^{\op}
+	\Bool \cong \Ind(\Boolf) \cong \Ind(\FinSet^{\op}) \cong  \Pro(\FinSet)^{\op}
 \end{align*}
 which means we can identify $\Stone$ spaces with profinite sets.
 \section{Rings and Affine schemes}
