@@ -706,18 +706,18 @@ If the desired lifts exist, then by Theorem 4.1 we will have the following adjun
 
 An arguably equally important question which we explore in the examples is if we can give concrete descriptions of $ \HomA_{\mathcal{B}}(-,\t A)$ and $\HomB_{\mathcal{A}}(-,\t B)$ as functors which are either well-known to that category, or that we can understand given the known machinery of that category.
 
-Oftentimes we do get a concrete description, which will help solidify our intuition about these adjunctions. However, when we don't get such a description, we can still explore concrete properties of $\HomA_{\mathcal{B}}(A,\t A)$ as $\mathcal{B}$-object.
+Often times we do get a concrete description, which will help solidify our intuition about these adjunctions. However, when we don't get such a description, we can still explore concrete properties of $\HomA_{\mathcal{B}}(A,\t A)$ as $\mathcal{B}$-object.
 
 
 Therefore our motivation in the following is two-fold, to show that our candidate is indeed schizophrenic, and to provide intuition by analyzing the adjunctions a little further.
 
 
 \section{Examples}
-The rest of our thesis shall be devoted to an analysis of several specific examples (and non-examples) of a natural dual adjunctions. Our goal is not only to show that our candidates are indeed schizophrenic objects, but to build intuition for the schizophrenic object through a careful analysis of the induced adjunctions. 
+The rest of our thesis shall be devoted to an analysis of several specific examples (and non-examples) of natural dual adjunctions. Our goal is not only to show that our candidates are indeed schizophrenic objects, but to build intuition for the schizophrenic object through a careful analysis of the induced adjunctions. 
 
-We are going to start with a example which is connected to a more profound duality called the Stone duality. For this example we will like to elucidate its schizophrenic nature as it ties directly to the generality we have learned, so that we can start to get a sense for in what direct way we can lift Hom-sets.
+We are going to start with an example which is connected to a more involved duality called the Stone duality, which will be our second example. For our first example we will like to elucidate its schizophrenic nature as it ties directly to the generality we have learned, so that we can start to get a sense for in what direct way we can lift Hom-sets.
 
-Consequently, in discussing the Stone duality we plan to give concrete descriptions of these Hom-set functors, for which we had just given a more general description using only universal properties and  Hom-sets. Though we do lead with the general into the concrete, we may otherwise view our elucidation of the concrete as the mental abstraction, since we must show the actual mechanics behind why we can think of these concrete objects as lifts of the hom sets.
+Consequently, in discussing the Stone duality we plan to give concrete descriptions of these Hom-set functors, for which we had just given a more general description using only universal properties and  Hom-sets. Though we do lead with the general into the concrete, we may otherwise view our elucidation of the concrete as the mental abstraction, since we must show the actual mechanics behind why we can think of these concrete objects as lifts of Hom-sets.
 
 This will then lend itself to the intuition of the following examples, which we can in some sense think of extensions or special cases of the given dualities. 
 
@@ -725,7 +725,7 @@ For the examples note that we may sometimes by abuse of notation and for lack of
 \section{The $\Top \rightleftarrows \Frm^{\op}$ duality}
 
 %\emph{A note about notation: When speaking about $\Hom$ sets of a general category $A$, we use the notation as before $\HomA(-,-)$. However to shorten notation and ease readability, when speaking of specific categories, such as $\Frm, \Top,$ or $\Set$, we use the notation $\Frm(-,-), \Top(-,-),$ $ \Set(-.-).$}
-In this part we assume basic knowledge about topological spaces and frames. For this example we will only use how the objects and morphisms in $\Top$ and $\Frm$ are defined.  Our reference text when it comes to any discussion about posets, lattices, frames, or locales, is \emph{Johnstone}'s \emph{Stone Spaces}. 
+In this part we assume basic knowledge about topological spaces and frames. We will only use the definitions of objects and morphisms in $\Top$ and $\Frm$.  Our reference text when it comes to any discussion about posets, lattices, frames, or locales, is \emph{Johnstone}'s \emph{Stone Spaces}. 
 
 
 The aim of this discussion is two-fold: first we want to concretize the maps using our general description in the first part of this paper. To this end we aim to be very explicit in this example, so that we just once get to see what these maps look like without dropping any notation via identification, which we  do on later examples for readability. 
@@ -848,7 +848,7 @@ In general, our schizophrenic object will not necessarily be initial in arbitrar
 
 \section{Stone duality}
 
-For the following section we assume a bit more familiarity with lattice theory than the mere definitions of objects and morphisms of the corresponding categories. To that effect, we assume familiarity with distributive lattices, sub join/meet-semilattices, boolean algebras,  ideals, filters, (principal) ultrafilters, (directed and codirected) posets, frames and locales.
+For the following section we assume a bit more familiarity with lattice theory than the mere definitions of objects and morphisms of the corresponding categories. To that effect, we assume familiarity with distributive lattices, sub join/meet-semilattices, Boolean algebras,  ideals, filters, (principal) ultrafilters, (directed and codirected) posets, frames and locales.
 
 Moreover, we follow the convention of [Joh] that a sub meet-semilattice is given by the datum $(L, \land, \top)$ and a sub join-semilattice is given by the datum $(L, \lor, \bot)$, so that a lattice is given by the datum $(L, \land, \lor, \top,\bot)$. Some authors do not necessitate including $\bot$ and $\top$ and choose to differentiate between $\DLat$ and $\DLat_{\text{bdd}}$, refering to what we call a distributive lattice as a bounded distributive lattice.
 
@@ -864,11 +864,11 @@ And finally we will show why the finite duality is a restriction of the Stone du
 
 \subsection{The $\FinSet \rightleftarrows \Boolf^{\op}$ duality}
 
-Before we speak about the Stone duality we plan to discuss one of its subdualities. However we should be clear what we mean by subduality.
+Before we begin we would like to be clear about what we mean by subduality:
 
 
 
-\begin{definition}[subduality]
+\begin{definition}[Subduality]
 	Let $\mathcal{A}$ and $\mathcal{B}$ be two categories for which there exists an duality, i.e., an adjunction $\mathcal{A} \rightleftarrows \mathcal{B}^{\op}$, given by left and right adjoint functors $T: \mathcal{A} \to \mathcal{B}^{\op}$ and $S: \mathcal{B}^{\op} \to \mathcal{A}$, respectively.
 	
 	If $\mathcal{A}' \subset \mathcal{A}$ and $\mathcal{B}' \subset \mathcal{B}$ are subcategories on which $S$ and $T$ restrict to a duality, we call $\mathcal{A}' \rightleftarrows \mathcal{B}'^{\op}$ given by  $T \lvert_{\mathcal{A}'}: \mathcal{A}' \to \mathcal{B}'^{\op}$ and $S\lvert_{\mathcal{B}'}: \mathcal{B}'^{\op} \to \mathcal{A}'$ a \emph{\textbf{subduality}} of $\mathcal{A} \rightleftarrows \mathcal{B}^{\op}$. 
@@ -877,27 +877,38 @@ Note that we may change perspective from talking about subdualities of the leadi
 
 The first subduality we will discuss is a subduality of the Stone duality.
 
-Consider the category $\Bool$ of Boolean algebras and boolean algebra homomorphisms between them. We claim there is an adjunction between $\Boolf$ and $\FinSet$ given by $\Ult(B)$, which sends a finite boolean algebra $B$ to the set $\Ult(B)$ of ultrafilters on $B$, and by $\mathcal{P}(X)$, which sends a finite set $X$ to its power-set.
+Consider the category $\Boolf$ of finite Boolean algebras and Boolean algebra homomorphisms between them. Let $\Ult(-)$ be the functor which sends a finite Boolean algebra $B$ to the set $\Ult(B)$ of ultrafilters on $B$ and Boolean algebra homomorphisms $B \stackrel{h}{\rightarrow} B'$ to the usual inverse image morphism $\Ult(B') \stackrel{h^{-1}}{\rightarrow}\Ult(B)$. A straightforward computation shows that $h^{-1}$ is well-defined.
 
+Now let $\mathcal{P}(-)$ be the functor which sends a finite set $X$ to its power-set $\mathcal{P}(X)$ and set-maps $X \stackrel{f}{\rightarrow}X'$ to $\mathcal{P}(X') \stackrel{f^{-1}}{\rightarrow} \mathcal{P}(X)$, the usual inverse image morphism. 
+
+We claim there is a dual adjunction between $\Boolf$ and $\FinSet$ given by $\Ult(-)$ and $\mathcal{P}(-)$:
 \[\begin{tikzcd}
 	 \FinSet& \bot & \Boolf^{\op}
 	\arrow["{\mathcal{P}(-)}", shift left=2, bend left, from=1-1, to=1-3]
-	\arrow["{\Ult(-)}", shift left=3, bend left, from=1-3, to=1-1]
+	\arrow["{\Ult(-)}", shift left=3, bend left, from=1-3, to=1-1].
 \end{tikzcd}\]
 
-Notice that $\mathcal{P}(X)$ is a boolean algebra for any $X \in \Set$, since it has distributive lattice structure and  every subset $S \subset X$ has a well-defined complement $X - S$. 
+Notice that $\mathcal{P}(X)$ is a Boolean algebra, where meets and joins are given by intersection and union, top and bottom elements by $X$ and $\emptyset$, and $\neg S := X - S$. The usual set theoretic laws shows the distributive property. \emph{As a side remark, this also holds for arbitrary sets, not just finite ones}.
 
+Since finite ultrafilters are principal, points of $X$ correspond bijectively to ultrafilters on $\mathcal{P}(X)$, which are necessarily generated by singletons, so that the unit $X \to \Ult(\mathcal{P}(X))$, which sends $x \mapsto \{S \lvert \{x\} \subseteq S\}$, is an isomorphism.
 
-It is also the case that $\Ult(-)$ is  fully faithful as long as $A$ is a finite boolean algebra, since ultrafilters on those are principle, meaning that they are generated by a single element, an element which we can then identify with the points of $X$ in a faithful way. And so the unit $\Ult(\mathcal{P}(X)) \to X$ of the adjunction is an isomorphism.
- 
-Similarly, $\mathcal{P}(-)$ is fully faithful , as sets have unique power sets up to isomorphisms, and their maps induce unique boolean algebra homomorphisms (\textcolor{red}{TODO} show this), so that the counit $B \to \mathcal{P}(\Ult(B))$ is an isomorphism, and so the adjunction above is a dual equivalence.
+On the other hand finite Boolean algebras are atomic, since every non-zero element is bounded below by finitely many elements, so there exists at least one minimal one. 
 
+Therefore ultrafilters in $\Boolf$ correspond exactly to the atoms, and one observes that every element is the join of atoms below it [Joh]. Since for distinct $b$ and $b'$, an atom below $b$ but not $b'$ generates an ultrafilter that separates them, the counit $B \to \mathcal{P}(\Ult(B))$ that sends $b \mapsto \{U \in \Ult(B) \lvert b \in U\}$ recovers  $b$ uniquely, and so it is an isomorphism. One needs only to check that the counit is indeed a Boolean algebra homomorphism, but this is straightforward.
+%
+%
+%It is also the case that $\Ult(-)$ is  fully faithful as long as $A$ is a finite Boolean algebra, since ultrafilters on those are principle, meaning that they are generated by a single element, an element which we can then identify with the points of $X$ in a faithful way. 
+%
+%For finite power-sets, those generators are necessarily the singleton sets, so that the counit $X \to \Ult(\mathcal{P}(X)) $ of the adjunction is an isomorphism.
+% 
+%Similarly, $\mathcal{P}(-)$ is fully faithful , as sets have unique power sets up to isomorphisms, and their maps induce unique Boolean algebra homomorphisms (\textcolor{red}{TODO} show this), so that the unit $B \to \mathcal{P}(\Ult(B))$ is an isomorphism, and so the adjunction above is a dual equivalence.
+%
 
-To determine the schizophrenic object first consider the free boolean algebra on one generator $b$ is the set $\diamondsuit : =\{\bot, b, \neg b, \top \}$, since our generator needs to induce complements (\textcolor{red}{TODO} and has finite limits and arbitrary colimits), and the free set on one generator is $\{pt\}$. 
+To determine a candidate for the schizophrenic object first consider the free Boolean algebra on one generator $b$ is the set $\diamondsuit : =\{\bot, b, \neg b, \top \}$, since our generator needs to induce complements, as well as finite limits and finite colimits. On the other side, the free set on one generator is  $\{pt\}$. 
 
-Now  an ultrafilter on $\diamondsuit$ is determined by which element the bottom (and analogously top) associates to, which is an element of the set $\{b, \neg b\}= \mathbb{2}$, which we will prove in the following. But from that  it holds that  $\Ult(\diamondsuit) = \mathbb{2}$.
+Now  an ultrafilter on $\diamondsuit$ is determined by the atoms $\{b, \neg b\}$, so that  $\Ult(\diamondsuit) = \mathbb{2}$, where we now view $\mathbb{2}$ as a $\Set$-object.\footnote{In this section we will see $\mathbb{2}$ and $\mathbb{S}$ in multiple categories, which will not always be reflected in the notation. The reader is advised to keep the context in mind.}
 
-Meanwhile $\mathcal{P}(\{pt\}) = \{\emptyset, \{pt\}\} = \mathbb{2}$ as boolean algebra, since the point and the empty set are complements, and thus form the truth-value boolean algebra which is an initial object of $\Bool$. 
+Meanwhile $\mathcal{P}(\{pt\}) = \{\emptyset, \{pt\}\} = \mathbb{2}$ as Boolean algebra under inclusion, since the point and the empty set are complements, and thus form the truth-value Boolean algebra which is an initial object of $\Bool$. 
 
  Now in the following we want to show that such lifts exist, and we check that by showing that the adjunction we gave serves as a lift of the respective hom sets. 
  
@@ -908,40 +919,54 @@ For the power-set functor, it is easy to see that $\mathcal{P}(X) = \Set(X, \mat
   \end{cases}
 \end{equation*}
 
-On the other hand, for a boolean algebra $A$ we have the following bijection \begin{align*}
+On the other hand, for a finite Boolean algebra $A$ we have the following bijection \begin{align*}
   	\phi: \Ult(A) \to& \Bool(A, \mathbb{2})\\
   	F \mapsto& f_F &f_F(x) = \begin{cases}
    1 & x \in F \\
     0 & \text{else}
   \end{cases}
   \end{align*}
-The proof is straightforward and boils down to an equivalence between properties of boolean algebra homomorphisms and prime filter axioms. 
+  
+In fact, the above map generalizes to a bijection on distributive lattices $\phi': \prim(A) \to \DLat(A, \mathbb{2})$, where $\prim(A)$ are the prime filters of $A$. We call any map $f \in \mathcal{L}(A, \mathbb{2})$ \textbf{\emph{a point}}, for any subcategory $\mathcal{L}$ of $\DLat$.
 
-Lattice homomorphisms are  order preserving, finite limit preserving, and finite colimit preserving. 
+Obviously the map $f \mapsto f^{-1}(1)$ is an inverse, so we only check that these are well-defined. 
 
-Through the above map, we see that this corresponds to axioms of being a prime filter $F$, which are being a sub meet-semilattice (closed under finite meets), upwards closed, and having the property of being prime: $\bot \notin F$ and $a \lor b \in F \implies a \in F $ or $b \in F$.
+The proof for $\phi'$ is straightforward and boils down to an equivalence between properties of lattice homomorphisms and prime filter axioms. That is, an order preserving, finite limit preserving, and finite colimit preserving morphism corresponds to a prime, upwards closed, sub meet-semilattice.
 
+Now when restricting to Boolean algebras (note that $\Bool$ is a \emph{full} subcategory of $\DLat$), prime filters correspond bijectively to ultrafilters, which, given the axioms of being a filter, will additionally  require that $A \in F$ if and only if $\forall B \in F: B \cap A \neq \emptyset$. 
 
-
-Now if our setting is Boolean, then we have that prime filters correspond to ultrafilters, which, given the axioms of being a filter, will additionally  require that $A \in F \iff \ \forall B \in F: B \cap A \neq \emptyset$. 
-
-The property that $F$ is prime is equivalent to $F$ being given above by $f^{-1}(1)$ for $f \in \DLat(A, \mathbb{2})$ which is further equivalent to the fact that its complement $I:= f^{-1}(0)$ is an ideal [Joh]. 
+The property that a filter $F$ is prime is equivalent to $F$ being given above by $f^{-1}(1)$ for $f \in \DLat(A, \mathbb{2})$ which is further equivalent to the fact that its complement $I:= f^{-1}(0)$ is an ideal [Joh]. \emph{We write $\DLat$ here instead of $\Bool$ to highlight that we do not use complement preservation for this direction}.
 
 So if $F$ is prime, then $\emptyset \notin F$ gives the forwards direction of the ultrafilter condition and for the other direction supposing $A \in I$, then $\neg A \in F $, but  $A \cap \neg A = \emptyset$ contradicting our assumption implying $A \in F$.
 
-Conversely if $F$ is an ultrafilter, then it cannot contain the complement of any of its elements, which is just $\neg f(A) = f(\neg A)$.
+Conversely if $F$ is an ultrafilter, then it cannot contain the complement of any of its elements, which is just $\neg f(A) = f(\neg A)$, proving the bijection.
 
 %The ultrafilter condition implies that a filter cannot contain the complement of any of its elements, which is just $\neg f(A) = f(\neg A)$. And conversely to separate complements out of the filter via a lattice homomorphism gives the ultrafilter condition, since finite limit preservation and complementation implies $\emptyset \notin F := f^{-1}(1)$ for one direction, and for the other direction supposing $A \in I: = f^{-1}(0)$ then $\neg A \in F $, but  $A \cap \neg A = \emptyset$ contradicting our assumption implying $A \in F$. 
 
 
-\emph{Note that frame homomorphisms additionally require preservation of arbitrary colimits, which simply upgrades the prime condition to completely prime, i.e. $\bigvee a_i \in F \implies \exists i \in I: a_i \in F$. However in our above setting of $A$ in $\Boolf$, this is no condition at all.
+\emph{Note that frame homomorphisms additionally require preservation of arbitrary colimits, which simply upgrades the prime condition to completely prime, i.e. $\bigvee a_i \in F$ implies $\exists i \in I: a_i \in F$. However in our above setting of $A$ in $\Boolf$, this is no condition at all.
 }
 
-Ultimately, what a point map  $F \stackrel{f}{\rightleftarrows} \mathbb{2}$ in $\DLat$ represents is the question of which subsets of our lattice are compatible with our desired structure restrictions. 
+Ultimately, what a point map  $A \stackrel{f}{\rightleftarrows} \mathbb{2}$ represents is the question of which subsets of our lattice $A$ are compatible with our desired structure restrictions. 
 
-As we have just seen, that means if our lattice is a frame, the points correspond to completely prime filters on $F$, and if it is a boolean algebra, they correspond to ultrafilters. 
+\[\begin{tabular}{ |p{3cm}||p{3cm}|  }
+ \hline
+ \multicolumn{2}{|c|}{Correspondence} \\
+ \hline
+$\textbf{Set of points}$& $\textbf{Type of filter}$\\
+ \hline
+ \hline 
+ $\DLat(A, \mathbb{2})$   &prime filters \\
+ \hline
+ $\Frm(A, \mathbb{2})$ &completely prime filters \\
+ \hline 
+ $\Bool(A, \mathbb{2})$    &ultrafilters \\
+ \hline
+\end{tabular}\]
 
-Note that the unit and counit maps then follow the exact same logic as the leading example, and in particular, $\mathbb{2}$ is also initial in $\Bool$ so that by the same logic, our $\sigma$ is equal to the set identity $1_{\mathbb{2}}$. 
+We will only show initiality of evaluation maps for the general Stone duality.
+
+Note that the unit and counit maps then follow the exact same logic as the leading example, and in particular, $\mathbb{2}$ is also initial in $\Bool$ so that by the same logic, our $\tau$ is equal to the set identity $1_{\mathbb{2}}$. 
 
  %\begin{lemma}
 %	Let $I \subset P$ be an ideal of a lattice $P$. Then the following are equivalent 
@@ -979,7 +1004,7 @@ Note that the unit and counit maps then follow the exact same logic as the leadi
 %
 % 
 %\begin{proof}
-% 	Our strategy will be to first identify  points of a frame $F \rightleftarrows \mathbb{2}$  with  completely prime filters on $A$ and then to show the ultrafilter condition in the boolean setting. 
+% 	Our strategy will be to first identify  points of a frame $F \rightleftarrows \mathbb{2}$  with  completely prime filters on $A$ and then to show the ultrafilter condition in the Boolean setting. 
 % 	
 % 	First we show that $f_F$ is finite limit, colimit, and order preserving. 
 %  
@@ -1004,7 +1029,7 @@ Note that the unit and counit maps then follow the exact same logic as the leadi
 %\end{align*}
 %Consider that all these statements are actually equivalences, since you can obtain each condition by swapping the two way implications from what was our condition---the second two way implication of each of these chains of equivalences---to what we have proven---each chains end statement.
 %
-%However note that when we swap we must think about $f_F$ as arbitrary boolean algebra (or frame) homomorphism $f$, and consider $I$ and $F$ as nothing but preimages under $F$, for example,
+%However note that when we swap we must think about $f_F$ as arbitrary Boolean algebra (or frame) homomorphism $f$, and consider $I$ and $F$ as nothing but preimages under $F$, for example,
 %
 %\begin{align*}
 %	\bigvee x_i \in f^{-1}(1)&\iff f( \bigvee x_i) = 1 \\ 
@@ -1016,7 +1041,7 @@ Note that the unit and counit maps then follow the exact same logic as the leadi
 %
 %This shows that $\phi'$ is well defined and has an inverse. 
 %
-%Now to conclude the proof we check that the ultrafilter condition is equivalent to a complement preserving point of a boolean algebra $F \rightleftarrows \mathbb{2}$.
+%Now to conclude the proof we check that the ultrafilter condition is equivalent to a complement preserving point of a Boolean algebra $F \rightleftarrows \mathbb{2}$.
 %
 %Having proven the equivalences for filter conditions, we note that for filters, the condition of being an ultrafilter of a set $S$ means that for $A, B \subset S$ it holds that $A \in F \iff \forall B \in F: A \cap B \neq \emptyset $. 
 %
@@ -1039,10 +1064,10 @@ Note that the unit and counit maps then follow the exact same logic as the leadi
 
 
 
-\subsection{The subdualities $\Top \rightleftarrows \Frm^{\op}$ and $\CohLoc \rightleftarrows \DLat$ }
-In the following we will want to give a general overview of how we obtain the Stone duality in the first place.
+\subsection{Concatenating subdualities of $\Top \rightleftarrows \Frm^{\op}$ with the $\CohLoc \rightleftarrows \DLat^{\op}$ duality}
+In the following we will want to give a general overview of how we obtain the Stone duality.
 
-Before we define it we first focus on the following adjunction
+Before we define it we first focus on the following dual adjunction
 
 \[\begin{tikzcd}
 	\Top & \bot & \Loc
@@ -1050,7 +1075,7 @@ Before we define it we first focus on the following adjunction
 	\arrow["{\pt(-)}", bend left, from=1-3, to=1-1]
 \end{tikzcd}\]
  
- which is  the adjunction in our leading example. This is indeed given by $\pt(A) = \Frm(A, \mathbb{2})$, and $\Top(X, \mathbb{S}) = \Omega(X)$, which is the frame of opens on $X$, since a continuous map into the Sierpinski space is  uniquely determined by the preimage of $\{1\} \subset \mathbb{S}$, which corresponds to a unique open set of $X$. 
+ which is  the duality of our leading example. This is indeed given by $\pt(A) := \Frm(A, \mathbb{2})$, and $\Top(X, \mathbb{S}) =: \Omega(X)$, which is the frame of opens on $X$, since a continuous map into the Sierpiński space is  uniquely determined by the preimage of $\{1\} \subset \mathbb{S}$, which corresponds to a unique open set of $X$. 
  
  Indeed, we may define the category of \emph{\textbf{spatial locales}} and of \emph{\textbf{sober spaces}} respectively to be the largest subcategories of $\Loc = \Frm^{\op}$ and $\Top$, such that the adjunction is an equivalence. So now we have 
  
@@ -1090,9 +1115,9 @@ On the other hand, any sober topological space $X$ can be given as $X = \pt(\Ome
 
 So a \emph{\textbf{coherent space}} is a sober space which satisfies the above condition.
 
-Given $A, B \in \CohLoc$, we know that any lattice homomorphism $K(A) \to K(B)$ extends to a frame homomorphism $A \to B$, since $K(A)$ freely generates $A$ (\textcolor{red}{TODO}: make sense of this for yourself), however the converse is not true, frame homomorphisms do not necessarily preserve finiteness.
+Given $A, B \in \CohLoc$, we know that any lattice homomorphism $K(A) \to K(B)$ extends to a frame homomorphism $A \to B$ via the free-forget adjunction (\textcolor{red}{TODO}: find source for this), however the converse is not true, frame homomorphisms do not necessarily preserve finiteness.
 
-In other words, the preimage of compact subsets under continuous maps is not necessarily  compact.
+In topological terms, the preimage of compact open subsets under continuous maps is not necessarily compact.
 
 So we may define a locale map $B \stackrel{f}{\to} A$ between coherent locales to be  \emph{\textbf{coherent}} if $f^*$ maps $K(A)$ to $K(B)$. Similarly a  continuous map $B \stackrel{f}{\to} A$ is coherent if $f^{-1}(K\Omega(A)) \subset  K\Omega (B)$.
 
@@ -1144,7 +1169,7 @@ This duality sends a distributive lattice $A$ to what we call its \emph{\textbf{
 
 But we aren't done yet, as we will then want to restrict the composition.
 
-Seeing that $\Spec(A)$ is Hausdorff if and only if $A$ is a boolean algebra [Joh], we shall see that we can restrict this equivalence to a duality between $\Bool$ and the category of coherent, Hausdorff spaces which are called \emph{\textbf{Stone spaces}}. 
+Seeing that $\Spec(A)$ is Hausdorff if and only if $A$ is a Boolean algebra [Joh], we shall see that we can restrict this equivalence to a duality between $\Bool$ and the category of coherent, Hausdorff spaces which are called \emph{\textbf{Stone spaces}}. 
 
 Note that Stone spaces are compact and totally disconnected [Joh] making them a subcategory of $\kHaus$. Moreover, if $X$ is Hausdorff, then $K(\Omega(X)) = \clop(X)$, since compact sets are exactly the closed sets of a  compact Hausdorff space.
 
@@ -1160,19 +1185,19 @@ As we have seen, we have the following adjunction
 Now remember our schizophrenic object $(\mathbb{2}, 1_{\mathbb{2}}, \mathbb{2})$. The question is then twofold: \begin{enumerate}
  	\item Do the hom-sets lift?
  	\begin{enumerate}
- 	\item Can we give the spectrum as a lift of the set of points of a boolean algebra, i.e. $[\Spec(B)] = \Bool(B, \mathbb{2})$?
- 	\item  Can we give the boolean algebra of clopens of a stone space as a lift of the set of continuous maps over compact Hausdorff spaces, i.e., does $[\clop(X)] = \Stone(X, \mathbb{2})$?
+ 	\item Can we give the spectrum as a lift of the set of points of a Boolean algebra, i.e. $[\Spec(B)] = \Bool(B, \mathbb{2})$?
+ 	\item  Can we give the Boolean algebra of clopens of a stone space as a lift of the set of continuous maps over compact Hausdorff spaces, i.e., does $[\clop(X)] = \Stone(X, \mathbb{2})$?
  	\end{enumerate}
  	\item Are these lifts initial?
 
 
  \end{enumerate}
 
-In order to answer these questions, we will first show that the composite subduality $\CohTop \rightleftarrows \DLat$ has a schizophrenic object, and then see what happens when we restrict to the Stone duality.
+In order to answer these questions, we will first show that the composite subduality $\CohTop \rightleftarrows \DLat^{\op}$ has a schizophrenic object, and then see what happens when we restrict to the Stone duality.
 
-First we look to the leading example and remember our points functor. Remember at the outset when we identified ultrafilters of a finite set $X$ with points of a finite boolean algebra, we showed that points of any lattice can be identified with its prime filters.
+First we look to the leading example and remember our points functor. Remember at the outset when we identified ultrafilters of a finite set $X$ with points of a finite Boolean algebra, we showed that points of any lattice can be identified with its prime filters.
 
-But in the background of that example we actually sent a boolean algebra $B$ to its frame of ideals $\Idl(B)$, and then considered the points of that frame, which correspond to completely prime filters of $\Idl(B)$. These correspond to prime filters $P$ of $B$ by the bijective assignments $P \mapsto \{I \in \Idl(B) \lvert I \cap P \neq \emptyset\}$ and $F \mapsto \{b \in B \lvert \downarrow (b) \in F \}$ [Joh] so that the prime filters of $B$ correspond to the spectrum. There was nothing about this argumentation that required $B$ to be boolean, as it works for any distributive lattice.
+But in the background of that example we actually sent a Boolean algebra $B$ to its frame of ideals $\Idl(B)$, and then considered the points of that frame, which correspond to completely prime filters of $\Idl(B)$. These correspond to prime filters $P$ of $B$ by the bijective assignments $P \mapsto \{I \in \Idl(B) \lvert I \cap P \neq \emptyset\}$ and $F \mapsto \{b \in B \lvert \downarrow (b) \in F \}$ [Joh] so that the prime filters of $B$ correspond to the spectrum. There was nothing about this argumentation that required $B$ to be Boolean, as it works for any distributive lattice.
 
 In a word, the points of the locale of ideals of $A$, or the \emph{spectrum} of $A$, are precisely its set of prime ideals, given by the lift of the functor $\DLat(-, \mathbb{2})$. 
 
@@ -1191,11 +1216,11 @@ Remember that each restriction is simply the free generator or left adjoint of t
  Now we see what happens when applying the restrictions.
  
  
-On the topological side, there is the restriction $\CohTop \stackrel{\Stone(-)}{\rightleftarrows} \Stone$, which is called the stone space reflection, or stoneification. On the other side, $\DLat$  restricts to $\Bool$ by the corresponding boolean algebra reflection functor, or Booleanification.
+On the topological side, there is the restriction $\CohTop \stackrel{\Stone(-)}{\rightleftarrows} \Stone$, which is called the stone space reflection, or stoneification. On the other side, $\DLat$  restricts to $\Bool$ by the corresponding Boolean algebra reflection functor, or Booleanification.
  
- To understand the Stoneification, we may first want to booleanify the lattice of compact open subsets of a space $X$, which we will call $A$. Let $A^*$ be the set of complements in $\mathcal{P}(X)$ of memebers of $A$. Then the patch topology, which has as a base $C = \{U \cap V \lvert U \in A, V \in A^*\}$ , will be a Stone space (notice that we are taking the boolean completion $B$ of $A$ and then taking its spectrum) [Joh].
+ To understand the Stoneification, we may first want to Booleanify the lattice of compact open subsets of a space $X$, which we will call $A$. Let $A^*$ be the set of complements in $\mathcal{P}(X)$ of memebers of $A$. Then the patch topology, which has as a base $C = \{U \cap V \lvert U \in A, V \in A^*\}$ , will be a Stone space (notice that we are taking the Boolean completion $B$ of $A$ and then taking its spectrum) [Joh].
  
- We must be careful here, because $\mathbb{S} \notin \Stone$, since $\mathbb{S}$ is clearly not Hausdorff. So we will need to take the boolean completion of $\mathbb{S}$ in $\mathcal{P}(\{0,1\})$ which is simply $\mathbb{2}_s$, the two point discrete space, since by booleanifying we must generate the complement of $\{1\}$.
+ We must be careful here, because $\mathbb{S} \notin \Stone$, since $\mathbb{S}$ is clearly not Hausdorff. So we will need to take the Boolean completion of $\mathbb{S}$ in $\mathcal{P}(\{0,1\})$ which is simply $\mathbb{2}_s$, the two point discrete space, since by Booleanifying we must generate the complement of $\{1\}$.
  
  
 The argumentation however works the same way as it would if $\mathbb{S}$ was in $\Stone$: the lift of $\CohTop(X, \mathbb{S})$ equals $[\clop(X)]$ if $X$ is a Stone space, since coherent maps into $\mathbb{S}$ are uniquely determined by the preimage of $\{1\}$, which are simply the compact open subsets of a compact Hausdorff space, which are its  clopens. 
@@ -1296,7 +1321,7 @@ This shows us that the left adjoint of the Stone duality is given as a lift of $
 	\arrow["{\Spatt(-)}", bend left, from=1-3, to=3-3]
 	\arrow["{\Coh(-)}", bend left, from=1-3, to=5-3]
 	\arrow["{F(-)}", bend left, from=1-5, to=1-3]
-	\arrow["{(\Coh \circ F)(-)}", tail reversed, from=1-5, to=5-5]
+	\arrow["{(\Coh \circ F)(-)}", from=1-5, to=5-5]
 	\arrow["{U(-)}", bend left, hook', from=3-1, to=1-1]
 	\arrow["{\Omega(-)}", bend left, from=3-1, to=3-3]
 	\arrow["{U(-)}", bend left, hook', from=3-3, to=1-3]
