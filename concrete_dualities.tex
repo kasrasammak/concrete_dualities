@@ -113,25 +113,27 @@
 
 Throughout this thesis we will be using the language of category theory, for which a mild introduction is in order. To that degree we plan to define the terms used as well as prove some well known theorems which we use quite freely, so not to distract us from the argument.
 
-We assume basic knowledge of Category theory (such as the definitions of Categories, functors, natural transformations, (filtered/directed) limits, (filtered/directed) colimits, initial object, terminal object, adjunctions, etc), and will choose to define terms as necessary as they relate to our investigation.
+We assume basic knowledge of category theory (such as the definitions of categories, functors, natural transformations, (filtered/directed) limits, (filtered/directed) colimits, initial object, terminal object, adjunctions, etc), and will choose to define terms as necessary as they relate to our discussion.
 
 This thesis will be divided into two parts. In the first part we describe the general framework for arbitrary categories. We will be answering the questions of what a mathematical duality is, what makes it concrete, and also what is the minimal datum that ascertains its existence. 
 
-In the second part we should like to describe some examples. As these examples span mathematics itself, we shall assume basic knowledge in each subfield to which our respective example pertains. Before each example we will make more explicit what is assumed, as well references for background and/or further reading. One may expect general knowledge of topology, commutative algebra, group theory, lattice theory, and Galois theory to be used quite freely.
+In the second part we should like to describe some examples. As these examples span mathematics itself, we shall assume basic knowledge in each subfield to which our respective example pertains. Before each example we will make more explicit what is assumed, as well references for background and/or further reading. One may expect general knowledge of topology, commutative algebra, group theory, lattice theory, and Galois theory, and even some very basic functional analysis to be assumed.
 
 
 \subsection{Concrete Categories}
 
-In the course of this thesis we will be considering a certain type of category, called a concrete category. As we do not assume knowledge about this on behalf of the reader, we would like to introduce some definitions of the basic kinds of objects and constructions we will be working with. 
+In the course of this thesis we will be considering a certain type of category, called a concrete category. We do not assume knowledge about this on behalf of the reader, therefore we would like to introduce some definitions of the basic kinds of objects and constructions we will be working with, as they will be quite central to this discussion.
 
-First we should define a concrete category:
+First let us define a concrete category:
 \\
 \
 \begin{definition}[Concrete Category]
 	Let $\mathcal{X}$ be a category. A \textbf{concrete category} over $\mathcal{X}$ is a pair $(\mathcal{A}, U)$ where $\mathcal{A}$ is a category and $U: \mathcal{A} \to \mathcal{X}$ is a faithful functor. Sometimes $U$ is called the \textbf{underlying functor} over $\mathcal{X}$ and $\mathcal{X}$ is called the \textbf{base category} for $(\mathcal{A},U)$. A concrete category over $\Set$ is called a \textbf{construct}.
 \end{definition}
 
-Note that from here on out, we use concrete category to mean construct, since we do not consider any other type of concrete category in this thesis.
+Note that from here on out, we use concrete category to mean construct, since we do not explicitly consider any other type of concrete category in this thesis.
+
+The underlying functor is also sometimes called the \emph{\textbf{forgetful functor}}.
 \\
 \begin{definition} [Concrete functor]
 Let $(\mathcal{A}, U)$ and $(\mathcal{B}, V)$ be concrete categories over $\mathcal{X}$. A \textbf{concrete functor} from $(\mathcal{A}, U)$ to $(\mathcal{B},V)$ is a functor $F: \mathcal{A} \to \mathcal{B}$ such that $U = V \circ F$. 
@@ -232,7 +234,7 @@ A functor $\mathcal{A} \stackrel{G}{\to}\mathcal{B}$ is called \textbf{topologic
  \end{definition}
  
  
- Replacing "source" with "mono-source" gives us the definition of a \emph{\textbf{monotopological}} category.
+ Replacing "source" with "mono-source" gives us the definition of a \emph{\textbf{mono-topological}} category.
  
  
  Notice here again that our intuition of such a category should come from topology, which is even reflected in its name, namely, from the concrete category $(\Top, U)$,  over which every source lifts initially, since the arbitrary intersection of topologies is a topology. That is, we are taking the intersection of all topologies on $A$ such that all $(UA \stackrel{f_i}{\to} UA_i)_I$ are continuous.
@@ -240,35 +242,33 @@ A functor $\mathcal{A} \stackrel{G}{\to}\mathcal{B}$ is called \textbf{topologic
   That means there is a systematic way to choose open sets of $UA$. In other words,  a subset $S \subset UA$ lifts to an open set in $A$ if and only if $S$ equals the preimage $Uf_i^{-1}(U(V))$ for some  $f_i \in (UA \stackrel{f_i}{\to} UA_i)_I$ and $V \in  \Omega(A_i)$, where $\Omega(X)$ for topological space $X$ denotes the set of open sets of $X$.. 
  
 
-\subsection*{Notes on free objects and the free functor}
+\subsection*{Free objects and the free-forget adjunction}
 
-It is important to note that in some category $\mathcal{A}$ with a representing object $A_0$ that is a free generator on one free object, it holds that $\HomA(A_0,A) \cong A$ on the level of set, as the morphisms are uniquely determined by where they send the free generator to. 
+In the course of this thesis we will only consider categories who have a representing object that is a free object on one free generator. 
 
-More concretely, given a forgetful functor $U: \mathcal{A} \to \Set$, we have $\HomA(A_0,A) = U(A)$. This due to how we construct $A_0$ and $B_0$ using the the left adjoint functor $F: \Set \to \mathcal{A}$ to the forgetful functor, which is called the free functor. 
+That is, we will only consider concrete categories $(\mathcal{A},U)$ which contain a representing object $A_0$ such that $\HomA(A_0,A) \cong U(A)$, which we can conceptualize via the idea that morphisms in $\HomA(A_0,A)$ are uniquely determined by where they send the free generator to. 
 
-In general, such a functor does not have to exist, and we can still get the construction by defining $A_0$ as the left adjoint object of $U$ at $\{pt\} \in \Set$, however, we will assume that such a functor does exist for purposes of explication: $A_0 = F(\{\text{pt}\})$. Such an assumption is fair since the properties of the adjunction by definition of the left adjoint object will still hold (in particular the middle equality of the equation below), regardless of existence of the functor as a whole: \begin{align*}
+However this set isomorphism is categorical in nature. We do not necessarily need to redefine what we mean by free generator for each new category, as we get the isomorphism by virtue of the adjunction. This free object is constructed using the the left adjoint functor $F: \Set \to \mathcal{A}$ to the forgetful functor $U$, which is called the \emph{\textbf{free functor}}. 
+
+The left adjoint functor does not have to exist. For our discussion we only consider categories where the left adjoint object of $U$ at $\{pt\} \in \Set$ exists. For the purpose of explication let us assume that a left adjoint $F$ exists, that is, we have the object $A_0 = F(\{\text{pt}\})$. Such an assumption is fair since the properties of the adjunction by definition of the left adjoint object will still hold (in particular the middle equality of the equation below), regardless of existence of the functor as a whole: \begin{align*}
 	\HomA(A_0, A) = \HomA(F(\{\text{pt}\}), A) = \HomB(\{pt\}, U(A)) = U(A).
 \end{align*}
 
-The left adjoint object to the forgetful functor has the following universal property (\textcolor{red}{TODO}).
+We can phrase this, without reference to a left adjoint functor, as the following universal property: given a concrete category $(\mathcal{A},U)$ and $\mathcal{A}$-object $A_0$ with an injective set map $\{pt\} \stackrel{\psi}{\hookrightarrow} U(A_0)$  we call $A_0$ the free object on $\{pt\}$ if and only if for every $\mathcal{A}$-object $A$ and set map $\{pt\} \stackrel{\varphi}{\rightarrow} U(A)$ there exists a unique $\mathcal{A}$-morphism $f \in \HomA(A_0, A)$ such that $U(f) \circ \psi = \varphi$..
 
-In the  examples which are to be discussed in this thesis, we only need to check that such a left adjoint object does exist in the category, and we show what they are and that they satisfy the universal property.
-\section{Notes: Concrete Dualities}	
+In the  examples which are to be discussed in this thesis, we only check that such a left adjoint object does exist in the relevant category by showing what they are and that they satisfy the universal property.
+\section{Concrete Dualities}	
 
-
-\textcolor{red}{BIGTODO}:
-Edit all relevant parts of this section that I wrote before I understood concrete categories and identified $S$ and $T$ with $\HomA(-,\t A)$ and $\HomB(-,\t B)$ directly, rather than by means of the forget functor.
-
-Let $\mathcal{A}$ and $\mathcal{B}$ be two categories with the following representable functors with representing objects $A_0 \in \mathcal{A}$, and $B_0 \in \mathcal{B}$. We assume these are free objects on one free generator, which we will later make precise. 
+Let $(\mathcal{A}, U)$  and $(\mathcal{B},V)$ be two concrete categories over the following representable functors with representing objects $A_0 \in \mathcal{A}$ and $B_0 \in \mathcal{B}$, our free objects on one free generator:
 \begin{align*}
 	&\HomA(A_0, -) \cong U: \mathcal{A} \to \Set\\
-	&\HomB(B_0, -) \cong V: \mathcal{B} \to \Set\\
+	&\HomB(B_0, -) \cong V: \mathcal{B} \to \Set.\\
 \end{align*}
 Let $T: \mathcal{A} \to \mathcal{B}$ and $S: \mathcal{B} \to \mathcal{A}$ be contravariant functors with natural transformations $\eta: 1_\mathcal{B} \to TS$ and $\epsilon :  1_\mathcal{A} \to ST$. We can view this as the following \emph{dual adjunction}
 \[\begin{tikzcd}
 	{\mathcal{A}} & \bot & {\mathcal{B}^{\op}}
 	\arrow["T", bend left, from=1-1, to=1-3]
-	\arrow["S", bend left, from=1-3, to=1-1]
+	\arrow["S", bend left, from=1-3, to=1-1].
 \end{tikzcd}\]
 
 When these natural transformations are natural isomorphisms we are speaking of a \emph{dual equivalence}. 
@@ -276,8 +276,8 @@ When these natural transformations are natural isomorphisms we are speaking of a
 Like any adjunction we have the following triangle equalities \begin{align*}
 	&T{\epsilon_A} \circ \eta_{TA} = 1_{TA} \ &\text{and}& \ &  S{\eta_B} \circ \epsilon_{SB} = 1_{SB}&
 \end{align*}
-and $\Hom$ set isomorphisms \begin{align*}
-	\HomA(A, SB) \cong \HomB(B, TA) \cong \HomB^{\op}(TA,B)
+and $\Hom$-set isomorphisms \begin{align*}
+	\HomA(A, SB) \cong \HomB^{\op}(TA,B) \cong \HomB(B, TA)
 \end{align*}
 
 Given some $\mathcal{A}$-morphism $f: A\to A'$, consider the map $Uf: UA \to UA'$. More explicitly, this is \begin{align*}
@@ -285,45 +285,41 @@ Given some $\mathcal{A}$-morphism $f: A\to A'$, consider the map $Uf: UA \to UA'
  \end{align*}
 We shorten this notation by using $[f]: [A] \to [A']$.
 
-The following pair of objects will be of central importance to this these, which are defined as the following:
+The following pair of objects will be of central importance to this thesis, which are defined as the following:
 \begin{align*}
 	\t A := SB_0&&
 	\t B := TA_0.
 \end{align*}
 
 
-From these characteristics we can deduce how $S$ and $T$ should be defined, to which a few lemmas will illuminate the bigger picture of our situation.
+From these characteristics we can deduce how $S$ and $T$ should be defined, to which a few lemmas will illuminate the bigger picture.
 \begin{lemma}
-\begin{align*}
+\begin{align}
 		VT \cong \HomA(-, \t  A)&&
-	US \cong \HomB(-, \t  B)\\
-\end{align*}
+	US \cong \HomB(-, \t  B)
+\end{align}
 \end{lemma}
 \begin{proof}
-As presheafs, $V$ and $VT$ (respectively $U$ and $US$) may be computed pointwise. 
+Since our representable functors and adjoint functors are natural in $A$ and $B$, we may compute $V$ and $VT$ (respectively $U$ and $US$) pointwise:
 \begin{align*}
-	VT(A) \cong \HomB(B_0, TA) \cong \HomA(A,SB_0) = \HomA(A, \t A) \\
+	VT(A) = \HomB(B_0, TA) \cong \HomA(A,SB_0) = \HomA(A, \t A) \\
 	\implies VT \cong \HomA(-, \t A)
 \end{align*}
 \begin{align*}
-	US(B) \cong  \HomA(A_0, SB) \cong  \HomB(B,TA_0) =  \HomB(B, \t B) \\
-	\implies US \cong \HomB(-, \t B)
+	US(B) =  \HomA(A_0, SB) \cong  \HomB(B,TA_0) =  \HomB(B, \t B) \\
+	\implies US \cong \HomB(-, \t B).
 \end{align*}
 \end{proof}
 Should we have strict identities
 \begin{align*}
-		VT = \HomA(-, \t  A)&&
-	US = \HomB(-, \t  B)\\
+		VT = \HomA(-, \t  A)&& US = \HomB(-, \t  B)
 \end{align*} 
 
 we say that the adjunction is \emph{strictly represented} by $\t A$ and $\t B$. 
 
-Given our assumption that $A_0$ and $B_0$ are free objects on one free generator, this result should already give us an idea of how our adjunction is to be induced, which the goal of the whole introduction to concrete dualities is to make precise. 
+This result should already give us an idea of how our adjunction is to be induced. That is, our adjoint functors should be regarded as lifts of the Hom-set functors in (1) to the relevant categories.\footnote{In the course of this introduction we will often prove results about $\mathcal{A}$, respectively $T: \mathcal{A}\to \mathcal{B}$ with unit $\epsilon:1_\mathcal{A} \to ST $, from which the results about $\mathcal{B}$, respectively $S: \mathcal{B} \to \mathcal{A}$ with counit $\eta: 1_\mathcal{B} \to TS$, follow completely analogously. Unless we state that results do not follow analogously, we assume this to be the case.}  The goal of this introduction to concrete dualities is to make this notion precise. 
 
-However the broad strokes of it uses the free-forget  adjunction ($\bar F \dashv \bar U$)  to show via \begin{align*}
-	\HomA(A, \t A) = VT(A) = \HomB(B_0, T A) = \bar U(TA)
-\end{align*} 
-that the underlying sets of $T$ and $S$ respectively, are $\Hom_A(-, \t A)$ and $\HomB(-, \t B)$. \footnote{In the course of this thesis we will often prove results about $\mathcal{A}$, respectively $T: \mathcal{A}\to \mathcal{B}$ with unit $\epsilon:1_\mathcal{A} \to ST $, from which the results about $\mathcal{B}$, respectively $S: \mathcal{B} \to \mathcal{A}$ with counit $\eta: 1_\mathcal{B} \to TS$, follow completely analogously. Unless we state that results do not follow analogously, we assume this to be the case.}
+
 
 \begin{lemma}
 	$V \t B \cong U \t A$
@@ -333,9 +329,12 @@ that the underlying sets of $T$ and $S$ respectively, are $\Hom_A(-, \t A)$ and 
 		V \t B \stackrel{Def. V}{=}& \HomB(B_0,\t B) \stackrel{Def. \t B}{=} \HomB(B_0, TA_0)\\ \stackrel{Adjunction}{\cong}& \HomA(A_0,SB_0) \stackrel{Def. \t A}{=}\HomA(A_0,\t A) \stackrel{Def. U}{=} U\t A
 	\end{align*} 
 	\end{proof}
+
+In plain English, the previous lemma said that the underlying sets of our adjoint functors are given by "homming into" $\t A$ and $\t B$, respectively, and this lemma shows that the underlying sets of $\t A$ and $\t B$ are the same (up to canonical bijection). 
+
 	
-	The aim of the following will be to show how the objects $\t A$ and $\t B$ actually induce the adjunction $T \dashv S$. In doing so, we first show that the units and counits of the adjunction are given \emph{by evaluation}, that is \begin{align*}
-		\epsilon_A(x): \HomA(A, \t A) &\to \t B& \eta_B(y) : \HomB(B, \t 
+	Now we will show how the objects $\t A$ and $\t B$ actually induce the adjunction $T \dashv S$. To do this we must first show that the unit and counit of our adjunction are given \emph{by evaluation}, that is as lifts of evaluation maps:\begin{align*}
+		[[\epsilon_A](x)]: \HomA(A, \t A) &\to [\t B]& [[\eta_B](y)] : \HomB(B, \t 
 		B) &\to \t A\\
 		f & \mapsto f(x)& g &\mapsto g(y).
 	\end{align*}
@@ -356,23 +355,21 @@ as for any $s \in \HomA(A, \t A) $, we have the induced map $[s]: [A] \to [\t A]
 
 So for every $x \in \HomA(A_0,  A)$ we have the following diagram.
 \[\begin{tikzcd}
-	s && {[s](x)} && {\tau([s](x))} \\
 	\HomA(A, \t A) && \HomA(A_0, \t A) && \HomB(B_0, \t B) \\
-	&& \HomA(A_0, SB_0) && \HomB(B_0, TA_0)
-	\arrow[maps to, from=1-1, to=1-3]
-	\arrow[maps to, from=1-3, to=1-5]
-	\arrow["\varphi_{A,x}", from=2-1, to=2-3]
-	\arrow["\tau", from=2-3, to=2-5]
-	\arrow["\cong",from=2-3, to=3-3]
-	\arrow["\cong",from=2-5, to=3-5]
-	\arrow[from=3-3, to=3-5]
+	&& \HomA(A_0, SB_0) && \HomB(B_0, TA_0)\\
+	s && {[s](x)} && {\tau([s](x))} \\
+	\arrow[maps to, from=3-1, to=3-3]
+	\arrow[maps to, from=3-3, to=3-5]
+	\arrow["\varphi_{A,x}", from=1-1, to=1-3]
+	\arrow["\tau", from=1-3, to=1-5]
+	\arrow["=",from=1-3, to=2-3]
+	\arrow["=",from=1-5, to=2-5]
+	\arrow["\cong",from=2-3, to=2-5]
 \end{tikzcd}\]
-By the dual adjunction we have $\HomA(A, SB_0) \cong \HomB(B_0, TA)$.
+While this is all very technical, our first example will make this machinery explicit, so to be able to see exactly how these definitions for $\tau$ and $\sigma$ arise via our unit and counit. 
 
-
-
-
-\begin{lemma}
+The first example will also serve to make the notion that the unit and counit are given by evaluation digestible, while the following lemma makes this precise.
+ \begin{lemma}
 	$\tau$ and $\sigma$ are inverses, and the following identities hold:
 	\begin{align*}
 		&[[\epsilon_A](x)] = \tau \varphi_{A,x}& & [[\eta_B](y)]= \sigma \psi_{B,y}
@@ -507,19 +504,28 @@ Notice that then $[Ts]$ becomes an evaluation of the precomposition functor $\Ho
 % 	 evaluated at $1_{\t B}$ gives $[\epsilon_{S \t B}](1_{\t B}) = 1_{\t B}$, from which we \emph{somehow} deduce that \begin{align*}
 % 	 	\tau \sigma = 1_{[\t B]}
 % 	 \end{align*} (\textcolor{red}{TODO}: why?)
-Lemma 3.3 makes precise the notion that our unit and counit are given "by evaluation", given
+Lemma 3.3 makes precise the notion that the underlying maps of our unit and counit are given "by evaluation":
 \begin{align*}
 	[[\epsilon_A](x)]: \HomA(A, \t A) &\to [\t B] & [[\eta_B](y)]:\HomB(B, \t B) &\to [\t A]\\
 	f &\mapsto f(x) & g &\mapsto g(y) 
 \end{align*}
-via canonical bijections $\tau$ and $\sigma$. From here we can (\textcolor{red}{TODO}: deduce or allude to?) deduce the fact that $T = \HomA(-, \t A)$ and $S = \HomB(-, \t B)$, as $\tau$ and $\sigma$ send the precise evaluation maps to the other pairing, and as such we can view the unit and counit as such:
+and that these maps induce the canonical bijections $\tau$ and $\sigma$. 
+
+So far we have described our  situation only on underlying sets. In particular we have just shown that the underlying set map of the unit and counit is given by
 \begin{align*}
-	\epsilon_A:  A&\to \HomB(\HomA(A, \t A),\t B) & \eta_B: B&\to \HomA(\HomB(B, \t B),\t A)\\
+	[\epsilon_A]:  [A]&\to \HomB(\HomA(A, \t A),\t B) & [\eta_B]: [B]&\to \HomA(\HomB(B, \t B),\t A)\\
+	x &\mapsto (f \to f(x)) & y &\mapsto (g\to g(y) ).
+\end{align*}
+In the following we will want to show how these evaluation maps actually lift as maps in the corresponding category. We want to see that for every $A \in \mathcal{A}$ the evaluation map $(f \to f(x))$ lifts to a $\mathcal{B}$-morphism, where $\HomA(A,\t A)$ is viewed as a $\mathcal{B}$-object, and thus the unit and counit
+\begin{align*}
+	\epsilon_A:  A&\to STA & \eta_B: B&\to TSB\\
 	x &\mapsto (f \to f(x)) & y &\mapsto (g\to g(y) )
 \end{align*}
+are well-defined.
+
+In our examples, we will describe explicitly how we can impose $\mathcal{B}$ structure on our evaluation maps, which we will often denote by  $\ev_{A,x}$ for readability.
 \section{Schizophrenic Objects}
-\subsection{Natural dual adjunction}
-What we want for our set up is that the composition of these maps induces a $U$-structured lift, i.e. for every $A \in \mathcal{A}$ and  $x \in A$ there exists an $e_{A,x} \in \HomB(TA, \t B)$, that induces  $[e_{A,x}]: [TA] \to [\t B]$, such that $[e_{A,x}] = \tau \varphi_{A,x}$, i.e., the following diagram commutes: 
+In general, what we want for our set up is that the composition of these maps induces a $U$-structured lift, i.e. for every $A \in \mathcal{A}$ and  $x \in A$ there exists an $e_{A,x} \in \HomB(TA, \t B)$, that induces  $[e_{A,x}]: [TA] \to [\t B]$, such that $[e_{A,x}] = \tau \varphi_{A,x}$, i.e., the following diagram commutes: 
 \[\begin{tikzcd}
 	& TA && {\t B} \\
 	\\
@@ -530,21 +536,25 @@ What we want for our set up is that the composition of these maps induces a $U$-
 	\arrow["{=}", shift right=1, draw=none, from=3-1, to=3-2]
 	\arrow["{\tau \varphi_{A,x}}", from=3-2, to=3-4]
 \end{tikzcd}\]
-%Although we know the existence of an isomorphism given by the adjunction, the family of lifts criterium is stronger, requiring  a choice of isomorphism for every $A \in \mathcal{A}$ and $x \in A$.
+However, as we will see, this will not be enough to induce $(T \dashv S)$ given the triple $(\t A, \tau, \t B)$. For this we will want to additionally impose the constraint that these lifts are initial. We call such lifts \emph{\textbf{natural}} (not to be confused with naturality of a natural transformation), while scenarios where we have $U$-structured  lifts that are not initial are called \emph{\textbf{non-natural}}.
 
-We will shortly see that to obtain the desired dual adjunction, we may additionally require such a lift to be intial, which lends itself to a precise definition of the \emph{schizophrenic object}, which is the central notion of this thesis:
+\subsection{Natural dual adjunction}
+
+We are now ready to introduce the central notion of our thesis: the schizophrenic object. From here, we simply start by assuming that $(\mathcal{A},U)$ and $(\mathcal{B},V)$ are concrete categories whose faithful functors are determined by representable objects given by the free object on one free generator.
+\\
+
 
 \begin{definition}
-	A triple $(\t A, \tau, \t B)$ with a pair of objects $(\t A, \t B) \in \mathcal{A} \times \mathcal{B}$ and a bijective map $\tau: [\t A] \to [\t B]$ is called a \emph{schizophrenic object} (for concrete categories $\mathcal{A}$ and $\mathcal{B}$) if the following conditions are satisfied:
+	A triple $(\t A, \tau, \t B)$ with a pair of objects $(\t A, \t B) \in \mathcal{A} \times \mathcal{B}$ and a bijective map $\tau: [\t A] \to [\t B]$ is called a \textbf{schizophrenic object}  if the following conditions are satisfied:
 \begin{enumerate}
 		\item[SO1.] For every $A \in \mathcal{A}$ the family $(\tau\varphi_{A,x}: \HomA(A, \t A) \to [\t B])_{x \in [A]}$ admits a $V$-initial lifting $(e_{A,x}:TA \to \t B)_{x \in [A]}$
 		\item[SO2.] For every $B \in \mathcal{B}$ the family $(\sigma\psi_{B,y}: \HomB(B, \t B) \to [\t A])_{y \in [B]}$ admits a $U$-initial lifting $(d_{B,y}:SB \to \t A)_{y \in [B]}$
 	\end{enumerate}
 \end{definition}
 
-What these conditions actually mean is two-fold: Firstly, the $V$-structured lifting property yields the existence of  a $\mathcal{B}$-morphism $e_{A,x} \in \HomB(TA, \t B)$ for every $A \in \mathcal{A}$ and $x \in A$, such that $[TA] = \HomA(A, \t A)$ and $[e_{A,x}] = \tau \varphi_{A,x}$.
+The $V$-structured lifting property yields the existence of  a $\mathcal{B}$-morphism $e_{A,x} \in \HomB(TA, \t B)$ for every $A \in \mathcal{A}$ and $x \in A$, such that $[TA] = \HomA(A, \t A)$ and $[e_{A,x}] = \tau \varphi_{A,x}$.
 
-But secondly,  the $V$-initiality means that for any $Z \in \mathcal{B}$ and a map $h: [Z] \to [TA]$, if  all composite maps $\tau \varphi_{A,x} \circ h$ are the underlying-set maps for $\mathcal{B}$-morphisms in $\HomB(Z, \t B)$, then there exists a unique $\mathcal{B}$-morphism $h' \in \HomB(Z, TA)$  whose underlying set map is $h$.
+The $V$-initiality means that for any $Z \in \mathcal{B}$ and a map $h: [Z] \to [TA]$, if  all composite maps $\tau \varphi_{A,x} \circ h$ are the underlying-set maps for $\mathcal{B}$-morphisms in $\HomB(Z, \t B)$, then there exists a unique $\mathcal{B}$-morphism $h' \in \HomB(Z, TA)$  whose underlying set map is $h$.
 
 In other words, the $V$-structured lift is initial among all such lifts: if $Z$ is any other $\mathcal{B}$-object whose underlying set maps into $\HomA(A, \t A)$ in a way that is compatible with all $\tau \varphi_{A,x}$ composites, then that map factors uniquely through $TA$ in $\mathcal{B}$. 
 
@@ -554,7 +564,7 @@ In other words, the $V$-structured lift is initial among all such lifts: if $Z$ 
 	Z && TA && {\t B} \\
 	\\
 	{[Z]} && {\HomA(A, \t A)} && {[\t B]}
-	\arrow["h'", from=1-1, to=1-3]
+	\arrow["{\exists ! h'}", dashed, from=1-1, to=1-3]
 	\arrow["{ ({\tau\varphi_{A,x}\circ h})'}", bend left, from=1-1, to=1-5]
 	\arrow[from=1-1, to=3-1]
 	\arrow["{e_{A,x}}", from=1-3, to=1-5]
@@ -590,26 +600,26 @@ Then by definitions and (SO2.) we have  \begin{align*}
 which shows that $\tau \varphi_{SB, t} \circ [\eta_B]: [B] \to [\t B]$ is the underlying set map of a $\mathcal{B}$-morphism in $\HomB(B, \t B)$, proving the existence of $\eta_B$. 
 
 Furthermore we see that \begin{align}
-	e_{SB, t} \circ \eta_B = t \ \ \text{ for all } t \in [SB]= \HomB(B, \t B)
+	e_{SB, t} \circ \eta_B = t \ \ \text{ for all } t \in [SB]= \HomB(B, \t B).
 \end{align}
 Since $[\eta_B]$ lifts for all $B$, we may verify naturality on underlying-set maps; we verify that given a $\mathcal{B}$-morphism $f: B \to B'$, that we have $ [\eta_{B'}]\circ (f \circ -) = [TSf] \circ [\eta_B]$, or in other words: \begin{align}
-	d_{B', f \circ y} = [TSf] \circ d_{B,y}
+	d_{B', f \circ y} = [TSf] \circ d_{B,y}.
 \end{align} 
-Remember that the left action of $[TSf]$ on $d_{B,y}$ is a right action of $Sf$ on $d_{B,y}$. But the underlying map of $d_{B,y} \circ Sf$ is $\sigma \psi_{B,y} \circ \HomB(f, \t B)$ which is, up to the bijection $\sigma$, just the evaluation map of a morphism in $\HomB(B, \t B)$ at some $y \in [B]$ precomposed with $f \in \HomB(B, B')$, which yields the evaluation map of a morphism in $\HomB(B',\t B)$ at $f \circ y \in [B']$. In other words $[d_{B,y}] [Sf] = [\sigma \psi_{B', f \circ y}] = [d_{B', f \circ y}]$, which is clearly the underlying set map of $d_{B', f \circ y}$, giving us (3) by uniqueness of the lift. 
+Remember that the left action of $[TSf]$ on $d_{B,y}$ is a right action of $Sf$ on $d_{B,y}$. But the underlying map of $d_{B,y} \circ Sf$ is $\sigma \psi_{B,y} \circ \HomB(f, \t B)$ which is, up to the bijection $\sigma$, just the evaluation map of a morphism in $\HomB(B, \t B)$ at some $y \in [B]$ precomposed with $f \in \HomB(B, B')$, which yields the evaluation map of a morphism in $\HomB(B',\t B)$ at $f \circ y \in [B']$. In other words $[d_{B,y}] [Sf] = [\sigma \psi_{B', f \circ y}] = [d_{B', f \circ y}]$, which is clearly the underlying set map of $d_{B', f \circ y}$, giving us (4) by uniqueness of the lift. 
 
 
 
-The definition of $S$ gives us that $[S\eta_B][\epsilon_{SB}](t) = \HomB(\eta_B, \t B)(e_{SB, t})$ and by (2) we have $\HomB(\eta_B, \t B)(e_{SB, t}) = e_{SB,t} \circ \eta_B = t$. Since $U$ is faithful, any map $[Sf] \in \Set([SB'], [SB])$ is the underlying-set map to a unique map $Sf \in \HomA(SB', SB)$, and we deduce that $[S\eta_B][\epsilon_{SB}] = 1_{[SB]}$ is the underlying set map of the triangle identity $S\eta_B \circ \epsilon_{SB} = 1_{SB}$.
+The definition of $S$ gives us that $[S\eta_B][\epsilon_{SB}](t) = \HomB(\eta_B, \t B)(e_{SB, t})$ and by (3) we have $\HomB(\eta_B, \t B)(e_{SB, t}) = e_{SB,t} \circ \eta_B = t$. Since $U$ is faithful, any map $[Sf] \in \Set([SB'], [SB])$ is the underlying-set map to a unique map $Sf \in \HomA(SB', SB)$, and we deduce that $[S\eta_B][\epsilon_{SB}] = 1_{[SB]}$ is the underlying set map of the triangle identity $S\eta_B \circ \epsilon_{SB} = 1_{SB}$.
 
 Finally, to show that $\tau$ is induced by this adjunction it suffices to see that it maps $\t x \mapsto [[\epsilon_{\t A}](\t x)](1_{\t A})$ as desired. For every $\t x \in [\t A]$ we have
 \begin{align*}
 	[[\epsilon_{\t A}](\t x)](1_{\t A}) = \tau \varphi_{\t A, \t x}(1_{\t A}) = \tau([1_{\t A}](\t x)) = \tau(\t x).
 \end{align*}
 \end{proof}
-A dual adjunction induced by a schizophrenic object in this way is called \emph{natural}. However there exist also dual adjunctions which are not natural in this sense, although some modifications are in order to make it natural. 
+A dual adjunction induced by a schizophrenic object in this way is called a \textbf{\emph{natural dual adjunction}}. In the following we shall briefly discuss dual adjunctions which are non-natural, as in our examples we will see that some modifications are in order to make it natural. 
 \subsection{Non-natural dual adjunction}
 
-Dual adjunctions which are not induced by a schizophrenic object are called \emph{non-natural}. The key difference here is initiality of the lifts. That is, an arbitrary dual adjunction $(S', T')$ in the situation described in $\S 3$ already determines a triple $(\t A, \tau, \t B)$ such that the following weakened conditions of $SO1$ and $SO2$ are fulfilled:
+Let there be a dual adjunction $(S', T')$ that satisfies the situation described in $\S 3$. This adjunction already determines a triple $(\t A, \tau, \t B)$ such that the following weakened conditions of $SO1$ and $SO2$ are fulfilled:
 \begin{enumerate}
 		\item[WSO1.] For every $A \in \mathcal{A}$ the family $(\tau\varphi_{A,x}: \HomA(A, \t A) \to [\t B])_{x \in [A]}$ admits a $V$-structured lift $(e_{A,x}:T'A \to \t B)_{x \in [A]}$ which extends functorially, i.e., for every $A \stackrel{f}{\to} A'$ in $\mathcal{A}$ there exists a $\mathcal{B}$-morphism $T'A' \stackrel{T'f}{\to}T'A$ with $[T'f] = \HomA(f,\t A)$. 
 		\item[WSO2.] For every $B \in \mathcal{B}$ the family $(\sigma\psi_{B,y}: \HomB(B, \t B) \to [\t A])_{y \in [B]}$ admits a $U$-structured lift $(d_{B,y}:S'B \to \t A)_{y \in [B]}$ which extends functorially.
@@ -623,7 +633,7 @@ Firstly, one may use the triple $(\t A, \tau, \t B)$ to induce a natural dual ad
 
 The second method is the one which we will later see in action in our examples, which is to restrict our  adjunction to full subcategories of our categories under which we have an equivalence. 
 
-In the next part we will discuss a situation which induces a non-natural dual adjunction between concrete categories.
+In the next part we will discuss a situation which induces a non-natural dual adjunction between concrete categories, as it is relevant to an important example.
 \subsection{Internal Hom-Functors}
 
 Let $(\mathcal{A}, U)$ be a concrete category. An \textbf{internal hom-functor} is a functor $H: \mathcal{A}^{\op} \times \mathcal{A} \to \mathcal{A}$ such that $UH = \HomA(-,-)$. Moreover \begin{align*}
@@ -639,7 +649,7 @@ Any cartesian closed concrete category which admits function spaces is a good ex
 \
 
 \begin{definition}
-	A construct $ \concA$ is said to admit \textbf{function spaces} if $\mathcal{A}$ is cartesian closed, $\concA$ admits finite concrete products, and the evaluation morphisms $A \times B^A \stackrel{\ev}{\to} B$ can be chosen in such a way that $U(B^A)= \HomA(A,B)$ where $\ev$ is the restriction of the canonical evaluation map in $\Set$.  \end{definition}
+	A concrete category $ \concA$ is said to  \textbf{admit function spaces} if $\mathcal{A}$ is cartesian closed, $\concA$ admits finite concrete products, and the evaluation morphisms $A \times B^A \stackrel{\ev}{\to} B$ can be chosen in such a way that $U(B^A)= \HomA(A,B)$ where $\ev$ is the restriction of the canonical evaluation map in $\Set$.  \end{definition}
 
 A cartesian closed concrete category which admits function spaces admits an internal hom-functor by definition, since we can choose $B^A$ to be our lift.
 
@@ -675,54 +685,39 @@ The question is if the concrete functor commutes with the evaluation map, since 
 	\arrow["{\phi_{\lvert B \lvert, \t A, x}}"', from=3-1, to=3-3]
 \end{tikzcd}\]
 
-In other words, we check $\sigma([f](y)) = [\lvert f \lvert ](\iota(y))$, but this follows from faithfulness of the concrete functor $\lvert - \lvert $. (\textcolor{red}{TODO/Question}: is this true/really so immediate?)
+In other words, we check $\sigma([f](y)) = [\lvert f \lvert ](\iota(y))$, but this follows from faithfulness of the concrete functor $\lvert - \lvert $. 
 
 Therefore we have a contravariant functor $S(B) = \HomB_\mathcal{A}(B, \t B)$. 
 
 Now if for every $A \in \mathcal{A}$ we can lift the $\mathcal{A}$-source $(p_{A, \t A, x}: H(A, \t A) \to \t A)$ along $\lvert - \lvert$ functorially, then we also have WSO1, inducing the contravariant functor $T: \mathcal{A} \to \mathcal{B}$ such that $\lvert T(A) \lvert = H(A, \t A)$, and as such we have the desired dual adjunction $(S, T)$. We will however only show this example-wise. 
 
 
-\section{Motivation}
-We are now in the position to understand what this schizophrenic object really affords us, however first we will explicate what that is by  saying a few words about motivation that will hopefully make the above seemingly abstract definition of the schizophrenic object more understandable. 
+\subsection*{Motivation}
+We are now in the position to understand what this schizophrenic object really affords us. What is interesting about it is that the object itself induces the adjunction via $\Hom$-sets in our respective categories. 
 
-First remember that there is a bijection between $[\t A]$ and $[\t B]$, since  \begin{align*}
-	[\t A] = \HomA(A_0, SB_0) = \Hom_B(B_0, TA_0) = [\t B].
-\end{align*}
+So our question for the examples will be the following: given a good candidate  $(\t A, \tau, \t B)$ for the schizophrenic object, does this object lend itself to a description of a $\mathcal{B}$-structure on $\HomA(A, \t A)$ for every $A \in \mathcal{A}$ in a way that is \emph{natural} (and similarly for $\t B$)? 
 
-In particular, we have shown that $\tau$ and $\sigma$ are necessarily such bijections and inverses of one another. 
-
-What is interesting about the schizophrenic object is that the object itself defines the adjunction via $\Hom$ sets in our respective categories. In other words, our question, in general, is that given a schizophrenic object $(\t A, \tau, \t B)$ do the sets $\Hom_A(A, SB_0)$ have $\mathcal{B}$ structure for every $A \in \mathcal{A}$ and $\HomB(B, TA_0)$ have $\mathcal{A}$ structure for every $B \in \mathcal{B}$, and moreover, are they the initial objects with $\mathcal{B}$-structure. 
-
-More explicitly, do we have initial lifts via the forgetful functor, such that the following diagrams commute for every $A \in \mathcal{A}$ and for every $B \in \mathcal{B}$?
-
-\[\begin{tikzcd}
-	&& {\mathcal{B}^{\op}} &&&&& {\mathcal{A}^{\op}} \\
-	&& {} && {\text{and}} \\
-	{\mathcal{A}} && \Set &&& {\mathcal{B}} && \Set \\
-	A && {\HomA(A, \t A)} &&& B && {\HomB(B, \t B)} \\
-	&&&&& {}
-	\arrow["{\t U(-)}", from=1-3, to=3-3]
-	\arrow["{\t U(-)}", from=1-8, to=3-8]
-	\arrow["\exists", dashed, from=3-1, to=1-3]
-	\arrow["{\HomA(-,\t A)}"', from=3-1, to=3-3]
-	\arrow["\exists", dashed, from=3-6, to=1-8]
-	\arrow["{\HomB(-,\t B)}"', from=3-6, to=3-8]
-	\arrow[maps to, from=4-1, to=4-3]
-	\arrow[maps to, from=4-6, to=4-8]
-\end{tikzcd}\]
-If such lifts exist, then by construction, we will have the following adjunction
+If the desired lifts exist, then by Theorem 4.1 we will have the following adjunction
 \[\begin{tikzcd}
 	{\mathcal{A}} & \bot & {\mathcal{B}^{\op}}
-	\arrow["{T:=\HomA(-, \t A)}",  bend left, from=1-1, to=1-3, from=1-1, to=1-3]
-	\arrow["{S:=\HomB(-, \t B)}", bend left, from=1-3, to=1-1, from=1-3, to=1-1]
+	\arrow["{T(-):=\HomA_{\mathcal{B}}(-, \t A)}",  bend left, from=1-1, to=1-3, from=1-1, to=1-3]
+	\arrow["{S(-):=\HomB_{\mathcal{A}}(-, \t B)}", bend left, from=1-3, to=1-1, from=1-3, to=1-1].
 \end{tikzcd}\]
 
-To understand this adjunction and see that it does indeed correspond to the morphisms explained in the first section, we will go through several examples.
+An arguably equally important question which we explore in the examples is if we can give concrete descriptions of $ \HomA_{\mathcal{B}}(-,\t A)$ and $\HomB_{\mathcal{A}}(-,\t B)$ as functors which are either well-known to that category, or that we can understand given the known machinery of that category.
+
+Oftentimes we do get a concrete description, which will help solidify our intuition about these adjunctions. However, when we don't get such a description, we can still explore concrete properties of $\HomA_{\mathcal{B}}(A,\t A)$ as $\mathcal{B}$-object.
+
+
+Therefore our motivation in the following is two-fold, to show that our candidate is indeed schizophrenic, and to provide intuition by analyzing the adjunctions a little further.
+
 
 \section{Examples}
-Our goal in the following will be to build intuition for the schizophrenic object through a careful analysis of examples. In particular, we are going to start with a subexample, if you will, of a more profound duality called the Stone duality, simply by elucidating its schizophrenic nature as it ties directly to the generality we have learned, so that we can get a sense for in what direct way we can lift hom sets.
+The rest of our thesis shall be devoted to an analysis of several specific examples (and non-examples) of a natural dual adjunctions. Our goal is not only to show that our candidates are indeed schizophrenic objects, but to build intuition for the schizophrenic object through a careful analysis of the induced adjunctions. 
 
-Consequently, in discussing the Stone duality we plan to give concrete descriptions of these Hom set functors, for which we had just given a more general description using universal properties and hom sets. Though we do lead with the general into the concrete, we may otherwise view our elucidation of the concrete as the generalization, since we must show the actual mechanics behind why we can think of these concrete objects as lifts of the hom sets.
+We are going to start with a example which is connected to a more profound duality called the Stone duality. For this example we will like to elucidate its schizophrenic nature as it ties directly to the generality we have learned, so that we can start to get a sense for in what direct way we can lift Hom-sets.
+
+Consequently, in discussing the Stone duality we plan to give concrete descriptions of these Hom-set functors, for which we had just given a more general description using only universal properties and  Hom-sets. Though we do lead with the general into the concrete, we may otherwise view our elucidation of the concrete as the mental abstraction, since we must show the actual mechanics behind why we can think of these concrete objects as lifts of the hom sets.
 
 This will then lend itself to the intuition of the following examples, which we can in some sense think of extensions or special cases of the given dualities. 
 
@@ -730,42 +725,52 @@ For the examples note that we may sometimes by abuse of notation and for lack of
 \section{The $\Top \rightleftarrows \Frm^{\op}$ duality}
 
 %\emph{A note about notation: When speaking about $\Hom$ sets of a general category $A$, we use the notation as before $\HomA(-,-)$. However to shorten notation and ease readability, when speaking of specific categories, such as $\Frm, \Top,$ or $\Set$, we use the notation $\Frm(-,-), \Top(-,-),$ $ \Set(-.-).$}
+In this part we assume basic knowledge about topological spaces and frames. For this example we will only use how the objects and morphisms in $\Top$ and $\Frm$ are defined.  Our reference text when it comes to any discussion about posets, lattices, frames, or locales, is \emph{Johnstone}'s \emph{Stone Spaces}. 
 
-The aim of discussing this example is two-fold: first we want to concretize the maps using our general description in the first part of this paper. To this end we aim to be very explicit in this example, so that we just once get to see what these maps look like explicitly, then later we will drop the explicicity for readability. 
 
-Secondly, we want to provide argumentative insight for the following examples. 
+The aim of this discussion is two-fold: first we want to concretize the maps using our general description in the first part of this paper. To this end we aim to be very explicit in this example, so that we just once get to see what these maps look like without dropping any notation via identification, which we  do on later examples for readability. 
 
-For this reason we will come to refer to this example as the leading example, as it will serve as a leading example for the following.
+Secondly, we want to provide argumentative insight for the coming examples. For this reason we will refer to this example as the leading example.
 
-We begin with the adjunction 
+To that end we start with our candidate for the schizophrenic object: $(\mathbb{S}, 1_{\mathbb{S}},\mathbb{2})$. In the topological side we have the Sierpiński space $\mathbb{S} = (\{0,1\}, \Omega(\mathbb{S}))$, where the open sets are given by $\Omega(\mathbb{S}) = \{ \emptyset, \{1\}, \{0,1\}\}$. On the frame side we have the two point poset $\mathbb{2} := \{0 \leq 1\}$.
+
+We aim to prove that this object is schizophrenic and as such induces the following natural dual adjunction
 
 \[\begin{tikzcd}
 	{\Top} & \bot & {\Frm^{\op}}
 	\arrow["{\text{[T] = $\Top$(--, $\mathbb{S}$)}}" , bend left, from=1-1, to=1-3]
-	\arrow["{\text{[S] = $\Frm$(--, $\mathbb{2}$)}}", bend left, from=1-3, to=1-1]
+	\arrow["{\text{[S] = $\Frm$(--, $\mathbb{2}$)}}", bend left, from=1-3, to=1-1].
 \end{tikzcd}\]
 
 with the following bijections induced by the unit and counit
 \begin{align*}
 	 \tau: [\mathbb{S}]&\to [\mathbb{2}] &\sigma: [\mathbb{2}] &\to [\mathbb{S}] \\
-	\t x &\mapsto [[\epsilon_{\mathbb{S}}](\t x)](1_{\mathbb{S}})&\t y &\to  [[\eta_{\mathbb{2}}](\t y)](1_{\mathbb{2}})
+	\t x &\mapsto [[\epsilon_{\mathbb{S}}](\t x)](1_{\mathbb{S}})&\t y &\to  [[\eta_{\mathbb{2}}](\t y)](1_{\mathbb{2}}).
 \end{align*}
-In this setting  the respective representable objects are $A_0 = \{pt\}$ and $B_0 = b$, where $b$ is here  notation for the free frame generated by one object, i.e., the free 3-chain $\bot - b - \top$. 
+In this setting  the respective representable objects are $A_0 = \{pt\}$ and $B_0 = b$, where $b$ is here  notation for the free frame generated by one object, i.e., the free 3-chain $\{\bot \leq b \leq \top\}$. Remember that as a frame needs to be a complete lattice, it must include bottom and top elements $\bot$ and $\top$. 
 
-Now we know that $[TA_0] = \Top(\{pt\}, \mathbb{S}) = \mathbb{S}$ and $[SB_0] = \Frm(b, \mathbb{2}) = \mathbb{2}$ , however it less immediate  why $\Top(A, \mathbb{S})$ lifts to the category $\Frm$ and why $\Frm(B, \mathbb{2})$  lifts to the category $\Top$.
+Now we can see explicitly  that $[TA_0] = \Top(\{pt\}, \mathbb{S}) = [\mathbb{S}]$, since a continuous map from the point is completely determined by where the point gets sent, and $[SB_0] = \Frm(b, \mathbb{2}) = [\mathbb{2}]$, since a simple computation shows that frame homomorphisms must send bottom elements to bottom elements and top elements to top elements, so that it is completely determined by the image of $b$. 
+
+Though we may obtain these equalities purely categorically, we now finally have an example to see in what sense the respective maps are completely determined by where they send the free generator.
+
+However it less immediate  why $\Top(A, \mathbb{S})$ lifts to the category $\Frm$ and why $\Frm(B, \mathbb{2})$  lifts to the category $\Top$.
 
 For a $\Frm$-structure on $\Top(A, \mathbb{S})$ we desire a lift which preserves the evaluation map $\sigma\varphi_{A,x}$, and which is initial among such lifts. This means we want the weakest $\Frm$-structure such that for all $x \in A$ and $A \in \Top$ evaluation maps $\sigma \varphi_{A,x}$ lift to frame homomorphisms $e_{A,x}$.
 
-We know that the evaluation is a frame homomorphism if and only if it preserves pointwise order in $\mathbb{2}$, since   $e_{A,x}(u \leq v) = e_{A,x}(u) \leq e_{A,x}(v) = u(x) \leq v(x)$, and conversely a pointwise order in $\mathbb{2}$ determines limits and colimits by definition;  $u(x) \land v(x) \leq (u \land v)(x)$ holds since the pointwise intersection is less than or equal to $u(x)$ and $v(x)$ respectively, and $(u \land v)(x) \leq u(x) \land v(x)$ holds since the intersection in the frame is less than or equal to $u$ and $v$ respectively and  evaluating preserves pointwise order.
-	
+We claim that the evaluation is a frame homomorphism if and only if it preserves pointwise order in $\mathbb{2}$.  
 
-(\textcolor{blue}{TODO} does a pointwise order preserving evaluation morphism into $\mathbb{2}$ preserve finite limits and colimits by some pointwise argument in the presheaf category? in other words, is there a way to abstract this argument so i dont have to prove it on elements?)
+For the forward direction we have \begin{align*}
+	e_{A,x}(u \leq v) = e_{A,x}(u) \leq e_{A,x}(v) = u(x) \leq v(x),
+\end{align*} and conversely a pointwise order in $\mathbb{2}$ determines limits and colimits by definition:  $u(x) \land v(x) \leq (u \land v)(x)$ holds since the pointwise intersection is less than or equal to $u(x)$ and $v(x)$ respectively, and $(u \land v)(x) \leq u(x) \land v(x)$ holds since the intersection in the frame is less than or equal to $u$ and $v$ respectively and  evaluating preserves pointwise order.
+	
+%
+%(\textcolor{blue}{TODO} does a pointwise order preserving evaluation morphism into $\mathbb{2}$ preserve finite limits and colimits by some pointwise argument in the presheaf category? in other words, is there a way to abstract this argument so i dont have to prove it on elements?)
 
 
 
 So for $A \in \Top$ we construct the $\Frm$-structure on $\Top(A, \mathbb{S})$ by a preorder that preserves the pointwise order in $\mathbb{2}$ for all $x \in A$. As we want the weakest such structure, we define it such that for  arbitrary $ u, v \in \Top(A, \mathbb{S})$ we have $u \leq v$ if and only if $u(x) \leq v(x)$ for all $x \in A$. 
 
-This is the initial $\Frm$-structure making all evaluation maps frame homomorphisms.
+Any other such frame structure must satisfy our pointwise definition, so that this is the initial $\Frm$-structure making all evaluation maps frame homomorphisms.
 
 
 
@@ -777,52 +782,50 @@ For a topology on $\Frm(A, \mathbb{2})$, we consider the family \begin{align*}
 Our adjunction has the counit
 \begin{align*}
 	\eta:& 1_{\Frm} \to TS\\
-	&B \mapsto TSB\\
-	&B \mapsto \Top(\Frm(B, \mathbb{2}), \mathbb{S})
+	&B \mapsto TSB
 \end{align*}
-so that 
+whose underlying map 
 \begin{align*}
-	\eta_B:& B \to \Top(\Frm(B, \mathbb{2}), \mathbb{S})
+	[\eta_B]: [B] &\to [\Top(\Frm(B, \mathbb{2}), \mathbb{S})] = \Top(\Frm(B, \mathbb{2}), \mathbb{S})\\
+	y & \mapsto (p \to p(y))
 \end{align*}
-is such that its underlying map 
+is given by evaluation
 \begin{align*}
-	[\eta_B]:& [B] \to [\Top(\Frm(B, \mathbb{2}), \mathbb{S})] = \Top(\Frm(B, \mathbb{2}), \mathbb{S})
+	[[\eta_B](y)]: \Frm(B, \mathbb{2}) &\to [\mathbb{S}]\\
+	p &\mapsto p(y).
 \end{align*}
 
-where 
-\begin{align*}
-	[\eta_B](y): \Frm(B, \mathbb{2}) &\to \mathbb{S}\\
-	p &\mapsto p(y)
-\end{align*}
-is given by evaluation.
 
-(\textcolor{red}{TODO} work out how to call these maps underlying set maps or not)
+Notice that the topology on $\Frm(B, \mathbb{2})$ is the initial topology making all $(\eta_B(y))_{y \in B}$ continuous, since continuous maps $\eta_B(y)$ into the Sierpiński space $\mathbb{S}$ are uniquely determined by the preimage of $\{1\}$.
 
-Notice that the topology on $\Frm(B, \mathbf{2})$ is the initial topology making all $(\eta_B(y))_{y \in B}$ continuous, since continuous maps $\eta_B(y)$ are uniquely determined by the preimage of $\{1\}$.
+In defining initial lifts we mentioned that our intuition should come from topology, so we found it astute for the leading example to use this intuition on one side of the lift directly.
 
-For each side of this adjunction respectively, we will see this kind of reasoning more often to argue initiality of lifts.
+Keep in mind that for each side of this adjunction respectively, we will see this kind of reasoning more often to argue initiality of lifts.
 
-We would like, only on this example, to explicate exactly what the bijection of the schizophrenic object is, since this example is quite straightforward and leads to a very familiar map, namely the identity. 
+With this we are done. We do not need to prove triangle equalities, we do not need to prove universality. We only prove that our candidate is schizophrenic, and Theorem 4.1 gives us the adjunction.
+
+We would like however, only on this example, to compute and explicate the bijection of the schizophrenic object, since this example is quite straightforward and leads to a very familiar map, namely the identity. For further examples we do not find it very useful to compute this map, so we  implicitly refer to the abstraction to know it exists. 
+
+We will also drop notation for underlying sets when $[\HomA(A,\t A)] = \HomA(A,\t A)$ is already a set. We will not, however, drop notation for $[\t A]$ and will refer explicitly to our $A_0$. However that is only for this example; after this we refer to elements of $[\t A]$ by abuse of notation not by maps from the free object, but by the images of the free generator under these maps.
 
 When passing to $U$ and $V$, we have
 \begin{align*}
-	[\eta_{\t B}]: [\t B] &\to [\Top(\Frm(\t B, \mathbb{2}), \mathbb{S})] = \Top(\Frm(\t A, \mathbb{2}), \mathbb{S})\\
-	(\t y: b \to y) &\mapsto (p \to p(y))
+	[\eta_{\t B}]: [\t B] &\to \Top(\Frm(\t B, \mathbb{2}), \mathbb{S})\\
+	(b \stackrel{\t y}{\rightarrow} y) &\mapsto (p \to p(y))
 \end{align*}
-which is equal to
-\begin{align}
-	[\eta_{\mathbb{2}}]: [\mathbb{2}] &\to [\Top(\Frm(\mathbb{2}, \mathbb{2}), \mathbb{S})] = \Top(\Frm(\mathbb{2}, \mathbb{2}), \mathbb{S})\\
-	(\t y: b \to y) &\mapsto (1_{\mathbb{2}} \to 1_{\mathbb{2}}(y))
-\end{align}
-So we have 
+which when plugging in  $\t B = \mathbb{2}$ is equal to
 \begin{align*}
+	[\eta_{\mathbb{2}}]: [\mathbb{2}] &\to  \Top(\Frm(\mathbb{2}, \mathbb{2}), \mathbb{S})\\
+	(b \stackrel{\t y}{\rightarrow} y) &\mapsto (1_{\mathbb{2}} \to 1_{\mathbb{2}}(y)),
+\end{align*}
+since $\Frm(\mathbb{2},\mathbb{2})$ only contains one map, the identity. So we have\begin{align*}
 	[\eta_{\mathbb{2}}](\t y): \Frm(\mathbb{2},\mathbb{2}) &\to \mathbb{S}\\
 	1_{\mathbb{2}} &\mapsto 1_{\mathbb{2}}(y)
 \end{align*}
 and now
 \begin{align*}
-	[[\eta_{\mathbb{2}}](\t y)]: [\Frm(\mathbb{2},\mathbb{2})] &\to [\mathbb{S}]\\
-	(b \to 1_{\mathbb{2}}) &\mapsto (\{pt\} \to1_{\mathbb{2}}(y))
+	[[\eta_{\mathbb{2}}](\t y)]: \Frm(\mathbb{2},\mathbb{2}) &\to [\mathbb{S}]\\
+	 1_{\mathbb{2}} &\mapsto (\{pt\} \to1_{\mathbb{2}}(y))
 \end{align*}
 so that 
 \begin{align*}
@@ -830,15 +833,14 @@ so that
 \end{align*}
 Now we can see that the map \begin{align*}
 	\sigma: [\mathbb{2}] &\to [\mathbb{S}]\\
-	(\t y: b \to y) &\mapsto (\{pt\} \to 1_{\mathbb{2}}(y))
+	(b \stackrel{\t y}{\rightarrow} y) &\mapsto (\{pt\} \to 1_{\mathbb{2}}(y))
 \end{align*}
 is the identity in $\Set$, as the underlying set on both sides is $[\mathbb{2}] = [\mathbb{S}] = \{0,1\}$ so that we are looking at the set map \begin{align*}
 	\{0,1\} &\to \{0,1\}\\
-	y &\mapsto 1_{\{0,1\}}(y)= y
+	y &\mapsto 1_{\{0,1\}}(y)= y.
 \end{align*}
-(\textcolor{red}{TODO}: Change all maps in $[-]$ from $A_0 \to x$ to simply $x$ and make a note about it when talking about why we can make this identification in the beginning.)
 
-This map is clearly the identity. This boils down to the fact that our choice of morphism from $\Frm(\mathbb{2},\mathbb{2})$ was easy to determine since the set $\Frm(\mathbb{2},B) = \{pt\}$, as $\mathbb{2}$ is an initial object in $\Frm$, and in particular it is clear in $(1)$ that $\Frm(\mathbb{2},\mathbb{2}) = \{1_{\mathbb{2}}\}$. From this we can deduce that $\sigma$ is the identity on $\bar U(\mathbb{2})$.
+This map is clearly the identity. This boils down to the fact that our choice of morphism from $\Frm(\mathbb{2},\mathbb{2})$ was easy to determine since the set $\Frm(\mathbb{2},B) = \{pt\}$, as $\mathbb{2}$ is an initial object in $\Frm$, and in particular it is clear that $\Frm(\mathbb{2},\mathbb{2}) = \{1_{\mathbb{2}}\}$. From this we can deduce that $\sigma$ is the identity on $[\mathbb{2}]$.
 
 
 In general, our schizophrenic object will not necessarily be initial in arbitrary concrete duality, and as such, our choice $p \in \HomA(\t A, \t A)$ may not be unique nor easy to determine, so that $\sigma$, though always a bijection, is not necessarily always the identity.
@@ -846,34 +848,36 @@ In general, our schizophrenic object will not necessarily be initial in arbitrar
 
 \section{Stone duality}
 
-(\textcolor{blue}{TODO}: introduce boolean algebras, as well as ideals, filters, ultrafilters, principle ultrafilters, maybe in the beginning? question for Georg) 
+For the following section we assume a bit more familiarity with lattice theory than the mere definitions of objects and morphisms of the corresponding categories. To that effect, we assume familiarity with distributive lattices, sub join/meet-semilattices, boolean algebras,  ideals, filters, (principal) ultrafilters, (directed and codirected) posets, frames and locales.
 
-Before we begin we would like to call attention to the fact that the Stone duality is wrought with interesting subdualities, some of which are themselves examples. It is not explicit yet what we mean by subduality, since here we are using it in a more broad sense, however in this section we will make that explicit. Though describing these subdualities may feel like a diversion, we find they actually elucidate the structure of the Stone duality as well as provide us with intuition for the following examples, so we plan to describe them.
+Moreover, we follow the convention of [Joh] that a sub meet-semilattice is given by the datum $(L, \land, \top)$ and a sub join-semilattice is given by the datum $(L, \lor, \bot)$, so that a lattice is given by the datum $(L, \land, \lor, \top,\bot)$. Some authors do not necessitate including $\bot$ and $\top$ and choose to differentiate between $\DLat$ and $\DLat_{\text{bdd}}$, refering to what we call a distributive lattice as a bounded distributive lattice.
 
-Our strategy is as follows: first we describe a the natural dual adjunction between $\FinSet$ and $\Boolf$, which we will later see, can be obtained by restricting the Stone duality to full subcategories. However that is not how we will be constructing the Stone duality. 
+Before we begin we would like to call attention to the fact that the Stone duality is wrought with interesting subdualities, some of which are themselves examples. Though describing these subdualities may feel like a diversion, we find they actually elucidate the structure of the Stone duality as well as provide us with intuition for the following examples, so we plan to describe them.
 
-We start with this example because it is easier to understand and provides some groundwork for the following dualities.
+Our strategy is as follows: first we describe a the dual adjunction between $\FinSet$ and $\Boolf$, which we will later see, can be obtained by restricting the Stone duality to full subcategories. However that is not how we will be constructing the Stone duality. 
 
-On the other hand, we will actually obtain the Stone duality via restriction and composition of some different dualities, namely the dualities  $\Top \rightleftarrows \Loc$, which we just saw, and  $\CohLoc^{\op}\rightleftarrows \DLat$, between the category of coherent locales and coherent maps between them, which we will later define, and the category of distributive lattices with lattice morphisms.\footnote{Some authors choose to differentiate between $\DLat$ and $\DLat_{\text{bdd}}$, but we will go by the convention of [Joh] who chooses to define semi-lattices to include the bottom and top elements, respectively.}
+We start with this example because it is easier to understand, gives us a candidate for the schizophrenic object of Stone, and provides some groundwork for the following dualities.
+
+On the other hand, we will actually obtain the Stone duality via restriction and composition of the dualities  $\Top \rightleftarrows \Loc$, which we just saw, and  $\CohLoc \rightleftarrows \DLat^{\op}$, between the category of coherent locales and coherent maps between them, which we will later define, and the category of distributive lattices with lattice morphisms.
 
 And finally we will show why the finite duality is a restriction of the Stone duality.
 
-\subsection{Duality between finite boolean algebras and finite sets}
+\subsection{The $\FinSet \rightleftarrows \Boolf^{\op}$ duality}
 
 Before we speak about the Stone duality we plan to discuss one of its subdualities. However we should be clear what we mean by subduality.
 
-\
+
 
 \begin{definition}[subduality]
-	Let $\mathcal{A}$ and $\mathcal{B}$ be two categories for which there exists an duality, i.e., an adjunction $\mathcal{A}^{\op} \rightleftarrows \mathcal{B}$, given by left and right adjoint functors $T: \mathcal{A}^{\op} \to \mathcal{B}$ and $S: \mathcal{B} \to \mathcal{A}^{\op}$, respectively.
+	Let $\mathcal{A}$ and $\mathcal{B}$ be two categories for which there exists an duality, i.e., an adjunction $\mathcal{A} \rightleftarrows \mathcal{B}^{\op}$, given by left and right adjoint functors $T: \mathcal{A} \to \mathcal{B}^{\op}$ and $S: \mathcal{B}^{\op} \to \mathcal{A}$, respectively.
 	
-	If $\mathcal{A}' \subset \mathcal{A}$ and $\mathcal{B}' \subset \mathcal{B}$ are subcategories on which $S$ and $T$ restrict to a duality, we call $\mathcal{A}'^{\op} \rightleftarrows \mathcal{B}'$ given by  $T \lvert_{\mathcal{A}'}: \mathcal{A}^{\op} \to \mathcal{B}$ and $S\lvert_{\mathcal{B}'}: \mathcal{B}' \to \mathcal{A}'^{\op}$ a \emph{\textbf{subduality}} of $\mathcal{A}^{\op} \rightleftarrows \mathcal{B}$. 
+	If $\mathcal{A}' \subset \mathcal{A}$ and $\mathcal{B}' \subset \mathcal{B}$ are subcategories on which $S$ and $T$ restrict to a duality, we call $\mathcal{A}' \rightleftarrows \mathcal{B}'^{\op}$ given by  $T \lvert_{\mathcal{A}'}: \mathcal{A}' \to \mathcal{B}'^{\op}$ and $S\lvert_{\mathcal{B}'}: \mathcal{B}'^{\op} \to \mathcal{A}'$ a \emph{\textbf{subduality}} of $\mathcal{A} \rightleftarrows \mathcal{B}^{\op}$. 
 \end{definition} 
 Note that we may change perspective from talking about subdualities of the leading example, or of the Stone duality. 
 
 The first subduality we will discuss is a subduality of the Stone duality.
 
-Consider the category $\Bool$ of Boolean algebras and boolean algebra homomorphisms between them. We claim there is an adjunction between $\Boolf$ and $\FinSet$ given by $\Ult(B)$, which sends a boolean algebra $B$ to the set $\Ult(B)$ of ultrafilters on $B$, and by $\mathcal{P}(X)$, which sends a set $X$ to its power-set.
+Consider the category $\Bool$ of Boolean algebras and boolean algebra homomorphisms between them. We claim there is an adjunction between $\Boolf$ and $\FinSet$ given by $\Ult(B)$, which sends a finite boolean algebra $B$ to the set $\Ult(B)$ of ultrafilters on $B$, and by $\mathcal{P}(X)$, which sends a finite set $X$ to its power-set.
 
 \[\begin{tikzcd}
 	 \FinSet& \bot & \Boolf^{\op}
@@ -881,7 +885,7 @@ Consider the category $\Bool$ of Boolean algebras and boolean algebra homomorphi
 	\arrow["{\Ult(-)}", shift left=3, bend left, from=1-3, to=1-1]
 \end{tikzcd}\]
 
-Notice that $\mathcal{P}(X)$ is a boolean algebra, since it has distributive lattice structure and  every subset $S$ has a well-defined complement $X - S$. 
+Notice that $\mathcal{P}(X)$ is a boolean algebra for any $X \in \Set$, since it has distributive lattice structure and  every subset $S \subset X$ has a well-defined complement $X - S$. 
 
 
 It is also the case that $\Ult(-)$ is  fully faithful as long as $A$ is a finite boolean algebra, since ultrafilters on those are principle, meaning that they are generated by a single element, an element which we can then identify with the points of $X$ in a faithful way. And so the unit $\Ult(\mathcal{P}(X)) \to X$ of the adjunction is an isomorphism.
@@ -1272,49 +1276,48 @@ This shows us that the left adjoint of the Stone duality is given as a lift of $
 	\arrow["{\Spec(-)}", bend left, from=7-5, to=7-1]
 \end{tikzcd}\]
 
-%\[\begin{tikzcd}
-%	\Top & \bot & \Loc & \bot & {\DLat^{\op}} \\
-%	\vdash && \vdash \\
-%	\Sob & \bot & \Spat && \cong \\
-%	\dashv && \vdash \\
-%	\CohTop & \bot & \CohLoc & \bot & {\DLat^{\op}} \\
-%	\vdash &&&& \vdash \\
-%	\Stone && \bot && \Bool \\
-%	\\
-%	\\
-%	\\
-%	\FinSet && \bot && {\Boolf^{\op}}
-%	\arrow["{\Omega(-)}", bend left, from=1-1, to=1-3]
-%	\arrow["\Sobb(-)", bend left, from=1-1, to=3-1]
-%	\arrow["{\Coh(-)}"', bend right, from=1-1, to=5-1]
-%	\arrow["{\pt(-)}", bend left, from=1-3, to=1-1]
-%	\arrow["{U(-)}", bend left, hook, from=1-3, to=1-5]
-%	\arrow["{\Spatt(-)}", bend left, from=1-3, to=3-3]
-%	\arrow["{\Coh(-)}", bend left, from=1-3, to=5-3]
-%	\arrow["{F(-)}", bend left, from=1-5, to=1-3]
-%	\arrow["{\id}", bend left, tail reversed, from=1-5, to=5-5]
-%	\arrow["{U(-)}", bend left, hook', from=3-1, to=1-1]
-%	\arrow["{\Omega(-)}", bend left, from=3-1, to=3-3]
-%	\arrow["{U(-)}", bend left, hook', from=3-3, to=1-3]
-%	\arrow["{\pt(-)}", bend left, from=3-3, to=3-1]
-%	\arrow["{U(-)}"', bend right, hook', from=5-1, to=3-1]
-%	\arrow["{\Omega(-)}", bend left, from=5-1, to=5-3]
-%	\arrow["{\Stone(-)}", bend left, from=5-1, to=7-1]
-%	\arrow["{U(-)}", bend left, hook', from=5-3, to=3-3]
-%	\arrow["{\pt(-)}", bend left, from=5-3, to=5-1]
-%	\arrow["{K(-)}", bend left, from=5-3, to=5-5]
-%	\arrow["{\id}", bend left, tail reversed, from=5-5, to=1-5]
-%	\arrow["{\Idl(-)}", bend left, from=5-5, to=5-3]
-%	\arrow["{\Bool(-)}", bend left, from=5-5, to=7-5]
-%	\arrow["{U(-)}", bend left, hook', from=7-1, to=5-1]
-%	\arrow["{\clop(-)}"', bend left, from=7-1, to=7-5]
+\[\begin{tikzcd}
+	\Top & \bot & \Loc & \top  & {\DLat^{\op}} \\
+	\vdash && \vdash \\
+	\Sob & \stackrel{\cong}{\bot} & \Spat  \\
+	\dashv && \vdash \\
+	\CohTop & \stackrel{\cong}{\bot} & \CohLoc & \stackrel{\cong}{\bot} & {\DLat^{\op}} \\
+	\vdash &&&& \vdash \\
+	\Stone && \stackrel{\cong}{\bot} && \Bool^{\op} \\
+	\\
+	\\
+	\\
+	\FinSet && \stackrel{\cong}{\bot} && {\Boolf^{\op}}
+	\arrow["{\Omega(-)}", bend left, from=1-1, to=1-3]
+	\arrow["\Sobb(-)", bend left, from=1-1, to=3-1]
+	\arrow["{\Coh(-)}"', bend right, from=1-1, to=5-1]
+	\arrow["{\pt(-)}", bend left, from=1-3, to=1-1]
+	\arrow["{U(-)}", bend left, hook, from=1-3, to=1-5]
+	\arrow["{\Spatt(-)}", bend left, from=1-3, to=3-3]
+	\arrow["{\Coh(-)}", bend left, from=1-3, to=5-3]
+	\arrow["{F(-)}", bend left, from=1-5, to=1-3]
+	\arrow["{(\Coh \circ F)(-)}", tail reversed, from=1-5, to=5-5]
+	\arrow["{U(-)}", bend left, hook', from=3-1, to=1-1]
+	\arrow["{\Omega(-)}", bend left, from=3-1, to=3-3]
+	\arrow["{U(-)}", bend left, hook', from=3-3, to=1-3]
+	\arrow["{\pt(-)}", bend left, from=3-3, to=3-1]
+	\arrow["{U(-)}"', bend right, hook', from=5-1, to=3-1]
+	\arrow["{\Omega(-)}", bend left, from=5-1, to=5-3]
+	\arrow["{\Stone(-)}", bend left, from=5-1, to=7-1]
+	\arrow["{U(-)}", bend left, hook', from=5-3, to=3-3]
+	\arrow["{\pt(-)}", bend left, from=5-3, to=5-1]
+	\arrow["{K(-)}", bend left, from=5-3, to=5-5]
+	\arrow["{\Idl(-)}", bend left, from=5-5, to=5-3]
+	\arrow["{\Bool(-)}", bend left, from=5-5, to=7-5]
+	\arrow["{U(-)}", bend left, hook', from=7-1, to=5-1]
+	\arrow["{\clop(-)}"', bend left, from=7-1, to=7-5]
 %	\arrow[from=7-1, to=11-1]
-%	\arrow["{U(-)}", bend left, hook', from=7-5, to=5-5]
-%	\arrow["{\Spec(-)}"', bend left, from=7-5, to=7-1]
+	\arrow["{U(-)}", bend left, hook', from=7-5, to=5-5]
+	\arrow["{\Spec(-)}"', bend left, from=7-5, to=7-1]
 %	\arrow[from=7-5, to=11-5]
-%	\arrow["{\Ult(-)}"', bend left, from=11-1, to=11-5]
-%	\arrow["{\mathcal{P}(-)}", bend right, from=11-1, to=11-5]
-%\end{tikzcd}\]
+	\arrow["{\mathcal{P}(-)}"', bend left, from=11-1, to=11-5]
+	\arrow["{\Ult(-)}"', bend left, from=11-5, to=11-1]
+\end{tikzcd}\]
 
 As a side remark, another reason our original equivalence of categories $\FinSet^{\op} \cong \Boolf$ might be interesting to us now is that by considering the $\Ind$ and $\Pro$ categories, we get the following equivalence:
 \begin{align*}
