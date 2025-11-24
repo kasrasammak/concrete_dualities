@@ -41,7 +41,7 @@
 \DeclareMathOperator{\Nat}{Nat}
 \DeclareMathOperator{\Ob}{Ob}
 \DeclareMathOperator{\Mor}{Mor}
-\DeclareMathOperator{\kSp}{kSp}
+\DeclareMathOperator{\kTop}{kTop}
 \DeclareMathOperator{\kHaus}{kHaus}
 \DeclareMathOperator{\Haus}{Haus}
 \DeclareMathOperator{\ev}{ev}
@@ -75,6 +75,12 @@
 \DeclareMathOperator{\const}{const}
 \DeclareMathOperator{\Boolf}{FinBool}
 \DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\atom}{atom}
+\DeclareMathOperator{\primIdl}{primeIdl}
+\DeclareMathOperator{\FinStone}{FinStone}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\BG}{BG}
+\DeclareMathOperator{\Grp}{Grp}
 
 
 
@@ -204,7 +210,7 @@ For the previous definitions we refer to the following commutative diagram for c
 
 Consider that here we mean initial in the sense of the initial or induced topology (in $(\Top, U)$ as  construct), however applied to arbitrary concrete category $(\mathcal{A}, U)$ over arbitrary category $\mathcal{X}$. 
 
-That is, this lift is initial in the poset $(\Lift(B), \subset)$  of $G$-structured lifts of $B$ where the preorder is given by $A\subset A'$ if and only if $A'$ factors through $A$ as a lift, i.e. the morphisms are $A' \stackrel{\phi}{\to} A$ such that $(GA' \stackrel{h'}{\to}B) = (GA' \stackrel{G\phi}{\to}GA\stackrel{h}{\to}B) $. 
+That is, this lift is initial in the poset $(\Lift(B), \subseteq)$  of $G$-structured lifts of $B$ where the preorder is given by $A\subseteq A'$ if and only if $A'$ factors through $A$ as a lift, i.e. the morphisms are $A' \stackrel{\phi}{\to} A$ such that $(GA' \stackrel{h'}{\to}B) = (GA' \stackrel{G\phi}{\to}GA\stackrel{h}{\to}B) $. 
 
 This is a very important concept throughout this paper, which deserves a remark about its intuition, which here should come from topology, where the initial topology is the limit topology, i.e., the coarsest topology on $GA$ making all $(A \stackrel{f_i}{\to}A_i)_I$ continuous. 
 
@@ -213,14 +219,14 @@ So for arbitrary category, we are looking for the weakest or initial $\mathcal{A
 Formally this is a limit  in $\mathcal{A}$ over $\mathcal{A}$-structures on $GA$ with the property that all $(A \stackrel{f_i}{\to}A_i)_I$ are $\mathcal{A}$-morphisms.
 
 \
-
-\begin{definition}[cogenerator]
-A \textbf{cogenerator} of a category $\mathcal{C}$ is an object $c \in \mathcal{C}$ such that the Hom-set functor $\HomC(-, c): \mathcal{C}^{\op} \to \Set$ is injective.
-
-That is, given two maps $e \stackrel[f_2]{f_1}{\rightrightarrows} d$, if the induced maps $\HomC(d, c) \stackrel[- \circ f_2]{- \circ f_1}{\rightrightarrows}  \HomC(e,c)$ are equal, then $f_1 = f_2$, i.e., for any $\phi: d \to c$ it holds that $\phi \circ f_1 = \phi \circ f_2 \Rightarrow f_1 = f_2$. 
-
-The dual concept is of a \textbf{generator}, which applies to $\HomC(c, -)$.
-\end{definition}
+%
+%\begin{definition}[cogenerator]
+%A \textbf{cogenerator} of a category $\mathcal{C}$ is an object $c \in \mathcal{C}$ such that the $\Hom$-set functor $\HomC(-, c): \mathcal{C}^{\op} \to \Set$ is injective.
+%
+%That is, given two maps $e \stackrel[f_2]{f_1}{\rightrightarrows} d$, if the induced maps $\HomC(d, c) \stackrel[- \circ f_2]{- \circ f_1}{\rightrightarrows}  \HomC(e,c)$ are equal, then $f_1 = f_2$, i.e., for any $\phi: d \to c$ it holds that $\phi \circ f_1 = \phi \circ f_2 \Rightarrow f_1 = f_2$. 
+%
+%The dual concept is of a \textbf{generator}, which applies to $\HomC(c, -)$.
+%\end{definition}
 \subsection{Topological categories}
 In the following we  introduce topological categories. 
 
@@ -239,7 +245,7 @@ A functor $\mathcal{A} \stackrel{G}{\to}\mathcal{B}$ is called \textbf{topologic
  
  Notice here again that our intuition of such a category should come from topology, which is even reflected in its name, namely, from the concrete category $(\Top, U)$,  over which every source lifts initially, since the arbitrary intersection of topologies is a topology. That is, we are taking the intersection of all topologies on $A$ such that all $(UA \stackrel{f_i}{\to} UA_i)_I$ are continuous.
  
-  That means there is a systematic way to choose open sets of $UA$. In other words,  a subset $S \subset UA$ lifts to an open set in $A$ if and only if $S$ equals the preimage $Uf_i^{-1}(U(V))$ for some  $f_i \in (UA \stackrel{f_i}{\to} UA_i)_I$ and $V \in  \Omega(A_i)$, where $\Omega(X)$ for topological space $X$ denotes the set of open sets of $X$.. 
+  That means there is a systematic way to choose open sets of $UA$. In other words,  a subset $S \subseteq UA$ lifts to an open set in $A$ if and only if $S$ equals the pre-image $Uf_i^{-1}(U(V))$ for some  $f_i \in (UA \stackrel{f_i}{\to} UA_i)_I$ and $V \in  \Omega(A_i)$, where $\Omega(X)$ for topological space $X$ denotes the set of open sets of $X$.. 
  
 
 \subsection*{Free objects and the free-forget adjunction}
@@ -257,6 +263,10 @@ The left adjoint functor does not have to exist. For our discussion we only cons
 We can phrase this, without reference to a left adjoint functor, as the following universal property: given a concrete category $(\mathcal{A},U)$ and $\mathcal{A}$-object $A_0$ with an injective set map $\{pt\} \stackrel{\psi}{\hookrightarrow} U(A_0)$  we call $A_0$ the free object on $\{pt\}$ if and only if for every $\mathcal{A}$-object $A$ and set map $\{pt\} \stackrel{\varphi}{\rightarrow} U(A)$ there exists a unique $\mathcal{A}$-morphism $f \in \HomA(A_0, A)$ such that $U(f) \circ \psi = \varphi$..
 
 In the  examples which are to be discussed in this thesis, we only check that such a left adjoint object does exist in the relevant category by showing what they are and that they satisfy the universal property.
+
+Note that in each example we discuss (except for one), the underlying set functor we consider is the usual forgetful  functor, that takes the set-datum of the categorical objects which are built into their construction, and forgets the rest of the structure. Therefore we assume the existence of $U$ at the outset, unless otherwise stated. 
+
+However there is no reason a priori that the underlying set functor should be the forgetful functor; for an illuminating exercise consider the category $\BG$ with one object where $\BG(\{pt\},\{pt\}) = U_{\Grp}(G)$ for some $G \in (\Grp, U_{\Grp})$.
 \section{Concrete Dualities}	
 
 Let $(\mathcal{A}, U)$  and $(\mathcal{B},V)$ be two concrete categories over the following representable functors with representing objects $A_0 \in \mathcal{A}$ and $B_0 \in \mathcal{B}$, our free objects on one free generator:
@@ -317,7 +327,7 @@ Should we have strict identities
 
 we say that the adjunction is \emph{strictly represented} by $\t A$ and $\t B$. 
 
-This result should already give us an idea of how our adjunction is to be induced. That is, our adjoint functors should be regarded as lifts of the Hom-set functors in (1) to the relevant categories.\footnote{In the course of this introduction we will often prove results about $\mathcal{A}$, respectively $T: \mathcal{A}\to \mathcal{B}$ with unit $\epsilon:1_\mathcal{A} \to ST $, from which the results about $\mathcal{B}$, respectively $S: \mathcal{B} \to \mathcal{A}$ with counit $\eta: 1_\mathcal{B} \to TS$, follow completely analogously. Unless we state that results do not follow analogously, we assume this to be the case.}  The goal of this introduction to concrete dualities is to make this notion precise. 
+This result should already give us an idea of how our adjunction is to be induced. That is, our adjoint functors should be regarded as lifts of the $\Hom$-set functors in (1) to the relevant categories.\footnote{In the course of this introduction we will often prove results about $\mathcal{A}$, respectively $T: \mathcal{A}\to \mathcal{B}$ with unit $\epsilon:1_\mathcal{A} \to ST $, from which the results about $\mathcal{B}$, respectively $S: \mathcal{B} \to \mathcal{A}$ with counit $\eta: 1_\mathcal{B} \to TS$, follow completely analogously. Unless we state that results do not follow analogously, we assume this to be the case.}  The goal of this introduction to concrete dualities is to make this notion precise. 
 
 
 
@@ -654,7 +664,7 @@ Any cartesian closed concrete category which admits function spaces is a good ex
 A cartesian closed concrete category which admits function spaces admits an internal hom-functor by definition, since we can choose $B^A$ to be our lift.
 
  
-Now we want to see how and under what conditions can  a category which admits an internal hom-functor  induce a dual adjunction. Let $\concA$ admit an internal hom-functor $H$, and let there be a concrete category $\concB$ and a concrete functor $\lvert - \lvert : \mathcal{B} \to \mathcal{A}$ such that $\HomB(B, C) \hookrightarrow \HomA(\lvert B \lvert, \lvert C \lvert)$ lift to $\mathcal{A}$-morphisms\footnote{$\HomB_\mathcal{A}(-,-)$ is notation for the hom set in $\mathcal{B}$ as $\mathcal{A}$-object} $\gamma_{B,C}: \HomB_\mathcal{A}(B,C) \to H(\lvert B \lvert, \lvert C\lvert)$.  In a monotopological category, this can be done by lifting initially.
+Now we want to see how and under what conditions can  a category which admits an internal hom-functor  induce a dual adjunction. Let $\concA$ admit an internal hom-functor $H$, and let there be a concrete category $\concB$ and a concrete functor $\lvert - \lvert : \mathcal{B} \to \mathcal{A}$ such that $\HomB(B, C) \hookrightarrow \HomA(\lvert B \lvert, \lvert C \lvert)$ lift to $\mathcal{A}$-morphisms\footnote{$\HomB_\mathcal{A}(-,-)$ is notation for the $\Hom$-set in $\mathcal{B}$ as $\mathcal{A}$-object} $\gamma_{B,C}: \HomB_\mathcal{A}(B,C) \to H(\lvert B \lvert, \lvert C\lvert)$.  In a monotopological category, this can be done by lifting initially.
 
 Given $\t B \in \mathcal{B}$ with $\t A := \lvert \t B \lvert $ and $\tau = 1_{[\t A]}$, we can check that $WSO2$ is fulfilled. In other words we are seeking a lift of the map $\sigma \psi_{B,y}: \HomB(B, \t B) \to [\t A]$. But such a lift is given by the internal hom-functor, given that the bottom part of the following diagram commutes:
 \[\begin{tikzcd}
@@ -715,9 +725,9 @@ Therefore our motivation in the following is two-fold, to show that our candidat
 \section{Examples}
 The rest of our thesis shall be devoted to an analysis of several specific examples (and non-examples) of natural dual adjunctions. Our goal is not only to show that our candidates are indeed schizophrenic objects, but to build intuition for the schizophrenic object through a careful analysis of the induced adjunctions. 
 
-We are going to start with an example which is connected to a more involved duality called the Stone duality, which will be our second example. For our first example we will like to elucidate its schizophrenic nature as it ties directly to the generality we have learned, so that we can start to get a sense for in what direct way we can lift Hom-sets.
+We are going to start with an example which is connected to a more involved duality called the Stone duality, which will be our second example. For our first example we will like to elucidate its schizophrenic nature as it ties directly to the generality we have learned, so that we can start to get a sense for in what direct way we can lift $\Hom$-sets.
 
-Consequently, in discussing the Stone duality we plan to give concrete descriptions of these Hom-set functors, for which we had just given a more general description using only universal properties and  Hom-sets. Though we do lead with the general into the concrete, we may otherwise view our elucidation of the concrete as the mental abstraction, since we must show the actual mechanics behind why we can think of these concrete objects as lifts of Hom-sets.
+Consequently, in discussing the Stone duality we plan to give concrete descriptions of these $\Hom$-set functors, for which we had just given a more general description using only universal properties and  $\Hom$-sets. Though we do lead with the general into the concrete, we may otherwise view our elucidation of the concrete as the mental abstraction, since we must show the actual mechanics behind why we can think of these concrete objects as lifts of $\Hom$-sets.
 
 This will then lend itself to the intuition of the following examples, which we can in some sense think of extensions or special cases of the given dualities. 
 
@@ -796,7 +806,7 @@ is given by evaluation
 \end{align*}
 
 
-Notice that the topology on $\Frm(B, \mathbb{2})$ is the initial topology making all $(\eta_B(y))_{y \in B}$ continuous, since continuous maps $\eta_B(y)$ into the Sierpiński space $\mathbb{S}$ are uniquely determined by the preimage of $\{1\}$.
+Notice that the topology on $\Frm(B, \mathbb{2})$ is the initial topology making all $(\eta_B(y))_{y \in B}$ continuous, since continuous maps $\eta_B(y)$ into the Sierpiński space $\mathbb{S}$ are uniquely determined by the pre-image of $\{1\}$. One can check that a map $Z \stackrel{h}{\rightarrow}  \Frm(B, \mathbb{2})$ is continuous if and only if all composites $\eta_B(y) \circ h$ are. 
 
 In defining initial lifts we mentioned that our intuition should come from topology, so we found it astute for the leading example to use this intuition on one side of the lift directly.
 
@@ -848,9 +858,9 @@ In general, our schizophrenic object will not necessarily be initial in arbitrar
 
 \section{Stone duality}
 
-For the following section we assume a bit more familiarity with lattice theory than the mere definitions of objects and morphisms of the corresponding categories. To that effect, we assume familiarity with distributive lattices, sub join/meet-semilattices, Boolean algebras,  ideals, filters, (principal) ultrafilters, (directed and codirected) posets, frames and locales.
+For the following section we assume a bit more familiarity with lattice theory than the mere definitions of objects and morphisms of the corresponding categories. To that effect, we assume familiarity with distributive lattices, sub join/meet-semilattices, (atomic) Boolean algebras,  ideals, filters, (principal) ultrafilters, (directed and codirected) posets, frames and locales.
 
-Moreover, we follow the convention of [Joh] that a sub meet-semilattice is given by the datum $(L, \land, \top)$ and a sub join-semilattice is given by the datum $(L, \lor, \bot)$, so that a lattice is given by the datum $(L, \land, \lor, \top,\bot)$. Some authors do not necessitate including $\bot$ and $\top$ and choose to differentiate between $\DLat$ and $\DLat_{\text{bdd}}$, refering to what we call a distributive lattice as a bounded distributive lattice.
+Moreover, we follow the convention of [Joh] that a sub meet-semilattice is given by the datum $(L, \land, \top)$ and a sub join-semilattice is given by the datum $(L, \lor, \bot)$, so that a lattice is given by the datum $(L, \land, \lor, \top,\bot)$. There is good reason for this, as we want to consider the empty limit/colimit. Some authors do not necessitate this and choose to differentiate between $\DLat$ and $\DLat_{\text{bdd}}$, refering to what we call a distributive lattice as a bounded distributive lattice.
 
 Before we begin we would like to call attention to the fact that the Stone duality is wrought with interesting subdualities, some of which are themselves examples. Though describing these subdualities may feel like a diversion, we find they actually elucidate the structure of the Stone duality as well as provide us with intuition for the following examples, so we plan to describe them.
 
@@ -869,11 +879,15 @@ Before we begin we would like to be clear about what we mean by subduality:
 
 
 \begin{definition}[Subduality]
-	Let $\mathcal{A}$ and $\mathcal{B}$ be two categories for which there exists an duality, i.e., an adjunction $\mathcal{A} \rightleftarrows \mathcal{B}^{\op}$, given by left and right adjoint functors $T: \mathcal{A} \to \mathcal{B}^{\op}$ and $S: \mathcal{B}^{\op} \to \mathcal{A}$, respectively.
+	Let $\mathcal{A}$ and $\mathcal{B}$ be two categories for which there exists a duality, i.e., an adjunction $\mathcal{A} \rightleftarrows \mathcal{B}^{\op}$, given by left and right adjoint functors $T: \mathcal{A} \to \mathcal{B}^{\op}$ and $S: \mathcal{B}^{\op} \to \mathcal{A}$, respectively.
 	
-	If $\mathcal{A}' \subset \mathcal{A}$ and $\mathcal{B}' \subset \mathcal{B}$ are subcategories on which $S$ and $T$ restrict to a duality, we call $\mathcal{A}' \rightleftarrows \mathcal{B}'^{\op}$ given by  $T \lvert_{\mathcal{A}'}: \mathcal{A}' \to \mathcal{B}'^{\op}$ and $S\lvert_{\mathcal{B}'}: \mathcal{B}'^{\op} \to \mathcal{A}'$ a \emph{\textbf{subduality}} of $\mathcal{A} \rightleftarrows \mathcal{B}^{\op}$. 
+	If $\mathcal{A}' \subseteq \mathcal{A}$ and $\mathcal{B}' \subseteq \mathcal{B}$ are subcategories on which $S$ and $T$ restrict to a duality, we call $\mathcal{A}' \rightleftarrows \mathcal{B}'^{\op}$ given by  $T \lvert_{\mathcal{A}'}: \mathcal{A}' \to \mathcal{B}'^{\op}$ and $S\lvert_{\mathcal{B}'}: \mathcal{B}'^{\op} \to \mathcal{A}'$ a \emph{\textbf{subduality}} of $\mathcal{A} \rightleftarrows \mathcal{B}^{\op}$. 
+	
+	If both $\mathcal{A}'$ and $\mathcal{B}'$ are full subcategories, we call the restriction a \emph{\textbf{full subduality}} of $\mathcal{A} \rightleftarrows \mathcal{B}^{\op}$. 
+
 \end{definition} 
-Note that we may change perspective from talking about subdualities of the leading example, or of the Stone duality. 
+
+Notice that if $\mathcal{A} \rightleftarrows \mathcal{B}^{\op}$ is an equivalence, and $\mathcal{A}' \rightleftarrows \mathcal{B}'^{\op}$ is a full subduality, then it is also an equivalence,  as the unit and counit maps $\epsilon$ and $\eta$ remain natural isomorphisms, since all objects in the restriction, maps between them (fullness guarantees a map backwards), and naturality are all inherited from the ambient categories. This is however not a necessary condition, as we will see.
 
 The first subduality we will discuss is a subduality of the Stone duality.
 
@@ -892,9 +906,11 @@ Notice that $\mathcal{P}(X)$ is a Boolean algebra, where meets and joins are giv
 
 Since finite ultrafilters are principal, points of $X$ correspond bijectively to ultrafilters on $\mathcal{P}(X)$, which are necessarily generated by singletons, so that the unit $X \to \Ult(\mathcal{P}(X))$, which sends $x \mapsto \{S \lvert \{x\} \subseteq S\}$, is an isomorphism.
 
-On the other hand finite Boolean algebras are atomic, since every non-zero element is bounded below by finitely many elements, so there exists at least one minimal one. 
+On the other hand finite Boolean algebras are atomic, since every non-zero element is bounded below by finitely many non-zero elements, so there exists at least one minimal one, which we call an atom. Therefore ultrafilters in $\Boolf$ correspond exactly to the atoms. 
 
-Therefore ultrafilters in $\Boolf$ correspond exactly to the atoms, and one observes that every element is the join of atoms below it [Joh]. Since for distinct $b$ and $b'$, an atom below $b$ but not $b'$ generates an ultrafilter that separates them, the counit $B \to \mathcal{P}(\Ult(B))$ that sends $b \mapsto \{U \in \Ult(B) \lvert b \in U\}$ recovers  $b$ uniquely, and so it is an isomorphism. One needs only to check that the counit is indeed a Boolean algebra homomorphism, but this is straightforward.
+Given  $B \in \DLat$ and $a \in B$, let $\atom(B)$ be the set of atoms in $B$ and $\atom(a) := \{x \in \atom(B) \lvert x \leq a \}$. If $B \in \Bool_{\atom}$, one observes that  $\atom(a)=\atom(a')$ implies $a = a'$. Equivalently, every element of an atomic Boolean algebra is the join of atoms below it [Joh]. 
+
+Since for distinct $b$ and $b'$, an atom below $b$ but not $b'$ generates an ultrafilter that separates them, the counit $B \to \mathcal{P}(\Ult(B))$ that sends $b \mapsto \{U \in \Ult(B) \lvert b \in U\}$ recovers  $b$ uniquely, and so it is an isomorphism. One needs only to check that the counit is indeed a Boolean algebra homomorphism, but this is straightforward.
 %
 %
 %It is also the case that $\Ult(-)$ is  fully faithful as long as $A$ is a finite Boolean algebra, since ultrafilters on those are principle, meaning that they are generated by a single element, an element which we can then identify with the points of $X$ in a faithful way. 
@@ -910,44 +926,60 @@ Now  an ultrafilter on $\diamondsuit$ is determined by the atoms $\{b, \neg b\}$
 
 Meanwhile $\mathcal{P}(\{pt\}) = \{\emptyset, \{pt\}\} = \mathbb{2}$ as Boolean algebra under inclusion, since the point and the empty set are complements, and thus form the truth-value Boolean algebra which is an initial object of $\Bool$. 
 
- Now in the following we want to show that such lifts exist, and we check that by showing that the adjunction we gave serves as a lift of the respective hom sets. 
+ Now in the following we only want to see that a lift of $\Hom$-sets exists, and we check that by showing that the adjunction we gave serves as such a lift. 
  
-For the power-set functor, it is easy to see that $\mathcal{P}(X) = \Set(X, \mathbb{2}) $ since any set map  $X \to \mathbb{2}$ is given uniquely by a subset $ S \subset X$, via characteristic functions \begin{equation*}
+For the power-set functor, it is easy to see that $\mathcal{P}(X) = \Set(X, \mathbb{2}) $ since any set map  $X \to \mathbb{2}$ is given uniquely by a subset $ S \subseteq X$, via characteristic functions \begin{equation*}
   \mathcal{X}_{ S}(x) = \begin{cases}
    1 & x \in  S \\
     0 & \text{else}.
   \end{cases}
 \end{equation*}
 
-On the other hand, for a finite Boolean algebra $A$ we have the following bijection \begin{align*}
-  	\phi: \Ult(A) \to& \Bool(A, \mathbb{2})\\
+On the other hand, we can obtain a $\Hom$-set description of $\Ult(-)$ via the following lemma:
+
+\begin{lemma} The following map, where $\prim(-)$ sends a distributive lattice to its set of prime filters, is a bijection:
+\begin{align*}
+  	\phi': \prim(B) \to& \DLat(A, \mathbb{2})\\
   	F \mapsto& f_F &f_F(x) = \begin{cases}
    1 & x \in F \\
     0 & \text{else}
   \end{cases}
   \end{align*}
-  
-In fact, the above map generalizes to a bijection on distributive lattices $\phi': \prim(A) \to \DLat(A, \mathbb{2})$, where $\prim(A)$ are the prime filters of $A$. We call any map $f \in \mathcal{L}(A, \mathbb{2})$ \textbf{\emph{a point}}, for any subcategory $\mathcal{L}$ of $\DLat$.
 
-Obviously the map $f \mapsto f^{-1}(1)$ is an inverse, so we only check that these are well-defined. 
+Furthermore, the map $\phi'$ restricts to a bijection $\phi$, when restricting $\DLat$ to $\Bool$:  
+	\begin{align*}
+  	\phi: \Ult(A) \to& \Bool(A, \mathbb{2})\\
+  	F \mapsto& f_F &f_F(x) = \begin{cases}
+   1 & x \in F \\
+    0 & \text{else}
+  \end{cases}
+\end{align*}
+\end{lemma} 
+\begin{proof}
+Obviously the map $f \mapsto f^{-1}(1)$ is an inverse, so we only check that these are well-defined.
 
-The proof for $\phi'$ is straightforward and boils down to an equivalence between properties of lattice homomorphisms and prime filter axioms. That is, an order preserving, finite limit preserving, and finite colimit preserving morphism corresponds to a prime, upwards closed, sub meet-semilattice.
+The proof for $\phi'$ is straightforward and can be found in [Joh] at Proposition 2.2. It boils down to an equivalence between properties of lattice homomorphisms and prime filter axioms. That is, an order preserving, finite limit preserving, and finite colimit preserving morphism corresponds to a prime, upwards closed, sub meet-semilattice. 
 
-Now when restricting to Boolean algebras (note that $\Bool$ is a \emph{full} subcategory of $\DLat$), prime filters correspond bijectively to ultrafilters, which, given the axioms of being a filter, will additionally  require that $A \in F$ if and only if $\forall B \in F: B \cap A \neq \emptyset$. 
+Now when restricting to Boolean algebras (note that $\Bool$ is a \emph{full} subcategory of $\DLat$), prime filters correspond bijectively to ultrafilters, which, given the filter axioms, will additionally  require that $A \in F$ if and only if $\forall B \in F: B \cap A \neq \emptyset$. 
 
 The property that a filter $F$ is prime is equivalent to $F$ being given above by $f^{-1}(1)$ for $f \in \DLat(A, \mathbb{2})$ which is further equivalent to the fact that its complement $I:= f^{-1}(0)$ is an ideal [Joh]. \emph{We write $\DLat$ here instead of $\Bool$ to highlight that we do not use complement preservation for this direction}.
 
 So if $F$ is prime, then $\emptyset \notin F$ gives the forwards direction of the ultrafilter condition and for the other direction supposing $A \in I$, then $\neg A \in F $, but  $A \cap \neg A = \emptyset$ contradicting our assumption implying $A \in F$.
 
 Conversely if $F$ is an ultrafilter, then it cannot contain the complement of any of its elements, which is just $\neg f(A) = f(\neg A)$, proving the bijection.
+\end{proof}
+  
+
 
 %The ultrafilter condition implies that a filter cannot contain the complement of any of its elements, which is just $\neg f(A) = f(\neg A)$. And conversely to separate complements out of the filter via a lattice homomorphism gives the ultrafilter condition, since finite limit preservation and complementation implies $\emptyset \notin F := f^{-1}(1)$ for one direction, and for the other direction supposing $A \in I: = f^{-1}(0)$ then $\neg A \in F $, but  $A \cap \neg A = \emptyset$ contradicting our assumption implying $A \in F$. 
 
 
-\emph{Note that frame homomorphisms additionally require preservation of arbitrary colimits, which simply upgrades the prime condition to completely prime, i.e. $\bigvee a_i \in F$ implies $\exists i \in I: a_i \in F$. However in our above setting of $A$ in $\Boolf$, this is no condition at all.
+\emph{As a side remark, frame homomorphisms additionally require preservation of arbitrary colimits, which simply upgrades the prime condition to completely prime, i.e. $\bigvee a_i \in F$ implies $\exists i \in I: a_i \in F$.
 }
 
-Ultimately, what a point map  $A \stackrel{f}{\rightleftarrows} \mathbb{2}$ represents is the question of which subsets of our lattice $A$ are compatible with our desired structure restrictions. 
+Taking from tradition of topology, where $\{pt\}$ is a terminal object, and thus points of a topological space $X$ can be characterized by maps $\{pt\} \stackrel{f_x}{\rightarrow} X$, sending $\{pt\} \mapsto x$, we call any map $f \in \mathcal{L}(A, \mathbb{2})$ \textbf{\emph{a point}}, where $\mathcal{L}$ is any subcategory of $\DLat$, since finite limit and finite colimit preservation ensures that $\mathbb{2}$ is initial in $\mathcal{L}$.
+
+Ultimately, what a point map  $A \stackrel{f}{\rightleftarrows} \mathbb{2}$ represents is the question of which subsets of $\mathcal{P}(A)$ are compatible with our desired structure restrictions:
 
 \[\begin{tabular}{ |p{3cm}||p{3cm}|  }
  \hline
@@ -964,14 +996,12 @@ $\textbf{Set of points}$& $\textbf{Type of filter}$\\
  \hline
 \end{tabular}\]
 
-We will only show initiality of evaluation maps for the general Stone duality.
-
 Note that the unit and counit maps then follow the exact same logic as the leading example, and in particular, $\mathbb{2}$ is also initial in $\Bool$ so that by the same logic, our $\tau$ is equal to the set identity $1_{\mathbb{2}}$. 
 
  %\begin{lemma}
-%	Let $I \subset P$ be an ideal of a lattice $P$. Then the following are equivalent 
+%	Let $I \subseteq P$ be an ideal of a lattice $P$. Then the following are equivalent 
 %	\begin{enumerate}
-%		\item The complement of $I$ is a filter $F \subset P$,
+%		\item The complement of $I$ is a filter $F \subseteq P$,
 %		\item $1 \notin I$ and $I$ is prime.
 %		\item $I$ can be given as the kernel of a lattice homomorphism $F \stackrel{f}{\rightleftarrows} \mathbb{2}$
 %	\end{enumerate}
@@ -1029,7 +1059,7 @@ Note that the unit and counit maps then follow the exact same logic as the leadi
 %\end{align*}
 %Consider that all these statements are actually equivalences, since you can obtain each condition by swapping the two way implications from what was our condition---the second two way implication of each of these chains of equivalences---to what we have proven---each chains end statement.
 %
-%However note that when we swap we must think about $f_F$ as arbitrary Boolean algebra (or frame) homomorphism $f$, and consider $I$ and $F$ as nothing but preimages under $F$, for example,
+%However note that when we swap we must think about $f_F$ as arbitrary Boolean algebra (or frame) homomorphism $f$, and consider $I$ and $F$ as nothing but pre-images under $F$, for example,
 %
 %\begin{align*}
 %	\bigvee x_i \in f^{-1}(1)&\iff f( \bigvee x_i) = 1 \\ 
@@ -1043,10 +1073,10 @@ Note that the unit and counit maps then follow the exact same logic as the leadi
 %
 %Now to conclude the proof we check that the ultrafilter condition is equivalent to a complement preserving point of a Boolean algebra $F \rightleftarrows \mathbb{2}$.
 %
-%Having proven the equivalences for filter conditions, we note that for filters, the condition of being an ultrafilter of a set $S$ means that for $A, B \subset S$ it holds that $A \in F \iff \forall B \in F: A \cap B \neq \emptyset $. 
+%Having proven the equivalences for filter conditions, we note that for filters, the condition of being an ultrafilter of a set $S$ means that for $A, B \subseteq S$ it holds that $A \in F \iff \forall B \in F: A \cap B \neq \emptyset $. 
 %
 %
-% Now consider that $F \subset \mathcal{P}(A)$ as a poset, where the empty set is an initial object, but $S \in F$ implies $A - S \notin F$ due to the ultrafilter condition. But this just means that $f_F(\neg S) = \neg f_F(S)$. 
+% Now consider that $F \subseteq \mathcal{P}(A)$ as a poset, where the empty set is an initial object, but $S \in F$ implies $A - S \notin F$ due to the ultrafilter condition. But this just means that $f_F(\neg S) = \neg f_F(S)$. 
 % 
 % For the converse case, the forwards implication of the ultrafilter condition is given by the fact that $F$ is a sub meet-semilattice and $\emptyset \notin F$. 
 % 
@@ -1064,10 +1094,10 @@ Note that the unit and counit maps then follow the exact same logic as the leadi
 
 
 
-\subsection{Concatenating subdualities of $\Top \rightleftarrows \Frm^{\op}$ with the $\CohLoc \rightleftarrows \DLat^{\op}$ duality}
+\subsection{Subdualities of $\Top \rightleftarrows \Frm^{\op}$ and the $\CohLoc \rightleftarrows \DLat^{\op}$ duality}
 In the following we will want to give a general overview of how we obtain the Stone duality.
 
-Before we define it we first focus on the following dual adjunction
+We start by focusing on the following dual adjunction
 
 \[\begin{tikzcd}
 	\Top & \bot & \Loc
@@ -1075,7 +1105,7 @@ Before we define it we first focus on the following dual adjunction
 	\arrow["{\pt(-)}", bend left, from=1-3, to=1-1]
 \end{tikzcd}\]
  
- which is  the duality of our leading example. This is indeed given by $\pt(A) := \Frm(A, \mathbb{2})$, and $\Top(X, \mathbb{S}) =: \Omega(X)$, which is the frame of opens on $X$, since a continuous map into the Sierpiński space is  uniquely determined by the preimage of $\{1\} \subset \mathbb{S}$, which corresponds to a unique open set of $X$. 
+ which is  the duality of our leading example. This is indeed given by $\pt(A) := \Frm(A, \mathbb{2})$, and $\Top(X, \mathbb{S}) =: \Omega(X)$, which is the frame of opens on $X$, since a continuous map into the Sierpiński space is  uniquely determined by the pre-image of $\{1\} \subseteq \mathbb{S}$,  corresponding to a unique open set of $X$. 
  
  Indeed, we may define the category of \emph{\textbf{spatial locales}} and of \emph{\textbf{sober spaces}} respectively to be the largest subcategories of $\Loc = \Frm^{\op}$ and $\Top$, such that the adjunction is an equivalence. So now we have 
  
@@ -1085,20 +1115,29 @@ Before we define it we first focus on the following dual adjunction
 	\arrow["{\pt(-)}", bend left, from=1-3, to=1-1]
 \end{tikzcd}\]
 
-Note that this further restricts to the duality $\CohTop	\rightleftarrows \CohLoc$, whose categories we define in  the following:
+where the unit and counit maps are given by\footnote{The notation $\downarrow (b)$ means the principal ideal generated by $b$} \begin{align*}
+	X \to& \pt(\Omega(X))  & \Omega(\pt(B)) \to & B\\
+	x \mapsto& \downarrow (X-\{x\}) & \{ p \in \pt(B) \lvert p(a) = 1\} \mapsto& a .
+\end{align*}
+In a sober topological space, points of $\Omega(X)$ correspond to prime elements, i.e. elements generating prime principal ideals, whose complements are the irreducible closed subsets of $X$, where sobriety is just the condition that singletons are the only irreducible closed subsets of $X$ [Joh 1.3].
+
+Spatial locales on the other hand map distinct elements to distinct sets of points. In other words, the counit is an isomorphism if and only if for all $a, b \in B : a \not\leq b$ implies the existence of some $ p \in \pt(B)$ such that $ p(a) = 1$ and $ p(b) = 0$.  
+
+Next we show that  dual adjunction further restricts to the duality $\CohTop	\rightleftarrows \CohLoc$, whose categories we define in  the following:
 
 Let $B$ be a locale. Then 
-
+\\
 \begin{definition}
-	We call an element $b \in B$ \textbf{finite}, if for all $S \subset A$ such that $\bigvee S \geq b$ there exists a finite $F \subset S$ such that $\bigvee F \geq b$. 
+	We call an element $b \in B$ \textbf{finite}, if for all $S \subseteq A$ such that $\bigvee S \geq b$ there exists a finite $F \subseteq S$ such that $\bigvee F \geq b$. 
 \end{definition}
 
 This definition is equivalent to the following two statements [Joh]:
 \begin{enumerate}
-	\item For all directed $S \subset B$ such that $\bigvee S \geq b$ there exists $s \in S$ such that $s \geq b$.
-	\item For all ideals $I \subset B$ such that $\bigvee I \geq b$ it holds that $b \in I$. 
+	\item For all directed $S \subseteq B$ such that $\bigvee S \geq b$ there exists $s \in S$ such that $s \geq b$.
+	\item For all ideals $I \subseteq B$ such that $\bigvee I \geq b$ it holds that $b \in I$. 
 \end{enumerate}
 Notice that if $B$ is spatial, which implies the existence of a topological space $X = \pt(B)$ such that $B = \Omega(X)$, then the finite elements are precisely the compact open subsets of $X$. 
+\\
 \begin{definition}
 	We call $B$ \textbf{coherent} if the following conditions hold: \begin{enumerate}
 		\item Every element $b \in B$ can be given as a join of finite elements
@@ -1111,30 +1150,31 @@ Since $K(B)$ is a sub join-semilattice of $B$ (closed under finite joins) [Joh],
 
 If $B$ is spatial, this means that $K(B)$ forms a basis for the topology on $X$. In fact this is an equivalence: coherent locales are spatial [Joh].
 
-On the other hand, any sober topological space $X$ can be given as $X = \pt(\Omega(X))$, but are not necessarily generated by compact elements. This motivates the definition of a coherent topological space to focus on topologies on $X$ where the compact open subsets, or $K(\Omega(A))$, are closed under finite intersection and generate the topology of $X$. 
+On the other hand, any sober topological space $X$ can be given as $X \cong \pt(\Omega(X))$, but are not necessarily generated by compact elements. This motivates the following definition:
 
-So a \emph{\textbf{coherent space}} is a sober space which satisfies the above condition.
+Let $X$ be a sober space. 
+\\
+\begin{definition}[Coherent space]
+	If $K(\Omega(X))$ is closed under finite intersection and generates the topology of $X$, we call $X$ a \textbf{coherent topological space}.
+\end{definition} 
+
 
 Given $A, B \in \CohLoc$, we know that any lattice homomorphism $K(A) \to K(B)$ extends to a frame homomorphism $A \to B$ via the free-forget adjunction (\textcolor{red}{TODO}: find source for this), however the converse is not true, frame homomorphisms do not necessarily preserve finiteness.
 
-In topological terms, the preimage of compact open subsets under continuous maps is not necessarily compact.
+In topological terms, that translates to the fact that the pre-image of compact open subsets under continuous maps is not necessarily compact.
 
-So we may define a locale map $B \stackrel{f}{\to} A$ between coherent locales to be  \emph{\textbf{coherent}} if $f^*$ maps $K(A)$ to $K(B)$. Similarly a  continuous map $B \stackrel{f}{\to} A$ is coherent if $f^{-1}(K\Omega(A)) \subset  K\Omega (B)$.
+So we may define a locale map $B \stackrel{f}{\to} A$ between coherent locales to be a \emph{\textbf{coherent map}} if $f^*$ maps $K(A)$ to $K(B)$. Similarly a  continuous map $B \stackrel{f}{\to} A$ is coherent if $f^{-1}(K\Omega(A)) \subseteq  K\Omega (B)$.
 
-Unlike the other examples, that means the restriction of $\Spat$ to $\CohLoc$ is not full.
+Unlike the other examples, that means the restrictions of $\Spat$ to $\CohLoc$ and $\Sob$ to $\CohTop$ are not full.
 
-In particular, we should be careful regarding how this affects how we interpret the schizophrenic object of this adjunction. 
-
-The preimage of coherent topological maps must preserve compact opens, and $\{1\}$ is a compact open set in $\mathbb{S}$, so that $\CohTop(X, \mathbb{S}) = K \Omega(X)$. 
-
-Strictly speaking, this adjunction does not have a schizophrenic object, since we cannot obtain the opens by lifting hom-sets anymore, and we choose not to restrict the image of the adjunction. However we may loosely  interpret the adjunction as having a schizophrenic object in that it is a subdual equivalence of a duality with a schizophrenic object, namely, of  $\Top \rightleftarrows \Loc$.
+However, the structure of our categories ensures that the inverse maps in $\Sob$ and $\Spat$ that make the unit and counit isomorphisms stay preserved after restriction. That means for any coherent map $B \stackrel{f}{\rightarrow} A$ which is also an isomorphism, the inverse $f^{-1}$ is also coherent. The proof is straight-foward and left to the reader. 
 
 %This means we have to at the very least redefine $\pt(-)$ to be a lift of $ \CohLoc(-,\mathbb{2})$ (\textcolor{red}{TODO}: unless $\Frm(B,\mathbb{2})=\CohLoc^{\op}(B, \mathbb{2})$?)
 %Thus we want to check that our functor $\pt(-)$ is unperturbed, or in other words, that $\Frm(B, \mathbb{2})=\CohLoc(B, \mathbb{2})$ if $B$ is a coherent locale.
 %
 %Or that $\Frm(B, \mathbb{2})$ restricted to the subset $\CohLoc(B, \mathbb{2})$ commutes with taking the
 
-That is to say, we have a dual equivalence
+Therefore we have the following dual equivalence
 
  \[\begin{tikzcd}
 	\CohTop & \stackrel{\cong}{\bot} & \CohLoc
@@ -1142,101 +1182,129 @@ That is to say, we have a dual equivalence
 	\arrow["{\pt(-)}", bend left, from=1-3, to=1-1]
 \end{tikzcd}\]
 
+We should be careful regarding how this affects our interpretation of the schizophrenic object of this adjunction. 
 
+The pre-image of coherent topological maps must preserve compact opens, and $\{1\}$ is a compact open set in $\mathbb{S}$, so that $\CohTop(X, \mathbb{S}) = K \Omega(X) \neq \Omega(X)$, since coherent topological spaces are only generated by compact opens, showing us that the schizophrenic object is not preserved under this restriction. 
 
-Now we will want to compose. Consider the fact that a locale is coherent if and only if it is isomorphic to the locale of ideals of a distributive lattice [Joh]. This gives us a functor $\Idl(-): \DLat \to \CohLoc$ (\textcolor{red}{TODO}: check that this is a functor).
+Strictly speaking, this adjunction does not have a schizophrenic object, since we cannot obtain the opens by lifting $\Hom$-sets anymore. However in practice we still consider subdualities of dualities induced by a schizophrenic object to be concrete dualities.
+
+Now we will want to compose. Consider the fact that a locale is coherent if and only if it is isomorphic to the locale of ideals of a distributive lattice [Joh]. This gives us a functor $\Idl(-): \DLat \to \CohLoc$, such that $\Idl(B \stackrel{f}{\rightarrow} B') = (\Idl(B') \stackrel{f^{-1}}{\rightarrow}\Idl(B)$). A similar computation as with $\Ult(-)$, but with fewer conditions,  shows that the pre-image morphism $f^{-1}$ is well defined.
 
 We can also view $K(-)$ as a functor by sending frame homomorphisms to their restrictions on finite elements, which we can do since, as we have seen above, we have defined $\CohLoc$ to be exactly the category where such a restriction is well defined.
 
-This shows us that we have a duality (\textcolor{red}{TODO}: show that this is an adjunction)
+The unit and counit maps \begin{align*}
+	B \to& K\Idl(B) & A \to & \Idl(K(A))\\
+	b \mapsto& \{ (b) \lvert b \in B\} & a \mapsto& \{k \in K(A) \lvert k \leq a\}
+\end{align*}
+are well-defined isomorphisms [Joh 3.2].
+
+That is to say that the finite elements of $\Idl(B)$ are exactly the principal ideals, and the ideals of $K(A)$ are uniquely determined by elements of $A$; they consist of all finite elements which sit under each $a \in A$. 
+
+This shows us that we have a dual equivalence
 
 \[\begin{tikzcd}
-	\CohLoc^{\op} & \bot & \DLat
+	\CohLoc & \stackrel{\cong}{\bot} & \DLat^{\op}
 	\arrow["{K(-)}", bend left, from=1-1, to=1-3]
-	\arrow["{\Idl(-)}", bend left, from=1-3, to=1-1]
+	\arrow["{\Idl(-)}", bend left, from=1-3, to=1-1].
 \end{tikzcd}\]
-%
+\subsection{Schizophrenic object of $\CohTop \rightleftarrows \DLat^{\op}$}
 %In particular, this is also a natural dual adjunction. 
-Now  we want to compose these dualities $\CohTop^{\op} \rightleftarrows \CohLoc^{\op} \rightleftarrows \DLat$. 
+Now we can compose these dual equivalences $\CohTop \rightleftarrows \CohLoc \rightleftarrows \DLat^{\op}$ and it will give us a dual equivalence. One side sends a distributive lattice $A$ to what we call its \emph{\textbf{spectrum}}, in other words, $\Spec(A) := \pt(\Idl(A))$. On the other side we shall send a coherent space $X$ to its lattice of compact open subsets $K(\Omega(X))$.  So we have the dual adjunction
+
+\[\begin{tikzcd}
+	\CohTop & \stackrel{\cong}{\bot} & \DLat^{\op}
+	\arrow["{K\Omega(-)}", bend left, from=1-1, to=1-3]
+	\arrow["{\Spec(-)}", bend left, from=1-3, to=1-1].
+\end{tikzcd}\]
 %, a natural candidate for schizophrenic object might be $\Omega(\mathbb{S}) = \bot - b - \top$, which we shall call $ \mathbb{S}_{\Lat}$, whose elements are all finite, so that  $K(\Omega(\mathbb{S}))$ leaves $ \Omega(\mathbb{S})$ unchanged.
 %
-%We see now that $K(X) = \CohLoc(X, \mathbb{S}_{\Lat})$, as coherent frame homomorphisms are precisely the ones which preserve compact opens, which are uniquely given by the preimage of $\{1\}$. 
+%We see now that $K(X) = \CohLoc(X, \mathbb{S}_{\Lat})$, as coherent frame homomorphisms are precisely the ones which preserve compact opens, which are uniquely given by the pre-image of $\{1\}$. 
 %
 %Moreover,  $\Idl(B) = \DLat(B, \mathbb{S}_{\Lat}), $ 
 %
 
-This duality sends a distributive lattice $A$ to what we call its \emph{\textbf{spectrum}}, in other words, $\Spec(A) := \pt(\Idl(A))$. On the other side we shall send a coherent space $X$ to its lattice of compact open subsets $K(\Omega(X))$. 
 
-But we aren't done yet, as we will then want to restrict the composition.
 
-Seeing that $\Spec(A)$ is Hausdorff if and only if $A$ is a Boolean algebra [Joh], we shall see that we can restrict this equivalence to a duality between $\Bool$ and the category of coherent, Hausdorff spaces which are called \emph{\textbf{Stone spaces}}. 
+We claim that this  adjunction is a natural dual adjunction given by the schizophrenic object $(\mathbb{S}, 1_{\mathbb{S}},\mathbb{2})$.
 
-Note that Stone spaces are compact and totally disconnected [Joh] making them a subcategory of $\kHaus$. Moreover, if $X$ is Hausdorff, then $K(\Omega(X)) = \clop(X)$, since compact sets are exactly the closed sets of a  compact Hausdorff space.
+It is worth remarking that the reason  $\CohTop \rightleftarrows \CohLoc$ was not natural was because $\CohTop(X, \mathbb{S}) $ gave us $K\Omega(X)$ and not $\Omega(X)$. So intuitively, one could think of this composition as precisely what what needs to do to preserve the schizophrenic object.
+
+On the one hand, Lemma 7.1 shows us that $\DLat(B, \mathbb{2})$ lifts to $\prim(B)$. Indeed, $\Spec(B) = \Frm(\Idl(B), \mathbb{2})$, which gives us completely prime filters of $\Idl(B)$, and these correspond precisely to $\prim(B)$ [Joh 3.4]. 
+
+Now, just like in the leading example, we want to give $\Spec(B)$ the weakest coherent topology such that each evaluation map $\DLat(B,\mathbb{2}) \stackrel{\ev_{B,b}}{\rightarrow}[\mathbb{S}]$ lifts to a coherent map $e_{B,b}$. So we give $\Spec(B)$ the topology $
+	\{ \ \{ f \in \DLat(B, \mathbb{2})  \lvert f(b)  = 1 \} \lvert  b \in B \}$
+and check that its elements are compact in $\Spec(B)$. 
+
+Each evaluation map $\DLat(B,\mathbb{2}) \stackrel{\ev_{B,b}}{\rightarrow}[\mathbb{S}]$ corresponds to the subset of $\Spec(B)$ given by \begin{align*}
+	e_{B,b}^{-1}(\{1\}) = \{ f \in \DLat(B, \mathbb{2})  \lvert f(b)  = 1 \} =& \{F \in \prim(B) \lvert b \in F \}\\ =& \{ I \in \primIdl(B) \lvert b \notin I\} =: D(b)
+\end{align*} 
+
+Consider the cover $D(b) \subseteq \bigcup_I D(a_i)$. This is equivalent to saying there is no prime ideal $I$ containing all $a_i$ and $b$ (\textcolor{red}{TODO} Might need a Zorns lemma argument, check this later), which is equivalent to saying $1 \in (\{a_i\} \cup \{b\})$, i.e. the ideal generated by $a_i$ and $b$ is the entire spectrum. By downwards closure and closure under finite meets, there exists a finite index $m \in \mathbb{N}$ such that $1 \leq \bigvee_{i=0}^m a_i$ from which it follows $D(b) \subseteq \bigcup_{i = 0}^m D(a_i)$. Thus all $D(b)$ are compact and so is $\Spec(B)$.
+
+
+Now we can say that the initial coherent topology on $\Spec(B)$ making all evaluation maps coherent is exactly the one where $\{ D(b) \}_{b \in B}$ forms its topology. Just like in the leading example, one can check that any map $Z \stackrel{h}{\rightarrow} \Spec(B)$ is coherent if and only if $\ev_{B,b} \circ h$ is. 
+
+On the other hand, maps in $\CohTop(X, \mathbb{S})$ can be uniquely determined by which compact open the pre-image maps $\{1\}$  to, so that $\CohTop(X, \mathbb{S})$ lifts to $K\Omega(X)$ as desired. Furthermore, we have already seen that the evaluations $\CohTop(X,\mathbb{S}) \stackrel{\ev_{X,x}}{\rightarrow}[\mathbb{2}]$ lift to distributive lattice homomorphisms $d_{X,x}$ if any only if $d_{X,x}$ preserves pointwise order in $\mathbb{2}$, so that an initial distributive lattice structure is obtained by pointwise inclusion. This is the exact same argumentation from the leading example.
+
 
 \subsection{Schizophrenic object of the Stone duality}
-As we have seen, we have the following adjunction
+Now we aren't done yet. To obtain the Stone duality, we will  restrict the above equivalence. 
 
+Seeing that $\Spec(A)$ is Hausdorff if and only if $A$ is a Boolean algebra [Joh], we can restrict this equivalence to a duality between $\Bool$ and the category of coherent, Hausdorff spaces which are called \emph{\textbf{Stone spaces}}. It is straight-forward to see that $\Bool \subseteq \DLat$ and $\Stone \subseteq \CohTop$ are full subcategories. 
+
+Note that Stone spaces are compact and totally disconnected [Joh] making them a subcategory of $\kHaus$. Moreover, if $X$ is Hausdorff, then $K(\Omega(X)) = \clop(X)$, since compact sets are exactly the closed sets of a compact Hausdorff space.
+
+Therefore we have the following dual equivalence
 \[\begin{tikzcd}
-	\Stone^{\op} & \bot & \Bool
+	\Stone & \stackrel{\cong}{\bot} & \Bool^{\op}
 	\arrow["{\clop(-)}", bend left, from=1-1, to=1-3]
 	\arrow["{\Spec(-)}", bend left, from=1-3, to=1-1]
 \end{tikzcd}\]
+which we call the \emph{\textbf{Stone duality}}.
 
-Now remember our schizophrenic object $(\mathbb{2}, 1_{\mathbb{2}}, \mathbb{2})$. The question is then twofold: \begin{enumerate}
- 	\item Do the hom-sets lift?
+In the following we will show that the Stone duality is a natural dual adjunction. \emph{It's interesting and not necessarily expected that we obtain a natural dual adjunction via restriction of another natural dual adjunction.}
+
+Recall our triple $(\mathbb{2}, 1_{\mathbb{2}}, \mathbb{2})$ from the finite setting. To determine if this triple is a schizophrenic object, we ask ourselves: \begin{enumerate}
+ 	\item Do the $\Hom$-sets lift?
  	\begin{enumerate}
  	\item Can we give the spectrum as a lift of the set of points of a Boolean algebra, i.e. $[\Spec(B)] = \Bool(B, \mathbb{2})$?
- 	\item  Can we give the Boolean algebra of clopens of a stone space as a lift of the set of continuous maps over compact Hausdorff spaces, i.e., does $[\clop(X)] = \Stone(X, \mathbb{2})$?
+ 	\item  Can we give the Boolean algebra of clopens of a Stone space as a lift of the set of continuous maps over compact Hausdorff spaces, i.e., does $[\clop(X)] = \Stone(X, \mathbb{2})$?
  	\end{enumerate}
  	\item Are these lifts initial?
 
 
  \end{enumerate}
 
-In order to answer these questions, we will first show that the composite subduality $\CohTop \rightleftarrows \DLat^{\op}$ has a schizophrenic object, and then see what happens when we restrict to the Stone duality.
-
-First we look to the leading example and remember our points functor. Remember at the outset when we identified ultrafilters of a finite set $X$ with points of a finite Boolean algebra, we showed that points of any lattice can be identified with its prime filters.
-
-But in the background of that example we actually sent a Boolean algebra $B$ to its frame of ideals $\Idl(B)$, and then considered the points of that frame, which correspond to completely prime filters of $\Idl(B)$. These correspond to prime filters $P$ of $B$ by the bijective assignments $P \mapsto \{I \in \Idl(B) \lvert I \cap P \neq \emptyset\}$ and $F \mapsto \{b \in B \lvert \downarrow (b) \in F \}$ [Joh] so that the prime filters of $B$ correspond to the spectrum. There was nothing about this argumentation that required $B$ to be Boolean, as it works for any distributive lattice.
-
-In a word, the points of the locale of ideals of $A$, or the \emph{spectrum} of $A$, are precisely its set of prime ideals, given by the lift of the functor $\DLat(-, \mathbb{2})$. 
-
-Such a lift is initial by the same argumentation as in the leading example: we simply take the initial topology such that all evaluation maps $\DLat(B, \mathbb{2}) \to \mathbb{2}$ are continuous, which have as a subbasis  $\{\ \{p \in \DLat(B,\mathbb{2}) \lvert p(b) = 1\}\  \lvert \ b \in B \ \}$.
-
-(\textcolor{red}{TODO} Compute/confirm  that this lifts initially to $\CohTop$)
+For 1.(a) recall that Lemma 7.1 told us that the points of a boolean algebra correspond to its ultrafilters, which are equivalent to prime filters in the Boolean setting.
 
 
-For the second map, consider that we also have the initial lift of the adjunction $\Top \stackrel{\Top(-,\mathbb{S})}{\rightleftarrows} \Frm^{\op}$.
+Since Boolean algebras automatically have Hausdorff spectrums, this lift is initial by the same argument as above. Nothing else has changed, we check in the same way that any map from a Stone space $[Z] \stackrel{h}{\rightarrow} \Spec(B)$ lifts to a coherent map if and only if its composites $\ev_{B,b} \circ h$ do. 
 
-Remember that each restriction is simply the free generator or left adjoint of the forgetful functor, whose underlying functors into subcategories of $\Top$ compose with the underlying functor into $\Top$.
+In fact, it is enough to check continuity, since continuous maps between compact Hausdorff spaces must be coherent, as continuity implies that the pre-image of  clopens are clopen, and in $\kHaus$ they are precisely the compact opens. This also means that $\Stone$ is a full subcategory of $\Top$. 
 
- Since coherentifying a topology on $X$ doesn't do anything to the Sierpinski space (all elements in $\mathbb{S}$ are compact open, and taking unions of finite intersections of $\mathbb{S}$ gives us back $\mathbb{S}$), we first notice that after composing, we have a functor $\CohTop \rightleftarrows \DLat$ that lifts $\CohTop(X, \mathbb{S})$ to $\DLat$, since coherent maps are precisely those which preserve compact opens, i.e.,  as we have already seen $\CohTop(X, \mathbb{S}) = K\Omega(X)$, so that $\CohTop(X,\mathbb{S})$ lifts to $\DLat$: it is exactly the distributive lattice of compact open subsets of $X$.
+1.(b) is only slightly more complicated. We start by remarking that $\mathbb{S} \notin \Stone$, so to pass the schizophrenic object downwards, we will want to Stonefy it via the Stone space reflection functor $\Stone(-)$, which is also called the Stoneification, i.e. the left adjoint to the forgetful functor (\textcolor{red}{TODO} find source to show this exists).
+
+  By the dual equivalence we get the corresponding Boolean algebra reflection functor $\Bool(-)$, or Booleanification.
+ 
+ To understand the Stoneification, we may first want to Booleanify the lattice of compact open subsets of a space $X$, which we will call $A$. Let $A^*$ be the set of complements in $\mathcal{P}(X)$ of members of $A$. Then the patch topology, which has as a base $C = \{U \cap V \lvert U \in A, V \in A^*\}$ , will be a Stone space (notice that we are taking the Boolean completion $B$ of $A$ and then taking its spectrum) [Joh].
+ 
+ This was just to see that we can in some sense Stoneify the $\Hom$-set functor via its schizophrenic object: we take the Boolean completion of $\mathbb{S}$ in $\mathcal{P}(\{0,1\})$ which is simply $\mathbb{2}_s$, the two point discrete space, since by Booleanifying we must generate the complement of $\{1\}$.
  
  
- Now we see what happens when applying the restrictions.
- 
- 
-On the topological side, there is the restriction $\CohTop \stackrel{\Stone(-)}{\rightleftarrows} \Stone$, which is called the stone space reflection, or stoneification. On the other side, $\DLat$  restricts to $\Bool$ by the corresponding Boolean algebra reflection functor, or Booleanification.
- 
- To understand the Stoneification, we may first want to Booleanify the lattice of compact open subsets of a space $X$, which we will call $A$. Let $A^*$ be the set of complements in $\mathcal{P}(X)$ of memebers of $A$. Then the patch topology, which has as a base $C = \{U \cap V \lvert U \in A, V \in A^*\}$ , will be a Stone space (notice that we are taking the Boolean completion $B$ of $A$ and then taking its spectrum) [Joh].
- 
- We must be careful here, because $\mathbb{S} \notin \Stone$, since $\mathbb{S}$ is clearly not Hausdorff. So we will need to take the Boolean completion of $\mathbb{S}$ in $\mathcal{P}(\{0,1\})$ which is simply $\mathbb{2}_s$, the two point discrete space, since by Booleanifying we must generate the complement of $\{1\}$.
- 
- 
-The argumentation however works the same way as it would if $\mathbb{S}$ was in $\Stone$: the lift of $\CohTop(X, \mathbb{S})$ equals $[\clop(X)]$ if $X$ is a Stone space, since coherent maps into $\mathbb{S}$ are uniquely determined by the preimage of $\{1\}$, which are simply the compact open subsets of a compact Hausdorff space, which are its  clopens. 
+The argument however works the same way as it would if $\mathbb{S}$ was in $\Stone$: $\CohTop(X, \mathbb{S})$ lifts to $\clop(X)$ if $X$ is a Stone space, since coherent maps into $\mathbb{S}$ are uniquely determined by the pre-image of $\{1\}$, which are simply the compact open subsets of a compact Hausdorff space, which are its  clopens. 
 
-By the same argument we have $\Stone(X, \mathbb{2}_s) = [\clop(X)]$, and in fact, since we have Stonefied all objects, we are back to being in a full subcategory of $\Top$, since continuous maps between compact Hausdorff spaces must be coherent (continuity means the preimage of every clopen set is clopen, and in this setting the clopens are the compact opens).
+By the same argument we have $\Stone(X, \mathbb{2}_s) = [\clop(X)]$, we only remark that continuous maps $X \stackrel{f}{\rightarrow}\mathbb{2}_s$ are still completely determined by the pre-image of $\{1\}$, since that pre-image sends $\{0\}$ to its unique complement. 
 
-This is in particular true for any compact Hausdorff space, so that one has $\kHaus(X, \mathbb{2}_s) = \Stone(X, \mathbb{2}_s)$ for all $X \in \Stone$. 
-
-Moreover, considering all $n$-ary operations $\mathbb{2}_s^n \stackrel{\gamma}{\to} \mathbb{2}_s$, where $\mathbb{2}_s^n$ is given the product topology on $\mathbb{2}_s$, we get an induced map \begin{align*}
+To understand the Boolean algebra structure on $\Stone(X, \mathbb{2}_s)$ we consider all $n$-ary operations $\mathbb{2}_s^n \stackrel{\gamma}{\to} \mathbb{2}_s$, where $\mathbb{2}_s^n$ is given the product topology on $\mathbb{2}_s$. We get an induced map \begin{align*}
 	\Stone(X, \mathbb{2}_s)^n \cong \Stone(X, \mathbb{2}_s^n) \stackrel{\gamma \circ -}{\to} \Stone(X, \mathbb{2}_s)
 \end{align*}
-where the first isomorphism is the fact that Hom-sets preserve limits in the second argument, which is given by a natural map that combines components and its inverse which separates them.
+where the first isomorphism is the fact that $\Hom$-sets preserve limits in the second argument. 
 
+Indeed, since $\mathbb{2}_s$ is discrete, every set function $[X] \to [\mathbb{2}]$ lifts to a continuous map, so that $\Stone(X, \mathbb{2}) \cong [\mathbb{2}]^X$. As usual, it is completely natural to define Boolean  operations on $\Stone(X,\mathbb{2}_s)$ pointwise in $\mathbb{2}$, which turns the set product structure on $\Stone(X,\mathbb{2})$ into  the  Boolean algebra  product $\mathbb{2}^X$, as the underlying set functor $V: \Bool \to \Set$ reflects limits.
 
-This shows us that the left adjoint of the Stone duality is given as a lift of $\Stone(-, \mathbb{2}_s)$, and in particular, this lift is initial, by a similar argument as in the leading example.
+Remember that the categorical product comes with projection maps $\pi_x: \mathbb{2}^X \stackrel{\pi_x}{\rightarrow } \mathbb{2}_x$. Notice that these \emph{are} the evaluation maps, since products in $\Set$ are just functions out of the indexing set and projections pick out coordinates for these functions, which is exactly what our evaluation maps are doing.
 
+Then initiality is just the universal property of the product: any map $B \stackrel{h}{\rightarrow} \mathbb{2}^X$ is Boolean if and only if the composite with projections $\pi_x \circ h$ are Boolean, showing us that the evaluation maps admit initial lifts into $\Bool$.
 %\[\begin{tikzcd}
 %	&& \Loc & \bot & \Top \\
 %	&& \vdash && \vdash \\
@@ -1268,87 +1336,89 @@ This shows us that the left adjoint of the Stone duality is given as a lift of $
 %	\arrow[hook', bend left, from=7-5, to=5-5]
 %	\arrow["{\clop(-)}", bend left, from=7-5, to=7-1]
 %\end{tikzcd}\]
+%
+%\[\begin{tikzcd}
+%	\Top & \bot & \Loc \\
+%	\vdash && \vdash \\
+%	\Sob & {\stackrel{\cong}{\bot}} & \Spat \\
+%	\vdash && \vdash \\
+%	\CohTop & \bot & \CohLoc & \bot & \DLat^{\op} \\
+%	\vdash &&&& \vdash \\
+%	\Stone && {\stackrel{\cong}{\bot}} && \Bool^{\op}
+%	\arrow["{\Omega(-)}", bend left, from=1-1, to=1-3]
+%	\arrow["{\Sobb(-)}", bend left, from=1-1, to=3-1]
+%	\arrow["{\pt(-)}", bend left, from=1-3, to=1-1]
+%	\arrow["{\Spatt(-)}", bend left, from=1-3, to=3-3]
+%	\arrow[hook', bend left, from=3-1, to=1-1]
+%	\arrow["\Omega(-)", bend left, from=3-1, to=3-3]
+%	\arrow["{\Coh(-)}", bend left, from=3-1, to=5-1]
+%	\arrow[hook', bend left, from=3-3, to=1-3]
+%	\arrow["{\pt(-)}", bend left, from=3-3, to=3-1]
+%	\arrow["{\Coh(-)}", bend left, from=3-3, to=5-3]
+%	\arrow[hook', bend left, from=5-1, to=3-1]
+%	\arrow["{\Omega(-)}", bend left, from=5-1, to=5-3]
+%	\arrow["{\Stone(-)}", bend left, from=5-1, to=7-1]
+%	\arrow[hook', bend left, from=5-3, to=3-3]
+%	\arrow["{\pt(-)}", bend left, from=5-3, to=5-1]
+%	\arrow["{K(-)}", bend left, from=5-3, to=5-5]
+%	\arrow["{\Idl(-)}", bend left, from=5-5, to=5-3]
+%	\arrow["{\Bool(-)}", bend left, from=5-5, to=7-5]
+%	\arrow[hook', bend left, from=7-1, to=5-1]
+%	\arrow["{\clop(-)}", bend left, from=7-1, to=7-5]
+%	\arrow[hook', bend left, from=7-5, to=5-5]
+%	\arrow["{\Spec(-)}", bend left, from=7-5, to=7-1]
+%\end{tikzcd}\]
+%
+%\[\begin{tikzcd}
+%	\Top & \bot & \Loc & \top  & {\DLat^{\op}} \\
+%	\vdash && \vdash \\
+%	\Sob & \stackrel{\cong}{\bot} & \Spat  \\
+%	\dashv && \vdash \\
+%	\CohTop & \stackrel{\cong}{\bot} & \CohLoc & \stackrel{\cong}{\bot} & {\DLat^{\op}} \\
+%	\vdash &&&& \vdash \\
+%	\Stone && \stackrel{\cong}{\bot} && \Bool^{\op} \\
+%	\\
+%	\\
+%	\\
+%	\FinSet && \stackrel{\cong}{\bot} && {\Boolf^{\op}}
+%	\arrow["{\Omega(-)}", bend left, from=1-1, to=1-3]
+%	\arrow["\Sobb(-)", bend left, from=1-1, to=3-1]
+%	\arrow["{\Coh(-)}"', bend right, from=1-1, to=5-1]
+%	\arrow["{\pt(-)}", bend left, from=1-3, to=1-1]
+%	\arrow["{U(-)}", bend left, hook, from=1-3, to=1-5]
+%	\arrow["{\Spatt(-)}", bend left, from=1-3, to=3-3]
+%	\arrow["{\Coh(-)}", bend left, from=1-3, to=5-3]
+%	\arrow["{F(-)}", bend left, from=1-5, to=1-3]
+%	\arrow["{(\Coh \circ F)(-)}", from=1-5, to=5-5]
+%	\arrow["{U(-)}", bend left, hook', from=3-1, to=1-1]
+%	\arrow["{\Omega(-)}", bend left, from=3-1, to=3-3]
+%	\arrow["{U(-)}", bend left, hook', from=3-3, to=1-3]
+%	\arrow["{\pt(-)}", bend left, from=3-3, to=3-1]
+%	\arrow["{U(-)}"', bend right, hook', from=5-1, to=3-1]
+%	\arrow["{\Omega(-)}", bend left, from=5-1, to=5-3]
+%	\arrow["{\Stone(-)}", bend left, from=5-1, to=7-1]
+%	\arrow["{U(-)}", bend left, hook', from=5-3, to=3-3]
+%	\arrow["{\pt(-)}", bend left, from=5-3, to=5-1]
+%	\arrow["{K(-)}", bend left, from=5-3, to=5-5]
+%	\arrow["{\Idl(-)}", bend left, from=5-5, to=5-3]
+%	\arrow["{\Bool(-)}", bend left, from=5-5, to=7-5]
+%	\arrow["{U(-)}", bend left, hook', from=7-1, to=5-1]
+%	\arrow["{\clop(-)}"', bend left, from=7-1, to=7-5]
+%%	\arrow[from=7-1, to=11-1]
+%	\arrow["{U(-)}", bend left, hook', from=7-5, to=5-5]
+%	\arrow["{\Spec(-)}"', bend left, from=7-5, to=7-1]
+%%	\arrow[from=7-5, to=11-5]
+%	\arrow["{\mathcal{P}(-)}"', bend left, from=11-1, to=11-5]
+%	\arrow["{\Ult(-)}"', bend left, from=11-5, to=11-1]
+%\end{tikzcd}\]
+\subsection{Restricting Stone to the finite case}
+Now we can revisit the finite adjunction from the beginning of this section. Any finite Stone space is discrete, since Hausdorffness forces singletons to be clopen (we give singletons by an intersection of all point-separating clopens, of which there are finitely many, so that singletons are themselves clopen). This shows that $\FinStone = \FinSet$.
 
-\[\begin{tikzcd}
-	\Top & \bot & \Loc \\
-	\vdash && \vdash \\
-	\Sob & {\stackrel{\cong}{\bot}} & \Spat \\
-	\vdash && \vdash \\
-	\CohTop & \bot & \CohLoc & \bot & \DLat^{\op} \\
-	\vdash &&&& \vdash \\
-	\Stone && {\stackrel{\cong}{\bot}} && \Bool^{\op}
-	\arrow["{\Omega(-)}", bend left, from=1-1, to=1-3]
-	\arrow["{\Sobb(-)}", bend left, from=1-1, to=3-1]
-	\arrow["{\pt(-)}", bend left, from=1-3, to=1-1]
-	\arrow["{\Spatt(-)}", bend left, from=1-3, to=3-3]
-	\arrow[hook', bend left, from=3-1, to=1-1]
-	\arrow["\Omega(-)", bend left, from=3-1, to=3-3]
-	\arrow["{\Coh(-)}", bend left, from=3-1, to=5-1]
-	\arrow[hook', bend left, from=3-3, to=1-3]
-	\arrow["{\pt(-)}", bend left, from=3-3, to=3-1]
-	\arrow["{\Coh(-)}", bend left, from=3-3, to=5-3]
-	\arrow[hook', bend left, from=5-1, to=3-1]
-	\arrow["{\Omega(-)}", bend left, from=5-1, to=5-3]
-	\arrow["{\Stone(-)}", bend left, from=5-1, to=7-1]
-	\arrow[hook', bend left, from=5-3, to=3-3]
-	\arrow["{\pt(-)}", bend left, from=5-3, to=5-1]
-	\arrow["{K(-)}", bend left, from=5-3, to=5-5]
-	\arrow["{\Idl(-)}", bend left, from=5-5, to=5-3]
-	\arrow["{\Bool(-)}", bend left, from=5-5, to=7-5]
-	\arrow[hook', bend left, from=7-1, to=5-1]
-	\arrow["{\clop(-)}", bend left, from=7-1, to=7-5]
-	\arrow[hook', bend left, from=7-5, to=5-5]
-	\arrow["{\Spec(-)}", bend left, from=7-5, to=7-1]
-\end{tikzcd}\]
-
-\[\begin{tikzcd}
-	\Top & \bot & \Loc & \top  & {\DLat^{\op}} \\
-	\vdash && \vdash \\
-	\Sob & \stackrel{\cong}{\bot} & \Spat  \\
-	\dashv && \vdash \\
-	\CohTop & \stackrel{\cong}{\bot} & \CohLoc & \stackrel{\cong}{\bot} & {\DLat^{\op}} \\
-	\vdash &&&& \vdash \\
-	\Stone && \stackrel{\cong}{\bot} && \Bool^{\op} \\
-	\\
-	\\
-	\\
-	\FinSet && \stackrel{\cong}{\bot} && {\Boolf^{\op}}
-	\arrow["{\Omega(-)}", bend left, from=1-1, to=1-3]
-	\arrow["\Sobb(-)", bend left, from=1-1, to=3-1]
-	\arrow["{\Coh(-)}"', bend right, from=1-1, to=5-1]
-	\arrow["{\pt(-)}", bend left, from=1-3, to=1-1]
-	\arrow["{U(-)}", bend left, hook, from=1-3, to=1-5]
-	\arrow["{\Spatt(-)}", bend left, from=1-3, to=3-3]
-	\arrow["{\Coh(-)}", bend left, from=1-3, to=5-3]
-	\arrow["{F(-)}", bend left, from=1-5, to=1-3]
-	\arrow["{(\Coh \circ F)(-)}", from=1-5, to=5-5]
-	\arrow["{U(-)}", bend left, hook', from=3-1, to=1-1]
-	\arrow["{\Omega(-)}", bend left, from=3-1, to=3-3]
-	\arrow["{U(-)}", bend left, hook', from=3-3, to=1-3]
-	\arrow["{\pt(-)}", bend left, from=3-3, to=3-1]
-	\arrow["{U(-)}"', bend right, hook', from=5-1, to=3-1]
-	\arrow["{\Omega(-)}", bend left, from=5-1, to=5-3]
-	\arrow["{\Stone(-)}", bend left, from=5-1, to=7-1]
-	\arrow["{U(-)}", bend left, hook', from=5-3, to=3-3]
-	\arrow["{\pt(-)}", bend left, from=5-3, to=5-1]
-	\arrow["{K(-)}", bend left, from=5-3, to=5-5]
-	\arrow["{\Idl(-)}", bend left, from=5-5, to=5-3]
-	\arrow["{\Bool(-)}", bend left, from=5-5, to=7-5]
-	\arrow["{U(-)}", bend left, hook', from=7-1, to=5-1]
-	\arrow["{\clop(-)}"', bend left, from=7-1, to=7-5]
-%	\arrow[from=7-1, to=11-1]
-	\arrow["{U(-)}", bend left, hook', from=7-5, to=5-5]
-	\arrow["{\Spec(-)}"', bend left, from=7-5, to=7-1]
-%	\arrow[from=7-5, to=11-5]
-	\arrow["{\mathcal{P}(-)}"', bend left, from=11-1, to=11-5]
-	\arrow["{\Ult(-)}"', bend left, from=11-5, to=11-1]
-\end{tikzcd}\]
-
-As a side remark, another reason our original equivalence of categories $\FinSet^{\op} \cong \Boolf$ might be interesting to us now is that by considering the $\Ind$ and $\Pro$ categories, we get the following equivalence:
+In fact we may even extend $\FinSet^{\op} \rightleftarrows \Boolf$ to Stone via $\Ind$ and $\Pro$ categories, as we get the following equivalence:
 \begin{align*}
 	\Bool \cong \Ind(\Boolf) \cong \Ind(\FinSet^{\op}) \cong  \Pro(\FinSet)^{\op}
 \end{align*}
-which means we can identify $\Stone$ spaces with profinite sets.
+which means we can identify $\Stone$ spaces with profinite sets. For further reading check $Johnstone$ Chapter bla bla (\textcolor{red}{TODO} sources yeah).
 \section{Rings and Affine schemes}
 
 We now turn to an example that any graduate Algebra student has encountered, the duality between the category of rings and the category of affine schemes. We will use the more general category of commutative $R$-algebras, which we denote $\CAlg$. Notice that if $R = \mathbb{Z}$, then $\CAlgZ = \Ring$. 
@@ -1438,17 +1508,15 @@ A topological space $X$ is said to be a \textbf{$k$-space}, or a \textbf{compact
 \end{definition}
 \
 
+That is to say a space is compactly generated if all its continuous functions are continuous on compact subspaces. Note that the domain in the definition of arbitrary compact space $Y$ could be restricted to compact subsets $K \subseteq X$ since images of compact spaces by continuous maps $f(Y) \subseteq X$ are homeomorphic to compact subspaces  $K \subseteq X$, so in particular, $f$ factors through the inclusion $\iota: K \hookrightarrow X$. 
 
-
-That is to say a space is compactly generated if all its continuous functions are continuous on compact subspaces. Note that the domain in the definition of arbitrary compact space $Y$ could be restricted to compact subsets $K \subset X$ since images of compact spaces by continuous maps $f(Y) \subset X$ are homeomorphic to compact subspaces  $K \subset X$, so in particular, $f$ factors through the inclusion $\iota: K \hookrightarrow X$. 
-
-For the following we will assume that $k$-spaces are additionally Hausdorff, and refer to ${\kSp}$ as the category of compactly generated Hausdorff spaces, whose morphisms are the continuous functions between them, making it a full subcategory of $\Top$, and in particular, of $\Haus \subset \Top$. 
+This is the general definition that one might find in other textbooks, but for our purposes we restrict the definition of $k$-continuity to compact Hausdorff spaces, and refer to ${\kTop}$ as the category of compactly generated Hausdorff spaces, whose morphisms are the continuous functions between them, making it a full subcategory of $\Top$, and in particular, of $\Haus \subseteq \Top$. 
 
 If given a topological space which may or may not be a $k$-space, we may force the compactly generated condition on it through a process which we call the \emph{Kelleyfication} of a topological space.
 
-That is, given the set of inclusions $(K \stackrel{t_i}{\hookrightarrow} X)_{i \in I}$ of  compact subspaces $K\subset X$, we give $X$ the finest topology making all $t_i$ continuous. 
+That is, given the set of inclusions $(K \stackrel{t_i}{\hookrightarrow} X)_{i \in I}$ of  compact subspaces $K\subseteq X$, we give $X$ the finest topology making all $t_i$ continuous. 
 
-That is, given an underlying-set function $X \stackrel{f}{\to} Y$, we give $X$ the topology such that $f$ is continuous if and only if $f \circ t_i$ is continuous. 
+That is, given an underlying-set function $[X] \stackrel{[f]}{\to} [Y]$, we give $X$ the topology such that $f$ is continuous if and only if $f \circ t_i$ is continuous. 
 
 But this is just the universal property of the colimit applied to topological spaces (and their full subcategories): for any set of continuous functions  $K_i \stackrel{\varphi_i}{\to}Y$ into some topological space $Y$ that satisfy commutativity (i.e., if there is a continuous map $K_i \stackrel{h}{\to} K_j $ for some $i, j \in I$, then $\varphi_i = \varphi_j \circ h$), then there exists a unique continuous map $X \stackrel{f}{\to}Y$ such that $\varphi = f \circ t_i$. 
 
@@ -1465,26 +1533,26 @@ This is reflected by commutativity of the following diagram:
 	\arrow["{f \circ t_j}"', bend right, from=3-3,  to=1-2]
 	\arrow["{t_j}"', from=3-3, to=2-2]
 \end{tikzcd}\]
-That is if $f \circ t_i$ is continuous, preimages of open sets $V \subset Y$ must be open under composition, in other words $t_i^{-1}(f^{-1}(V)) \subset K_i$ is open. 
+That is if $f \circ t_i$ is continuous, pre-images of open sets $V \subseteq Y$ must be open under composition, in other words $t_i^{-1}(f^{-1}(V)) \subseteq K_i$ is open. 
 
 So $f \circ t_i$ induces a continuous $f: X \to Y$ in the following way: given a topological space with underlying set  $X$, the colimit out of compact Hausdorff subspaces will be its \emph{Kelleyfication}, which is necessarily a refinement of the topology of $X$, since continuous maps $X \stackrel{f}{\to}Y$ necessarily satisfy commutativity of the above diagram, so we want to add opens to $X$ which satisfy commutativity for arbitrary function $X \stackrel{f}{\to}Y$. 
 
 %(\textcolor{red}{TODO}: make this better, why exactly is this universal property equivalent to the first statement ($f$ continuous iff $f \circ t_i$ continuous)?)
 
 
-That is, if $X$ is not already Kelleyfied, we add opens $U = f^{-1}(V)$, for functions $f$ such that  $t_i^{-1}(U) \subset K$ is open  but $U \subset X$ is not. This is the universality condition, since commutativity must be satisfied for arbitrary function $f$. But this is our original statement: we want a topology on $X$ such that $f$ is continuous if and only if $f \circ t_i$ is continuous. 
+That is, if $X$ is not already Kelleyfied, we add opens $U = f^{-1}(V)$, for functions $f$ such that  $t_i^{-1}(U) \subseteq K$ is open  but $U \subseteq X$ is not. This is the universality condition, since commutativity must be satisfied for arbitrary function $f$. But this is our original statement: we want a topology on $X$ such that $f$ is continuous if and only if $f \circ t_i$ is continuous. 
 
-Thus we can understand a $k$-space as a colimit of compact Hausdorff spaces, or specifically, $X \in \kSp$ if and only if $X = \colim_{K \subset X \text{ compact}}K$.
+Thus we can understand a $k$-space as a colimit of compact Hausdorff spaces, or specifically, $X \in \kTop$ if and only if $X = \colim_{K \subseteq X \text{ compact}}K$.
 
 %\textcolor{red}{Question}: are compact subspaces in $X$ compact if and only if they are compact in Kelley($X$)? No.
 
-We may otherwise view the \emph{Kelleyfication} as the left adjoint $k(-)$ to the forgetful functor. As $\kSp$ is a full subcategory of $\Haus$, this puts us in the setting of a coreflective subcategory of $\Haus \subset \Top$. 
+We may otherwise view the \emph{Kelleyfication} as the right adjoint $k(-)$ to the forgetful functor. As $\kTop$ is a full subcategory of $\Haus$, this puts us in the setting of a coreflective subcategory of $\Haus \subseteq \Top$. 
 
-Another way to think about $\kSp$ is as the coreflective hull of $\kHaus$ in $\Haus$. That is to say, the forgetful functor $\kHaus \hookrightarrow \Haus$ does not have a left adjoint (\textcolor{red}{TODO}: Why? Does it have something to do with that $\kHaus$ is not closed under colimits), however we may take the intersection of all coreflective subcategories of $\Haus$ which contain $\kHaus$, and this will precisely be the category generated under colimits of $\kHaus$  (\textcolor{red}{TODO}: make this precise.)
+Another way to think about $\kTop$ is as the coreflective hull of $\kHaus$ in $\Haus$. That is to say, the underlying functor $\kHaus \hookrightarrow \Haus$ does not have a right adjoint, since $\kHaus$ is not closed under colimits. However taking the intersection of all coreflective subcategories of $\Haus$ which contain $\kHaus$, noting that the inclusion functors are left adjoint so they preserves all colimits, and that the category generated by colimits of $\kHaus$ is itself coreflective, we obtain precisely the category generated under colimits of $\kHaus$.
 
-Note that products are given as the Kelleyfications of topological  products, and furthermore, that for all locally compact spaces $X$, we have $X \times_k Y = X \times Y$ for all $Y \in \kSp$. (\textcolor{blue}{TODO} show this).
+Note that products are given as the Kelleyfications of topological  products, and furthermore, that for all locally compact Hausdorff spaces $X$, we have $X \times_k Y = X \times Y$ for all $Y \in \kTop$, since we can compute limits in $\Haus$ and pass back to $\kTop$ by the right adjoint, which preserves limits. One only needs to check that $X \in \kTop$
 
-It is important that our category admits function spaces, or in other words, that we are in a closed category (i.e. all exponentiables exist). In the following we will show why $\kSp$ is a closed category. This will indeed give us intuition of why we have even defined $\kSp$ the way we have, as $\Haus $ is not a closed category.  
+It is important that our category admits function spaces, or in other words, that we are in a closed category (i.e. all exponentiables exist). In the following we will show why $\kTop$ is a closed category. This will indeed give us intuition of why we have even defined $\kTop$ the way we have, as $\Haus $ is not a closed category.  
 
 What we want is the following adjunction:
 \begin{align*}
@@ -1492,26 +1560,26 @@ What we want is the following adjunction:
 \end{align*}
 For all $A, B, C \in \Ob(\Haus)$. However this does not hold in general. 
 
-However in $\kSp$ function spaces are given as Kelleyfications of the set $\Top(X,Y)$ with the compact-open topology. (\textcolor{blue}{TODO} why?).
-\textcolor{red}{ToDO} Show that this means that $\kSp$ is cartesian closed concrete category which admits function spaces.
-And as per [Dub], we see that $\kSp$ admits function spaces.
+However in $\kTop$ function spaces are given as Kelleyfications of the set $\Top(X,Y)$ with the compact-open topology. (\textcolor{blue}{TODO} why?).
+\textcolor{red}{ToDO} Show that this means that $\kTop$ is cartesian closed concrete category which admits function spaces.
+And as per [Dub], we see that $\kTop$ admits function spaces.
 
-First we note that $\kSp$ is a coreflective subcategory of $\Top$. Since $\kSp$ is a coreflective subcategory of a topological category, it is itself a topological category (Herrlichs theorem \textcolor{red}{TODO} Find and cite this), and in particular it is monotopological. 
+First we note that $\kTop$ is a coreflective subcategory of $\Top$. Since $\kTop$ is a coreflective subcategory of a topological category, it is itself a topological category (Herrlichs theorem \textcolor{red}{TODO} Find and cite this), and in particular it is monotopological. 
 
 Note that $\Top$ is a topological category since  for any source in $\Set$ we can always take the initial topology making every map in the source continuous.
 
-(\textcolor{red}{ToDO} Show that $\kSp$ admits function spaces )
+(\textcolor{red}{ToDO} Show that $\kTop$ admits function spaces )
 
 Now let us define the category $\kAlg$ of complex $k$-algebras, whose objects are $\mathbb{C}$-algebras endowed with a Kelley topology, whose morphisms are the continuous algebra homomorphisms, and whose algebra operations are continuous with respect to $k$-products. 
 
-Now since $\kSp$ is a monotopological category which admits function spaces, we are in the setting of a category which admits an internal hom-functor. 
+Now since $\kTop$ is a monotopological category which admits function spaces, we are in the setting of a category which admits an internal hom-functor. 
 
-To put ourselves completely in the situation of \textbf{4.c} we notice that $\kAlg \subset \kSp$ is a full subcategory, so that we have an underlying functor $U: \kAlg \to \kSp$, which satisfies the conditions of $4.c$ in the following. As $\mathbb{C}$ is a colimit of its compact Hausdorff subspaces which is moreover a $\mathbb{C}$-algebra, we see that $\mathbb{C} \in \kAlg$, and we call it $\mathbb{C}_a$,  so that $U(\mathbb{C}_a) = \mathbb{C}_s$, by analogous notation, and clearly $\tau = 1_{\mathbb{C}}. $
+To put ourselves completely in the situation of \textbf{4.c} we notice that $\kAlg \subseteq \kTop$ is a full subcategory, so that we have an underlying functor $U: \kAlg \to \kTop$, which satisfies the conditions of $4.c$ in the following. As $\mathbb{C}$ is a colimit of its compact Hausdorff subspaces which is moreover a $\mathbb{C}$-algebra, we see that $\mathbb{C} \in \kAlg$, and we call it $\mathbb{C}_a$,  so that $U(\mathbb{C}_a) = \mathbb{C}_s$, by analogous notation, and clearly $\tau = 1_{\mathbb{C}}. $
 
 Since  we are in a monotopological category, then we know that $\kAlg(A, \mathbb{C}_a) \to [\mathbb{C}_s]$
-lifts initially to a $\kSp$-morphism, which we will denote $\Hom_k(A, \mathbb{C}_a) \to \mathbb{C}_s$.
+lifts initially to a $\kTop$-morphism, which we will denote $\Hom_k(A, \mathbb{C}_a) \to \mathbb{C}_s$.
 
-Now all we need to see is that $\kSp(X,\mathbb{C}_s) \to [\mathbb{C}_a]$ lifts along $U$ functorially to a $\kAlg$-morphism $C_k(X, \mathbb{C}_s) \to \mathbb{C}_a$, which we must show directly. 
+Now all we need to see is that $\kTop(X,\mathbb{C}_s) \to [\mathbb{C}_a]$ lifts along $U$ functorially to a $\kAlg$-morphism $C_k(X, \mathbb{C}_s) \to \mathbb{C}_a$, which we must show directly. 
 
 To show this we first want to see that $C_k(X, \mathbb{C}_s)$ has the necessary internal operations. For that we first notice that the functor $C_k(X, -)$ is product preserving (as a coreflection we can compute limits in $\Top$ and then Kelleyfy). 
 
@@ -1525,7 +1593,7 @@ induces a continuous scalar multiplication on $C_k(X, \mathbb{C}_s)$, by applyin
 \end{align*}
 As such we have an adjunction 
 \begin{align*}
-	C: \kSp & \to \kAlg &  S: \kAlg & \to \kSp\\
+	C: \kTop & \to \kAlg &  S: \kAlg & \to \kTop\\
 	X &\mapsto C_k(X, \mathbb{C}_s) & A &\mapsto \Hom_k(A, \mathbb{C}_a)
 \end{align*}
 
@@ -1533,18 +1601,18 @@ which is not natural.
 
 This is called the \emph{generalized Gelfand-Naimark Duality}. 
 
-In the following we will want to restrict $\kSp$ and $\kAlg$ to their full subcategories under which the above adjunction is a dual equivalence. For that we will introduce the category of $C^*$-algebras.
+In the following we will want to restrict $\kTop$ and $\kAlg$ to their full subcategories under which the above adjunction is a dual equivalence. For that we will introduce the category of $C^*$-algebras.
 \subsection{$C^*$-algebras}
 Consider the functor $C^*: \Top \to \Set$, which sends  $X \mapsto C^*(X) = \Top_{bd.}(X, \mathbb{C})$ for all $X \in \Top$. 
 From pointwise operations $C^*(X)$ can be seen to be an associative, commutative, unital $\mathbb{C}$-algebra. Pointwise conjugation gives us the operation $f \mapsto f^*$, so that $C^*(X)$ is an involutive algebra, and the supremum norm $\lVert f \lVert = \sup_{x \in X}\lvert f(x)\lvert $ turns $C^*(X)$ into a normed algebra satisfying $\lVert f \lVert^2 = \lVert f \cdot f^* \lVert$. If we consider the involution preserving unital $\mathbb{C}$-algebra homomorphisms, we obtain a category $C^*$.
 
-Note that $C^* \subset \kAlg$ is a full subcategory.
+Note that $C^* \subseteq \kAlg$ is a full subcategory.
 
  We could view $C^*$ as a concrete category via the usual underlying-set functor, however we might find it more interesting in this case to consider a different faithful functor, namely the functor $\bigcirc: C^* \to \Set$ which sends any $C^*$-algebra $A$ to it's unit ball $\{ a \in A \  \lvert  \ \lVert a \lVert \leq 1\}$ and each morphism $f$  to its restriction $f_\bigcirc$ to the unit ball of its domain.
  
  \subsubsection{Gelfand-Naimark Duality}
  
- For any compact Hausdorff space $X$, we see that the $C^*$-algebra $C^*(X)$ and the function $k$-algebra $C(X) = C_k(X, \mathbb{C}_s)$ coincide algebraically, since continuous functions over compact spaces are bounded in $\mathbb{C}$ and since $X \times_k X = X \times X$ (\textcolor{red}{TODO}: why  is $C^*(X) \subset C(X)$. Also make a comment about why $X \in \kSp$ for $X$ locally compact ). Moreover the topology of $C^*(X)$ is the compact open topology, since $X$ is compact, and therefore they also coincide topologically. That means we have can restrict $C$ to a functor $C: \kHaus \to C^*$.
+ For any compact Hausdorff space $X$, we see that the $C^*$-algebra $C^*(X)$ and the function $k$-algebra $C(X) = C_k(X, \mathbb{C}_s)$ coincide algebraically, since continuous functions over compact spaces are bounded in $\mathbb{C}$ and since $X \times_k X = X \times X$ (\textcolor{red}{TODO}: why  is $C^*(X) \subseteq C(X)$. Also make a comment about why $X \in \kTop$ for $X$ locally compact ). Moreover the topology of $C^*(X)$ is the compact open topology, since $X$ is compact, and therefore they also coincide topologically. That means we have can restrict $C$ to a functor $C: \kHaus \to C^*$.
  
  Can we restrict $S$ accordingly? For every $C^*$-algebra $A$, the space $S(A) = \Hom_k(A, \mathbb{C}_a)$ is compact, and its topology is that of pointwise convergence, due to basic results about the topology of function spaces. (\textcolor{red}{TODO} cite basic results). We call $S: C^* \to \kHaus$ the \emph{spectrum}- functor, and it follows that the generalized Gelfand-Naimark adjunction restricts to a dual adjunction
  
@@ -1558,7 +1626,11 @@ Note that $C^* \subset \kAlg$ is a full subcategory.
  Thus we can conclude that there is a natural dual adjunction between concrete categories $(\kHaus, U)$ and $(C^*, \bigcirc)$ with schizophrenic object $(D, 1_D, \mathbb{C}_a)$. 
  
  \section{Galois theory}
- Let us dive into another familiar example called the \emph{Galois correspondence}. The example we want to discuss is actually a generalization of the usual Galois correspondence from the fundamental theorem of Galois theory, given by the following contravariant adjunction between the directed posets (\textcolor{red}{TODO} define this) of subfield extensions of the finite field extension $k \hookrightarrow M\hookrightarrow L$ and of the corresponding subgroups $H$ of the Galois group $\Gal(L/k)$:
+ Let us dive into another familiar example called the \emph{Galois correspondence}.
+ 
+ For this example we assume familiarity with Galois theory. That is we assume the reader understands field extensions, basic group theory with respect to orbits and stabilizers, and we interpret a $\GSet$ to be a set equipped with a left group action, that is, a group homomorphism $\theta: G \to \Aut(S)$. Our main reference text shall be $\emph{Szamuely}$, though we also recommend $\emph{Bosch}$, for the non-categorical approach.
+ 
+  One can phrase the fundamental theorem of Galois theory as the following contravariant adjunction between the directed posets of subfield extensions of the finite field extension $k \hookrightarrow M\hookrightarrow L$ and of the corresponding subgroups $H$ of the Galois group $\Gal(L/k)$:
  
  \[\begin{tikzcd}
 	{\{L|M|k\} }^{\op} & \bot & {\{H \leq \Gal(L/k)\}}
@@ -1572,7 +1644,7 @@ It is easily checked that this defines an adjunction, however the schizophrenic 
 
 The first important consideration is that we want our left (and by consequence, our right) category to include the separable closure of $k$, which we denote $k_s$, and naturally, all its intermediate finite field extensions. Intuitively, we want a field extension $k_s$ whose intermediate field extensions $k^s|L$ are all normal \emph{and} separable. 
 
-That's why we take $k_s$ and not $ \bar k$,  the algebraic closure of $k$. For perfect fields, where every algebraic extension is separable,  we have $k_s = \bar k$, by definition. However in general, we only have $k_s \subset \bar k$ so we cannot guarantee that an arbitrary algebraic extension of $k$ is separable.
+That's why we take $k_s$ and not $ \bar k$,  the algebraic closure of $k$. For perfect fields, where every algebraic extension is separable,  we have $k_s = \bar k$, by definition. However in general, we only have $k_s \subseteq \bar k$ so we cannot guarantee that an arbitrary algebraic extension of $k$ is separable.
 
 
 Now from the above left adjoint functor one may obtain an adjunction with respect to the set of cosets of each subgroup $H$ in $\Gal(k_s/k) =: G$, which has a canonical $G$-action on it.
@@ -1593,8 +1665,10 @@ Explicitly this is a map $L|k \mapsto \CAlgk(L, k_s)$, where $\CAlgk(L, k_s)$  c
 	\arrow["{\GSet(-, k_s)}", bend left, from=1-3, to=1-1].
 \end{tikzcd}\]
 
+Just to remark, the free objects on one free generator in these categories should already be clear by now from previous examples: $k[t]$ and $\{pt\}$.
+
 %That also means in this case that the set $\CAlgk(L,k_s)$ is finite. 
-First  we should seek $G$-equivariant lifts of the evaluation maps $\CAlgk(L,k_s) \to [k_s]$, i.e. lifts that preserves the $G$-action, which just means we can define the $G$-action of our lift of $\CAlgk(L,k_s)$ pointwise on $k_s$, since \begin{align*}
+First  we  seek $G$-equivariant lifts of the evaluation maps $\CAlgk(L,k_s) \to [k_s]$, i.e. lifts that preserves the $G$-action, which just means we can define the $G$-action of our lift of $\CAlgk(L,k_s)$ pointwise on $k_s$, since \begin{align*}
 	(g \varphi)(x) := \ev_{x,L}(g \cdot \varphi) =  g \cdot  \ev_{x, L}(\varphi) = g \cdot \varphi(x).
 \end{align*}
 
@@ -1656,7 +1730,7 @@ This is analogous to many familiar examples where we derived our structure point
 %\end{tikzcd}\]
 %
 %
-%(\textcolor{blue}{TODO} show that $\GSet(H,k_s)$ lifts initially to $\CAlgk$, I still don't know, but idea is that  a $G$-equivariant map of some set should determine some Galois subfield extension since its "part of that action" being preserved by a map. Determine how this set of maps should look like, and what exactly is the datum of the $G$-set as well as datum of the $\CAlgk$; How big or small is this hom-set? Is there a function for every element of the field, or is it enough to realize the datum in some sense as that of the generating elements of the extension? ). 
+%(\textcolor{blue}{TODO} show that $\GSet(H,k_s)$ lifts initially to $\CAlgk$, I still don't know, but idea is that  a $G$-equivariant map of some set should determine some Galois subfield extension since its "part of that action" being preserved by a map. Determine how this set of maps should look like, and what exactly is the datum of the $G$-set as well as datum of the $\CAlgk$; How big or small is this $\Hom$-set? Is there a function for every element of the field, or is it enough to realize the datum in some sense as that of the generating elements of the extension? ). 
 
 
 Therefore our triple $(k_s,1_{k_s},k_s)$ is indeed a schizophrenic object, which means the diagram we gave at the beginning of this section is in fact a well defined adjunction, as it is the induced adjunction of our schizophrenic object.
@@ -1705,7 +1779,7 @@ Given $g' \in G$ and that $y = g \cdot x$, we have \begin{align*}
 \end{align*}
 It is easily checked that these maps are inverse to one another.
 
-Now replacing $H$ with $\CAlgk(L,k_s)$, we can use an analog to the above well-definedness argument to show why the stabilizer of $\iota$ is exactly $U_x$. And as $\iota$ is just the inclusion we have then $h(a) = a$ for any $a \in L$ and all $h \in U_{x}$, so that $L \subset (k_s)^{U_x}$.
+Now replacing $H$ with $\CAlgk(L,k_s)$, we can use an analog to the above well-definedness argument to show why the stabilizer of $\iota$ is exactly $U_x$. And as $\iota$ is just the inclusion we have then $h(a) = a$ for any $a \in L$ and all $h \in U_{x}$, so that $L \subseteq (k_s)^{U_x}$.
 
 For the other inclusion we simply see use the fact that any finite field extension is given as a fixed field of some subgroup of $G$, so that our stabilizer $U_{\iota} = \{ g \in G \lvert g \circ \iota = \iota \}$ is exactly  $\Gal(k_s/L)$. That means if $g(a) = a$ for all $a \in (k_s)^{U_x}$, then $a \in L$. 
 
@@ -1715,7 +1789,7 @@ Therefore $L|k = \GSet(\CAlgk(L,k_s),k_s)$. Using this we can also derive direct
 
 
 %$\{k_s|L|k\} $ ${\{H \leq \Gal(L/k)\}}$
-This adjunction will then extend to another subdual equivalence of the Galois correspondence, namely between the full subcategory $\ket \subset \CAlgk$ of finite dimensional algebras over $k$, defined to be isomorphic to a finite product of finite separable field extensions, and the full subcategory $\GFSet \subset \GSet$ of finite $G$-sets:
+This adjunction will then extend to another subdual equivalence of the Galois correspondence, namely between the full subcategory $\ket \subseteq \CAlgk$ of finite dimensional algebras over $k$, defined to be isomorphic to a finite product of finite separable field extensions, and the full subcategory $\GFSet \subseteq \GSet$ of finite $G$-sets:
 
  \[\begin{tikzcd}
 	\ket^{\op} & \stackrel{\cong}{\bot} & \GFSet
@@ -1738,7 +1812,7 @@ Consider that $k_s|k = \colim_{\{k_s|L|k\}}L|k$, then we have \begin{align*}
 
 so that $\Gal(k_s/k)$ can be realized as a profinite group.
 
-% (\textcolor{red}{TODO}: finish this part, if necessary, but the basic structure is the following: show that $\kSp$ is a monotopological category, show that monotopological categories admit function spaces... if theres an easier way to do it we may not need to define lifts and topological categories, so do that later)
+% (\textcolor{red}{TODO}: finish this part, if necessary, but the basic structure is the following: show that $\kTop$ is a monotopological category, show that monotopological categories admit function spaces... if theres an easier way to do it we may not need to define lifts and topological categories, so do that later)
  
  
 
@@ -1796,16 +1870,16 @@ so that $\Gal(k_s/k)$ can be realized as a profinite group.
 \section{Questions}
 \begin{enumerate}
 	\item How do I approach the preliminaries part? Just a list of definitions? Or should I write some kind of narrating text? Should I move it to the appendix?
-	\item Ask Georg how to differentiate between $k$-Alg in terms of kelleyfied complex algebras and $k$-Alg in terms of algebras over a field $k$. We know that $\kAlg \subset \CAlgk$ as subcategory (not full), should this be reflected in the notation?
+	\item Ask Georg how to differentiate between $k$-Alg in terms of kelleyfied complex algebras and $k$-Alg in terms of algebras over a field $k$. We know that $\kAlg \subseteq \CAlgk$ as subcategory (not full), should this be reflected in the notation?
 	\item How do I introduce subjects and where do i draw the line for assumed knowledge and not.
 	\item $\mathbb{A}^1$ is a free object on one free generator in $\Aff$
-	\item Why do we know that Kelleyfied products and kelleyfied function spaces with the compact open topology are the categorical products and exponentials in $\kSp$
+	\item Why do we know that Kelleyfied products and kelleyfied function spaces with the compact open topology are the categorical products and exponentials in $\kTop$
 	\item $\GSet(H, k_s)$ lifts to $\CAlgk$ (possible for later)
-	\item $X \times_k Y = X \times Y$ for $X$ locally compact, $Y \in \kSp$
+	\item $X \times_k Y = X \times Y$ for $X$ locally compact, $Y \in \kTop$
 	\item ask Georg if pointwise order preserving evaluation morphism into $\mathbb{2}$ preserves finite limits and colimits by some pointwise argument in the presheaf category
-	\item why  is $C^*(X) \subset C(X)$
+	\item why  is $C^*(X) \subseteq C(X)$
 	\item $B \cap A \neq \emptyset $ for all $B \in F$ (filter) implies $B \cap A \in F$
-	\item Why is $\kSp$ a monotopological category? Why does it have function spaces?
+	\item Why is $\kTop$ a monotopological category? Why does it have function spaces?
 	\item can same schizophrenic object induce different dualities when looked at different categories? In what sense am I supposed to think of sub-dualities? (I guess so yeah)
 	\item Show that $C_k(X, \mathbb{C}) = C(X, \mathbb{C})$ if $X$ is locally compact.
 \end{enumerate}
