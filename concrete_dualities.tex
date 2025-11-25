@@ -1,4 +1,4 @@
-\documentclass[11pt,a4paper]{article}
+\documentclass[10pt,a4paper]{report}
 \usepackage[margin=3cm]{geometry}
 \usepackage{fancyhdr}
 \usepackage{amssymb}
@@ -12,8 +12,20 @@
 \usepackage{tikz-cd}
 \usepackage{bbm}
 \usepackage{stackrel}
-% change subsections to alphabetic
-\renewcommand\thesubsection{\thesection.\alph{subsection}}
+\usepackage[linktoc=all, colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+%\usepackage[shortlabels]{enumitem}
+%\usepackage[dvipsnames]{xcolor}
+
+\bibliographystyle{alpha}
+
+%\hypersetup{
+%  linktoc=section,      % Only the number in the ToC is a link
+%  colorlinks=true,
+%  linkcolor=Blue,        % or any color you want
+%  citecolor=Green,
+%}
+
+%\renewcommand\thesubsection{\thesection.\alph{subsection}}
 
 \newtheorem{theorem}{Theorem}[section] % part
 \newtheorem{lemma}{Lemma}[section] % part
@@ -105,17 +117,33 @@
 \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
 \renewcommand\qedsymbol{$\blacksquare$}
 % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXG1hdGhjYWx7QX1ee29wfSJdLFsyLDAsIlxcbWF0aGNhbHtCfSJdLFsxLDAsIlxcYm90Il0sWzAsMSwiVCIsMCx7ImN1cnZlIjotMn1dLFsxLDAsIlMiLDAseyJjdXJ2ZSI6LTJ9XV0=
-
+\title{\textsc{An overview of \\ Concrete Dualities}
+\\[3em]
+{\Large {Bachelor Thesis in Mathematics}}\\[2em]
+{\normalsize Advisor: Dr. Georg Lehner\\ Second Examiner: Prof. Dr. Holger Reich}}
+\author{
+    Kasra Sammak\\
+    % {\small (Matr. 5563286)}
+}
+\date{2025 Winter Semester}
 
 \begin{document}
+\maketitle
 
-\pagestyle{fancy}
-\fancyhf{}
-\rhead{Kasra Sammak}
-\lhead{Concrete Dualities}
+\newpage
+
+\tableofcontents
+%\setcounter{page}{0}
+\newpage
+%\setcounter{page}{1}
+
+%\pagestyle{fancy}
+%\fancyhf{}
+%\rhead{Kasra Sammak}
+%\lhead{Concrete Dualities}
 \rfoot{\thepage}
-\section{Introduction}
-\section{Preliminaries/Index}
+\chapter{Introduction}
+\chapter{Preliminaries}
 
 Throughout this thesis we will be using the language of category theory, for which a mild introduction is in order. To that degree we plan to define the terms used as well as prove some well known theorems which we use quite freely, so not to distract us from the argument.
 
@@ -126,7 +154,7 @@ This thesis will be divided into two parts. In the first part we describe the ge
 In the second part we should like to describe some examples. As these examples span mathematics itself, we shall assume basic knowledge in each subfield to which our respective example pertains. Before each example we will make more explicit what is assumed, as well references for background and/or further reading. One may expect general knowledge of topology, commutative algebra, group theory, lattice theory, and Galois theory, and even some very basic functional analysis to be assumed.
 
 
-\subsection{Concrete Categories}
+\section{Concrete Categories}
 
 In the course of this thesis we will be considering a certain type of category, called a concrete category. We do not assume knowledge about this on behalf of the reader, therefore we would like to introduce some definitions of the basic kinds of objects and constructions we will be working with, as they will be quite central to this discussion.
 
@@ -145,7 +173,7 @@ The underlying functor is also sometimes called the \emph{\textbf{forgetful func
 Let $(\mathcal{A}, U)$ and $(\mathcal{B}, V)$ be concrete categories over $\mathcal{X}$. A \textbf{concrete functor} from $(\mathcal{A}, U)$ to $(\mathcal{B},V)$ is a functor $F: \mathcal{A} \to \mathcal{B}$ such that $U = V \circ F$. 
 \end{definition}
 A concrete functor is necessarily faithful, since $V$ is faithful. In general, for any functors $F: \mathcal{A} \to \mathcal{B}$ and $G: \mathcal{B} \to \mathcal{C}$, if $G \circ F$ is faithful, then $F$ is. The proof is easy: consider elements  $f, g \in \HomA(A, A')$ such that $Ff = Fg$. Then $GFf = GFg$ and since $G\circ F$ is faithful, then $f = g$. 
-\subsection{Types of arrows}
+\section{Types of Arrows}
 \begin{definition}[Source and sink]
 	 A \textbf{source} is a pair $(Y, (f_i))$ consisting of an object $Y$  of a category $\mathcal{C}$, and a family of morphisms $(Y \stackrel{f_i}{\to} X_i)_{i \in I}$ over a class $I$. Equivalently it is a family of objects in the under category  $\mathcal{C}_{Y/}$. 
 	 
@@ -227,7 +255,7 @@ Formally this is a limit  in $\mathcal{A}$ over $\mathcal{A}$-structures on $GA$
 %
 %The dual concept is of a \textbf{generator}, which applies to $\HomC(c, -)$.
 %\end{definition}
-\subsection{Topological categories}
+\section{Topological Categories}
 In the following we  introduce topological categories. 
 
 Let $(A, U)$ be a concrete category over $\mathcal{X}$. 
@@ -248,7 +276,7 @@ A functor $\mathcal{A} \stackrel{G}{\to}\mathcal{B}$ is called \textbf{topologic
   That means there is a systematic way to choose open sets of $UA$. In other words,  a subset $S \subseteq UA$ lifts to an open set in $A$ if and only if $S$ equals the pre-image $Uf_i^{-1}(U(V))$ for some  $f_i \in (UA \stackrel{f_i}{\to} UA_i)_I$ and $V \in  \Omega(A_i)$, where $\Omega(X)$ for topological space $X$ denotes the set of open sets of $X$.. 
  
 
-\subsection*{Free objects and the free-forget adjunction}
+\section{Free Objects and the Free-Forget Adjunction}
 
 In the course of this thesis we will only consider categories who have a representing object that is a free object on one free generator. 
 
@@ -267,7 +295,7 @@ In the  examples which are to be discussed in this thesis, we only check that su
 Note that in each example we discuss (except for one), the underlying set functor we consider is the usual forgetful  functor, that takes the set-datum of the categorical objects which are built into their construction, and forgets the rest of the structure. Therefore we assume the existence of $U$ at the outset, unless otherwise stated. 
 
 However there is no reason a priori that the underlying set functor should be the forgetful functor; for an illuminating exercise consider the category $\BG$ with one object where $\BG(\{pt\},\{pt\}) = U_{\Grp}(G)$ for some $G \in (\Grp, U_{\Grp})$.
-\section{Concrete Dualities}	
+\chapter{Concrete Dualities and the Schizophrenic Object}	
 
 Let $(\mathcal{A}, U)$  and $(\mathcal{B},V)$ be two concrete categories over the following representable functors with representing objects $A_0 \in \mathcal{A}$ and $B_0 \in \mathcal{B}$, our free objects on one free generator:
 \begin{align*}
@@ -549,7 +577,7 @@ In general, what we want for our set up is that the composition of these maps in
 \end{tikzcd}\]
 However, as we will see, this will not be enough to induce $(T \dashv S)$ given the triple $(\t A, \tau, \t B)$. For this we will want to additionally impose the constraint that these lifts are initial. We call such lifts \emph{\textbf{natural}} (not to be confused with naturality of a natural transformation), while scenarios where we have $U$-structured  lifts that are not initial are called \emph{\textbf{non-natural}}.
 
-\subsection{Natural dual adjunction}
+\subsection{Natural Dual Adjunction}
 
 We are now ready to introduce the central notion of our thesis: the schizophrenic object. From here, we simply start by assuming that $(\mathcal{A},U)$ and $(\mathcal{B},V)$ are concrete categories whose faithful functors are determined by representable objects given by the free object on one free generator.
 \\
@@ -628,7 +656,7 @@ Finally, to show that $\tau$ is induced by this adjunction it suffices to see th
 \end{align*}
 \end{proof}
 A dual adjunction induced by a schizophrenic object in this way is called a \textbf{\emph{natural dual adjunction}}. In the following we shall briefly discuss dual adjunctions which are non-natural, as in our examples we will see that some modifications are in order to make it natural. 
-\subsection{Non-natural dual adjunction}
+\section{Non-Natural Dual Adjunction}
 
 Let there be a dual adjunction $(S', T')$ that satisfies the situation described in $\S 3$. This adjunction already determines a triple $(\t A, \tau, \t B)$ such that the following weakened conditions of $SO1$ and $SO2$ are fulfilled:
 \begin{enumerate}
@@ -645,7 +673,7 @@ Firstly, one may use the triple $(\t A, \tau, \t B)$ to induce a natural dual ad
 The second method is the one which we will later see in action in our examples, which is to restrict our  adjunction to full subcategories of our categories under which we have an equivalence. 
 
 In the next part we will discuss a situation which induces a non-natural dual adjunction between concrete categories, as it is relevant to an important example.
-\subsection{Internal Hom-Functors}
+\section{Internal Hom-Functors}
 
 Let $(\mathcal{A}, U)$ be a concrete category. An \textbf{internal hom-functor} is a functor $H: \mathcal{A}^{\op} \times \mathcal{A} \to \mathcal{A}$ such that $UH = \HomA(-,-)$. Moreover 
 \begin{align*}
@@ -703,7 +731,7 @@ Therefore we have a contravariant functor $S(B) = \HomB_\mathcal{A}(B, \t B)$.
 
 Now if for every $A \in \mathcal{A}$ we can lift the $\mathcal{A}$-source $(p_{A, \t A, x}: H(A, \t A) \to \t A)$ along $\lvert - \lvert$ functorially, then we also have WSO1, inducing the contravariant functor $T: \mathcal{A} \to \mathcal{B}$ such that $\lvert T(A) \lvert = H(A, \t A)$, and as such we have the desired dual adjunction $(S, T)$. We will however only show this example-wise. 
 
-\subsubsection{Topological categories}
+\subsection{Internal Hom in Topological Categories}
 
 If $(\mathcal{A}, U)$ is a topological concrete category admitting function spaces, we have, for all $A \in \mathcal{A}$ the source $(\top \stackrel{\t x}{\rightarrow} A)_{x \in [A]}$. (\textcolor{red}{TODO} Show this) where $\top$ is the terminal object. That is to say $\HomA(\top, A) = [A]$. Therefore, we would get, for any set map $[f]:[A'] \to [A]$ a unique lifting diagram
 
@@ -722,7 +750,7 @@ If $(\mathcal{A}, U)$ is a topological concrete category admitting function spac
 In other words, we would be able to lift arbitrary set maps to $\mathcal{A}$-morphisms, which, for non-trivial categories  is almost never true.
 
 %(\textcolor{red}{TODO} check this for yourself)
-\subsection*{Motivation}
+\section{Motivation}
 We are now in the position to understand what this schizophrenic object really affords us. What is interesting about it is that the object itself induces the adjunction via $\Hom$-sets in our respective categories. 
 
 So our question for the examples will be the following: given a good candidate  $(\t A, \tau, \t B)$ for the schizophrenic object, does this object lend itself to a description of a $\mathcal{B}$-structure on $\HomA(A, \t A)$ for every $A \in \mathcal{A}$ in a way that is \emph{natural} (and similarly for $\t B$)? 
@@ -742,7 +770,7 @@ Often times we do get a concrete description, which will help solidify our intui
 Therefore our motivation in the following is two-fold, to show that our candidate is indeed schizophrenic, and to provide intuition by analyzing the adjunctions a little further.
 
 
-\section{Examples}
+\chapter{Examples}
 The rest of our thesis shall be devoted to an analysis of several specific examples (and non-examples) of natural dual adjunctions. Our goal is not only to show that our candidates are indeed schizophrenic objects, but to build intuition for the schizophrenic object through a careful analysis of the induced adjunctions. 
 
 We are going to start with an example which is connected to a more involved duality called the Stone duality, which will be our second example. For our first example we will like to elucidate its schizophrenic nature as it ties directly to the generality we have learned, so that we can start to get a sense for in what direct way we can lift $\Hom$-sets.
@@ -752,10 +780,10 @@ Consequently, in discussing the Stone duality we plan to give concrete descripti
 This will then lend itself to the intuition of the following examples, which we can in some sense think of extensions or special cases of the given dualities. 
 
 For the examples note that we may sometimes by abuse of notation and for lack of a better functorial description use $\HomA(-,\t A)$ to denote $T$, unless we denote otherwise.
-\section{The $\Top \rightleftarrows \Frm^{\op}$ duality}
+\section{The $\Top \rightleftarrows \Frm^{\op}$ Duality}
 
 %\emph{A note about notation: When speaking about $\Hom$ sets of a general category $A$, we use the notation as before $\HomA(-,-)$. However to shorten notation and ease readability, when speaking of specific categories, such as $\Frm, \Top,$ or $\Set$, we use the notation $\Frm(-,-), \Top(-,-),$ $ \Set(-.-).$}
-In this part we assume basic knowledge about topological spaces and frames. We will only use the definitions of objects and morphisms in $\Top$ and $\Frm$.  Our reference text when it comes to any discussion about posets, lattices, frames, or locales, is \emph{Johnstone}'s \emph{Stone Spaces}. 
+In this part we assume basic knowledge about topological spaces and frames. We will only use the definitions of objects and morphisms in $\Top$ and $\Frm$.  Our reference text when it comes to any discussion about posets, lattices, frames, or locales, is \emph{Johnstone}'s \emph{Stone Spaces} \cite{zbMATH03940199}. 
 
 
 The aim of this discussion is two-fold: first we want to concretize the maps using our general description in the first part of this paper. To this end we aim to be very explicit in this example, so that we just once get to see what these maps look like without dropping any notation via identification, which we  do on later examples for readability. 
@@ -872,15 +900,14 @@ is the identity in $\Set$, as the underlying set on both sides is $[\mathbb{2}] 
 
 This map is clearly the identity. This boils down to the fact that our choice of morphism from $\Frm(\mathbb{2},\mathbb{2})$ was easy to determine since the set $\Frm(\mathbb{2},B) = \{pt\}$, as $\mathbb{2}$ is an initial object in $\Frm$, and in particular it is clear that $\Frm(\mathbb{2},\mathbb{2}) = \{1_{\mathbb{2}}\}$. From this we can deduce that $\sigma$ is the identity on $[\mathbb{2}]$.
 
-
 In general, our schizophrenic object will not necessarily be initial in arbitrary concrete duality, and as such, our choice $p \in \HomA(\t A, \t A)$ may not be unique nor easy to determine, so that $\sigma$, though always a bijection, is not necessarily always the identity.
  
 
-\section{Stone duality}
+\section{Stone Duality}
 
 For the following section we assume a bit more familiarity with lattice theory than the mere definitions of objects and morphisms of the corresponding categories. To that effect, we assume familiarity with distributive lattices, sub join/meet-semilattices, (atomic) Boolean algebras,  ideals, filters, (principal) ultrafilters, (directed and codirected) posets, frames and locales.
 
-Moreover, we follow the convention of [Joh] that a sub meet-semilattice is given by the datum $(L, \land, \top)$ and a sub join-semilattice is given by the datum $(L, \lor, \bot)$, so that a lattice is given by the datum $(L, \land, \lor, \top,\bot)$. There is good reason for this, as we want to consider the empty limit/colimit. Some authors do not necessitate this and choose to differentiate between $\DLat$ and $\DLat_{\text{bdd}}$, refering to what we call a distributive lattice as a bounded distributive lattice.
+Moreover, we follow the convention of \cite{zbMATH03940199} that a sub meet-semilattice is given by the datum $(L, \land, \top)$ and a sub join-semilattice is given by the datum $(L, \lor, \bot)$, so that a lattice is given by the datum $(L, \land, \lor, \top,\bot)$. There is good reason for this, as we want to consider the empty limit/colimit. Some authors do not necessitate this and choose to differentiate between $\DLat$ and $\DLat_{\text{bdd}}$, refering to what we call a distributive lattice as a bounded distributive lattice.
 
 Before we begin we would like to call attention to the fact that the Stone duality is wrought with interesting subdualities, some of which are themselves examples. Though describing these subdualities may feel like a diversion, we find they actually elucidate the structure of the Stone duality as well as provide us with intuition for the following examples, so we plan to describe them.
 
@@ -892,7 +919,7 @@ On the other hand, we will actually obtain the Stone duality via restriction and
 
 And finally we will show why the finite duality is a restriction of the Stone duality.
 
-\subsection{The $\FinSet \rightleftarrows \Boolf^{\op}$ duality}
+\subsection{The $\FinSet \rightleftarrows \Boolf^{\op}$ Duality}
 
 Before we begin we would like to be clear about what we mean by subduality:
 
@@ -928,7 +955,7 @@ Since finite ultrafilters are principal, points of $X$ correspond bijectively to
 
 On the other hand finite Boolean algebras are atomic, since every non-zero element is bounded below by finitely many non-zero elements, so there exists at least one minimal one, which we call an atom. Therefore ultrafilters in $\Boolf$ correspond exactly to the atoms. 
 
-Given  $B \in \DLat$ and $a \in B$, let $\atom(B)$ be the set of atoms in $B$ and $\atom(a) := \{x \in \atom(B) \lvert x \leq a \}$. If $B \in \Bool_{\atom}$, one observes that  $\atom(a)=\atom(a')$ implies $a = a'$. Equivalently, every element of an atomic Boolean algebra is the join of atoms below it [Joh]. 
+Given  $B \in \DLat$ and $a \in B$, let $\atom(B)$ be the set of atoms in $B$ and $\atom(a) := \{x \in \atom(B) \lvert x \leq a \}$. If $B \in \Bool_{\atom}$, one observes that  $\atom(a)=\atom(a')$ implies $a = a'$. Equivalently, every element of an atomic Boolean algebra is the join of atoms below it \cite{zbMATH03940199}. 
 
 Since for distinct $b$ and $b'$, an atom below $b$ but not $b'$ generates an ultrafilter that separates them, the counit $B \to \mathcal{P}(\Ult(B))$ that sends $b \mapsto \{U \in \Ult(B) \lvert b \in U\}$ recovers  $b$ uniquely, and so it is an isomorphism. One needs only to check that the counit is indeed a Boolean algebra homomorphism, but this is straightforward.
 %
@@ -978,11 +1005,11 @@ Furthermore, the map $\phi'$ restricts to a bijection $\phi$, when restricting $
 \begin{proof}
 Obviously the map $f \mapsto f^{-1}(1)$ is an inverse, so we only check that these are well-defined.
 
-The proof for $\phi'$ is straightforward and can be found in [Joh] at Proposition 2.2. It boils down to an equivalence between properties of lattice homomorphisms and prime filter axioms. That is, an order preserving, finite limit preserving, and finite colimit preserving morphism corresponds to a prime, upwards closed, sub meet-semilattice. 
+The proof for $\phi'$ is straightforward and can be found in \cite{zbMATH03940199} at Proposition 2.2. It boils down to an equivalence between properties of lattice homomorphisms and prime filter axioms. That is, an order preserving, finite limit preserving, and finite colimit preserving morphism corresponds to a prime, upwards closed, sub meet-semilattice. 
 
 Now when restricting to Boolean algebras (note that $\Bool$ is a \emph{full} subcategory of $\DLat$), prime filters correspond bijectively to ultrafilters, which, given the filter axioms, will additionally  require that $A \in F$ if and only if $\forall B \in F: B \cap A \neq \emptyset$. 
 
-The property that a filter $F$ is prime is equivalent to $F$ being given above by $f^{-1}(1)$ for $f \in \DLat(A, \mathbb{2})$ which is further equivalent to the fact that its complement $I:= f^{-1}(0)$ is an ideal [Joh]. \emph{We write $\DLat$ here instead of $\Bool$ to highlight that we do not use complement preservation for this direction}.
+The property that a filter $F$ is prime is equivalent to $F$ being given above by $f^{-1}(1)$ for $f \in \DLat(A, \mathbb{2})$ which is further equivalent to the fact that its complement $I:= f^{-1}(0)$ is an ideal \cite{zbMATH03940199}. \emph{We write $\DLat$ here instead of $\Bool$ to highlight that we do not use complement preservation for this direction}.
 
 So if $F$ is prime, then $\emptyset \notin F$ gives the forwards direction of the ultrafilter condition and for the other direction supposing $A \in I$, then $\neg A \in F $, but  $A \cap \neg A = \emptyset$ contradicting our assumption implying $A \in F$.
 
@@ -1008,11 +1035,11 @@ Ultimately, what a point map  $A \stackrel{f}{\rightleftarrows} \mathbb{2}$ repr
 $\textbf{Set of points}$& $\textbf{Type of filter}$\\
  \hline
  \hline 
- $\DLat(A, \mathbb{2})$   &prime filters \\
+ $\DLat(A, \mathbb{2})$   &prime filter \\
  \hline
- $\Frm(A, \mathbb{2})$ &completely prime filters \\
+ $\Frm(A, \mathbb{2})$ &completely prime filter \\
  \hline 
- $\Bool(A, \mathbb{2})$    &ultrafilters \\
+ $\Bool(A, \mathbb{2})$    &ultrafilter \\
  \hline
 \end{tabular}\]
 
@@ -1114,7 +1141,7 @@ Note that the unit and counit maps then follow the exact same logic as the leadi
 
 
 
-\subsection{Subdualities of $\Top \rightleftarrows \Frm^{\op}$ and the $\CohLoc \rightleftarrows \DLat^{\op}$ duality}
+\subsection{Subdualities of $\Top \rightleftarrows \Frm^{\op}$ and the $\CohLoc \rightleftarrows \DLat^{\op}$ Duality}
 In the following we will want to give a general overview of how we obtain the Stone duality.
 
 We start by focusing on the following dual adjunction
@@ -1151,7 +1178,7 @@ Let $B$ be a locale. Then
 	We call an element $b \in B$ \textbf{finite}, if for all $S \subseteq A$ such that $\bigvee S \geq b$ there exists a finite $F \subseteq S$ such that $\bigvee F \geq b$. 
 \end{definition}
 
-This definition is equivalent to the following two statements [Joh]:
+This definition is equivalent to the following two statements \cite{zbMATH03940199}:
 \begin{enumerate}
 	\item For all directed $S \subseteq B$ such that $\bigvee S \geq b$ there exists $s \in S$ such that $s \geq b$.
 	\item For all ideals $I \subseteq B$ such that $\bigvee I \geq b$ it holds that $b \in I$. 
@@ -1166,9 +1193,9 @@ Notice that if $B$ is spatial, which implies the existence of a topological spac
 
 \end{definition}
 
-Since $K(B)$ is a sub join-semilattice of $B$ (closed under finite joins) [Joh], the second condition is equivalent to $1 \in K(B)$ and $K(B)$ is closed under finite meets.
+Since $K(B)$ is a sub join-semilattice of $B$ (closed under finite joins) \cite{zbMATH03940199}, the second condition is equivalent to $1 \in K(B)$ and $K(B)$ is closed under finite meets.
 
-If $B$ is spatial, this means that $K(B)$ forms a basis for the topology on $X$. In fact this is an equivalence: coherent locales are spatial [Joh].
+If $B$ is spatial, this means that $K(B)$ forms a basis for the topology on $X$. In fact this is an equivalence: coherent locales are spatial \cite{zbMATH03940199}.
 
 On the other hand, any sober topological space $X$ can be given as $X \cong \pt(\Omega(X))$, but are not necessarily generated by compact elements. This motivates the following definition:
 
@@ -1208,7 +1235,7 @@ The pre-image of coherent topological maps must preserve compact opens, and $\{1
 
 Strictly speaking, this adjunction does not have a schizophrenic object, since we cannot obtain the opens by lifting $\Hom$-sets anymore. However in practice we still consider subdualities of dualities induced by a schizophrenic object to be concrete dualities.
 
-Now we will want to compose. Consider the fact that a locale is coherent if and only if it is isomorphic to the locale of ideals of a distributive lattice [Joh]. This gives us a functor $\Idl(-): \DLat \to \CohLoc$, such that $\Idl(B \stackrel{f}{\rightarrow} B') = (\Idl(B') \stackrel{f^{-1}}{\rightarrow}\Idl(B)$). A similar computation as with $\Ult(-)$, but with fewer conditions,  shows that the pre-image morphism $f^{-1}$ is well defined.
+Now we will want to compose. Consider the fact that a locale is coherent if and only if it is isomorphic to the locale of ideals of a distributive lattice \cite{zbMATH03940199}. This gives us a functor $\Idl(-): \DLat \to \CohLoc$, such that $\Idl(B \stackrel{f}{\rightarrow} B') = (\Idl(B') \stackrel{f^{-1}}{\rightarrow}\Idl(B)$). A similar computation as with $\Ult(-)$, but with fewer conditions,  shows that the pre-image morphism $f^{-1}$ is well defined.
 
 We can also view $K(-)$ as a functor by sending frame homomorphisms to their restrictions on finite elements, which we can do since, as we have seen above, we have defined $\CohLoc$ to be exactly the category where such a restriction is well defined.
 
@@ -1227,7 +1254,7 @@ This shows us that we have a dual equivalence
 	\arrow["{K(-)}", bend left, from=1-1, to=1-3]
 	\arrow["{\Idl(-)}", bend left, from=1-3, to=1-1].
 \end{tikzcd}\]
-\subsection{Schizophrenic object of $\CohTop \rightleftarrows \DLat^{\op}$}
+\subsection{Schizophrenic Object of $\CohTop \rightleftarrows \DLat^{\op}$}
 %In particular, this is also a natural dual adjunction. 
 Now we can compose these dual equivalences $\CohTop \rightleftarrows \CohLoc \rightleftarrows \DLat^{\op}$ and it will give us a dual equivalence. One side sends a distributive lattice $A$ to what we call its \emph{\textbf{spectrum}}, in other words, $\Spec(A) := \pt(\Idl(A))$. On the other side we shall send a coherent space $X$ to its lattice of compact open subsets $K(\Omega(X))$.  So we have the dual adjunction
 
@@ -1267,12 +1294,12 @@ Now we can say that the initial coherent topology on $\Spec(B)$ making all evalu
 On the other hand, maps in $\CohTop(X, \mathbb{S})$ can be uniquely determined by which compact open the pre-image maps $\{1\}$  to, so that $\CohTop(X, \mathbb{S})$ lifts to $K\Omega(X)$ as desired. Furthermore, we have already seen that the evaluations $\CohTop(X,\mathbb{S}) \stackrel{\ev_{X,x}}{\rightarrow}[\mathbb{2}]$ lift to distributive lattice homomorphisms $d_{X,x}$ if any only if $d_{X,x}$ preserves pointwise order in $\mathbb{2}$, so that an initial distributive lattice structure is obtained by pointwise inclusion. This is the exact same argumentation from the leading example.
 
 
-\subsection{Schizophrenic object of the Stone duality}
+\subsection{Schizophrenic Object of the Stone duality}
 Now we aren't done yet. To obtain the Stone duality, we will  restrict the above equivalence. 
 
-Seeing that $\Spec(A)$ is Hausdorff if and only if $A$ is a Boolean algebra [Joh], we can restrict this equivalence to a duality between $\Bool$ and the category of coherent, Hausdorff spaces which are called \emph{\textbf{Stone spaces}}. It is straight-forward to see that $\Bool \subseteq \DLat$ and $\Stone \subseteq \CohTop$ are full subcategories. 
+Seeing that $\Spec(A)$ is Hausdorff if and only if $A$ is a Boolean algebra \cite{zbMATH03940199}, we can restrict this equivalence to a duality between $\Bool$ and the category of coherent, Hausdorff spaces which are called \emph{\textbf{Stone spaces}}. It is straight-forward to see that $\Bool \subseteq \DLat$ and $\Stone \subseteq \CohTop$ are full subcategories. 
 
-Note that Stone spaces are compact and totally disconnected [Joh] making them a subcategory of $\kHaus$. Moreover, if $X$ is Hausdorff, then $K(\Omega(X)) = \clop(X)$, since compact sets are exactly the closed sets of a compact Hausdorff space.
+Note that Stone spaces are compact and totally disconnected \cite{zbMATH03940199}making them a subcategory of $\kHaus$. Moreover, if $X$ is Hausdorff, then $K(\Omega(X)) = \clop(X)$, since compact sets are exactly the closed sets of a compact Hausdorff space.
 
 Therefore we have the following dual equivalence
 \[\begin{tikzcd}
@@ -1306,7 +1333,7 @@ In fact, it is enough to check continuity, since continuous maps between compact
 
   By the dual equivalence we get the corresponding Boolean algebra reflection functor $\Bool(-)$, or Booleanification.
  
- To understand the Stoneification, we may first want to Booleanify the lattice of compact open subsets of a space $X$, which we will call $A$. Let $A^*$ be the set of complements in $\mathcal{P}(X)$ of members of $A$. Then the patch topology, which has as a base $C = \{U \cap V \lvert U \in A, V \in A^*\}$ , will be a Stone space (notice that we are taking the Boolean completion $B$ of $A$ and then taking its spectrum) [Joh].
+ To understand the Stoneification, we may first want to Booleanify the lattice of compact open subsets of a space $X$, which we will call $A$. Let $A^*$ be the set of complements in $\mathcal{P}(X)$ of members of $A$. Then the patch topology, which has as a base $C = \{U \cap V \lvert U \in A, V \in A^*\}$ , will be a Stone space (notice that we are taking the Boolean completion $B$ of $A$ and then taking its spectrum) \cite{zbMATH03940199}.
  
  This was just to see that we can in some sense Stoneify the $\Hom$-set functor via its schizophrenic object: we take the Boolean completion of $\mathbb{S}$ in $\mathcal{P}(\{0,1\})$ which is simply $\mathbb{2}_s$, the two point discrete space, since by Booleanifying we must generate the complement of $\{1\}$.
  
@@ -1431,16 +1458,16 @@ Then initiality is just the universal property of the product: any map $B \stack
 %	\arrow["{\mathcal{P}(-)}"', bend left, from=11-1, to=11-5]
 %	\arrow["{\Ult(-)}"', bend left, from=11-5, to=11-1]
 %\end{tikzcd}\]
-\subsection{Restricting Stone to the finite case}
+\subsection{Restricting Stone to the Finite Case}
 Now we can revisit the finite adjunction from the beginning of this section. Any finite Stone space is discrete, since Hausdorffness forces singletons to be clopen (we give singletons by an intersection of all point-separating clopens, of which there are finitely many, so that singletons are themselves clopen). This shows that $\FinStone = \FinSet$, and it is thus clear that Stone restricts to the finite duality from 7.a.
 
-In fact we may  extend\footnote{For further reading look at Johnstone's last chapter. As we said at the beginning of the section, had we constructed Stone this way, we would have bypassed elucidating the nature of the Stone duality and had to introduce abstraction which is unnecessary for our purposes.} $\FinSet^{\op} \rightleftarrows \Boolf$ to Stone via $\Ind$ and $\Pro$ categories, as we get the following equivalence:
+In fact we may  extend\footnote{For further reading look at Chapter VI. in \emph{Johnstone's Stone Spaces}. As we said at the beginning of the section, had we constructed Stone this way, we would have bypassed elucidating the nature of the Stone duality and had to introduce abstraction which is unnecessary for our purposes.} $\FinSet^{\op} \rightleftarrows \Boolf$ to Stone via $\Ind$ and $\Pro$ categories, as we get the following equivalence:
 \begin{align*}
 	\Stone \cong \Bool^{\op} \cong \Ind(\Boolf)^{\op} \cong \Ind(\FinSet^{\op})^{\op} \cong  \Pro(\FinSet).
 \end{align*}
 
 For further reading check $Johnstone$ Chapter bla bla (\textcolor{red}{TODO} sources yeah).
-\section{Rings and Affine schemes}
+\section{Rings and Affine Schemes}
 
 We now turn to an example that any graduate Algebra student has encountered, the duality between the category of rings and the category of affine schemes. We will use the more general category of commutative $R$-algebras, which we denote $\CAlg$. Notice that if $R = \mathbb{Z}$, then $\CAlgZ = \Ring$. 
 
@@ -1637,7 +1664,7 @@ which, by remarks of \textbf{4.c}, is clearly not natural.
 This is called the \emph{generalized Gelfand-Naimark Duality}. 
 
 In the following we will want to restrict $\kTop$ and $\kAlg$ to their full subcategories under which the above adjunction is a dual equivalence. For that we will introduce the category of $C^*$-algebras.
-\subsection{$C^*$-algebras}
+\subsection{$C^*$-Algebras}
 Consider the functor $C^*: \Top \to \Set$, which sends  $X \mapsto C^*(X) = \Top_{bd.}(X, \mathbb{C})$ for all $X \in \Top$. 
 From pointwise operations $C^*(X)$ can be seen to be an associative, commutative, unital $\mathbb{C}$-algebra. Pointwise conjugation gives us the operation $f \mapsto f^*$, so that $C^*(X)$ is an involutive algebra, and the supremum norm $\lVert f \lVert = \sup_{x \in X}\lvert f(x)\lvert $ turns $C^*(X)$ into a normed algebra satisfying $\lVert f \lVert^2 = \lVert f \cdot f^* \lVert$. If we consider the involution preserving unital $\mathbb{C}$-algebra homomorphisms, we obtain a category $C^*$.
 
@@ -1645,7 +1672,7 @@ Note that $C^* \subseteq \kAlg$ is a full subcategory.
 
  We could view $C^*$ as a concrete category via the usual underlying-set functor, however we might find it more interesting in this case to consider a different faithful functor, namely the functor $\bigcirc: C^* \to \Set$ which sends any $C^*$-algebra $A$ to it's unit ball $\{ a \in A \  \lvert  \ \lVert a \lVert \leq 1\}$ and each morphism $f$  to its restriction $f_\bigcirc$ to the unit ball of its domain.
  
- \subsubsection{Gelfand-Naimark Duality}
+ \subsection{Gelfand-Naimark Duality}
  
  For any compact Hausdorff space $X$, we see that the $C^*$-algebra $C^*(X)$ and the function $k$-algebra $C(X) = C_k(X, \mathbb{C}_s)$ coincide algebraically, since continuous functions over compact spaces are bounded in $\mathbb{C}$ and since $X \times_k X = X \times X$ (\textcolor{red}{TODO}: why  is $C^*(X) \subseteq C(X)$. Also make a comment about why $X \in \kTop$ for $X$ locally compact ). Moreover the topology of $C^*(X)$ is the compact open topology, since $X$ is compact, and therefore they also coincide topologically. That means we have can restrict $C$ to a functor $C: \kHaus \to C^*$.
  
@@ -1660,7 +1687,7 @@ Note that $C^* \subseteq \kAlg$ is a full subcategory.
  
  Thus we can conclude that there is a natural dual adjunction between concrete categories $(\kHaus, U)$ and $(C^*, \bigcirc)$ with schizophrenic object $(D, 1_D, \mathbb{C}_a)$. 
  
- \section{Galois theory}
+ \section{The Galois Correspondence}
  Let us dive into another familiar example called the \emph{Galois correspondence}.
  
  For this example we assume familiarity with Galois theory. That is we assume familiarity with field extensions and introductory group theory, specifically with respect to orbits and stabilizers. We interpret a $\GSet$ to be a set equipped with a left group action, that is, a group homomorphism $\theta: G \to \Aut(S)$. Our main reference text shall be $\emph{Szamuely}$, though we also recommend $\emph{Bosch}$, for the non-categorical approach.
@@ -1668,7 +1695,7 @@ Note that $C^* \subseteq \kAlg$ is a full subcategory.
   One can phrase the fundamental theorem of Galois theory as the following contravariant adjunction between the directed posets of subfield extensions of the finite field extension $k \hookrightarrow M\hookrightarrow L$ and of the corresponding subgroups $H$ of the Galois group $\Gal(L/k)$:
  
  \[\begin{tikzcd}
-	{\{L|M|k\} }^{\op} & \bot & {\{H \leq \Gal(L/k)\}}
+	{\{L|M|k\} } & \bot & {\{H \leq \Gal(L/k)\}}^{\op}
 	\arrow["{\Gal(L/-)}", shift left=3, bend left, from=1-1, to=1-3]
 	\arrow["{L^{(-)}}", bend left, from=1-3, to=1-1]
 \end{tikzcd}\]
@@ -1689,13 +1716,13 @@ Explicitly this is a map $L|k \mapsto \CAlgk(L, k_s)$, where $\CAlgk(L, k_s)$  c
  For any finite field extension $L|k$, homomorphisms into the closure $k_s$ are given by maps which permute the roots of the minimal polynomials over $k$ of the finite generators of $L|k$. For background reading one may consider any introductory textbook on Galois theory, such as \emph{Bosch - Algebra}, where this claim follows directly from Lemma 3.4/8. 
  
  Since every element of $k_s$ is a separable root over  $k$, the canonical $G$-action on $k_s$ which defines $G$ in the first place is completely determined by how its elements permute the roots of separable minimal polynomials with coefficients in $k$.
- \subsection*{Schizophrenic object of $\CAlgk \rightleftarrows \GSet$ duality}
+ \subsection*{Schizophrenic Object of $\CAlgk \rightleftarrows \GSet^{\op}$}
  
  In the following we shall want to show explicitly that the generalized Galois adjunction fits the schizophrenic framework to be considered a concrete duality.
   
  To be sufficiently general we consider the category $\CAlgk$  of commutative unital $k$-algebras with $k$-algebra homomorphisms, and the category $\GSet$ of sets with a $\Gal(k_s/k)$-action and $G$-equivariant maps between them, and we plan to show that $(k_s, 1_{k_s}, k_s)$ is a schizophrenic object which induces the following adjunction 
   \[\begin{tikzcd}
-	\CAlgk & \bot & \GSet
+	\CAlgk & \bot & \GSet^{\op}
 	\arrow["{\CAlgk(-, k_s)}", shift left=3, bend left, from=1-1, to=1-3]
 	\arrow["{\GSet(-, k_s)}", bend left, from=1-3, to=1-1].
 \end{tikzcd}\]
@@ -1770,7 +1797,7 @@ This is analogous to many familiar examples where we derived our structure point
 
 Therefore our triple $(k_s,1_{k_s},k_s)$ is indeed a schizophrenic object, which means the diagram we gave at the beginning of this section is in fact a well defined adjunction, as it is the induced adjunction of our schizophrenic object.
 
-\subsection*{Restricting to an equivalence of categories}
+\subsection*{Restricting to an Equivalence of Categories}
 
 Even though at this point the goal of this example, showing that we have a concrete duality, is complete, we would like to continue our discussion to bring us back to concrete Galois theory.
 
@@ -1780,7 +1807,7 @@ Given a finite separable field extension $L|k$, the set $\CAlgk(L,k_s)$ is finit
 
 
  \[\begin{tikzcd}
-	\{\text{finite separable extensions of } k \}^{\op} & \stackrel{\cong}{\bot} & \GFSet_{\text{transitive}}
+	\{\text{finite separable extensions of } k \} & \stackrel{\cong}{\bot} & \GFSet_{\text{transitive}}^{\op}
 	\arrow["{\CAlgk(-, k_s)}", shift left=3, bend left, from=1-1, to=1-3]
 	\arrow["{\GSet(-, k_s)}", bend left, from=1-3, to=1-1]
 \end{tikzcd}\]
@@ -1827,7 +1854,7 @@ Therefore $L|k = \GSet(\CAlgk(L,k_s),k_s)$. Using this we can also derive direct
 This adjunction will then extend to another subdual equivalence of the Galois correspondence, namely between the full subcategory $\ket \subseteq \CAlgk$ of finite dimensional algebras over $k$, defined to be isomorphic to a finite product of finite separable field extensions, and the full subcategory $\GFSet \subseteq \GSet$ of finite $G$-sets:
 
  \[\begin{tikzcd}
-	\ket^{\op} & \stackrel{\cong}{\bot} & \GFSet
+	\ket & \stackrel{\cong}{\bot} & \GFSet^{\op}
 	\arrow["{\CAlgk(-, k_s)}", shift left=3, bend left, from=1-1, to=1-3]
 	\arrow["{\GSet(-, k_s)}", bend left, from=1-3, to=1-1]
 \end{tikzcd}\]
@@ -1902,7 +1929,7 @@ so that $\Gal(k_s/k)$ can be realized as a profinite group.
 %	x &\mapsto 1_{\{0,1\}}(x)= x
 %\end{align*}
 
-\section{Questions}
+\chapter{Questions}
 \begin{enumerate}
 	\item Why do we know that Kelleyfied products and kelleyfied function spaces with the compact open topology are the categorical products and exponentials in $\kTop$
 %	\item ask Georg if pointwise order preserving evaluation morphism into $\mathbb{2}$ preserves finite limits and colimits by some pointwise argument in the presheaf category
@@ -1919,4 +1946,6 @@ so that $\Gal(k_s/k)$ can be realized as a profinite group.
 %	\item In general,  a schizophrenic object should be fully determined by the adjunction and the representing objects. I mean to say if I understand the adjunction and know what the representing objects are, I have everything I need to check my hypothesis about the schizophrenic object, i.e., a hypothesis about a schizophrenic object leads to simply checking the adjunction and representable objects.
 %	\item Why are the representable objects \emph{necessarily} free objects on one free generator, and what is meant by free here? Does the necessary part come from the fact that only such an object could lead to a schizophrenic object, or is it for some reason necessary a priori?
 %\end{enumerate}
+\bibliography{references}
+
 \end{document}
