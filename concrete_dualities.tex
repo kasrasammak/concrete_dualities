@@ -274,14 +274,14 @@ Let $(\mathcal{A}, U)$  and $(\mathcal{B},V)$ be two concrete categories over th
 	&\HomA(A_0, -) \cong U: \mathcal{A} \to \Set\\
 	&\HomB(B_0, -) \cong V: \mathcal{B} \to \Set.\\
 \end{align*}
-Let $T: \mathcal{A} \to \mathcal{B}$ and $S: \mathcal{B} \to \mathcal{A}$ be contravariant functors with natural transformations $\eta: 1_\mathcal{B} \to TS$ and $\epsilon :  1_\mathcal{A} \to ST$. We can view this as the following \emph{dual adjunction}
+Let $T: \mathcal{A} \to \mathcal{B}$ and $S: \mathcal{B} \to \mathcal{A}$ be contravariant functors with natural transformations $\eta: 1_\mathcal{B} \to TS$ and $\epsilon :  1_\mathcal{A} \to ST$. We can view this as the following \textbf{\emph{dual adjunction}}
 \[\begin{tikzcd}
 	{\mathcal{A}} & \bot & {\mathcal{B}^{\op}}
 	\arrow["T", bend left, from=1-1, to=1-3]
 	\arrow["S", bend left, from=1-3, to=1-1].
 \end{tikzcd}\]
 
-When these natural transformations are natural isomorphisms we are speaking of a \emph{dual equivalence}. 
+We also refer to a general dual adjunctions as a \textbf{\emph{duality}}. When these natural transformations are natural isomorphisms we are speaking of a \textbf{\emph{dual equivalence}}. 
 
 Like any adjunction we have the following triangle equalities \begin{align*}
 	&T{\epsilon_A} \circ \eta_{TA} = 1_{TA} \ &\text{and}& \ &  S{\eta_B} \circ \epsilon_{SB} = 1_{SB}&
@@ -301,6 +301,7 @@ The following pair of objects will be of central importance to this thesis, whic
 	\t B := TA_0.
 \end{align*}
 
+We will come to refer to a dual adjunction in this situation as a \textbf{\emph{concrete duality}}.
 
 From these characteristics we can deduce how $S$ and $T$ should be defined, to which a few lemmas will illuminate the bigger picture.
 \begin{lemma}
@@ -718,7 +719,7 @@ If $(\mathcal{A}, U)$ is a topological concrete category admitting function spac
 	\arrow["{[f]}", from=3-1, to=3-3]
 	\arrow["{\ev_{\top, \ast}}", from=3-3, to=3-5].
 \end{tikzcd}\]
-In other words, we could lift arbitrary set maps to $\mathcal{A}$-morphisms, which, for non-trivial categories  is almost never true.
+In other words, we would be able to lift arbitrary set maps to $\mathcal{A}$-morphisms, which, for non-trivial categories  is almost never true.
 
 %(\textcolor{red}{TODO} check this for yourself)
 \subsection*{Motivation}
@@ -1431,13 +1432,14 @@ Then initiality is just the universal property of the product: any map $B \stack
 %	\arrow["{\Ult(-)}"', bend left, from=11-5, to=11-1]
 %\end{tikzcd}\]
 \subsection{Restricting Stone to the finite case}
-Now we can revisit the finite adjunction from the beginning of this section. Any finite Stone space is discrete, since Hausdorffness forces singletons to be clopen (we give singletons by an intersection of all point-separating clopens, of which there are finitely many, so that singletons are themselves clopen). This shows that $\FinStone = \FinSet$.
+Now we can revisit the finite adjunction from the beginning of this section. Any finite Stone space is discrete, since Hausdorffness forces singletons to be clopen (we give singletons by an intersection of all point-separating clopens, of which there are finitely many, so that singletons are themselves clopen). This shows that $\FinStone = \FinSet$, and it is thus clear that Stone restricts to the finite duality from 7.a.
 
-In fact we may even extend $\FinSet^{\op} \rightleftarrows \Boolf$ to Stone via $\Ind$ and $\Pro$ categories, as we get the following equivalence:
+In fact we may  extend\footnote{For further reading look at Johnstone's last chapter. As we said at the beginning of the section, had we constructed Stone this way, we would have bypassed elucidating the nature of the Stone duality and had to introduce abstraction which is unnecessary for our purposes.} $\FinSet^{\op} \rightleftarrows \Boolf$ to Stone via $\Ind$ and $\Pro$ categories, as we get the following equivalence:
 \begin{align*}
-	\Bool \cong \Ind(\Boolf) \cong \Ind(\FinSet^{\op}) \cong  \Pro(\FinSet)^{\op}
+	\Stone \cong \Bool^{\op} \cong \Ind(\Boolf)^{\op} \cong \Ind(\FinSet^{\op})^{\op} \cong  \Pro(\FinSet).
 \end{align*}
-which means we can identify $\Stone$ spaces with profinite sets. For further reading check $Johnstone$ Chapter bla bla (\textcolor{red}{TODO} sources yeah).
+
+For further reading check $Johnstone$ Chapter bla bla (\textcolor{red}{TODO} sources yeah).
 \section{Rings and Affine schemes}
 
 We now turn to an example that any graduate Algebra student has encountered, the duality between the category of rings and the category of affine schemes. We will use the more general category of commutative $R$-algebras, which we denote $\CAlg$. Notice that if $R = \mathbb{Z}$, then $\CAlgZ = \Ring$. 
