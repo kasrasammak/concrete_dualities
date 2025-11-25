@@ -1,4 +1,4 @@
-\documentclass[12pt,a4paper]{article}
+\documentclass[11pt,a4paper]{article}
 \usepackage[margin=3cm]{geometry}
 \usepackage{fancyhdr}
 \usepackage{amssymb}
@@ -137,7 +137,7 @@ First let us define a concrete category:
 	Let $\mathcal{X}$ be a category. A \textbf{concrete category} over $\mathcal{X}$ is a pair $(\mathcal{A}, U)$ where $\mathcal{A}$ is a category and $U: \mathcal{A} \to \mathcal{X}$ is a faithful functor. Sometimes $U$ is called the \textbf{underlying functor} over $\mathcal{X}$ and $\mathcal{X}$ is called the \textbf{base category} for $(\mathcal{A},U)$. A concrete category over $\Set$ is called a \textbf{construct}.
 \end{definition}
 
-Note that from here on out, we use concrete category to mean construct, since we do not explicitly consider any other type of concrete category in this thesis.
+In this thesis we normally use concrete category to mean construct, since we do not explicitly consider any other type of concrete category.
 
 The underlying functor is also sometimes called the \emph{\textbf{forgetful functor}}.
 \\
@@ -646,7 +646,8 @@ The second method is the one which we will later see in action in our examples, 
 In the next part we will discuss a situation which induces a non-natural dual adjunction between concrete categories, as it is relevant to an important example.
 \subsection{Internal Hom-Functors}
 
-Let $(\mathcal{A}, U)$ be a concrete category. An \textbf{internal hom-functor} is a functor $H: \mathcal{A}^{\op} \times \mathcal{A} \to \mathcal{A}$ such that $UH = \HomA(-,-)$. Moreover \begin{align*}
+Let $(\mathcal{A}, U)$ be a concrete category. An \textbf{internal hom-functor} is a functor $H: \mathcal{A}^{\op} \times \mathcal{A} \to \mathcal{A}$ such that $UH = \HomA(-,-)$. Moreover 
+\begin{align*}
 	\text{all evaluation maps } \phi_{A,A',x}: \HomA(A,A') &\to [A']\\
 	h &\mapsto [h](x)\\
 	\text{lift to $\mathcal{A}$-morphisms } p_{A,A',x}: H(A,A') &\to A' \text{ for all } A, A' \in \mathcal{A}, x \in [A]
@@ -701,7 +702,25 @@ Therefore we have a contravariant functor $S(B) = \HomB_\mathcal{A}(B, \t B)$.
 
 Now if for every $A \in \mathcal{A}$ we can lift the $\mathcal{A}$-source $(p_{A, \t A, x}: H(A, \t A) \to \t A)$ along $\lvert - \lvert$ functorially, then we also have WSO1, inducing the contravariant functor $T: \mathcal{A} \to \mathcal{B}$ such that $\lvert T(A) \lvert = H(A, \t A)$, and as such we have the desired dual adjunction $(S, T)$. We will however only show this example-wise. 
 
+\subsubsection{Topological categories}
 
+If $(\mathcal{A}, U)$ is a topological concrete category admitting function spaces, we have, for all $A \in \mathcal{A}$ the source $(\top \stackrel{\t x}{\rightarrow} A)_{x \in [A]}$. (\textcolor{red}{TODO} Show this) where $\top$ is the terminal object. That is to say $\HomA(\top, A) = [A]$. Therefore, we would get, for any set map $[f]:[A'] \to [A]$ a unique lifting diagram
+
+\[\begin{tikzcd}
+	{H(\top, A')} && {H(\top,A)} && A \\
+	\\
+	{\HomA(\top,A')}=[A'] && {[A]=\HomA(\top, A)} && {[A]}
+	\arrow["{f}", dashed, from=1-1, to=1-3]
+	\arrow[from=1-1, to=3-1]
+	\arrow["{e_{\top, \ast}}", from=1-3, to=1-5]
+	\arrow[from=1-3, to=3-3]
+	\arrow[from=1-5, to=3-5]
+	\arrow["{[f]}", from=3-1, to=3-3]
+	\arrow["{\ev_{\top, \ast}}", from=3-3, to=3-5].
+\end{tikzcd}\]
+In other words, we could lift arbitrary set maps to $\mathcal{A}$-morphisms, which, for non-trivial categories  is almost never true.
+
+%(\textcolor{red}{TODO} check this for yourself)
 \subsection*{Motivation}
 We are now in the position to understand what this schizophrenic object really affords us. What is interesting about it is that the object itself induces the adjunction via $\Hom$-sets in our respective categories. 
 
@@ -1471,7 +1490,7 @@ Since we have a canonical choice  $[A] \cong \Aff(X_A,\mathbb{A}^1)$ of set isom
 The problem on the other side however is that we cannot find an appropriate concrete functor $V$ over which $\CAlg(A, R[t]) \stackrel{\tau\varphi_{A,x}}{\rightarrow} [R[t]]$ lifts to the category of affine schemes initially. 
 
 By Yoneda we see that  \begin{align*}
-	\CAlg(A, R[x]) \cong X_A(R[x]) = \Aff(\mathbb{A}^1, X_A) 
+	\CAlg(A, R[t]) \cong X_A(R[t]) = \Aff(\mathbb{A}^1, X_A) 
 \end{align*}
 so if we could find such a functor we would have $\Aff(\mathbb{A}^1,X_A) \cong [X_A]$ suggesting that $\mathbb{A}^1$ is a free object on one free generator, however there does not exist a functor $V$ so that this isomorphism holds. Although $\Aff$ is concrete (just take the functor $[\mathcal{O}(-)]$), such a functor does not lift $\tau\varphi_{A,x}$ in a way that can identify the set $\CAlg(A,R[t])$ with the functor $X_A$.
 
@@ -1522,17 +1541,31 @@ But this is just the universal property of the colimit applied to topological sp
 
 This is reflected by commutativity of the following diagram:
 
+
 \[\begin{tikzcd}
-	& Y \\
-	& X \\
-	{K_i} && {K_j}
-	\arrow["f", dashed, from=2-2, to=1-2]
-	\arrow["{f \circ t_i}", bend left,  from=3-1, to=1-2]
-	\arrow["{t_i}", from=3-1, to=2-2]
-	\arrow["h"', from=3-1, to=3-3]
-	\arrow["{f \circ t_j}"', bend right, from=3-3,  to=1-2]
-	\arrow["{t_j}"', from=3-3, to=2-2]
+	{K_i} && X && Y \\
+	\\
+	{[K_i]} && {[X]} && {[Y]}
+	\arrow["{t_i}", from=1-1, to=1-3]
+	\arrow["{f \circ t_i}", bend left,  from=1-1, to=1-5]
+	\arrow[from=1-1, to=3-1]
+	\arrow["{f}",dashed, from=1-3, to=1-5]
+	\arrow[from=1-3, to=3-3]
+	\arrow[from=1-5, to=3-5]
+	\arrow["{[t_i]}"', from=3-1, to=3-3]
+	\arrow["{[f]}"', from=3-3, to=3-5]
 \end{tikzcd}\]
+%\[\begin{tikzcd}
+%	& Y \\
+%	& X \\
+%	{K_i} && {K_j}
+%	\arrow["f", dashed, from=2-2, to=1-2]
+%	\arrow["{f \circ t_i}", bend left,  from=3-1, to=1-2]
+%	\arrow["{t_i}", from=3-1, to=2-2]
+%	\arrow["h"', from=3-1, to=3-3]
+%	\arrow["{f \circ t_j}"', bend right, from=3-3,  to=1-2]
+%	\arrow["{t_j}"', from=3-3, to=2-2]
+%\end{tikzcd}\]
 That is if $f \circ t_i$ is continuous, pre-images of open sets $V \subseteq Y$ must be open under composition, in other words $t_i^{-1}(f^{-1}(V)) \subseteq K_i$ is open. 
 
 So $f \circ t_i$ induces a continuous $f: X \to Y$ in the following way: given a topological space with underlying set  $X$, the colimit out of compact Hausdorff subspaces will be its \emph{Kelleyfication}, which is necessarily a refinement of the topology of $X$, since continuous maps $X \stackrel{f}{\to}Y$ necessarily satisfy commutativity of the above diagram, so we want to add opens to $X$ which satisfy commutativity for arbitrary function $X \stackrel{f}{\to}Y$. 
@@ -1550,7 +1583,7 @@ We may otherwise view the \emph{Kelleyfication} as the right adjoint $k(-)$ to t
 
 Another way to think about $\kTop$ is as the coreflective hull of $\kHaus$ in $\Haus$. That is to say, the underlying functor $\kHaus \hookrightarrow \Haus$ does not have a right adjoint, since $\kHaus$ is not closed under colimits. However taking the intersection of all coreflective subcategories of $\Haus$ which contain $\kHaus$, noting that the inclusion functors are left adjoint so they preserves all colimits, and that the category generated by colimits of $\kHaus$ is itself coreflective, we obtain precisely the category generated under colimits of $\kHaus$.
 
-Note that products are given as the Kelleyfications of topological  products, and furthermore, that for all locally compact Hausdorff spaces $X$, we have $X \times_k Y = X \times Y$ for all $Y \in \kTop$, since we can compute limits in $\Haus$ and pass back to $\kTop$ by the right adjoint, which preserves limits. One only needs to check that $X \in \kTop$
+Note that products are given as the Kelleyfications of topological  products. Furthermore,  any locally compact Hausdorff space $X$ is in $\kTop$, so we have $X \times_k Y = X \times Y$ for all $Y \in \kTop$, since $k(-)$ preserves limits. 
 
 It is important that our category admits function spaces, or in other words, that we are in a closed category (i.e. all exponentiables exist). In the following we will show why $\kTop$ is a closed category. This will indeed give us intuition of why we have even defined $\kTop$ the way we have, as $\Haus $ is not a closed category.  
 
@@ -1597,7 +1630,7 @@ As such we have an adjunction
 	X &\mapsto C_k(X, \mathbb{C}_s) & A &\mapsto \Hom_k(A, \mathbb{C}_a)
 \end{align*}
 
-which is not natural.
+which, by remarks of \textbf{4.c}, is clearly not natural.
 
 This is called the \emph{generalized Gelfand-Naimark Duality}. 
 
@@ -1628,7 +1661,7 @@ Note that $C^* \subseteq \kAlg$ is a full subcategory.
  \section{Galois theory}
  Let us dive into another familiar example called the \emph{Galois correspondence}.
  
- For this example we assume familiarity with Galois theory. That is we assume the reader understands field extensions, basic group theory with respect to orbits and stabilizers, and we interpret a $\GSet$ to be a set equipped with a left group action, that is, a group homomorphism $\theta: G \to \Aut(S)$. Our main reference text shall be $\emph{Szamuely}$, though we also recommend $\emph{Bosch}$, for the non-categorical approach.
+ For this example we assume familiarity with Galois theory. That is we assume familiarity with field extensions and introductory group theory, specifically with respect to orbits and stabilizers. We interpret a $\GSet$ to be a set equipped with a left group action, that is, a group homomorphism $\theta: G \to \Aut(S)$. Our main reference text shall be $\emph{Szamuely}$, though we also recommend $\emph{Bosch}$, for the non-categorical approach.
  
   One can phrase the fundamental theorem of Galois theory as the following contravariant adjunction between the directed posets of subfield extensions of the finite field extension $k \hookrightarrow M\hookrightarrow L$ and of the corresponding subgroups $H$ of the Galois group $\Gal(L/k)$:
  
@@ -1869,19 +1902,12 @@ so that $\Gal(k_s/k)$ can be realized as a profinite group.
 
 \section{Questions}
 \begin{enumerate}
-	\item How do I approach the preliminaries part? Just a list of definitions? Or should I write some kind of narrating text? Should I move it to the appendix?
-	\item Ask Georg how to differentiate between $k$-Alg in terms of kelleyfied complex algebras and $k$-Alg in terms of algebras over a field $k$. We know that $\kAlg \subseteq \CAlgk$ as subcategory (not full), should this be reflected in the notation?
-	\item How do I introduce subjects and where do i draw the line for assumed knowledge and not.
-	\item $\mathbb{A}^1$ is a free object on one free generator in $\Aff$
 	\item Why do we know that Kelleyfied products and kelleyfied function spaces with the compact open topology are the categorical products and exponentials in $\kTop$
-	\item $\GSet(H, k_s)$ lifts to $\CAlgk$ (possible for later)
-	\item $X \times_k Y = X \times Y$ for $X$ locally compact, $Y \in \kTop$
-	\item ask Georg if pointwise order preserving evaluation morphism into $\mathbb{2}$ preserves finite limits and colimits by some pointwise argument in the presheaf category
+%	\item ask Georg if pointwise order preserving evaluation morphism into $\mathbb{2}$ preserves finite limits and colimits by some pointwise argument in the presheaf category
 	\item why  is $C^*(X) \subseteq C(X)$
-	\item $B \cap A \neq \emptyset $ for all $B \in F$ (filter) implies $B \cap A \in F$
-	\item Why is $\kTop$ a monotopological category? Why does it have function spaces?
-	\item can same schizophrenic object induce different dualities when looked at different categories? In what sense am I supposed to think of sub-dualities? (I guess so yeah)
+	\item Why is $\kTop$ does $\kTop$ admit function spaces? Why doesn't $\Haus$?
 	\item Show that $C_k(X, \mathbb{C}) = C(X, \mathbb{C})$ if $X$ is locally compact.
+	\item Why does $C_k(A, \mathbb{C}_s) \mapsto [\mathbb{C}_a]$ lift to $C^*$ initially? 
 \end{enumerate}
 %\begin{enumerate}
 %	\item Is the above actually the case, i.e., am I actually supposed to look at the underlying sets in $\Set$ to understanding that $\tau$ is the identity?
