@@ -117,7 +117,7 @@
 \DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
 \renewcommand\qedsymbol{$\blacksquare$}
 % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXG1hdGhjYWx7QX1ee29wfSJdLFsyLDAsIlxcbWF0aGNhbHtCfSJdLFsxLDAsIlxcYm90Il0sWzAsMSwiVCIsMCx7ImN1cnZlIjotMn1dLFsxLDAsIlMiLDAseyJjdXJ2ZSI6LTJ9XV0=
-\title{\textsc{An overview of \\ Concrete Dualities}
+\title{\textsc{An Expository Study of \\ Concrete Dualities}
 \\[3em]
 {\Large {Bachelor Thesis in Mathematics}}\\[2em]
 {\normalsize Advisor: Dr. Georg Lehner\\ Second Examiner: Prof. Dr. Holger Reich}}
@@ -142,7 +142,7 @@
 %\rhead{Kasra Sammak}
 %\lhead{Concrete Dualities}
 \rfoot{\thepage}
-\chapter{Introduction}
+\chapter*{Introduction}
 
 Concrete dualities appear throughout mathematics in forms that seem unrelated at first glance: between topological spaces and certain classes of lattices, between commutative rings and sets with a group action, between rings and affine schemes, and so on. A particularly accessible example is the classical self-duality of finite-dimensional vector spaces via the dual space construction. A common feature of these dualities is that they arise from a dual adjunction in which a single object carries compatible structure on both sides. Such an object — often called \emph{schizophrenic} or \emph{dualizing} — induces a particularly well defined dual adjunction and by proxy an equivalence between the associated categories of structured sets. The guiding theme of this thesis is that many familiar dualities can be understood uniformly through this mechanism.
 
@@ -150,7 +150,7 @@ The purpose of the present work is expository rather than exploratory. We do not
 
 This choice comes with trade-offs. Not every construction can be unpacked to completion, and we occasionally move at a higher level of abstraction to preserve a coherent narrative. At other points, we allow ourselves brief detours—when the situation is both feasible and illuminating, for instance when the functors restrict to equivalences and understanding why sheds conceptual light on the framework. These detours are secondary to our main objective but hopefully serve to build conceptual familiarity with the framework.
 
-By the end of the thesis, the reader should be able to recognize the mechanism behind a concrete duality: how a dual adjunction together with a schizophrenic object organizes structure and induces a well-behaved dual adjunction that underlies classical dualities across mathematics. Even without mastering every detail of the individual examples, seeing why they genuinely instantiate this mechanism constitutes the intended payoff.
+At the same time, we hope to gesture toward the underlying philosophical insight: dualities of this kind allow topological or geometric intuition to be translated into algebraic or logical intuition (and vice versa), revealing that the two viewpoints often describe the same underlying structure. By the end of the thesis, the reader should be able to recognize the mechanism behind a concrete duality: how a schizophrenic object induces a well-behaved dual adjunction and organizes structure that underlies classical dualities across mathematics. To understand why these individual examples genuinely instantiate this mechanism constitutes the key takeaway.
 \chapter{Preliminaries}
 
 Throughout this thesis we will be using the language of category theory, for which a mild introduction is in order. We plan to only define the terms that are particularly relevant to the thesis in this section, so as to not distract the reader with basic definitions.
@@ -651,17 +651,17 @@ Then by definitions and (SO2.) we have  \begin{align*}
 \end{align*}
 which shows that $\tau \varphi_{SB, t} \circ [\eta_B]: [B] \to [\t B]$ is the underlying set map of a $\mathcal{B}$-morphism in $\HomB(B, \t B)$, proving the existence of $\eta_B$. 
 
-Furthermore we see that \begin{align}
+Furthermore we see that \begin{align}\label{3}
 	e_{SB, t} \circ \eta_B = t \ \ \text{ for all } t \in [SB]= \HomB(B, \t B).
 \end{align}
-Since $[\eta_B]$ lifts for all $B$, we may verify naturality on underlying-set maps; we verify that given a $\mathcal{B}$-morphism $f: B \to B'$, that we have $ [\eta_{B'}]\circ (f \circ -) = [TSf] \circ [\eta_B]$, or in other words: \begin{align}
+Since $[\eta_B]$ lifts for all $B$, we may verify naturality on underlying-set maps; we verify that given a $\mathcal{B}$-morphism $f: B \to B'$, that we have $ [\eta_{B'}]\circ (f \circ -) = [TSf] \circ [\eta_B]$, or in other words: \begin{align}\label{4}
 	d_{B', f \circ y} = [TSf] \circ d_{B,y}.
 \end{align} 
-Remember that the left action of $[TSf]$ on $d_{B,y}$ is a right action of $Sf$ on $d_{B,y}$. But the underlying map of $d_{B,y} \circ Sf$ is $\sigma \psi_{B,y} \circ \HomB(f, \t B)$ which is, up to the bijection $\sigma$, just the evaluation map of a morphism in $\HomB(B, \t B)$ at some $y \in [B]$ precomposed with $f \in \HomB(B, B')$, which yields the evaluation map of a morphism in $\HomB(B',\t B)$ at $f \circ y \in [B']$. In other words $[d_{B,y}] [Sf] = [\sigma \psi_{B', f \circ y}] = [d_{B', f \circ y}]$, which is clearly the underlying set map of $d_{B', f \circ y}$, giving us (4) by uniqueness of the lift. 
+Remember that the left action of $[TSf]$ on $d_{B,y}$ is a right action of $Sf$ on $d_{B,y}$. But the underlying map of $d_{B,y} \circ Sf$ is $\sigma \psi_{B,y} \circ \HomB(f, \t B)$ which is, up to the bijection $\sigma$, just the evaluation map of a morphism in $\HomB(B, \t B)$ at some $y \in [B]$ precomposed with $f \in \HomB(B, B')$, which yields the evaluation map of a morphism in $\HomB(B',\t B)$ at $f \circ y \in [B']$. In other words $[d_{B,y}] [Sf] = [\sigma \psi_{B', f \circ y}] = [d_{B', f \circ y}]$, which is clearly the underlying set map of $d_{B', f \circ y}$, giving us \ref{4} by uniqueness of the lift. 
 
 
 
-The definition of $S$ gives us that $[S\eta_B][\epsilon_{SB}](t) = \HomB(\eta_B, \t B)(e_{SB, t})$ and by (3) we have $\HomB(\eta_B, \t B)(e_{SB, t}) = e_{SB,t} \circ \eta_B = t$. Since $U$ is faithful, any map $[Sf] \in \Set([SB'], [SB])$ is the underlying-set map to a unique map $Sf \in \HomA(SB', SB)$, and we deduce that $[S\eta_B][\epsilon_{SB}] = 1_{[SB]}$ is the underlying set map of the triangle identity $S\eta_B \circ \epsilon_{SB} = 1_{SB}$.
+The definition of $S$ gives us that $[S\eta_B][\epsilon_{SB}](t) = \HomB(\eta_B, \t B)(e_{SB, t})$ and by \ref{3} we have $\HomB(\eta_B, \t B)(e_{SB, t}) = e_{SB,t} \circ \eta_B = t$. Since $U$ is faithful, any map $[Sf] \in \Set([SB'], [SB])$ is the underlying-set map to a unique map $Sf \in \HomA(SB', SB)$, and we deduce that $[S\eta_B][\epsilon_{SB}] = 1_{[SB]}$ is the underlying set map of the triangle identity $S\eta_B \circ \epsilon_{SB} = 1_{SB}$.
 
 Finally, to show that $\tau$ is induced by this adjunction it suffices to see that it maps $\t x \mapsto [[\epsilon_{\t A}](\t x)](1_{\t A})$ as desired. For every $\t x \in [\t A]$ we have
 \begin{align*}
@@ -1390,6 +1390,8 @@ Indeed, since $\mathbb{2}_s$ is discrete, every set function $[X] \to [\mathbb{2
 Remember that the categorical product comes with projection maps $\pi_x: \mathbb{2}^X \stackrel{\pi_x}{\rightarrow } \mathbb{2}_x$. Notice that these \emph{are} the evaluation maps, since products in $\Set$ are just functions out of the indexing set and projections pick out coordinates for these functions, which is exactly what our evaluation maps are doing.
 
 Then initiality is just the universal property of the product: any map $B \stackrel{h}{\rightarrow} \mathbb{2}^X$ is Boolean if and only if the composite with projections $\pi_x \circ h$ are Boolean, showing us that the evaluation maps admit initial lifts into $\Bool$.
+
+Therefore we have a natural dual equivalence between the categories $\Stone \rightleftarrows \Bool^{\op}$ induced by the schizophrenic object $(\mathbb{2}, 1_{\mathbb{2}},\mathbb{2})$. 
 %\[\begin{tikzcd}
 %	&& \Loc & \bot & \Top \\
 %	&& \vdash && \vdash \\
@@ -1560,6 +1562,8 @@ By Yoneda we see that  \begin{align*}
 \end{align*}
 so if we could find such a functor we would have $\Aff(\mathbb{A}^1,X_A) \cong [X_A]$ suggesting that $\mathbb{A}^1$ is a free object on one free generator, however there does not exist a functor $V$ so that this isomorphism holds. Although $\Aff$ is concrete (just take the functor $[\mathcal{O}(-)]$), such a functor does not lift $\tau\varphi_{A,x}$ in a way that can identify the set $\CAlg(A,R[t])$ with the functor $X_A$.
 
+This non-example is included because it is easy to digest and shows that even adjunctions which may appear to contain a schizophrenic object--in this case $(R[t],\tau, \mathbb{A}^1)$--may still fail, strictly speaking, to produce a  concrete duality. Nevertheless, it still lets us see structure of a schizophrenic object on one side of the adjunction, and its failure makes clear which structural properties our dualities truly depend on.
+
 % and that it is isomorphic to $X(A) = \CAlg(A, -)$, however it is not obvious how to think about $\mathbb{A}^1$ as a free functor on one free generator, as elements of affine schemes are not given in the same way as they are for $R[x]$, where the element $X$ is clearly our free generator. 
 %
 %We may however still use Yoneda to see that $\CAlg(A, R[x]) \cong X_A(R[x]) = \Aff(\mathbb{A}^1, X_A) \cong [X_A]$, and as such our intuition thus must come from the fact that $\mathbb{A}^1$ is our free affine scheme on one free generator (\textcolor{blue}{TODO} why?) and  thus by the above equality we can think of elements of our affine scheme  as global functions from $A$ to $R[x]$.
@@ -1717,8 +1721,12 @@ Note that $C^* \subseteq \kAlg$ is a full subcategory.
  For initiality we notice that any other algebraic structure on $C^*(X)$ that is compatible with the underlying point-wise structure must factor uniquely through $C^*(X)$, as operations must preserve involution and the norm. 
  
 % use the typical argument that we define all operations on $C_k(X, \mathbb{C}_s)$ pointwise: addition and multiplication is standard; for involution we have $f^*(x) = \overline{f(x)}$ and for the norm we have $\lVert f \lVert_{\infty} = \sup_{x \in X} \lvert f(x) \lvert $ so that $\lVert \ev_{X,x}(f)\lVert_{\infty, \mathbb{C}} \leq \lVert f \lVert_{\infty}$.
+% \cite{DUBUC1971281}
+ Can we restrict $S$ accordingly? For every $C^*$-algebra $A$, it should be clear from \cite{KelleyGeneralTopology} that the space $S(A) = \Hom_k(A, \mathbb{C}_a)$ is compact, and that its topology is that of pointwise convergence.  Indeed \emph{Kelley's} definition of pointwise convergence applied to our situation is exactly 
+% the initial topology making the inclusion $S(A) \hookrightarrow \mathbb{C}^A$ continuous, which is just 
+ the initial topology making all evaluation maps $\Hom_k(A, \mathbb{C}_a) \stackrel{\ev_{A,a}}{\rightarrow} [\mathbb{C}_c]$ continuous. Indeed this is equivalent to the initial topology making the inclusion $S(A) \hookrightarrow \mathbb{C}^A$ continuous, from which Hausdorffness is clear, since the product of Hausdorff spaces is Hausdorff, and the subspace of a Hausdorff space is Hausdorff. 
  
- Can we restrict $S$ accordingly? For every $C^*$-algebra $A$, the space $S(A) = \Hom_k(A, \mathbb{C}_a)$ is compact, and its topology is that of pointwise convergence \cite{DUBUC1971281}. In other words, it is the initial topology making the inclusion $S(A) \hookrightarrow \mathbb{C}^A$ continuous, which is just the initial topology making all evaluation maps continuous. Hausdorffness is clear, since the product of Hausdorff spaces is Hausdorff, and the subspace of a Hausdorff space is Hausdorff. We call $S: C^* \to \kHaus$ the \emph{Spectrum}-functor, and it follows that the generalized Gelfand-Naimark adjunction restricts to a dual adjunction
+ We call $S: C^* \to \kHaus$ the \emph{Spectrum}-functor, and it follows that the generalized Gelfand-Naimark adjunction restricts to a dual adjunction
  
  \begin{align*}
 	C: \kHaus & \to C^* &  S: C^* & \to \kHaus\\
@@ -1731,7 +1739,7 @@ Note that $C^* \subseteq \kAlg$ is a full subcategory.
  
  Thus we can conclude that there is a natural dual adjunction between concrete categories $(\kHaus, U)$ and $(C^*, \bigcirc)$ with schizophrenic object $(D, 1_D, \mathbb{C}_a)$. 
  
- We would like to remark that this duality is an equivalence. This fact is indeed interesting, however to show it requires machinery that is beyond the scope of this thesis. For details, refer to chapters III. and IV. in \cite{zbMATH03940199}.
+ We would like to remark that this duality is in fact an equivalence. Albeit interesting, showing this requires machinery that is beyond the scope of this thesis. For details, refer to chapters III. and IV. in \cite{zbMATH03940199}.
  
  \section{The Galois Correspondence}
  Let us dive into another familiar example called the \emph{Galois correspondence}.
@@ -1762,7 +1770,7 @@ Explicitly this is a map $L|k \mapsto \CAlgk(L, k_s)$, where $\CAlgk(L, k_s)$  c
  For any finite field extension $L|k$, homomorphisms into the closure $k_s$ are given by maps which permute the roots of the minimal polynomials over $k$ of the finite generators of $L|k$. For background reading one may consider any introductory textbook on Galois theory, such as \emph{Bosch's Algebra}, where this claim follows directly from Lemma 3.4/8 \cite{zbMATH07745132} . 
  
  Since every element of $k_s$ is a separable root over  $k$, the canonical $G$-action on $k_s$ which defines $G$ in the first place is completely determined by how its elements permute the roots of separable minimal polynomials with coefficients in $k$.
- \subsection*{Schizophrenic Object of $\CAlgk \rightleftarrows \GSet^{\op}$}
+ \subsection{Schizophrenic Object of $\CAlgk \rightleftarrows \GSet^{\op}$}
  
  In the following we shall want to show explicitly that the generalized Galois adjunction fits the schizophrenic framework to be considered a concrete duality.
   
@@ -1843,7 +1851,7 @@ This is analogous to many familiar examples where we derived our structure point
 
 Therefore our triple $(k_s,1_{k_s},k_s)$ is indeed a schizophrenic object, which means the diagram we gave at the beginning of this section is in fact a well defined adjunction, as it is the induced adjunction of our schizophrenic object.
 
-\subsection*{Restricting to an Equivalence of Categories}
+\subsection{Restricting to an Equivalence of Categories}
 
 Even though at this point the goal of this example, showing that we have a concrete duality, is complete, we would like to continue our discussion to bring us back to concrete Galois theory.
 
@@ -1975,16 +1983,26 @@ so that $\Gal(k_s/k)$ can be realized as a profinite group.
 %	x &\mapsto 1_{\{0,1\}}(x)= x
 %\end{align*}
 
-\chapter{Questions}
-\begin{enumerate}
-%	\item Why do we know that Kelleyfied products and kelleyfied function spaces with the compact open topology are the categorical products and exponentials in $\kTop$
-%	\item ask Georg if pointwise order preserving evaluation morphism into $\mathbb{2}$ preserves finite limits and colimits by some pointwise argument in the presheaf category
-%	\item Let $C(X) = C_k(X,Y)$ be the kelleyfied function space with the compact open topology. Let $C^*(X) = \Top_{\text{bdd}}(X, \mathbb{C})\subseteq C(X)$. Why is $C^*(X) \subset C(X)$ 
-%	\item If $X$ is compact Hausdorff, then is $C(X)$
-	\item Show that $C_k(X, \mathbb{C}) = C(X, \mathbb{C})$ if $X$ is locally compact. Is it true? Maybe $X$ needs to be compact? 
-	\item Why does $C_k(A, \mathbb{C}_s) \mapsto [\mathbb{C}_a]$ lift to $C^*$ initially? 
-	\item Why does $\Hom_k(B, \mathbb{C}_a) \stackrel{\ev_{B,y}}{\rightarrow} [\mathbb{C}_s]$ lift to $\kHaus$ initially?
-\end{enumerate}
+\chapter*{Conclusion}
+
+In this thesis we have shown that the concrete dualities examined here all arise from the same mechanism: a dual adjunction induced by a schizophrenic object. Our analysis of the classical examples confirms that, despite their differences, they all fit this general framework. 
+
+
+
+%The level of detail varied according to feasibility, and we did not attempt to develop the full surrounding theory within each subfield; the aim was expository rather than exhaustive.
+
+A useful consequence of this perspective is that recognizing a potential schizophrenic object can serve as the primary step toward understanding a duality. In each case, the schizophrenic object provides the most intuitive point of entry, and identifying it is typically far easier than attempting to describe the adjunction directly. 
+
+The level of detail varied according to feasibility, and we did not attempt to develop the full surrounding theory within each subfield. However what we did show was that once such an object is identified, the dual adjunction — with its associated structure — follows, making it unnecessary to rebuild the theory from the ground up for each new instance. In this sense, knowing how concrete dualities arise allows one to see familiar constructions not as isolated coincidences but as manifestations of a single underlying mechanism.
+%\begin{enumerate}
+%%	\item Why do we know that Kelleyfied products and kelleyfied function spaces with the compact open topology are the categorical products and exponentials in $\kTop$
+%%	\item ask Georg if pointwise order preserving evaluation morphism into $\mathbb{2}$ preserves finite limits and colimits by some pointwise argument in the presheaf category
+%%	\item Let $C(X) = C_k(X,Y)$ be the kelleyfied function space with the compact open topology. Let $C^*(X) = \Top_{\text{bdd}}(X, \mathbb{C})\subseteq C(X)$. Why is $C^*(X) \subset C(X)$ 
+%%	\item If $X$ is compact Hausdorff, then is $C(X)$
+%	\item Show that $C_k(X, \mathbb{C}) = C(X, \mathbb{C})$ if $X$ is locally compact. Is it true? Maybe $X$ needs to be compact? 
+%	\item Why does $C_k(A, \mathbb{C}_s) \mapsto [\mathbb{C}_a]$ lift to $C^*$ initially? 
+%	\item Why does $\Hom_k(B, \mathbb{C}_a) \stackrel{\ev_{B,y}}{\rightarrow} [\mathbb{C}_s]$ lift to $\kHaus$ initially?
+%\end{enumerate}
 %\begin{enumerate}
 %	\item Is the above actually the case, i.e., am I actually supposed to look at the underlying sets in $\Set$ to understanding that $\tau$ is the identity?
 %	\subitem am I to understand $p(x) \in \mathbb{S}$ as "translating" from $\Frm$ to $\Top$ via $\Set$-elements?
