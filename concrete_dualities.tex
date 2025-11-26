@@ -143,6 +143,14 @@
 %\lhead{Concrete Dualities}
 \rfoot{\thepage}
 \chapter{Introduction}
+
+Concrete dualities appear throughout mathematics in forms that seem unrelated at first glance: between topological spaces and certain classes of lattices, between commutative rings and sets with a group action, between rings and affine schemes, and so on. A particularly accessible example is the classical self-duality of finite-dimensional vector spaces via the dual space construction. A common feature of these dualities is that they arise from a dual adjunction in which a single object carries compatible structure on both sides. Such an object — often called \emph{schizophrenic} or \emph{dualizing} — induces a particularly well defined dual adjunction and by proxy an equivalence between the associated categories of structured sets. The guiding theme of this thesis is that many familiar dualities can be understood uniformly through this mechanism.
+
+The purpose of the present work is expository rather than exploratory. We do not aim to uncover new dualities or to analyze the deeper theory within each subfield. Instead, the goal is to make the general framework of concrete dualities transparent, and to demonstrate that several classical examples indeed fit this structure. Although these examples are well known in the literature, the technical ingredients that ensure they conform to the general mechanism are often treated as routine or left to the reader. Here we attempt to make these points explicit—or at least visible—even when a complete treatment would lead too far beyond the intended scope.
+
+This choice comes with trade-offs. Not every construction can be unpacked to completion, and we occasionally move at a higher level of abstraction to preserve a coherent narrative. At other points, we allow ourselves brief detours—when the situation is both feasible and illuminating, for instance when the functors restrict to equivalences and understanding why sheds conceptual light on the framework. These detours are secondary to our main objective but hopefully serve to build conceptual familiarity with the framework.
+
+By the end of the thesis, the reader should be able to recognize the mechanism behind a concrete duality: how a dual adjunction together with a schizophrenic object organizes structure and induces a well-behaved dual adjunction that underlies classical dualities across mathematics. Even without mastering every detail of the individual examples, seeing why they genuinely instantiate this mechanism constitutes the intended payoff.
 \chapter{Preliminaries}
 
 Throughout this thesis we will be using the language of category theory, for which a mild introduction is in order. We plan to only define the terms that are particularly relevant to the thesis in this section, so as to not distract the reader with basic definitions.
@@ -319,13 +327,14 @@ Like any adjunction we have the following triangle equalities \begin{align*}
 	&T{\epsilon_A} \circ \eta_{TA} = 1_{TA} \ &\text{and}& \ &  S{\eta_B} \circ \epsilon_{SB} = 1_{SB}&
 \end{align*}
 and $\Hom$-set isomorphisms \begin{align*}
-	\HomA(A, SB) \cong \HomB^{\op}(TA,B) \cong \HomB(B, TA)
+	\HomA(A, SB) \cong \HomB^{\op}(TA,B) \cong \HomB(B, TA).
 \end{align*}
 
-Given some $\mathcal{A}$-morphism $f: A\to A'$, consider the map $Uf: UA \to UA'$. More explicitly, this is \begin{align*}
- 	\HomA(A_0, -) (f) : \HomA(A_0, A) \stackrel{f \circ (-)}{\to} \HomA(A_0, A')
+Given some $\mathcal{A}$-morphism $f: A\to A'$, consider the map $Uf: UA \to UA'$. More explicitly, this is the map \begin{align*}
+ 	\HomA(A_0, -) (f) : \HomA(A_0, A) \stackrel{f \circ (-)}{\to}& \HomA(A_0, A')\\
+ 	\t x \mapsto& f\circ \t x.
  \end{align*}
-We shorten this notation by using $[f]: [A] \to [A']$.
+We shorten this with the notation $[f]: [A] \to [A']$.
 
 The following pair of objects will be of central importance to this thesis, which are defined as the following:
 \begin{align*}
@@ -337,7 +346,7 @@ We will come to refer to a dual adjunction in this situation as a \textbf{\emph{
 
 From these characteristics we can deduce how $S$ and $T$ should be defined, to which a few lemmas will illuminate the bigger picture.
 \begin{lemma}
-\begin{align}
+\begin{align}\label{eq:underlying-hom}
 		VT \cong \HomA(-, \t  A)&&
 	US \cong \HomB(-, \t  B)
 \end{align}
@@ -360,7 +369,7 @@ Should we have strict identities
 
 we say that the adjunction is \emph{strictly represented} by $\t A$ and $\t B$. 
 
-This result should already give us an idea of how our adjunction is to be induced. That is, our adjoint functors should be regarded as lifts of the $\Hom$-set functors in (1) to the relevant categories.\footnote{In the course of this introduction we will often prove results about $\mathcal{A}$, respectively $T: \mathcal{A}\to \mathcal{B}$ with unit $\epsilon:1_\mathcal{A} \to ST $, from which the results about $\mathcal{B}$, respectively $S: \mathcal{B} \to \mathcal{A}$ with counit $\eta: 1_\mathcal{B} \to TS$, follow completely analogously. Unless we state that results do not follow analogously, we assume this to be the case.}  The goal of this introduction to concrete dualities is to make this notion precise. 
+This result should already give us an idea of how our adjunction is to be induced. That is, our adjoint functors should be regarded as lifts of the $\Hom$-set functors in \ref{eq:underlying-hom} to the relevant categories.\footnote{In the course of this introduction we will often prove results about $\mathcal{A}$, respectively $T: \mathcal{A}\to \mathcal{B}$ with unit $\epsilon:1_\mathcal{A} \to ST $, from which the results about $\mathcal{B}$, respectively $S: \mathcal{B} \to \mathcal{A}$ with counit $\eta: 1_\mathcal{B} \to TS$, follow completely analogously. Unless we state that results do not follow analogously, we assume this to be the case.}  The goal of this introduction to concrete dualities is to make this notion precise. 
 
 
 
@@ -1234,7 +1243,7 @@ Let $X$ be a sober space.
 \end{definition} 
 
 
-Given $A, B \in \CohLoc$, we know that any lattice homomorphism $K(A) \to K(B)$ extends to a frame homomorphism $A \to B$ via the free-forget adjunction (\textcolor{red}{TODO}: find source for this), however the converse is not true, frame homomorphisms do not necessarily preserve finiteness.
+Given $A, B \in \CohLoc$, we know that any lattice homomorphism $K(A) \to K(B)$ freely extends to a frame homomorphism $A \to B$, as coherent locales are freely generated by their finite elements by definition, however the converse is not true, frame homomorphisms do not necessarily preserve finiteness.
 
 In topological terms, that translates to the fact that the pre-image of compact open subsets under continuous maps is not necessarily compact.
 
@@ -1314,7 +1323,7 @@ Each evaluation map $\DLat(B,\mathbb{2}) \stackrel{\ev_{B,b}}{\rightarrow}[\math
 	e_{B,b}^{-1}(\{1\}) = \{ f \in \DLat(B, \mathbb{2})  \lvert f(b)  = 1 \} =& \{F \in \prim(B) \lvert b \in F \}\\ =& \{ I \in \primIdl(B) \lvert b \notin I\} =: D(b)
 \end{align*} 
 
-Consider the cover $D(b) \subseteq \bigcup_I D(a_i)$. This is equivalent to saying there is no prime ideal $I$ containing all $a_i$ and $b$ (\textcolor{red}{TODO} Might need a Zorns lemma argument, check this later), which is equivalent to saying $1 \in (\{a_i\} \cup \{b\})$, i.e. the ideal generated by $a_i$ and $b$ is the entire spectrum. By downwards closure and closure under finite meets, there exists a finite index $m \in \mathbb{N}$ such that $1 \leq \bigvee_{i=0}^m a_i$ from which it follows $D(b) \subseteq \bigcup_{i = 0}^m D(a_i)$. Thus all $D(b)$ are compact and so is $\Spec(B)$.
+Consider the cover $D(b) \subseteq \bigcup_I D(a_i)$. This is equivalent to saying there is no prime ideal $I$ containing all $a_i$ and $b$, which is equivalent (by Zorn's lemma)  to saying $1 \in (\{a_i\} \cup \{b\})$, i.e. the ideal generated by $a_i$ and $b$ is the entire spectrum. By downwards closure and closure under finite meets, there exists a finite index $m \in \mathbb{N}$ such that $1 \leq \bigvee_{i=0}^m a_i$ from which it follows $D(b) \subseteq \bigcup_{i = 0}^m D(a_i)$. Thus all $D(b)$ are compact and so is $\Spec(B)$.
 
 
 Now we can say that the initial coherent topology on $\Spec(B)$ making all evaluation maps coherent is exactly the one where $\{ D(b) \}_{b \in B}$ forms its topology. Just like in the leading example, one can check that any map $Z \stackrel{h}{\rightarrow} \Spec(B)$ is coherent if and only if $\ev_{B,b} \circ h$ is. 
@@ -1357,16 +1366,17 @@ Since Boolean algebras automatically have Hausdorff spectrums, this lift is init
 
 In fact, it is enough to check continuity, since continuous maps between compact Hausdorff spaces must be coherent, as continuity implies that the pre-image of  clopens are clopen, and in $\kHaus$ they are precisely the compact opens. This also means that $\Stone$ is a full subcategory of $\Top$. 
 
-1.(b) is only slightly more complicated. We start by remarking that $\mathbb{S} \notin \Stone$, so to pass the schizophrenic object downwards, we will want to Stonefy it via the Stone space reflection functor $\Stone(-)$, which is also called the Stoneification, i.e. the left adjoint to the forgetful functor (\textcolor{red}{TODO} find source to show this exists).
+1.(b) is only slightly more complicated. We start by remarking that $\mathbb{S} \notin \Stone$, so to pass the schizophrenic object downwards, we will want to generate a Stone topology.
 
-  By the dual equivalence we get the corresponding Boolean algebra reflection functor $\Bool(-)$, or Booleanification.
+%Stonefy it via the Stone space coreflection functor $\Stone(-)$, which is also called the Stoneification, i.e. the right adjoint to the forgetful functor (\textcolor{red}{TODO} find source to show this exists).
+%
+%  By the dual equivalence we obtain the corresponding Boolean algebra coreflection functor $\Bool(-)$, or Booleanification.
  
- To understand the Stoneification, we may first want to Booleanify the lattice of compact open subsets of a space $X$, which we will call $A$. Let $A^*$ be the set of complements in $\mathcal{P}(X)$ of members of $A$. Then the patch topology, which has as a base $C = \{U \cap V \lvert U \in A, V \in A^*\}$ , will be a Stone space (notice that we are taking the Boolean completion $B$ of $A$ and then taking its spectrum) \cite{zbMATH03940199}.
+That is, we take the lattice of compact open subsets of a space $X$, which we will call $A$. Let $A^*$ be the set of complements in $\mathcal{P}(X)$ of members of $A$. Then the patch topology, which has as a base $C = \{U \cap V \lvert U \in A, V \in A^*\}$ , will be a Stone space (notice that we are taking the Boolean completion $B$ of $A$ and then taking its spectrum) \cite{zbMATH03940199}. We remark that this argument also invokes the Axiom of Choice.
  
- This was just to see that we can in some sense Stoneify the $\Hom$-set functor via its schizophrenic object: we take the Boolean completion of $\mathbb{S}$ in $\mathcal{P}(\{0,1\})$ which is simply $\mathbb{2}_s$, the two point discrete space, since by Booleanifying we must generate the complement of $\{1\}$.
+ This was just to see that we can in some sense "Stoneify" the $\Hom$-set functor via its schizophrenic object: we take the Boolean completion of $\mathbb{S}$ in $\mathcal{P}(\{0,1\})$ which is simply $\mathbb{2}_s$, the two point discrete space, since by Booleanifying we must generate the complement of $\{1\}$.
  
- 
-The argument however works the same way as it would if $\mathbb{S}$ was in $\Stone$: $\CohTop(X, \mathbb{S})$ lifts to $\clop(X)$ if $X$ is a Stone space, since coherent maps into $\mathbb{S}$ are uniquely determined by the pre-image of $\{1\}$, which are simply the compact open subsets of a compact Hausdorff space, which are its  clopens. 
+The argument for existence of lifts however works the same way as it would if $\mathbb{S}$ was in $\Stone$: $\CohTop(X, \mathbb{S})$ lifts to $\clop(X)$ if $X$ is a Stone space, since coherent maps into $\mathbb{S}$ are uniquely determined by the pre-image of $\{1\}$, which are simply the compact open subsets of a compact Hausdorff space, which are its  clopens. 
 
 By the same argument we have $\Stone(X, \mathbb{2}_s) = [\clop(X)]$, we only remark that continuous maps $X \stackrel{f}{\rightarrow}\mathbb{2}_s$ are still completely determined by the pre-image of $\{1\}$, since that pre-image sends $\{0\}$ to its unique complement. 
 
@@ -1570,33 +1580,30 @@ so if we could find such a functor we would have $\Aff(\mathbb{A}^1,X_A) \cong [
 %Now we shall try to understand the unit and counits.
 
 \section{Gelfand Duality}
-In order to describe the following duality, some context is in order. To that end we assume familiarity with general topology, specifically with respect to compact Hausdorff spaces, and some functional analysis, such as notions of point-wise versus norm convergence.
+In order to describe the following duality, some context is in order. To that end we assume some familiarity with general topology, specifically with respect to compact Hausdorff spaces, and some functional analysis, such as notions of point-wise versus norm convergence. A basic understanding will suffice as we will not delve too deep into the functional or topological properties, to which we refer to \emph{Engelking's General Topology} \cite{engelking1989general} and \emph{Johnstone's Stone Spaces} for further reading. Our goal is only to underline the underlying categorical framework.
 
-Our plan is to describe a general non-natural dual adjunction and then restrict it to a natural dual equivalence. For that we must set the scene by defining the category of \emph{Kelley spaces}.
+Our plan is to describe a general non-natural dual adjunction and then restrict it to a natural dual adjunction, which is also an equivalence. For that we must set the scene by defining the category of \emph{Kelley spaces}.
 \subsection{Kelley Spaces}
 Of primary importance to a Kelley space is the notion of $k$-continuity:
 \\
 \begin{definition}[$k$-continuous]
-	A function $f: X \to Y$ of underlying sets of a topological space is said to be \textbf{$k$-continuous} if for all compact $K$ and continuous functions $t: K \to X$ the composition $f \circ t$ is continuous. 
+	A function $f: X \to Y$ of underlying sets of a topological space is said to be \textbf{$k$-continuous} if for all compact Hausdorff $K$ and continuous functions $t: K \to X$ the composition $f \circ t$ is continuous. 
 \end{definition}
 
 \emph{Remark}. We may  restrict this to an equivalent definition which tests only on inclusions of all compact subspaces $K \stackrel{\iota}{\hookrightarrow} X$. This is because images of compact spaces $K'$ under $t$ are homeomorphic to compact subspaces $t(K) \cong K' \subseteq X$. 
-
-
-For our purposes we will also restrict the definition of $k$-continuity to compact \emph{Hausdorff} spaces, though not all authors do this.\\
 
 \begin{definition}[k-space]
 A topological space $X$ is said to be a \textbf{$k$-space}, or a \textbf{compactly generated topological space}, if for all spaces $Y$ and underlying-set functions $f: X \to Y$, it holds that $f$ is continuous if and only if $f$ is $k$-continuous.	
 
 Such spaces are also known as $\textbf{Kelley spaces}$.
 \end{definition}
-We refer to ${\kTop}$ as the category of compactly generated Hausdorff spaces, whose morphisms are the continuous functions between them, making it a full subcategory of $\Top$, and in particular, of $\Haus \subseteq \Top$. 
+We refer to ${\kTop}$ as the category of compactly generated Hausdorff spaces, whose morphisms are the continuous functions between them, making it a full subcategory of $\Top$. 
 
 Given a topological space, we may force the compactly generated condition on it through a process which we call the \emph{Kelleyfication} of a topological space.
 
-Explicitly, given the set of inclusions $(K \stackrel{t_i}{\hookrightarrow} X)_{i \in I}$ of  compact subspaces $K\subseteq X$, we give $X$ the finest topology making all $t_i$ continuous. In other words,  given an underlying-set function $[X] \stackrel{[f]}{\to} [Y]$, we give $X$ the topology such that $f$ is continuous if and only if $f \circ t_i$ is continuous. 
+Explicitly, given the set of inclusions\footnote{If $X$ is already Hausdorff, we may restrict to inclusions, since the image of continuous maps of compact spaces is compact and thus homeomorphic to some compact subspace of $X$. Otherwise, just replace the inclusions with arbitrary continuous maps from arbitrary compact Hausdorff spaces.} $(K \stackrel{t_i}{\hookrightarrow} X)_{i \in I}$ of  compact subspaces $K\subseteq X$, we give $X$ the finest topology making all $t_i$ continuous. In other words,  given an underlying-set function $[X] \stackrel{[f]}{\to} [Y]$, we give $X$ the topology such that $f$ is continuous if and only if $f \circ t_i$ is continuous. 
 
-But this is just the universal property of the colimit applied to Hausdorff spaces: for any set of continuous functions  $K_i \stackrel{\varphi_i}{\to}Y$ into some topological space $Y$ that satisfy commutativity (i.e., if there is a continuous map $K_i \stackrel{h}{\to} K_j $ for some $i, j \in I$, then $\varphi_i = \varphi_j \circ h$), then there exists a unique continuous map $X \stackrel{f}{\to}Y$ such that $\varphi_i = f \circ t_i$. 
+But this is just the universal property of the colimit applied to compact Hausdorff spaces: for any set of continuous functions  $K_i \stackrel{\varphi_i}{\to}Y$ into some topological space $Y$ that satisfy commutativity (i.e., if there is a continuous map $K_i \stackrel{h}{\to} K_j $ for some $i, j \in I$, then $\varphi_i = \varphi_j \circ h$), then there exists a unique continuous map $X \stackrel{f}{\to}Y$ such that $\varphi_i = f \circ t_i$. 
 
 This is reflected by commutativity of the following diagram:
 
@@ -1629,33 +1636,39 @@ That is if $f \circ t_i$ is continuous, pre-images of open sets $V \subseteq Y$ 
 
 So $f \circ t_i$ induces a continuous $f: X \to Y$ in the following way: given a topological space with underlying set  $X$, the colimit out of compact Hausdorff subspaces will be its \emph{Kelleyfication}, which is necessarily a refinement of the topology of $X$, since continuous maps $X \stackrel{f}{\to}Y$ necessarily satisfy commutativity of the above diagram, so we want to add opens to $X$ which satisfy commutativity for arbitrary set-function $[X] \stackrel{[f]}{\to}[Y]$. So we add opens $U = [f]^{-1}(V)$, for functions $[f]$ such that  $t_i^{-1}(U) \subseteq K$ is open  but $U \subseteq X$ is not. This is the universality condition, since commutativity must be satisfied for all $[f]$. But this is our original statement: we want a topology on $X$ such that $f$ is continuous if and only if $f \circ t_i$ is continuous. 
 
-Thus we can understand a $k$-space as a colimit of compact Hausdorff spaces, or specifically, $X \in \kTop$ if and only if $X = \colim_{K \subseteq X \text{ compact}}K$.
+Thus we can understand a $k$-space as a colimit of compact Hausdorff spaces, or specifically, $X \in \kTop$ if and only if $X \in \Haus $ and $X = \colim_{K \subseteq X \text{ compact}}K$.
 
 %\textcolor{red}{Question}: are compact subspaces in $X$ compact if and only if they are compact in Kelley($X$)? No.
 
-We may otherwise view the \emph{Kelleyfication} as the right adjoint $k(-)$ to the forgetful functor. As $\kTop$ is a full subcategory of $\Haus$, this puts us in the setting of a coreflective subcategory of $\Haus \subseteq \Top$. 
+We may otherwise view the \emph{Kelleyfication} as the right adjoint $k(-)$ to the forgetful functor into $\Top$, which we may also get as a categorical fact, since $\kTop$ is monotopological \cite{adamek1990abstract}.\footnote{The fact the $\kTop$ is a monotopological category is treated as standard fact in sources \cite{MR1147921} and \cite{DUBUC1971281}, although we were unfortunately unable to find an explicit proof. Therefore we will be using it without proof.} As $\kTop$ is a full subcategory of $\Top$, this puts us in the setting of a coreflective subcategory of $\Top$. 
 
 In fact we may construct $\kTop$ categorically as the coreflective hull of $\kHaus$ in $\Haus$. That is to say, the underlying functor $\kHaus \hookrightarrow \Haus$ does not have a right adjoint, since $\kHaus$ is not closed under colimits. However we can take the intersection of all coreflective subcategories of $\Haus$ which contain $\kHaus$ to obtain the category generated under colimits of $\kHaus$. To see this, note that the inclusion functors are left adjoint so they preserve all colimits, and that by the Adjoint Functor Theorem the category generated by colimits of $\kHaus$ is itself coreflective.
 
-Products in $\kTop$ are given as the Kelleyfications of topological  products. Furthermore,  any locally compact Hausdorff space $X$ is in $\kTop$, so we have $X \times_k Y = X \times Y$ for all $Y \in \kTop$, since $k(-)$ preserves limits. 
+Products in $\kTop$ are given as the Kelleyfications of topological  products. Furthermore,  any locally compact Hausdorff space $X$ is in $\kTop$, so we have $X \times_k Y = X \times Y$ for all $Y \in \kTop$, since $k(-)$ preserves limits \cite{engelking1989general}. Furthermore, function spaces are given as Kelleyfications of the set $\Top(X,Y)$ with the compact-open topology, which we denote $Y^X$ to clarify that it's a $\Top$-object.
 
-To get ourselves in the setting of \ref{sec: int hom}, we want to show that $\kTop$ is a closed category admitting function spaces. This will indeed give us intuition of why we have even defined $\kTop$ the way we have, as $\Haus $ is not a cartesian closed category.  
-
-What we want is the following adjunction:
+It then follows from results about function spaces, namely, that if $X \times Z \in \kTop$ then the exponential mapping
 \begin{align*}
-	\Haus(A \times_{\Haus}C, B) \cong \Haus(C, B^A)
+	\Top(X \times_k Z, Y) \stackrel{\Lambda}{\rightarrow}& \Top(Z, Y^X)\\
+	f(x, z) \mapsto& \Lambda(f(x, z))= f(z)(x) 
 \end{align*}
-For all $A, B, C \in \Ob(\Haus)$. However this does not hold in general. 
+ is a well-defined homeomorphism. Since Kelleyfication only refines the topology, underlying set bijection isn't altered and continuity $\Lambda$ and $\Lambda^{-1}$ are preserved, so that $\kTop$ is a cartesian closed concrete category admitting function spaces.
 
-However in $\kTop$ function spaces are given as Kelleyfications of the set $\Top(X,Y)$ with the compact-open topology. (\textcolor{red}{TODO} why?).
-\textcolor{red}{ToDO} Show that this means that $\kTop$ is cartesian closed concrete category which admits function spaces.
-And as per [Dub], we see that $\kTop$ admits function spaces.
+With the fact that $\kTop$ is a monotopological category, this then puts us in the setting of \ref{sec: int hom}. 
 
-First we note that $\kTop$ is a coreflective subcategory of $\Top$. Since $\kTop$ is a coreflective subcategory of a topological category, it is itself a topological category (Herrlichs theorem \textcolor{red}{TODO} Find and cite this), and in particular it is monotopological. 
-
-Note that $\Top$ is a topological category since  for any source in $\Set$ we can always take the initial topology making every map in the source continuous.
-
-(\textcolor{red}{ToDO} Show that $\kTop$ admits function spaces )
+%, we want to show that $\kTop$ is a caretsian closed category admitting function spaces. This will indeed give us intuition of why we have even defined $\kTop$ the way we have, as $\Haus $ is not a cartesian closed category.  
+%
+%What we want is the following adjunction:
+%\begin{align*}
+%	\kTop(X \times_k Z, Y) \cong \kTop(Z, Y^X)
+%\end{align*}
+%
+%However in $\kTop$  (\textcolor{red}{TODO} why?).
+%\textcolor{red}{ToDO} Show that this means that $\kTop$ is cartesian closed concrete category which admits function spaces.
+%And as per [Dub], we see that $\kTop$ admits function spaces.
+%
+%First we note that $\kTop$ is a coreflective subcategory of $\Top$. Since $\kTop$ is a coreflective subcategory of a topological category, it is itself a topological category (Herrlichs theorem \textcolor{red}{TODO} Find and cite this), and in particular it is monotopological. 
+%
+%Note that $\Top$ is a topological category since  for any source in $\Set$ we can always take the initial topology making every map in the source continuous.
 
 Now let us define the category $\kAlg$ of complex $k$-algebras, whose objects are $\mathbb{C}$-algebras endowed with a Kelley topology, whose morphisms are the continuous algebra homomorphisms, and whose algebra operations are continuous with respect to $k$-products. 
 
@@ -1699,18 +1712,26 @@ Note that $C^* \subseteq \kAlg$ is a full subcategory.
  
  \subsection{Gelfand-Naimark Duality}
  
- For any compact Hausdorff space $X$, we see that the $C^*$-algebra $C^*(X)$ and the function $k$-algebra $C(X) = C_k(X, \mathbb{C}_s)$ coincide algebraically, since continuous functions over compact spaces are bounded in $\mathbb{C}$ and since $X \times_k X = X \times X$ (\textcolor{red}{TODO}: why  is $C^*(X) \subseteq C(X)$. Also make a comment about why $X \in \kTop$ for $X$ locally compact \cite{engelking1989general}). Moreover the topology of $C^*(X)$ is the compact open topology, since $X$ is compact, and therefore they also coincide topologically. That means we have can restrict $C$ to a functor $C: \kHaus \to C^*$.
+ For any compact Hausdorff space $X$, we have $C_k(X,\mathbb{C}_s) = C(X, \mathbb{C}_s)$ \cite{engelking1989general}, so that the $C^*$-algebra $C^*(X)$ and the function $k$-algebra $C(X) := C_k(X, \mathbb{C}_s)$ coincide algebraically, since continuous functions over compact spaces are bounded in $\mathbb{C}$ and since $X \times_k X = X \times X$. Moreover the topology of $C^*(X)$ for $X$ compact is the compact open topology \cite{engelking1989general},  and therefore they also coincide topologically. That means we have can restrict $C$ to a functor $C: \kHaus \to C^*$.
  
- Can we restrict $S$ accordingly? For every $C^*$-algebra $A$, the space $S(A) = \Hom_k(A, \mathbb{C}_a)$ is compact, and its topology is that of pointwise convergence, due to basic results about the topology of function spaces. (\textcolor{red}{TODO} cite basic results). We call $S: C^* \to \kHaus$ the \emph{spectrum}- functor, and it follows that the generalized Gelfand-Naimark adjunction restricts to a dual adjunction
+ For initiality we notice that any other algebraic structure on $C^*(X)$ that is compatible with the underlying point-wise structure must factor uniquely through $C^*(X)$, as operations must preserve involution and the norm. 
+ 
+% use the typical argument that we define all operations on $C_k(X, \mathbb{C}_s)$ pointwise: addition and multiplication is standard; for involution we have $f^*(x) = \overline{f(x)}$ and for the norm we have $\lVert f \lVert_{\infty} = \sup_{x \in X} \lvert f(x) \lvert $ so that $\lVert \ev_{X,x}(f)\lVert_{\infty, \mathbb{C}} \leq \lVert f \lVert_{\infty}$.
+ 
+ Can we restrict $S$ accordingly? For every $C^*$-algebra $A$, the space $S(A) = \Hom_k(A, \mathbb{C}_a)$ is compact, and its topology is that of pointwise convergence \cite{DUBUC1971281}. In other words, it is the initial topology making the inclusion $S(A) \hookrightarrow \mathbb{C}^A$ continuous, which is just the initial topology making all evaluation maps continuous. Hausdorffness is clear, since the product of Hausdorff spaces is Hausdorff, and the subspace of a Hausdorff space is Hausdorff. We call $S: C^* \to \kHaus$ the \emph{Spectrum}-functor, and it follows that the generalized Gelfand-Naimark adjunction restricts to a dual adjunction
  
  \begin{align*}
 	C: \kHaus & \to C^* &  S: C^* & \to \kHaus\\
 	X &\mapsto C_k(X, \mathbb{C}_s) & A &\mapsto \Hom_k(A, \mathbb{C}_a).
 \end{align*}
  
+ 
+ 
  However this still doesn't give us the schizophrenic object, as $\mathbb{C}_s \notin \kHaus$. Remember that we want to consider $C^*$ as a concrete category via the functor $\bigcirc$, so that for any compact Hausdorff space $X$, one has $\bigcirc C(X) = \kHaus(X, D)$ where $D = \{ c \in \mathbb{C}_s \ \lvert \ \lVert c \lVert \leq 1 \}. $
  
  Thus we can conclude that there is a natural dual adjunction between concrete categories $(\kHaus, U)$ and $(C^*, \bigcirc)$ with schizophrenic object $(D, 1_D, \mathbb{C}_a)$. 
+ 
+ We would like to remark that this duality is an equivalence. This fact is indeed interesting, however to show it requires machinery that is beyond the scope of this thesis. For details, refer to chapters III. and IV. in \cite{zbMATH03940199}.
  
  \section{The Galois Correspondence}
  Let us dive into another familiar example called the \emph{Galois correspondence}.
@@ -1745,7 +1766,7 @@ Explicitly this is a map $L|k \mapsto \CAlgk(L, k_s)$, where $\CAlgk(L, k_s)$  c
  
  In the following we shall want to show explicitly that the generalized Galois adjunction fits the schizophrenic framework to be considered a concrete duality.
   
- To be sufficiently general we consider the category $\CAlgk$  of commutative unital $k$-algebras with $k$-algebra homomorphisms, and the category $\GSet$ of sets with a $\Gal(k_s/k)$-action and $G$-equivariant maps between them, and we plan to show that $(k_s, 1_{k_s}, k_s)$ is a schizophrenic object which induces the following adjunction 
+ To be sufficiently general we consider the concrete category $(\CAlgk, U) $, where $U(-) = \CAlgk(k[t],-)$,  of commutative unital $k$-algebras with $k$-algebra homomorphisms, and the concrete category $(\GSet,V)$, where $V(-) = \GSet(\{pt\},-)$, of sets with a $\Gal(k_s/k)$-action and $G$-equivariant maps between them. The representable functors should already be clear based on previous examples. We only plan to show that $(k_s, 1_{k_s}, k_s)$ is a schizophrenic object which induces the following adjunction 
   \[\begin{tikzcd}
 	\CAlgk & \bot & \GSet^{\op}
 	\arrow["{\CAlgk(-, k_s)}", shift left=3, bend left, from=1-1, to=1-3]
@@ -1956,12 +1977,13 @@ so that $\Gal(k_s/k)$ can be realized as a profinite group.
 
 \chapter{Questions}
 \begin{enumerate}
-	\item Why do we know that Kelleyfied products and kelleyfied function spaces with the compact open topology are the categorical products and exponentials in $\kTop$
+%	\item Why do we know that Kelleyfied products and kelleyfied function spaces with the compact open topology are the categorical products and exponentials in $\kTop$
 %	\item ask Georg if pointwise order preserving evaluation morphism into $\mathbb{2}$ preserves finite limits and colimits by some pointwise argument in the presheaf category
-	\item why  is $C^*(X) \subseteq C(X)$
-	\item Why is $\kTop$ does $\kTop$ admit function spaces? Why doesn't $\Haus$?
-	\item Show that $C_k(X, \mathbb{C}) = C(X, \mathbb{C})$ if $X$ is locally compact.
+%	\item Let $C(X) = C_k(X,Y)$ be the kelleyfied function space with the compact open topology. Let $C^*(X) = \Top_{\text{bdd}}(X, \mathbb{C})\subseteq C(X)$. Why is $C^*(X) \subset C(X)$ 
+%	\item If $X$ is compact Hausdorff, then is $C(X)$
+	\item Show that $C_k(X, \mathbb{C}) = C(X, \mathbb{C})$ if $X$ is locally compact. Is it true? Maybe $X$ needs to be compact? 
 	\item Why does $C_k(A, \mathbb{C}_s) \mapsto [\mathbb{C}_a]$ lift to $C^*$ initially? 
+	\item Why does $\Hom_k(B, \mathbb{C}_a) \stackrel{\ev_{B,y}}{\rightarrow} [\mathbb{C}_s]$ lift to $\kHaus$ initially?
 \end{enumerate}
 %\begin{enumerate}
 %	\item Is the above actually the case, i.e., am I actually supposed to look at the underlying sets in $\Set$ to understanding that $\tau$ is the identity?
